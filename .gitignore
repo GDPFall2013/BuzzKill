@@ -1,0 +1,18 @@
+# Dart Excludes
+.buildlog
+web/out/*
+*.js.deps
+*.js.map
+*.dart.js
+*~
+*.js
+*.js_
+.children
+.project
+.gitmodules
+*.map
+*.lock
+*.tmp
+packages
+packages/
+!app/background.js

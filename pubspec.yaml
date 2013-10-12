@@ -1,0 +1,7 @@
+name: alfreds_adventure
+description: Alfred's Adventure Game
+dependencies:
+  browser: any
+  game_loop:
+    git: https://github.com/johnmccutchan/game_loop.git
+  js: any
