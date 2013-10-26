@@ -1,4 +1,4 @@
-part of boiler_plate;
+part of gdp;
 
 /**
  *  The Game class holds the root of the game.  It is started by Main
@@ -8,16 +8,19 @@ class Game{
 Input input;
 Game() {
     input = new Input();
+    ObjectManager om = new ObjectManager();
 }
 
+//TODO remove when player is added
 int x = 20;
 int y = 30;
 
 /**
  *  Update is called once per game Loop
  */
-void update() {
+void update(double dt) {
   
+  // Some test code for Movement.  TODO remove when player is added
   if (input.isDown(KeyCode.UP)){
    y -= 1;
   }
@@ -30,6 +33,10 @@ void update() {
   if (input.isDown(KeyCode.LEFT)){
    x -= 1;
   }
+  
+  for (GameObject go in ObjectManager.instance.goList) {
+    go.update(dt);
+  }
 }
 
 /**
@@ -37,9 +44,16 @@ void update() {
  *  By the Game Loop
  */
 void draw() {
+  // Does a gray background so we can see the canvas size
   context.fillStyle = 'gray';
   context.fillRect(0, 0, 640, 480);
   
+  for (GameObject go in ObjectManager.instance.goList) {
+    go.draw();
+  }
+  
+  
+  //TODO remove this part once we have a player to move
   context.fillStyle = 'black';
   context.font = "normal 20pt san-serif";
   context.fillText(" Boiler Plate ", x, y, 100);

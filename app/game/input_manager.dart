@@ -1,4 +1,4 @@
-part of boiler_plate;
+part of gdp;
 
 /**
  * This class is the interface between Game Loop's input features

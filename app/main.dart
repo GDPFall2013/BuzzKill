@@ -1,4 +1,4 @@
-library boiler_plate;
+library gdp;
 
 import 'dart:html';
 import 'dart:collection';
@@ -7,6 +7,9 @@ import 'package:game_loop/game_loop_html.dart';
 
 part 'game/game.dart';
 part 'game/input_manager.dart';
+part 'game/object_manager.dart';
+
+part 'game/objects/game_object.dart';
 
 // Global Variables  ******
 // Canvas and context are available anywhere for drawing purposes
@@ -31,7 +34,7 @@ void main() {
   gameLoop.onUpdate = ((gameLoop) {
     // Update Game Logic Here
   //  print('${gameLoop.frame}: ${gameLoop.gameTime} [dt = ${gameLoop.dt}].');
-  game.update();
+    game.update(gameLoop.dt);
   });
   gameLoop.onRender = ((gameLoop){
     // Draw game into canvasElement using WebGL or CanvasRenderingContext here.
