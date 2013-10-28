@@ -5,10 +5,14 @@ part of gdp;
  *  and controls all other parts of the application. 
  */
 class Game{
-Input input;
+//Input input;
+Player player = new Player();
+
+
 Game() {
-    input = new Input();
+    //input = new Input();
     ObjectManager om = new ObjectManager();
+    om.addObject(player);
 }
 
 //TODO remove when player is added
@@ -21,6 +25,8 @@ int y = 30;
 void update(double dt) {
   
   // Some test code for Movement.  TODO remove when player is added
+ 
+/*  
   if (input.isDown(KeyCode.UP)){
    y -= 1;
   }
@@ -33,6 +39,7 @@ void update(double dt) {
   if (input.isDown(KeyCode.LEFT)){
    x -= 1;
   }
+  */
   
   for (GameObject go in ObjectManager.instance.goList) {
     go.update(dt);
@@ -46,7 +53,7 @@ void update(double dt) {
 void draw() {
   // Does a gray background so we can see the canvas size
   context.fillStyle = 'gray';
-  context.fillRect(0, 0, 640, 480);
+  context.fillRect(09, 0, 640, 480);
   
   for (GameObject go in ObjectManager.instance.goList) {
     go.draw();
@@ -54,9 +61,12 @@ void draw() {
   
   
   //TODO remove this part once we have a player to move
+  /*
   context.fillStyle = 'black';
   context.font = "normal 20pt san-serif";
   context.fillText(" Boiler Plate ", x, y, 100);
+  */
+  
 }
 
 }
