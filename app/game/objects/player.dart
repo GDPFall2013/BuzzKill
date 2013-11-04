@@ -9,7 +9,7 @@ class Player extends GameObject{
   Input input;
   bool JUMPING = false;
   double velocity_y = 0.0;
-  double accel = 10.0;
+  double accel = 1.5;
   static double GROUND_LEVEL = 300.0;
   
   
@@ -42,7 +42,7 @@ class Player extends GameObject{
        else{
        SoundManager.instance.playSound(SoundManager.enumSoundJump);
        JUMPING = true;
-       velocity_y = 130.0;}
+       velocity_y = 25.0;}
 
      }
    
@@ -54,12 +54,12 @@ class Player extends GameObject{
      
      //move right
      if (input.isDown(KeyCode.RIGHT)){
-       x += 2;
+       x += 3;
      }
      
      //move left
      if (input.isDown(KeyCode.LEFT)){
-       x -= 2;
+       x -= 3;
        
      }
      
@@ -67,10 +67,10 @@ class Player extends GameObject{
      //if in jumping motion
      if(JUMPING){
        
-         if(velocity_y > -130.0){
+         if(velocity_y > - 130.0){
             velocity_y = velocity_y - accel;
-            y = y - (velocity_y - 50);
-            x += 1;
+            y = y - velocity_y;// - 50);
+        //    x += 1;  ?
          }
        }
        
