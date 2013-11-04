@@ -2,7 +2,7 @@ part of gdp;
 
 
 
-class Obstacle extends GameObject{
+class Alien extends GameObject{
   
   ImageElement img = new ImageElement();
 
@@ -13,7 +13,7 @@ class Obstacle extends GameObject{
   static double GROUND_LEVEL = 300.0;
   
   
-  Obstacle(){
+  Alien(){
     
     x = 300.0;
     y = 300.0;

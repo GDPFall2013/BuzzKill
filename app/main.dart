@@ -13,6 +13,7 @@ part 'game/object_manager.dart';
 part 'game/sound_manager.dart';
 
 part 'game/objects/game_object.dart';
+part 'game/objects/block.dart';
 part 'game/objects/player.dart';
 part 'game/objects/obstacle.dart';
 
