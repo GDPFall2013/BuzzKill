@@ -40,6 +40,7 @@ class Player extends GameObject{
        
        //start jump motion
        else{
+       SoundManager.instance.playSound(SoundManager.enumSoundJump);
        JUMPING = true;
        velocity_y = 130.0;}
 

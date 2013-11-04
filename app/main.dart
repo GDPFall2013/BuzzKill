@@ -5,10 +5,12 @@ import 'dart:collection';
 
 //import 'packages/js/js.dart' as js;
 import 'package:game_loop/game_loop_html.dart';
+import '../packages/simple_audio/simple_audio.dart';
 
 part 'game/game.dart';
 part 'game/input_manager.dart';
 part 'game/object_manager.dart';
+part 'game/sound_manager.dart';
 
 part 'game/objects/game_object.dart';
 part 'game/objects/player.dart';

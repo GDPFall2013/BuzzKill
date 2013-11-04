@@ -10,9 +10,11 @@ Player player = new Player();
 Obstacle obstacle = new Obstacle();
 
 
+
 Game() {
     //input = new Input();
     ObjectManager om = new ObjectManager();
+    SoundManager sm = new SoundManager();
     om.addObject(player);
     om.addObject(obstacle);
 }

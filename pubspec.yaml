@@ -5,3 +5,5 @@ dependencies:
   game_loop:
     git: https://github.com/johnmccutchan/game_loop.git
   js: any
+  simple_audio:
+    git: https://github.com/johnmccutchan/simpleaudio.git
