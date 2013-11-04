@@ -7,12 +7,14 @@ part of gdp;
 class Game{
 //Input input;
 Player player = new Player();
+Obstacle obstacle = new Obstacle();
 
 
 Game() {
     //input = new Input();
     ObjectManager om = new ObjectManager();
     om.addObject(player);
+    om.addObject(obstacle);
 }
 
 //TODO remove when player is added
