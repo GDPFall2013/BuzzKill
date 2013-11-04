@@ -21,6 +21,7 @@ Game() {
     floor.width = viewportWidth - 0.0;  //TODO: convert this to double properly
     floor.height = 30.0;
     ObjectManager.instance.addObject(floor);
+    ObjectManager.instance.blockList.add(floor);
 }
 
 /**
