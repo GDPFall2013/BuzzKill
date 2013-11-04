@@ -12,6 +12,7 @@ part 'game/object_manager.dart';
 
 part 'game/objects/game_object.dart';
 part 'game/objects/player.dart';
+part 'game/objects/obstacle.dart';
 
 
 // Global Variables  ******
