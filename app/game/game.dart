@@ -58,8 +58,24 @@ void draw() {
         go.x - go.width/2 < camera.x + viewportWidth) {
       go.draw();
       DrawColliderBox(go);
-    }
+    }   
   }
+  
+  drawHUD();
 }
 
+/**
+ * Draws textual information around the edges of the screen that does not move with
+ * the camera.
+ */
+drawHUD() {  //TODO: Change this information into Game Variables
+  context.save();
+  context.fillStyle = 'black';
+  context.font = "normal 14pt calibri";
+  context.fillText("BUZZKILL", 10, 20, 100);
+  //context.fillText("Score:  ?????", viewportWidth/2 -35, 20, 100);  Do we have score in this game?
+  context.fillText("Lives: 3", 10, viewportHeight-15, 100);
+  context.fillText("Remaining Oxygen: 100%", viewportWidth - 200, viewportHeight-15, 500);
+  context.restore();
+}
 }
