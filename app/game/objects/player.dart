@@ -17,6 +17,8 @@ class Player extends GameObject{
     
     x = 0.0;
     y = 300.0;
+    width = 60.0;
+    height = 100.0;
     img = new Element.tag("img");
     img.src = "./content/buzz.png";
     input = new Input();
@@ -25,8 +27,7 @@ class Player extends GameObject{
   }
   
    draw(){
-    context.drawImageScaled(img, x, y, 60, 100);
-
+    context.drawImageScaled(img, x, y, width, height);
   }
    
    update(double dt){

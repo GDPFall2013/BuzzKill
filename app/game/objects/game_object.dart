@@ -44,20 +44,20 @@ class GameObject {
 /*
  *  This is for debugging and testing purposes only.  Shows a box around all the objects.
  */
-drawColliderBox(GameObject go){
+DrawColliderBox(GameObject go){
   assert(go.height > 0.0);
   assert(go.width > 0.0);
   
-  double x = go.x;
-  double y = go.y;
+  double cx = go.x - camera.x;
+  double cy = go.y - camera.y;
   
   context.save();
   context.beginPath(); 
-  context.moveTo(x - go.width/2, y - go.height/2);
-  context.lineTo(x + go.width/2, y - go.height/2);
-  context.lineTo(x + go.width/2, y + go.height/2);
-  context.lineTo(x - go.width/2, y + go.height/2);
-  context.lineTo(x - go.width/2, y - go.height/2);
+  context.moveTo(cx - go.width/2, cy - go.height/2);
+  context.lineTo(cx + go.width/2, cy - go.height/2);
+  context.lineTo(cx + go.width/2, cy + go.height/2);
+  context.lineTo(cx - go.width/2, cy + go.height/2);
+  context.lineTo(cx - go.width/2, cy - go.height/2);
   context.strokeStyle = "black";  //Should this be capitalized?
   context.stroke();
   context.restore();

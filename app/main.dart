@@ -7,6 +7,8 @@ import 'dart:collection';
 import 'package:game_loop/game_loop_html.dart';
 import '../packages/simple_audio/simple_audio.dart';
 
+import 'game/camera.dart';
+
 part 'game/game.dart';
 part 'game/input_manager.dart';
 part 'game/object_manager.dart';
@@ -26,6 +28,9 @@ var canvas;
 // Readable from anywhere
 final int viewportWidth = 640, 
       viewportHeight = 480;
+
+// The camera is a singleton and should be accessible anywhere
+Camera camera = new Camera();
 
 //The Game Loop
 GameLoopHtml gameLoop = new GameLoopHtml(canvas);

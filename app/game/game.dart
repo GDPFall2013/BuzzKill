@@ -17,7 +17,7 @@ Game() {
     om.addObject(obstacle);
     
     Block floor = new Block();
-    floor.initialize(viewportWidth/2, viewportHeight - 70.0);
+    floor.initialize(0.0, viewportHeight - 70.0);
     floor.width = viewportWidth - 0.0;  //TODO: convert this to double properly
     floor.height = 30.0;
     ObjectManager.instance.addObject(floor);
@@ -28,6 +28,14 @@ Game() {
  *  Update is called once per game Loop
  */
 void update(double dt) {
+  
+  // Adjust the camera position
+  if (player.x - camera.x > viewportWidth - 150) {
+    camera.x = player.x - (viewportWidth - 150);
+  }
+  if (player.x - camera.x < 150) {
+    camera.x = player.x - 150;
+  }
   
   for (GameObject go in ObjectManager.instance.goList) {
     go.update(dt);
@@ -44,7 +52,13 @@ void draw() {
   context.fillRect(0, 0, 640, 480);
   
   for (GameObject go in ObjectManager.instance.goList) {
-    go.draw();
+    
+    // TODO: Change so its not just objects that have their middle in the screen that get drawn
+    if (go.x + go.width/2 > camera.x && 
+        go.x - go.width/2 < camera.x + viewportWidth) {
+      go.draw();
+      DrawColliderBox(go);
+    }
   }
 }
 

@@ -1,5 +1,5 @@
-name: alfreds_adventure
-description: Alfred's Adventure Game
+name: BuzzKill
+description: Game
 dependencies:
   browser: any
   game_loop:
