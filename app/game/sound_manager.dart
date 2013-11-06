@@ -1,5 +1,9 @@
 part of gdp;
 
+/**
+ * The Sound Manager is the class that interfaces with the Simpl Audio Library
+ * It is a singleton so it is accessible from anywhere
+ */
 class SoundManager {
   
   AudioManager audioManager = new AudioManager('content/Sound Files');
