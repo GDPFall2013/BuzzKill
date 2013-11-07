@@ -46,7 +46,7 @@ void main() {
   gameLoop.onUpdate = ((gameLoop) {
     // Update Game Logic Here
   //  print('${gameLoop.frame}: ${gameLoop.gameTime} [dt = ${gameLoop.dt}].');
-    game.update(gameLoop.dt);
+    game.update(gameLoop.dt * 100);
   });
   gameLoop.onRender = ((gameLoop){
     // Draw game into canvasElement using WebGL or CanvasRenderingContext here.

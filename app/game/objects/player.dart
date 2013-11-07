@@ -55,12 +55,12 @@ class Player extends GameObject{
      
      //move right
      if (input.isDown(KeyCode.RIGHT)){
-       x += 3;
+       x += 3 * dt;
      }
      
      //move left
      if (input.isDown(KeyCode.LEFT)){
-       x -= 3;
+       x -= 3 * dt;
        
      }
      
@@ -70,7 +70,7 @@ class Player extends GameObject{
        
          if(velocity_y > - 130.0){
             velocity_y = velocity_y - accel;
-            y = y - velocity_y;// - 50);
+            y = y - velocity_y * dt;// - 50);
         //    x += 1;  ?
          }
        }
