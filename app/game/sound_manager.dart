@@ -22,16 +22,27 @@ class SoundManager {
   bool _muted = false;
   
   AudioClip _jumpClip;
+  AudioClip _oxygenClip;
+  AudioClip _shipItemClip;
   
   AudioClip _currentMusic;
  
   static final int enumSoundJump = 1;
+  static final int enumSoundOxygen = 2;
+  static final int enumSoundShipItem = 3;
   
   init(){
     sfxSource = this.audioManager.makeSource('sfxSource');
     
     _jumpClip = audioManager.makeClip('jump', 'fastinvader3Wave.wav');
     _jumpClip.load();
+    
+    _oxygenClip = audioManager.makeClip('oxygen', 'ufo_highpitchWave.wav');
+    _oxygenClip.load();
+    
+    _shipItemClip = audioManager.makeClip('shipItem', 'ufo_lowpitchWave.wav');
+    _shipItemClip.load();
+    
   }
   
   void setMusic( int newMusic) {
@@ -102,7 +113,13 @@ class SoundManager {
         // enums aren't implemented yet, and switch only takes constants at the moment.
         case 1: 
           audioManager.playClipFromSource('sfxSource', 'jump');
-          break;       
+          break;  
+        case 2: 
+          audioManager.playClipFromSource('sfxSource', 'oxygen');
+          break;
+        case 3: 
+          audioManager.playClipFromSource('sfxSource', 'shipItem');
+          break;
       }
     }
   } 

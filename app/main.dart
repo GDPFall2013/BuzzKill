@@ -18,6 +18,9 @@ part 'game/objects/game_object.dart';
 part 'game/objects/block.dart';
 part 'game/objects/player.dart';
 part 'game/objects/alien.dart';
+part 'game/objects/oxygen.dart';
+part 'game/objects/ship_item.dart';
+part 'game/objects/spike.dart';
 
 part 'game/animations/sprite_sheet.dart';
 
