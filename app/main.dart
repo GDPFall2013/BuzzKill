@@ -19,6 +19,8 @@ part 'game/objects/block.dart';
 part 'game/objects/player.dart';
 part 'game/objects/alien.dart';
 
+part 'game/animations/sprite_sheet.dart';
+
 
 // Global Variables  ******
 // Canvas and context are available anywhere for drawing purposes
