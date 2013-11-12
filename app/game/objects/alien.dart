@@ -27,7 +27,10 @@ class Alien extends GameObject{
   }
   
    draw(){
-    context.drawImageScaled(img, x, y, width, height);
+     double cx = this.x - camera.x;
+     double cy = this.y - camera.y;
+     
+    context.drawImageScaled(img, cx - width/2, cy - height/2, width, height);
 
   }
   
