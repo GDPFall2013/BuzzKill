@@ -5,7 +5,7 @@ part of gdp;
  * The game object is the parent object of every object that can be displayed on the
  * screen.  It has many subclasses, including enemies, blocks, and the player.
  */
-class GameObject {
+abstract class GameObject {
   double x;
   double y;
   double height = 0.0;

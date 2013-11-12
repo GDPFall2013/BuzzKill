@@ -5,7 +5,7 @@ part of gdp;
  * To keep his oxygen "Life" from reaching 0.  
  * Oxygen can float in midair and is not affected by gravity
  */
-class Oxygen extends GameObject {
+class Oxygen extends Item {
   
   
   update(double dt){

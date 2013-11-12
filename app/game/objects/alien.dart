@@ -2,7 +2,7 @@ part of gdp;
 
 
 
-class Alien extends GameObject{
+class Alien extends Enemy{
   
   ImageElement img = new ImageElement();
 
@@ -34,6 +34,10 @@ class Alien extends GameObject{
 
   }
   
+   injure() {
+     Game.oxygen -= 10.0; // TODO: Call Method in Player that he's been hurt by X amount
+   }
+   
    /*
    update(double dt){
      

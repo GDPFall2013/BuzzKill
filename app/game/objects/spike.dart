@@ -4,7 +4,7 @@ part of gdp;
  *  The spike is an object in the game that is immobile and hurts Buzz if he 
  *  touches it
  */
-class Spike extends GameObject {
+class Spike extends Enemy {
   double damage = 10.0;
   
   update(double dt) {
@@ -39,8 +39,8 @@ class Spike extends GameObject {
     context.restore();
   }
   
-  injureBuzz() {
-    // TODO: Call Method in Player that he's been hurt by X amount
+  injure() {
+    Game.oxygen -= 5.0;// TODO: Call Method in Player that he's been hurt by X amount
   }
   
 }

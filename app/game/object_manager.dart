@@ -13,6 +13,8 @@ class ObjectManager {
   
   List<GameObject> goList = new List<GameObject>();
   List<GameObject> blockList = new List<Block>();
+  List<Enemy> enemyList = new List<Enemy>();
+  List<Item> itemList = new List<Item>();
   
   /*
    * Adds an object to the master list of objects

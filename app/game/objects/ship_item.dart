@@ -4,7 +4,7 @@ part of gdp;
  * The ship item is what Buzz needs to collect to pass the level.  It is an object
  * Not affected by Gravity
  */
-class ShipItem extends GameObject{
+class ShipItem extends Item{
   
   update(double dt) {
     //Inanimate object, does nothing
