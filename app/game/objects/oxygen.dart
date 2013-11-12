@@ -14,8 +14,12 @@ class Oxygen extends GameObject {
   
   draw() {
     context.save();
+    context.beginPath();
+    context.fillStyle = 'green';
+    context.arc(x - camera.x, y - camera.y,width/2,0,2*PI);
+    context.fill();
     context.fillStyle = 'black';
-    context.fillText("OXYGEN", x - camera.x - width/2, y - camera.y, width);
+    context.fillText("Oxygen", x - camera.x - width/2, y - camera.y, width);
     context.restore();
   }
   

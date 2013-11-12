@@ -12,9 +12,30 @@ class Spike extends GameObject {
   }
   
   draw() {
+    double cx = this.x - camera.x;
+    double cy = this.y - camera.y;
+    
+    double left = cx - width/2;
+    double bottom = cy + height/2;
+    double top = cy - height/2;
+    
+    
     context.save();
-    context.fillStyle = 'black';
-    context.fillText("SPIKE", x - camera.x - width/2, y - camera.y, width);
+    context.beginPath();
+    context.moveTo(left, bottom);
+    context.lineTo(left + 1 * width/10, top);
+    context.lineTo(left + 2 * width/10, bottom);
+    context.lineTo(left + 3 * width/10, top);
+    context.lineTo(left + 4 * width/10, bottom);
+    context.lineTo(left + 5 * width/10, top);
+    context.lineTo(left + 6 * width/10, bottom);
+    context.lineTo(left + 7 * width/10, top);
+    context.lineTo(left + 8 * width/10, bottom);
+    context.lineTo(left + 9 * width/10, top);
+    context.lineTo(left + 10 * width/10, bottom);
+    context.fillStyle = 'maroon';
+    context.stroke();
+    context.fill();
     context.restore();
   }
   

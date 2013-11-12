@@ -28,21 +28,21 @@ Game() {
     //Objects here for testing 
     
     Spike spike = new Spike()
-    ..initialize(20.0,viewportHeight - 40.0)
+    ..initialize(20.0,viewportHeight - 90.0)
     ..width = 100.0
     ..height = 10.0;
     ObjectManager.instance.addObject(spike);
     
     Oxygen oxygen = new Oxygen()
-    ..initialize(500.0,viewportHeight - 100.0)
+    ..initialize(100.0,viewportHeight - 150.0)
     ..width = 30.0
     ..height = 10.0;
     ObjectManager.instance.addObject(oxygen);
     
     ShipItem shipItem = new ShipItem()
-    ..initialize(250.0,viewportHeight - 200.0)
+    ..initialize(400.0,viewportHeight - 200.0)
     ..width = 50.0
-    ..height = 30.0;
+    ..height = 50.0;
     ObjectManager.instance.addObject(shipItem);
 }
 

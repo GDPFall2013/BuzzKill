@@ -12,8 +12,24 @@ class ShipItem extends GameObject{
   
   draw() {
     context.save();
+    context.beginPath();
+    context.fillStyle = 'brown';
+    context.strokeStyle = 'black';
+    
+    double cx = this.x - camera.x;
+    double cy = this.y - camera.y;
+    
+    context.moveTo(cx - this.width/2, cy - this.height/2);
+    context.lineTo(cx + this.width/2, cy - this.height/2);
+    context.lineTo(cx + this.width/2, cy + this.height/2);
+    context.lineTo(cx - this.width/2, cy + this.height/2);
+    context.lineTo(cx - this.width/2, cy - this.height/2);
+ 
+    
+    context.stroke();
+    context.fill();
     context.fillStyle = 'black';
-    context.fillText("SHIP ITEM", x - camera.x - width/2, y - camera.y, width);
+    context.fillText("Ship Item", x - camera.x - width/2, y - camera.y, width);
     context.restore();
   }
   
