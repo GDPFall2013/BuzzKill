@@ -39,8 +39,8 @@ class Spike extends Enemy {
     context.restore();
   }
   
-  injure() {
-    Game.oxygen -= 5.0;// TODO: Call Method in Player that he's been hurt by X amount
+  double injure() {
+    return 20.0;
   }
   
 }

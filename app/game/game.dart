@@ -20,10 +20,13 @@ class Game{
 Player player = new Player();
 Alien alien = new Alien();
 static double oxygen = 100.0; 
+static int lives = 3;
+
 
 
 int stateEnumPlay = 1;
 int stateEnumWin = 2;
+int stateEnumGameOver = 3;
 
 int state;
 
@@ -145,4 +148,10 @@ win() {
   
   state = stateEnumWin;
 }
+
+gameOver() {
+  // music to be placed here in the future
+  state = stateEnumGameOver;
+}
+
 }

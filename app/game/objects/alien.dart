@@ -34,8 +34,8 @@ class Alien extends Enemy{
 
   }
   
-   injure() {
-     Game.oxygen -= 10.0; // TODO: Call Method in Player that he's been hurt by X amount
+   double injure() {
+    return 10.0;
    }
    
    /*

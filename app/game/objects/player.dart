@@ -17,10 +17,20 @@ class Player extends GameObject{
   static double GROUND_LEVEL = 300.0;
   SpriteSheet sprite;
   
+  int stateEnumAlive = 1;
+  int stateEnumInjured = 2;
+  int stateEnumDead = 3;
+  
+  
+  int state;
+  
+  double playerStartX = 0.0;  //TODO: This should be moved to level object later
+  double playerStartY = 300.0; 
+  
   Player(){
-    
-    x = 0.0;
-    y = 300.0;
+    state = stateEnumAlive;
+    x = playerStartX;
+    y = playerStartY;
     width = 60.0;
     height = 100.0;
     img = new Element.tag("img");
@@ -33,69 +43,78 @@ class Player extends GameObject{
   }
   
    draw(){
-     double cx = this.x - camera.x;
-     double cy = this.y - camera.y;
-    //context.drawImageScaled(img, cx - width/2, cy - height/2, width, height);
      
-     
-     if(JUMPING && LOOK_RIGHT){
-
-        sprite.spritex = 225;
-        sprite.spritey = 200;
-
-       sprite.drawOnPosition(cx-width/2, cy - height/2 , width , height);
+     if (state == stateEnumDead) {
+       // don't draw
+     } else {
        
-     }
-     
-     else if(JUMPING && LOOK_LEFT){
-      
-         sprite.spritex = 225;
-         sprite.spritey = 300;
-
-       sprite.drawOnPosition(cx-width/2, cy - height/2 , width , height);
-     }
-
-     else if(WALKING && LOOK_RIGHT){
-       if(sprite.spritex >= 825){
-         sprite.spritex = 0;
+       double cx = this.x - camera.x;
+       double cy = this.y - camera.y;
+      //context.drawImageScaled(img, cx - width/2, cy - height/2, width, height);
+       
+       
+       if(JUMPING && LOOK_RIGHT){
+  
+          sprite.spritex = 225;
+          sprite.spritey = 200;
+  
+         sprite.drawOnPosition(cx-width/2, cy - height/2 , width , height);
+         
+       }
+       
+       else if(JUMPING && LOOK_LEFT){
+        
+           sprite.spritex = 225;
+           sprite.spritey = 300;
+  
+         sprite.drawOnPosition(cx-width/2, cy - height/2 , width , height);
+       }
+  
+       else if(WALKING && LOOK_RIGHT){
+         if(sprite.spritex >= 825){
+           sprite.spritex = 0;
+           sprite.spritey = 0;
+         }
+         else{
+         sprite.spritex = sprite.spritex + 75;
          sprite.spritey = 0;
-       }
-       else{
-       sprite.spritex = sprite.spritex + 75;
-       sprite.spritey = 0;
-       }
-       
-       print(sprite.spritex  + sprite.spritey);
-       sprite.drawOnPosition(cx-width/2, cy - height/2 , width , height);
-     }
-     
-     else if(WALKING && LOOK_LEFT){
-       if(sprite.spritex <= 0){
-         sprite.spritex = 825;
-         sprite.spritey = 100;
-       }
-       else{
-       sprite.spritex = sprite.spritex - 75;
-       sprite.spritey = 100;
-       }
-       sprite.drawOnPosition(cx-width/2, cy - height/2 , width , height);
-     }
-     
-     else {
-       if(LOOK_LEFT){
-         sprite.spritex = 825;
-         sprite.spritey = 100;
-       }
-       else{
-         sprite.spritex = 0;
-         sprite.spritey = 0;
+         }
+         
+         print(sprite.spritex  + sprite.spritey);
+         sprite.drawOnPosition(cx-width/2, cy - height/2 , width , height);
        }
        
-       sprite.drawOnPosition(cx-width/2, cy - height/2 , width , height);
+       else if(WALKING && LOOK_LEFT){
+         if(sprite.spritex <= 0){
+           sprite.spritex = 825;
+           sprite.spritey = 100;
+         }
+         else{
+         sprite.spritex = sprite.spritex - 75;
+         sprite.spritey = 100;
+         }
+         sprite.drawOnPosition(cx-width/2, cy - height/2 , width , height);
+       }
+       
+       else {
+         if(LOOK_LEFT){
+           sprite.spritex = 825;
+           sprite.spritey = 100;
+         }
+         else{
+           sprite.spritex = 0;
+           sprite.spritey = 0;
+         }
+         
+         sprite.drawOnPosition(cx-width/2, cy - height/2 , width , height);
+       }
      }
   }
    
    update(double dt){
+     
+     
+     
      
      if (input.isDown(KeyCode.UP)){
        
@@ -164,7 +183,28 @@ class Player extends GameObject{
          y = 300.0;
        }
      
+      //Check for death 
+      if (Game.oxygen <= 0 || this.y > viewportHeight + this.height /2) {
+        Game.lives -= 1;
+        if (Game.lives <= 0) {
+         Game.instance.gameOver();
+        }
+        // TODO: play some music
+        // TODO: wait a few seconds
+        camera.x = 0.0;
+        camera.y = 0.0;
+        
+        this.x = playerStartX;
+        this.y = playerStartY;
+        
+        state = stateEnumAlive;
+      }
    }
   
+   injureBuzz (double injuryAmount) {
+     Game.oxygen -= injuryAmount;
+     // TODO: Play sound
+     state = stateEnumInjured;
+   }
   
 }
