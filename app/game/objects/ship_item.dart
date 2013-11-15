@@ -38,6 +38,6 @@ class ShipItem extends Item{
    */
   collect() {
     SoundManager.instance.playSound(SoundManager.enumSoundShipItem);
-    // TODO: Trigger End of Level 
+    Game.instance.win();
   }
 }

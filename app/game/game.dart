@@ -5,13 +5,30 @@ part of gdp;
  *  and controls all other parts of the application. 
  */
 class Game{
+  static Game instance;
+  factory Game() {
+    
+    if (instance == null) {
+      instance = new Game._internal();
+      instance.Initialize();
+    }
+    return instance;
+  }
+  Game._internal();
+  
   
 Player player = new Player();
 Alien alien = new Alien();
-static double oxygen = 100.0;  
+static double oxygen = 100.0; 
 
 
-Game() {
+int stateEnumPlay = 1;
+int stateEnumWin = 2;
+
+int state;
+
+Initialize() {
+    state = stateEnumPlay;
     ObjectManager om = new ObjectManager();
     SoundManager sm = new SoundManager();
     om.addObject(player);
@@ -54,17 +71,19 @@ Game() {
  *  Update is called once per game Loop
  */
 void update(double dt) {
-  
-  // Adjust the camera position
-  if (player.x - camera.x > viewportWidth - 150) {
-    camera.x = player.x - (viewportWidth - 150);
-  }
-  if (player.x - camera.x < 150) {
-    camera.x = player.x - 150;
-  }
-  
-  for (GameObject go in ObjectManager.instance.goList) {
-    go.update(dt);
+  if (state == stateEnumPlay) {
+    
+    // Adjust the camera position
+    if (player.x - camera.x > viewportWidth - 150) {
+      camera.x = player.x - (viewportWidth - 150);
+    }
+    if (player.x - camera.x < 150) {
+      camera.x = player.x - 150;
+    }
+    
+    for (GameObject go in ObjectManager.instance.goList) {
+      go.update(dt);
+    }
   }
 }
 
@@ -73,6 +92,8 @@ void update(double dt) {
  *  By the Game Loop
  */
 void draw() {
+  if (state == stateEnumPlay) {
+  
   // Does a gray background so we can see the canvas size
   context.fillStyle = 'gray';
   context.fillRect(0, 0, 640, 480);
@@ -88,6 +109,17 @@ void draw() {
   }
   
   drawHUD();
+  
+  } else if (state == stateEnumWin) {
+    context.fillStyle = 'black';
+    context.fillRect(0, 0, 640, 480);
+    
+    context.fillStyle = 'white';
+    context.font = "normal 30pt calibri";
+    context.fillText("YOU WIN!", viewportWidth/2 - 70, viewportHeight/2 - 40, 1000);
+  }
+  
+  
 }
 
 /**
@@ -103,5 +135,14 @@ drawHUD() {  //TODO: Change this information into Game Variables
   context.fillText("Lives: 3", 10, viewportHeight-15, 100);
   context.fillText("Remaining Oxygen: 100%", viewportWidth - 200, viewportHeight-15, 500);
   context.restore();
+}
+
+/**
+ * Code to trigger when the game has been won
+ */
+win() {
+  // music to be placed here in the future
+  
+  state = stateEnumWin;
 }
 }
