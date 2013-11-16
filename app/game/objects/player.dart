@@ -24,6 +24,9 @@ class Player extends GameObject{
   
   int state;
   
+  double invincibilityTimer = 0.0;
+  bool blink = false;
+  
   double playerStartX = 0.0;  //TODO: This should be moved to level object later
   double playerStartY = 300.0; 
   
@@ -44,7 +47,7 @@ class Player extends GameObject{
   
    draw(){
      
-     if (state == stateEnumDead) {
+     if (state == stateEnumDead || blink) {
        // don't draw
      } else {
        
@@ -113,7 +116,8 @@ class Player extends GameObject{
    
    update(double dt){
      
-     
+     //TODO: When checking for injury, should not be affected if 
+     // state = stateEnumInjured
      
      
      if (input.isDown(KeyCode.UP)){
@@ -205,6 +209,18 @@ class Player extends GameObject{
      Game.oxygen -= injuryAmount;
      // TODO: Play sound
      state = stateEnumInjured;
+     invincibilityTimer = 3.0;
+     gameLoop.addTimer((invincibilityTimer) => invincibilityCountDown(), 0.5);
+   }
+   
+   invincibilityCountDown() {
+     if (invincibilityTimer > 0) {
+       invincibilityTimer -= 0.25;
+       blink = !blink;
+       gameLoop.addTimer((invincibilityTimer) => invincibilityCountDown(), 0.25);
+     } else {
+       state = stateEnumAlive;
+     }
    }
   
 }
