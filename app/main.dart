@@ -9,6 +9,7 @@ import 'package:game_loop/game_loop_html.dart';
 import '../packages/simple_audio/simple_audio.dart';
 
 import 'game/camera.dart';
+import 'dart:core';
 
 part 'game/game.dart';
 part 'game/input_manager.dart';
