@@ -13,6 +13,5 @@ web/out/*
 *.map
 *.lock
 *.tmp
-packages
-packages/
+
 !app/background.js
