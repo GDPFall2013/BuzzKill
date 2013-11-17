@@ -33,16 +33,6 @@ class SpriteSheet {
 }
 
 
-
-
-
-
-
-
-
-
-
-
 class ImageLoader {
   
 static Map<String,ImageElement> bufferedImages;
