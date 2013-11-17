@@ -27,6 +27,9 @@ part 'game/objects/enemy.dart';
 
 part 'game/animations/sprite_sheet.dart';
 
+part 'game/levels/level_manager.dart';
+part 'game/levels/level_one.dart';
+
 
 // Global Variables  ******
 // Canvas and context are available anywhere for drawing purposes

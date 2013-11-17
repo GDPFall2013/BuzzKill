@@ -17,8 +17,7 @@ class Game{
   Game._internal();
   
   
-Player player = new Player();
-Alien alien = new Alien();
+  Player player = new Player();
 static double oxygen = 100.0; 
 static int lives = 3;
 
@@ -31,44 +30,10 @@ int stateEnumGameOver = 3;
 int state;
 
 Initialize() {
+  LevelManager lm = new LevelManager();
+  lm.loadLevel(1, player);
     state = stateEnumPlay;
-    ObjectManager om = new ObjectManager();
-    SoundManager sm = new SoundManager();
-    om.addObject(player);
-    om.addObject(alien);
-    om.enemyList.add(alien);
-    
-    Block floor = new Block();
-    floor.initialize(0.0, viewportHeight - 70.0);
-    floor.width = viewportWidth - 0.0;  //TODO: convert this to double properly
-    floor.height = 30.0;
-    ObjectManager.instance.addObject(floor);
-    ObjectManager.instance.blockList.add(floor);
-    
-    //TODO Preload Sounds
-    
-    //Objects here for testing 
-    
-    Spike spike = new Spike()
-    ..initialize(20.0,viewportHeight - 90.0)
-    ..width = 100.0
-    ..height = 10.0;
-    ObjectManager.instance.addObject(spike);
-    ObjectManager.instance.enemyList.add(spike);
-    
-    Oxygen oxygen = new Oxygen()
-    ..initialize(100.0,viewportHeight - 150.0)
-    ..width = 30.0
-    ..height = 10.0;
-    ObjectManager.instance.addObject(oxygen);
-    ObjectManager.instance.itemList.add(oxygen);
-    
-    ShipItem shipItem = new ShipItem()
-    ..initialize(400.0,viewportHeight - 200.0)
-    ..width = 50.0
-    ..height = 50.0;
-    ObjectManager.instance.addObject(shipItem);
-    ObjectManager.instance.itemList.add(shipItem);
+
 }
 
 /**
