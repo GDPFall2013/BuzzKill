@@ -5,6 +5,6 @@ part of gdp;
 */
 abstract class Enemy extends GameObject {
   
-  injure() {}
+  double injure() {}
  
 }
