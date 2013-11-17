@@ -20,7 +20,7 @@ class Game{
   Player player = new Player();
 static double oxygen = 100.0; 
 static int lives = 3;
-
+Alien alien2 = new Alien(400.0);
 
 
 int stateEnumPlay = 1;

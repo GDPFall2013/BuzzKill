@@ -41,7 +41,7 @@ class Player extends GameObject{
     input = new Input();
     sprite = new SpriteSheet("./content/buzzspritesheet.png",0,0,75,100);
     //WALKING = true;
-    print("begin");
+    //print("begin");
     
   }
   
@@ -61,7 +61,7 @@ class Player extends GameObject{
           sprite.spritex = 225;
           sprite.spritey = 200;
   
-         sprite.drawOnPosition(cx-width/2, cy - height/2 , width , height);
+         sprite.drawOnPosition((cx-width/2)-50, cy - height/2 , width , height);
          
        }
        
@@ -70,7 +70,7 @@ class Player extends GameObject{
            sprite.spritex = 225;
            sprite.spritey = 300;
   
-         sprite.drawOnPosition(cx-width/2, cy - height/2 , width , height);
+         sprite.drawOnPosition((cx-width/2)+50 , cy - height/2 , width , height);
        }
   
        else if(WALKING && LOOK_RIGHT){
@@ -83,8 +83,8 @@ class Player extends GameObject{
          sprite.spritey = 0;
          }
          
-         print(sprite.spritex  + sprite.spritey);
-         sprite.drawOnPosition(cx-width/2, cy - height/2 , width , height);
+         //print(sprite.spritex  + sprite.spritey);
+         sprite.drawOnPosition((cx-width/2)-50, cy - height/2 , width , height);
        }
        
        else if(WALKING && LOOK_LEFT){
@@ -96,20 +96,22 @@ class Player extends GameObject{
          sprite.spritex = sprite.spritex - 75;
          sprite.spritey = 100;
          }
-         sprite.drawOnPosition(cx-width/2, cy - height/2 , width , height);
+         sprite.drawOnPosition((cx-width/2)+50, cy - height/2 , width , height);
        }
        
        else {
          if(LOOK_LEFT){
            sprite.spritex = 825;
            sprite.spritey = 100;
+           sprite.drawOnPosition((cx-width/2)+50, cy - height/2 , width , height);
          }
          else{
            sprite.spritex = 0;
            sprite.spritey = 0;
+           sprite.drawOnPosition((cx-width/2)-50, cy - height/2 , width , height);
          }
          
-         sprite.drawOnPosition(cx-width/2, cy - height/2 , width , height);
+         
        }
      }
   }
