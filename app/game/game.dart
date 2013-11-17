@@ -63,6 +63,8 @@ void update(double dt) {
       lastOxygenTick += 250;
       oxygen -= 1;
     }
+    
+    ObjectManager.instance.removeDeadObjects();
   }
 }
 

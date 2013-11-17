@@ -29,7 +29,6 @@ class Oxygen extends Item {
   collect() {
     Game.oxygen += 20.0;  //TODO this should be changed to a method call
     SoundManager.instance.playSound(SoundManager.enumSoundOxygen);
-    // Destroy this object
+   this.dead = true;
   }
-  
 }
