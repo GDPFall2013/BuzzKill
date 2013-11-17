@@ -23,6 +23,19 @@ class ObjectManager {
     goList.add(go);
   }
   
+  void removeDeadObjects() {
+    for (int i = 0; i < goList.length; i++){
+      GameObject go = goList[i];
+      if (go.dead){
+        goList.remove(go);
+        itemList.remove(go);
+        enemyList.remove(go);
+        blockList.remove(go);
+        i--;
+      }
+    }
+  }
+  
   //TODO this is not currently used
 // given two objects, check for a collision between them
   bool checkForCollision(GameObject a, GameObject b){

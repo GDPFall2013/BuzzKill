@@ -192,6 +192,7 @@ class Player extends GameObject{
       //Check for death 
       if (Game.oxygen <= 0 || this.y > viewportHeight + this.height /2) {
         Game.lives -= 1;
+        Game.oxygen = 100.0;
         if (Game.lives <= 0) {
          Game.instance.gameOver();
         }
