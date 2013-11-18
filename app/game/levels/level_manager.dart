@@ -3,13 +3,17 @@ part of gdp;
 
 class LevelManager {
  
-  Alien alien = new Alien();
+  Alien alien = new Alien(300.0);
+  Alien alien2 = new Alien(600.0); 
   loadLevel(int level, Player player) {
     ObjectManager om = new ObjectManager();
     SoundManager sm = new SoundManager();
     om.addObject(player);
     om.addObject(alien);
     om.enemyList.add(alien);
+    
+    om.addObject(alien2);
+    om.enemyList.add(alien2);
     
     Block floor = new Block();
     floor.initialize(0.0, viewportHeight - 70.0);

@@ -19,8 +19,11 @@ class Game{
   
   Player player = new Player();
 static double oxygen = 100.0; 
-static int lives = 3;
+Stopwatch oxygenTimer = new Stopwatch();
+double lastOxygenTick = 0.0;
 
+static int lives = 3;
+Alien alien2 = new Alien(400.0);
 
 
 int stateEnumPlay = 1;
@@ -34,6 +37,7 @@ Initialize() {
   lm.loadLevel(1, player);
     state = stateEnumPlay;
 
+    oxygenTimer.start();
 }
 
 /**
@@ -53,6 +57,14 @@ void update(double dt) {
     for (GameObject go in ObjectManager.instance.goList) {
       go.update(dt);
     }
+    
+    //Drain Oxygen
+    if (oxygenTimer.elapsedMilliseconds > 250 + lastOxygenTick){
+      lastOxygenTick += 250;
+      oxygen -= 1;
+    }
+    
+    ObjectManager.instance.removeDeadObjects();
   }
 }
 
@@ -86,6 +98,14 @@ void draw() {
     context.fillStyle = 'white';
     context.font = "normal 30pt calibri";
     context.fillText("YOU WIN!", viewportWidth/2 - 70, viewportHeight/2 - 40, 1000);
+  } else if (state == stateEnumGameOver){
+    context.fillStyle = 'black';
+    context.fillRect(0, 0, 640, 480);
+    
+    context.fillStyle = 'white';
+    context.font = "normal 30pt calibri";
+    context.fillText("Suffocation!", viewportWidth/2 - 70, viewportHeight/2 - 40, 1000);
+    
   }
   
   
@@ -101,8 +121,8 @@ drawHUD() {  //TODO: Change this information into Game Variables
   context.font = "normal 14pt calibri";
   context.fillText("BUZZKILL", 10, 20, 100);
   //context.fillText("Score:  ?????", viewportWidth/2 -35, 20, 100);  Do we have score in this game?
-  context.fillText("Lives: 3", 10, viewportHeight-15, 100);
-  context.fillText("Remaining Oxygen: 100%", viewportWidth - 200, viewportHeight-15, 500);
+  context.fillText("Lives: $lives", 10, viewportHeight-15, 100);
+  context.fillText("Remaining Oxygen: $oxygen", viewportWidth - 200, viewportHeight-15, 500);
   context.restore();
 }
 

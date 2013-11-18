@@ -34,11 +34,17 @@ class TaskRegistry {
     return _tasks.containsKey(taskName);
   }
 
+  /**
+   * **DEPRECATED** Use [addTask] instead.
+   */
   @deprecated
   Task addSync(String name, dynamic func(TaskContext ctx), {String description}) {
     return addTask(name, new Task(func, description: description));
   }
 
+  /**
+   * **DEPRECATED** Use [addTask] instead.
+   */
   @deprecated
   Task addAsync(String name, Future execFuture(TaskContext ctx), {String description}) {
     return addTask(name, new Task(execFuture, description: description));
@@ -51,8 +57,11 @@ class TaskRegistry {
    *
    * If a [Future] is returned from the [task] [Function], the runner will wait
    * for the [Future] to complete.
+   *
+   * If [description] is provided and [task] is an instance of [Task], then
+   * [task] will be cloned and given the provided [description].
    */
-  Task addTask(String name, dynamic task) {
+  Task addTask(String name, dynamic task, {String description} ) {
     require(!isFrozen, "Cannot add a task. Frozen.");
     _validateTaskName(name);
     requireArgument(!_tasks.containsKey(name), 'task',
@@ -60,9 +69,13 @@ class TaskRegistry {
 
     requireArgumentNotNull(task, 'task');
 
-    if(task is! Task) {
+    if(task is Task) {
+      if(description != null) {
+        task = task.clone(description: description);
+      }
+    } else {
       // wrap it?
-      task = new Task(task);
+      task = new Task(task, description: description);
     }
 
     _tasks[name] = task;

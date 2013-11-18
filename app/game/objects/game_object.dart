@@ -10,6 +10,7 @@ abstract class GameObject {
   double y;
   double height = 0.0;
   double width = 0.0;
+  bool dead = false;
   
   GameObject() {}
   
