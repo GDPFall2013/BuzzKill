@@ -30,6 +30,8 @@ class Player extends GameObject{
   double playerStartX = 0.0;  //TODO: This should be moved to level object later
   double playerStartY = 300.0; 
   
+  CollisionSystem collision; //utilized for testing purposes
+  
   Player(){
     state = stateEnumAlive;
     x = playerStartX;
@@ -179,9 +181,8 @@ class Player extends GameObject{
          }
        }
        
-       
-       
-      if(y >= GROUND_LEVEL){
+      if(y >= GROUND_LEVEL)
+      {
          velocity_y = 0.0;
          JUMPING = false;
          y = 300.0;
@@ -222,5 +223,20 @@ class Player extends GameObject{
        state = stateEnumAlive;
      }
    }
-  
+   
+   collideWithItem()
+   {
+     collision.PlayerCollideWithItem();
+   }
+   
+   collideWithEnemy()
+   {
+     collision.PlayerCollideWithEnemy();
+   }
+   
+   collideWithBlock()
+   {
+     collision.PlayerCollideWithBlock();
+   }
+   
 }
