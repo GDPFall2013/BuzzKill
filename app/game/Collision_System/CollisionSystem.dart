@@ -48,6 +48,8 @@ class CollisionSystem extends GameObject
       {
         if (check_collision.checkForCollision(player, block))
         {
+           player.velocity_y = 0.0;
+           player.JUMPING = false;
            player.y = 350.0;      
         }
       }

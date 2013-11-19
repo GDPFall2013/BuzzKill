@@ -30,9 +30,7 @@ class Player extends GameObject{
   double playerStartX = 0.0;  //TODO: This should be moved to level object later
   double playerStartY = 300.0; 
   
-  ObjectManager check_collision = new ObjectManager();
-  
-  //CollisionSystem collision; //utilized for testing purposes
+  CollisionSystem collision = new CollisionSystem(); //utilized for testing purposes
   
   Player(){
     state = stateEnumAlive;
@@ -210,32 +208,9 @@ class Player extends GameObject{
         state = stateEnumAlive;
       }
       
-      for (Block block in ObjectManager.instance.blockList) 
-      {
-        if (check_collision.checkForCollision(this, block))
-        {
-          velocity_y = 0.0;
-          JUMPING = false;
-          this.y = 350.0;      
-        }
-      }
-      for (Enemy enemy in ObjectManager.instance.enemyList) 
-      {
-        if (check_collision.checkForCollision(this,enemy))
-        {
-          this.injureBuzz (enemy.injure());    
-        }
-      }
-      for (Item item in ObjectManager.instance.itemList) 
-      {
-        if (check_collision.checkForCollision(this, item))
-        {
-          item.collect();   
-        }
-      }
-      //collision.PlayerCollideWithItem(this);
-      //collision.PlayerCollideWithEnemy(this);
-      //collision.PlayerCollideWithBlock(this);
+      collision.PlayerCollideWithItem(this);
+      collision.PlayerCollideWithEnemy(this);
+      collision.PlayerCollideWithBlock(this);
        
    }
   
