@@ -12,13 +12,11 @@ class CollisionSystem extends GameObject
     return instance;
   }
   CollisionSystem._internal();
-  
-   Player player = new Player();
    
    ObjectManager check_collision = new ObjectManager();
    
    
-     PlayerCollideWithItem()
+     PlayerCollideWithItem(Player player)
      {
       // Collision Check for player colliding with items
       for (Item item in ObjectManager.instance.itemList) 
@@ -30,7 +28,7 @@ class CollisionSystem extends GameObject
       }
      }
      
-     PlayerCollideWithEnemy()
+     PlayerCollideWithEnemy(Player player)
      {
        // Collision Check for player colliding with enemies
       for (Enemy enemy in ObjectManager.instance.enemyList) 
@@ -43,7 +41,7 @@ class CollisionSystem extends GameObject
       }
      }
      
-     PlayerCollideWithBlock()
+     PlayerCollideWithBlock(Player player)
      {
       //Collision Check for player colliding with blocks
       for (Block block in ObjectManager.instance.blockList) 

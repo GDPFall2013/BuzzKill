@@ -30,7 +30,9 @@ class Player extends GameObject{
   double playerStartX = 0.0;  //TODO: This should be moved to level object later
   double playerStartY = 300.0; 
   
-  CollisionSystem collision; //utilized for testing purposes
+  ObjectManager check_collision = new ObjectManager();
+  
+  //CollisionSystem collision; //utilized for testing purposes
   
   Player(){
     state = stateEnumAlive;
@@ -183,12 +185,12 @@ class Player extends GameObject{
          }
        }
        
-      if(y >= GROUND_LEVEL)
+     /* if(y >= GROUND_LEVEL)
       {
          velocity_y = 0.0;
          JUMPING = false;
          y = 300.0;
-       }
+       }*/
      
       //Check for death 
       if (Game.oxygen <= 0 || this.y > viewportHeight + this.height /2) {
@@ -207,6 +209,34 @@ class Player extends GameObject{
         
         state = stateEnumAlive;
       }
+      
+      for (Block block in ObjectManager.instance.blockList) 
+      {
+        if (check_collision.checkForCollision(this, block))
+        {
+          velocity_y = 0.0;
+          JUMPING = false;
+          this.y = 350.0;      
+        }
+      }
+      for (Enemy enemy in ObjectManager.instance.enemyList) 
+      {
+        if (check_collision.checkForCollision(this,enemy))
+        {
+          this.injureBuzz (enemy.injure());    
+        }
+      }
+      for (Item item in ObjectManager.instance.itemList) 
+      {
+        if (check_collision.checkForCollision(this, item))
+        {
+          item.collect();   
+        }
+      }
+      //collision.PlayerCollideWithItem(this);
+      //collision.PlayerCollideWithEnemy(this);
+      //collision.PlayerCollideWithBlock(this);
+       
    }
   
    injureBuzz (double injuryAmount) {
@@ -225,21 +255,6 @@ class Player extends GameObject{
      } else {
        state = stateEnumAlive;
      }
-   }
-   
-   collideWithItem()
-   {
-     collision.PlayerCollideWithItem();
-   }
-   
-   collideWithEnemy()
-   {
-     collision.PlayerCollideWithEnemy();
-   }
-   
-   collideWithBlock()
-   {
-     collision.PlayerCollideWithBlock();
    }
    
 }
