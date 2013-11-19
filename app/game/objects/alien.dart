@@ -20,8 +20,6 @@ class Alien extends Enemy{
     y = GROUND_LEVEL;
     width = 97.0;
     height = 50.0;
-    img = new Element.tag("img");
-    img.src = "./content/AlienTurtle.png";
     input = new Input();
     sprite = new SpriteSheet("./content/alienturtle_spritesheet.png",0,0,97,50);
     repeat = 0;

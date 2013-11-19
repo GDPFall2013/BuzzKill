@@ -37,7 +37,7 @@ class SoundManager {
     _jumpClip = audioManager.makeClip('jump', 'fastinvader3Wave.wav');
     _jumpClip.load();
     
-    _oxygenClip = audioManager.makeClip('oxygen', 'ufo_highpitchWave.wav');
+    _oxygenClip = audioManager.makeClip('oxygen', 'fastinvader4Wave.wav');
     _oxygenClip.load();
     
     _shipItemClip = audioManager.makeClip('shipItem', 'ufo_lowpitchWave.wav');
