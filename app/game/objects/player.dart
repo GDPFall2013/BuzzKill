@@ -209,7 +209,9 @@ class Player extends GameObject{
       }
       
       collision.PlayerCollideWithItem(this);
-      collision.PlayerCollideWithEnemy(this);
+      if (state == stateEnumAlive) {
+        collision.PlayerCollideWithEnemy(this);
+      }
       collision.PlayerCollideWithBlock(this);
        
    }
