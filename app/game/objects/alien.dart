@@ -18,8 +18,8 @@ class Alien extends Enemy{
     
     x = xx;
     y = GROUND_LEVEL;
-    width = 97.0;
-    height = 50.0;
+    width = 83.0;
+    height = 40.0;
     input = new Input();
     sprite = new SpriteSheet("./content/alienturtle_spritesheet.png",0,0,97,50);
     repeat = 0;
@@ -64,7 +64,9 @@ class Alien extends Enemy{
        sprite.spritey = 0;
        repeat = 1;
      }
-   sprite.drawOnPosition(cx-width/2, cy-height/2, width , height);
+     // Adjustments are a quick-fix on tightening the collision Box
+     // (while still matching the drawing)
+   sprite.drawOnPosition(cx-width/2 - 8, cy-height/2 - 7, width , height);
      
     //context.drawImageScaled(img, cx - width/2, cy - height/2, width, height);
 
