@@ -224,15 +224,16 @@ class Player extends GameObject{
      Game.oxygen -= injuryAmount;
      // TODO: Play sound
      state = stateEnumInjured;
-     invincibilityTimer = 3.0;
-     gameLoop.addTimer((invincibilityTimer) => invincibilityCountDown(), 0.5);
+     invincibilityTimer = 1.5;
+     blink = !blink;
+     gameLoop.addTimer((invincibilityTimer) => invincibilityCountDown(), 0.1);
    }
    
    invincibilityCountDown() {
      if (invincibilityTimer > 0) {
-       invincibilityTimer -= 0.25;
+       invincibilityTimer -= 0.10;
        blink = !blink;
-       gameLoop.addTimer((invincibilityTimer) => invincibilityCountDown(), 0.25);
+       gameLoop.addTimer((invincibilityTimer) => invincibilityCountDown(), 0.10);
      } else {
        state = stateEnumAlive;
      }
