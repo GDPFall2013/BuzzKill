@@ -225,7 +225,7 @@ class Player extends GameObject{
      // TODO: Play sound
      state = stateEnumInjured;
      invincibilityTimer = 1.5;
-     blink = !blink;
+     blink = true;
      gameLoop.addTimer((invincibilityTimer) => invincibilityCountDown(), 0.1);
    }
    
