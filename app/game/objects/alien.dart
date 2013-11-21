@@ -14,6 +14,10 @@ class Alien extends Enemy{
   SpriteSheet sprite;
   int repeat = 0;
   
+  double imgOffsetX = 8.0;
+  double imgOffsetY = -7.0;
+  double lastDraw = 0.0;  // Used for timing Animation
+  
   Alien(double xx){
     
     x = xx;
@@ -25,48 +29,51 @@ class Alien extends Enemy{
     repeat = 0;
   }
   
+  update (double dt) {
+  //move increment (assuming aliens will always be moving towards the left)
+    x = x - 0.5 * dt;
+    
+    lastDraw += dt;
+    if (lastDraw > 1.0) {
+    lastDraw -= 1.0;
+      //sprite logic
+      if(sprite.spritex >= 380){
+        sprite.spritex = 0;
+        sprite.spritey = 0;
+        
+        repeat = 1;
+      }
+      else if(repeat==1 || repeat==2 || repeat == 3 || repeat ==4){
+        sprite.spritex = sprite.spritex;
+        sprite.spritey = 0;
+        
+        if(repeat == 1){
+          repeat = 2;
+        }
+        else if(repeat == 2){
+          repeat = 3;
+        }
+        else if(repeat == 3){
+          repeat = 4;
+        }
+        else if(repeat == 4){
+          repeat = 5;
+        }
+      }
+      else{
+        sprite.spritex = sprite.spritex + 97;
+        sprite.spritey = 0;
+        repeat = 1;
+      }
+    }
+  }
+  
    draw(){
 
-     
-     //move increment (assuming aliens will always be moving towards the left)
-     x = x - 0.5;
-     
-     
      double cx = this.x - camera.x;
      double cy = this.y - camera.y;
      
-     //sprite logic
-     if(sprite.spritex >= 380){
-     sprite.spritex = 0;
-     sprite.spritey = 0;
-     
-     repeat = 1;
-     }
-     else if(repeat==1 || repeat==2 || repeat == 3 || repeat ==4){
-       sprite.spritex = sprite.spritex;
-       sprite.spritey = 0;
-       
-       if(repeat == 1){
-         repeat = 2;
-       }
-       else if(repeat == 2){
-         repeat = 3;
-       }
-       else if(repeat == 3){
-         repeat = 4;
-       }
-       else if(repeat == 4){
-         repeat = 5;
-       }
-     }
-     else{
-       sprite.spritex = sprite.spritex + 97;
-       sprite.spritey = 0;
-       repeat = 1;
-     }
-     // Adjustments are a quick-fix on tightening the collision Box
-     // (while still matching the drawing)
-   sprite.drawOnPosition(cx-width/2 - 8, cy-height/2 - 7, width , height);
+    sprite.drawOnPosition(cx-width/2 - imgOffsetX, cy-height/2 + imgOffsetY, width , height);
      
     //context.drawImageScaled(img, cx - width/2, cy - height/2, width, height);
 
@@ -75,6 +82,4 @@ class Alien extends Enemy{
    double injure() {
     return 10.0;
    }
-   
- 
 }
