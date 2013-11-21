@@ -81,9 +81,9 @@ void draw() {
   
   for (GameObject go in ObjectManager.instance.goList) {
     
-    // TODO: Change so its not just objects that have their middle in the screen that get drawn
-    if (go.x + go.width/2 > camera.x && 
-        go.x - go.width/2 < camera.x + viewportWidth) {
+    double drawSpace = viewportWidth/4;
+    if (go.x + go.width/2 > camera.x  - drawSpace && 
+        go.x - go.width/2 < camera.x + viewportWidth + drawSpace) {
       go.draw();
       DrawColliderBox(go);
     }   
