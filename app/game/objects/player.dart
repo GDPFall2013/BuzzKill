@@ -32,14 +32,18 @@ class Player extends GameObject{
   
   CollisionSystem collision = new CollisionSystem(); //utilized for testing purposes
   
+  double imgXOffset = 16.0;
+  double imgYOffset = - 12.0;
+  
   Player(){
     state = stateEnumAlive;
     x = playerStartX;
     y = playerStartY;
-    width = 60.0;
-    height = 100.0;
+    width = 46.0;
+    height = 78.0;
     img = new Element.tag("img");
     img.src = "./content/buzz.png";
+
     input = new Input();
     sprite = new SpriteSheet("./content/buzzspritesheet.png",0,0,75,100);
     //WALKING = true;
@@ -63,7 +67,7 @@ class Player extends GameObject{
           sprite.spritex = 225;
           sprite.spritey = 200;
   
-         sprite.drawOnPosition((cx-width/2)-50, cy - height/2 , width , height);
+         sprite.drawOnPosition((cx-width/2) - imgXOffset, cy - height/2 + imgYOffset, width , height);
          
        }
        
@@ -72,7 +76,7 @@ class Player extends GameObject{
            sprite.spritex = 225;
            sprite.spritey = 300;
   
-         sprite.drawOnPosition((cx-width/2)+50 , cy - height/2 , width , height);
+         sprite.drawOnPosition((cx-width/2)  + imgXOffset, cy - height/2 + imgYOffset, width , height);
        }
   
        else if(WALKING && LOOK_RIGHT){
@@ -86,7 +90,7 @@ class Player extends GameObject{
          }
          
          //print(sprite.spritex  + sprite.spritey);
-         sprite.drawOnPosition((cx-width/2)-50, cy - height/2 , width , height);
+         sprite.drawOnPosition((cx-width/2)  - imgXOffset, cy - height/2 + imgYOffset, width , height);
        }
        
        else if(WALKING && LOOK_LEFT){
@@ -98,19 +102,19 @@ class Player extends GameObject{
          sprite.spritex = sprite.spritex - 75;
          sprite.spritey = 100;
          }
-         sprite.drawOnPosition((cx-width/2)+50, cy - height/2 , width , height);
+         sprite.drawOnPosition((cx-width/2)  + imgXOffset, cy - height/2 + imgYOffset, width , height);
        }
        
        else {
          if(LOOK_LEFT){
            sprite.spritex = 825;
            sprite.spritey = 100;
-           sprite.drawOnPosition((cx-width/2)+50, cy - height/2 , width , height);
+           sprite.drawOnPosition((cx-width/2)  + imgXOffset, cy - height/2 + imgYOffset, width , height);
          }
-         else{
+         else{ // Look Right
            sprite.spritex = 0;
            sprite.spritey = 0;
-           sprite.drawOnPosition((cx-width/2)-50, cy - height/2 , width , height);
+           sprite.drawOnPosition((cx-width/2)  - imgXOffset, cy - height/2 + imgYOffset, width , height);
          }
          
          
