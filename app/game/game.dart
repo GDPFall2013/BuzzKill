@@ -47,11 +47,11 @@ void update(double dt) {
   if (state == stateEnumPlay) {
     
     // Adjust the camera position
-    if (player.x - camera.x > viewportWidth - 150) {
-      camera.x = player.x - (viewportWidth - 150);
+    if (player.x - camera.x > viewportWidth - 205) {
+      camera.x = player.x - (viewportWidth - 205);
     }
-    if (player.x - camera.x < 150) {
-      camera.x = player.x - 150;
+    if (player.x - camera.x < 205) {
+      camera.x = player.x - 205;
     }
     
     for (GameObject go in ObjectManager.instance.goList) {
