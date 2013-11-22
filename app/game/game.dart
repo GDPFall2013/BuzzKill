@@ -17,14 +17,14 @@ class Game{
   Game._internal();
   
   
-  Player player = new Player();
+Player player = new Player();
 static double oxygen = 100.0; 
 Stopwatch oxygenTimer = new Stopwatch();
 double lastOxygenTick = 0.0;
 
 static int lives = 3;
-Alien alien2 = new Alien(400.0);
 
+LevelManager levelManager = new LevelManager();
 
 int stateEnumPlay = 1;
 int stateEnumWin = 2;
@@ -33,8 +33,7 @@ int stateEnumGameOver = 3;
 int state;
 
 Initialize() {
-  LevelManager lm = new LevelManager();
-  lm.loadLevel(1, player);
+  levelManager.loadLevel(LevelManager.enumLevelTest);
     state = stateEnumPlay;
 
     oxygenTimer.start();

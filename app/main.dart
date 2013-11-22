@@ -30,6 +30,7 @@ part 'game/animations/sprite_sheet.dart';
 
 part 'game/levels/level_manager.dart';
 part 'game/levels/level_one.dart';
+part 'game/levels/level_test.dart';
 
 part 'game/Collision_System/CollisionSystem.dart';
 
