@@ -24,12 +24,14 @@ class SoundManager {
   AudioClip _jumpClip;
   AudioClip _oxygenClip;
   AudioClip _shipItemClip;
+  AudioClip _injureClip;
   
   AudioClip _currentMusic;
  
   static final int enumSoundJump = 1;
   static final int enumSoundOxygen = 2;
   static final int enumSoundShipItem = 3;
+  static final int enumSoundInjure = 4;
   
   init(){
     sfxSource = this.audioManager.makeSource('sfxSource');
@@ -42,6 +44,9 @@ class SoundManager {
     
     _shipItemClip = audioManager.makeClip('shipItem', 'ufo_lowpitchWave.wav');
     _shipItemClip.load();
+    
+    _injureClip = audioManager.makeClip('injure', 'invaderKilledWave.wav');
+    _injureClip.load();
     
   }
   
@@ -119,6 +124,9 @@ class SoundManager {
           break;
         case 3: 
           audioManager.playClipFromSource('sfxSource', 'shipItem');
+          break;
+        case 4: 
+          audioManager.playClipFromSource('sfxSource', 'injure');
           break;
       }
     }

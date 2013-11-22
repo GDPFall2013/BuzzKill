@@ -240,7 +240,7 @@ class Player extends GameObject{
   
    injureBuzz (double injuryAmount) {
      Game.oxygen -= injuryAmount;
-     // TODO: Play sound
+     SoundManager.instance.playSound(SoundManager.enumSoundInjure);
      state = stateEnumInjured;
      invincibilityTimer = 1.5;
      blink = true;
