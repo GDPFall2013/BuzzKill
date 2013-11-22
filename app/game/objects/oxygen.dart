@@ -7,12 +7,14 @@ part of gdp;
  */
 class Oxygen extends Item {
   
+  SpriteSheet sprite = new SpriteSheet("./content/gameitems.png",0,0,50,50);
   
   update(double dt){
     // inanimate object, does nothing
   }
   
   draw() {
+    /*
     context.save();
     context.beginPath();
     context.fillStyle = 'green';
@@ -21,6 +23,8 @@ class Oxygen extends Item {
     context.fillStyle = 'black';
     context.fillText("Oxygen", x - camera.x - width/2, y - camera.y, width);
     context.restore();
+    */
+    sprite.drawOnPosition(x-camera.x, y-camera.y, width , height);
   }
   
   /*
