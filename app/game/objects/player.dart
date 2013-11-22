@@ -53,10 +53,7 @@ class Player extends GameObject{
   
    draw(){
      
-     if (state == stateEnumDead || blink) {
-       // don't draw
-     } else {
-       
+     if (state != stateEnumDead && !blink) {
        double cx = this.x - camera.x;
        double cy = this.y - camera.y;
       //context.drawImageScaled(img, cx - width/2, cy - height/2, width, height);
@@ -135,107 +132,115 @@ class Player extends GameObject{
    
    update(double dt){
      
-     //TODO: When checking for injury, should not be affected if 
-     // state = stateEnumInjured
-     
-     
-     if (input.isDown(KeyCode.UP)){
+     if (state != stateEnumDead) {
        
-       //if currently jumping
-       if(JUMPING){
-         //do nothing 
-       }
-       
-       //start jump motion
-       else{
-       SoundManager.instance.playSound(SoundManager.enumSoundJump);
-       JUMPING = true;
-       velocity_y = 25.0;}
-
-     }
-   
-     
-     //down key does nothing for now
-     if (input.isDown(KeyCode.DOWN)){
-       //y += 1;    
-     }
-     
-     //move right
-     if (input.isDown(KeyCode.RIGHT)){
-       x += 3 * dt;
-       WALKING = true;
-       LOOK_RIGHT = true;
-       LOOK_LEFT = false;
-       
-     }
-     
-     else{
-       WALKING = false;
-       //LOOK_RIGHT = false;
-     }
-     
-     //move left
-     if (input.isDown(KeyCode.LEFT)){
-       x -= 3 * dt;
-       WALKING = true;
-       LOOK_LEFT = true;
-       LOOK_RIGHT = false;
-     }
-     else{
-       if(!WALKING){
-       WALKING = false;}
-       //LOOK_LEFT = false;
-     }
-     
-       
-     //if in jumping motion
-     if(JUMPING){
-       
-         if(velocity_y > - 130.0){
-            velocity_y = velocity_y - accel;
-            y = y - velocity_y * dt;// - 50);
-            
-            if(LOOK_RIGHT && input.isDown(KeyCode.RIGHT)){
-            x += 1;
-            }
-            else if(LOOK_LEFT && input.isDown(KeyCode.LEFT)){
-              x -= 1;
-            }
-            
+       if (input.isDown(KeyCode.UP)){
+         
+         //if currently jumping
+         if(JUMPING){
+           //do nothing 
          }
+         
+         //start jump motion
+         else{
+         SoundManager.instance.playSound(SoundManager.enumSoundJump);
+         JUMPING = true;
+         velocity_y = 25.0;}
+  
+       }
+     
+       
+       //down key does nothing for now
+       if (input.isDown(KeyCode.DOWN)){
+         //y += 1;    
        }
        
-     /* if(y >= GROUND_LEVEL)
-      {
-         velocity_y = 0.0;
-         JUMPING = false;
-         y = 300.0;
-       }*/
-     
-      //Check for death 
-      if (Game.oxygen <= 0 || this.y > viewportHeight + this.height /2) {
-        Game.lives -= 1;
-        Game.oxygen = 100.0;
-        if (Game.lives <= 0) {
-         Game.instance.gameOver();
-        }
-        // TODO: play some music
-        // TODO: wait a few seconds
-        camera.x = 0.0;
-        camera.y = 0.0;
-        
-        this.x = playerStartX;
-        this.y = playerStartY;
-        
-        state = stateEnumAlive;
-      }
-      
-      collision.PlayerCollideWithItem(this);
-      if (state == stateEnumAlive) {
-        collision.PlayerCollideWithEnemy(this);
-      }
-      collision.PlayerCollideWithBlock(this);
+       //move right
+       if (input.isDown(KeyCode.RIGHT)){
+         x += 3 * dt;
+         WALKING = true;
+         LOOK_RIGHT = true;
+         LOOK_LEFT = false;
+         
+       }
        
+       else{
+         WALKING = false;
+         //LOOK_RIGHT = false;
+       }
+       
+       //move left
+       if (input.isDown(KeyCode.LEFT)){
+         x -= 3 * dt;
+         WALKING = true;
+         LOOK_LEFT = true;
+         LOOK_RIGHT = false;
+       }
+       else{
+         if(!WALKING){
+         WALKING = false;}
+         //LOOK_LEFT = false;
+       }
+       
+         
+       //if in jumping motion
+       if(JUMPING){
+         
+           if(velocity_y > - 130.0){
+              velocity_y = velocity_y - accel;
+              y = y - velocity_y * dt;// - 50);
+              
+              if(LOOK_RIGHT && input.isDown(KeyCode.RIGHT)){
+              x += 1;
+              }
+              else if(LOOK_LEFT && input.isDown(KeyCode.LEFT)){
+                x -= 1;
+              }
+              
+           }
+         }
+         
+       /* if(y >= GROUND_LEVEL)
+        {
+           velocity_y = 0.0;
+           JUMPING = false;
+           y = 300.0;
+         }*/
+       
+        //Check for death 
+        if ((Game.oxygen <= 0 || this.y > viewportHeight + this.height /2) 
+            && state != stateEnumDead) {
+          Game.lives -= 1;
+          state = stateEnumDead;
+          
+          if (Game.lives <= 0) {
+           Game.instance.gameOver();
+          } else {
+            // TODO: play some death music
+            gameLoop.addTimer((reload) => requestReloadLevel(), 2.0);
+          }
+        }
+        
+      //  if (state == stateEnumAlive || state == stateEnumInjured) {
+          collision.PlayerCollideWithItem(this);
+       // }
+        if (state == stateEnumAlive) {
+          collision.PlayerCollideWithEnemy(this);
+        }
+        collision.PlayerCollideWithBlock(this);
+     }
+       
+   }
+   
+   requestReloadLevel() {
+     camera.x = 0.0;
+     camera.y = 0.0;
+     Game.oxygen = 100.0;
+     Game.instance.reloadLevel();
+     this.x = playerStartX;
+     this.y = playerStartY;
+     
+     state = stateEnumAlive;
    }
   
    injureBuzz (double injuryAmount) {
@@ -253,7 +258,9 @@ class Player extends GameObject{
        blink = !blink;
        gameLoop.addTimer((invincibilityTimer) => invincibilityCountDown(), 0.10);
      } else {
-       state = stateEnumAlive;
+       if (state != stateEnumDead) {
+        state = stateEnumAlive;
+       }
      }
    }
    

@@ -25,6 +25,7 @@ double lastOxygenTick = 0.0;
 static int lives = 3;
 
 LevelManager levelManager = new LevelManager();
+int currentLevel;
 
 int stateEnumPlay = 1;
 int stateEnumWin = 2;
@@ -33,6 +34,7 @@ int stateEnumGameOver = 3;
 int state;
 
 Initialize() {
+  currentLevel = LevelManager.enumLevelTest;
   levelManager.loadLevel(LevelManager.enumLevelTest);
     state = stateEnumPlay;
 
@@ -137,6 +139,11 @@ win() {
 gameOver() {
   // music to be placed here in the future
   state = stateEnumGameOver;
+}
+
+reloadLevel() {
+  ObjectManager.instance.clear();
+  levelManager.loadLevel(currentLevel);
 }
 
 }

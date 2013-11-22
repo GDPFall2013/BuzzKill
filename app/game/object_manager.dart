@@ -36,7 +36,13 @@ class ObjectManager {
     }
   }
   
-  //TODO this is not currently used
+void clear() {
+  goList.clear();
+  itemList.clear();
+  enemyList.clear();
+  blockList.clear();
+}
+  
 // given two objects, check for a collision between them
   bool checkForCollision(GameObject a, GameObject b){
     bool collided = false;
