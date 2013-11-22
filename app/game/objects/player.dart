@@ -62,6 +62,8 @@ class Player extends GameObject{
       //context.drawImageScaled(img, cx - width/2, cy - height/2, width, height);
        
        
+       
+       
        if(JUMPING && LOOK_RIGHT){
   
           sprite.spritex = 225;
@@ -76,7 +78,16 @@ class Player extends GameObject{
            sprite.spritex = 225;
            sprite.spritey = 300;
   
-         sprite.drawOnPosition((cx-width/2)  + imgXOffset, cy - height/2 + imgYOffset, width , height);
+         sprite.drawOnPosition((cx-width/2)  - imgXOffset, cy - height/2 + imgYOffset, width , height);
+       }
+       
+       else if(JUMPING){
+         
+         sprite.spritex = 225;
+         sprite.spritey = 200;
+         
+         sprite.drawOnPosition((cx-width/2) - imgXOffset, cy - height/2 + imgYOffset, width , height);
+         
        }
   
        else if(WALKING && LOOK_RIGHT){
@@ -102,14 +113,14 @@ class Player extends GameObject{
          sprite.spritex = sprite.spritex - 75;
          sprite.spritey = 100;
          }
-         sprite.drawOnPosition((cx-width/2)  + imgXOffset, cy - height/2 + imgYOffset, width , height);
+         sprite.drawOnPosition((cx-width/2)  - imgXOffset, cy - height/2 + imgYOffset, width , height);
        }
        
        else {
          if(LOOK_LEFT){
            sprite.spritex = 825;
            sprite.spritey = 100;
-           sprite.drawOnPosition((cx-width/2)  + imgXOffset, cy - height/2 + imgYOffset, width , height);
+           sprite.drawOnPosition((cx-width/2)  - imgXOffset, cy - height/2 + imgYOffset, width , height);
          }
          else{ // Look Right
            sprite.spritex = 0;
@@ -183,7 +194,14 @@ class Player extends GameObject{
          if(velocity_y > - 130.0){
             velocity_y = velocity_y - accel;
             y = y - velocity_y * dt;// - 50);
-        //    x += 1;  ?
+            
+            if(LOOK_RIGHT && input.isDown(KeyCode.RIGHT)){
+            x += 1;
+            }
+            else if(LOOK_LEFT && input.isDown(KeyCode.LEFT)){
+              x -= 1;
+            }
+            
          }
        }
        
