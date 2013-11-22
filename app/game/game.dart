@@ -34,10 +34,10 @@ int stateEnumGameOver = 3;
 int state;
 
 Initialize() {
-  currentLevel = LevelManager.enumLevelTest;
-  levelManager.loadLevel(LevelManager.enumLevelTest);
- // currentLevel = LevelManager.enumLevelOne;
- // levelManager.loadLevel(LevelManager.enumLevelOne);
+ // currentLevel = LevelManager.enumLevelTest;
+ // levelManager.loadLevel(LevelManager.enumLevelTest);
+  currentLevel = LevelManager.enumLevelOne;
+  levelManager.loadLevel(LevelManager.enumLevelOne);
     state = stateEnumPlay;
 
     oxygenTimer.start();
