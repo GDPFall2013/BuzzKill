@@ -50,26 +50,8 @@ class CollisionSystem extends GameObject
         {
            player.velocity_y = 0.0;
            player.JUMPING = false;
-           player.y = 350.0;      
+           player.y = block.y - block.height/2 - player.height/2;      
         }
       }
      }  
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  

@@ -14,7 +14,7 @@ class Player extends GameObject{
   
   double velocity_y = 0.0;
   double accel = 1.5;
-  static double GROUND_LEVEL = 300.0;
+  //static double GROUND_LEVEL = 300.0;
   SpriteSheet sprite;
   
   int stateEnumAlive = 1;
@@ -157,7 +157,8 @@ class Player extends GameObject{
        
        //move right
        if (input.isDown(KeyCode.RIGHT)){
-         x += 3 * dt;
+         movePlayer(1.0, 3*dt);
+        // x += 3 * dt;
          WALKING = true;
          LOOK_RIGHT = true;
          LOOK_LEFT = false;
@@ -171,7 +172,8 @@ class Player extends GameObject{
        
        //move left
        if (input.isDown(KeyCode.LEFT)){
-         x -= 3 * dt;
+         movePlayer(-1.0, 3*dt);
+      //   x -= 3 * dt;
          WALKING = true;
          LOOK_LEFT = true;
          LOOK_RIGHT = false;
@@ -183,29 +185,20 @@ class Player extends GameObject{
        }
        
          
-       //if in jumping motion
-       if(JUMPING){
-         
-           if(velocity_y > - 130.0){
-              velocity_y = velocity_y - accel;
-              y = y - velocity_y * dt;// - 50);
-              
-              if(LOOK_RIGHT && input.isDown(KeyCode.RIGHT)){
-              x += 1;
-              }
-              else if(LOOK_LEFT && input.isDown(KeyCode.LEFT)){
-                x -= 1;
-              }
-              
-           }
+
+         //Gravity
+         if(velocity_y > - 130.0){
+            velocity_y = velocity_y - accel;
+            y = y - velocity_y * dt;// - 50);
+            
+            if(LOOK_RIGHT && input.isDown(KeyCode.RIGHT)){
+            movePlayer (1.0, 3 * dt);
+            }
+            else if(LOOK_LEFT && input.isDown(KeyCode.LEFT)){
+            movePlayer(1.0, 3 * dt);
+            }
          }
          
-       /* if(y >= GROUND_LEVEL)
-        {
-           velocity_y = 0.0;
-           JUMPING = false;
-           y = 300.0;
-         }*/
        
         //Check for death 
         if ((Game.oxygen <= 0 || this.y > viewportHeight + this.height /2) 
@@ -231,6 +224,23 @@ class Player extends GameObject{
      }
        
    }
+   
+   /**
+    *  Takes player commands for movement and  checks to see if that
+    *  movement should be blocked.  If it is, it undoes the movement
+    */
+   movePlayer(double direction, double amount) {
+     //move, then check if player is colliding with stuff.  If he is, move him back.
+       this.x += direction * amount;
+       for (Block block in ObjectManager.instance.blockList) {
+         if (ObjectManager.instance.checkForCollision(this, block)){
+           this.x -= direction * amount;   //Undo the movement
+           return;
+         }
+       }
+     }
+   
+   
    
    resetPlayer() {
      camera.x = 0.0;
