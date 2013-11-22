@@ -23,6 +23,21 @@ class ObjectManager {
     goList.add(go);
   }
   
+  void addBlock(Block block) {
+    goList.add(block);
+    blockList.add(block);
+  }
+  
+  void addItem(Item item) {
+    goList.add(item);
+    itemList.add(item);
+  }
+  
+  void addEnemy(Enemy enemy) {
+    goList.add(enemy);
+    enemyList.add(enemy);
+  }
+  
   void removeDeadObjects() {
     for (int i = 0; i < goList.length; i++){
       GameObject go = goList[i];

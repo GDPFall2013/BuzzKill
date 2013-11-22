@@ -10,6 +10,12 @@ class ShipItem extends Item{
     //Inanimate object, does nothing
   }
   
+  initialize(double x, double y) {
+    super.initialize(x, y);
+    this.height = 50.0;
+    this.width = 50.0;
+  }
+  
   draw() {
     context.save();
     context.beginPath();

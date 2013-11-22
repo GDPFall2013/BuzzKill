@@ -40,8 +40,8 @@ CanvasRenderingContext2D context;
 var canvas;
 // Size of the Canvas is only set once, but size should be 
 // Readable from anywhere
-final int viewportWidth = 640, 
-      viewportHeight = 480;
+final double viewportWidth = 640.0, 
+      viewportHeight = 480.0;
 
 // The camera is a singleton and should be accessible anywhere
 Camera camera = new Camera();
@@ -78,9 +78,9 @@ void main() {
  */
 void buildCanvas(){
   canvas = query('canvas');
-  canvas.width = viewportWidth;
+  canvas.width = viewportWidth.toInt();
   
-  canvas.height = viewportHeight;
+  canvas.height = viewportHeight.toInt();
   document.body.nodes.add(canvas);
   context = canvas.getContext("2d");
 }

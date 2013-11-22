@@ -18,13 +18,11 @@ class Alien extends Enemy{
   double imgOffsetY = -7.0;
   double lastDraw = 0.0;  // Used for timing Animation
   
-  Alien(double xx){
-    
-    x = xx;
-    y = GROUND_LEVEL;
+  initialize(double x, double y) {
+    super.initialize(x, GROUND_LEVEL);
     width = 83.0;
     height = 40.0;
-    input = new Input();
+    //y = GROUND_LEVEL;
     sprite = new SpriteSheet("./content/alienturtle_spritesheet.png",0,0,97,50);
     repeat = 0;
   }

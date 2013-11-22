@@ -13,6 +13,12 @@ class Oxygen extends Item {
     // inanimate object, does nothing
   }
   
+  initialize(double x, double y) {
+    super.initialize(x, y);
+    this.width = 30.0;
+    this.height = 10.0;
+  }
+  
   draw() {
     /*
     context.save();
