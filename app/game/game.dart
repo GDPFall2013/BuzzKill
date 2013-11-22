@@ -105,7 +105,7 @@ void draw() {
     
     context.fillStyle = 'white';
     context.font = "normal 30pt calibri";
-    context.fillText("Suffocation!", viewportWidth/2 - 70, viewportHeight/2 - 40, 1000);
+    context.fillText("Buzz didn't make it...", viewportWidth/2 - 120, viewportHeight/2 - 40, 1000);
     
   }
   
@@ -137,13 +137,23 @@ win() {
 }
 
 gameOver() {
-  // music to be placed here in the future
+  // TODO music to be placed here in the future
+  gameLoop.addTimer((restart) => restartGame(), 3.0);
   state = stateEnumGameOver;
 }
 
 reloadLevel() {
   ObjectManager.instance.clear();
   levelManager.loadLevel(currentLevel);
+  player.resetPlayer();
+}
+
+restartGame() {
+  ObjectManager.instance.clear();
+  lives = 3;
+  levelManager.loadLevel(currentLevel);
+  player.resetPlayer();
+  state = stateEnumPlay;
 }
 
 }

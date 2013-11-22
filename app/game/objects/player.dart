@@ -217,7 +217,7 @@ class Player extends GameObject{
            Game.instance.gameOver();
           } else {
             // TODO: play some death music
-            gameLoop.addTimer((reload) => requestReloadLevel(), 2.0);
+            gameLoop.addTimer((reload) => Game.instance.reloadLevel(), 2.0);
           }
         }
         
@@ -232,11 +232,10 @@ class Player extends GameObject{
        
    }
    
-   requestReloadLevel() {
+   resetPlayer() {
      camera.x = 0.0;
      camera.y = 0.0;
      Game.oxygen = 100.0;
-     Game.instance.reloadLevel();
      this.x = playerStartX;
      this.y = playerStartY;
      
@@ -263,5 +262,4 @@ class Player extends GameObject{
        }
      }
    }
-   
 }
