@@ -19,7 +19,7 @@ class Alien extends Enemy{
   double lastDraw = 0.0;  // Used for timing Animation
   
   initialize(double x, double y) {
-    super.initialize(x, GROUND_LEVEL);
+    super.initialize(x, y);
     width = 83.0;
     height = 40.0;
     //y = GROUND_LEVEL;
@@ -29,7 +29,7 @@ class Alien extends Enemy{
   
   update (double dt) {
   //move increment (assuming aliens will always be moving towards the left)
-    x = x - 0.5 * dt;
+   // x = x - 0.5 * dt;
     
     lastDraw += dt;
     if (lastDraw > 1.0) {
@@ -41,7 +41,10 @@ class Alien extends Enemy{
         
         repeat = 1;
       }
-      else if(repeat==1 || repeat==2 || repeat == 3 || repeat ==4){
+      
+      //repeating a single sprite for smoother animation
+      else if(repeat==1 || repeat==2 || repeat == 3 || repeat ==4 || repeat ==5
+              || repeat==6 || repeat==7 || repeat==8){
         sprite.spritex = sprite.spritex;
         sprite.spritey = 0;
         
@@ -56,6 +59,18 @@ class Alien extends Enemy{
         }
         else if(repeat == 4){
           repeat = 5;
+        }
+        else if(repeat == 5){
+          repeat = 6;
+        }
+        else if(repeat == 6){
+          repeat = 7;
+        }
+        else if(repeat == 7){
+          repeat = 8;
+        }
+        else if(repeat == 8){
+          repeat = 9;
         }
       }
       else{

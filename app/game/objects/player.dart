@@ -192,10 +192,10 @@ class Player extends GameObject{
             y = y - velocity_y * dt;// - 50);
             
             if(LOOK_RIGHT && input.isDown(KeyCode.RIGHT)){
-            movePlayer (1.0, 3 * dt);
+            movePlayer (1.0, 1 * dt);
             }
             else if(LOOK_LEFT && input.isDown(KeyCode.LEFT)){
-            movePlayer(1.0, 3 * dt);
+            movePlayer(1.0, -1 * dt);
             }
          }
          

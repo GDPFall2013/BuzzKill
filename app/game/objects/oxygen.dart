@@ -37,7 +37,7 @@ class Oxygen extends Item {
    * This method to be called when Buzz touches the object.  
    */
   collect() {
-    Game.oxygen += 20.0;  //TODO this should be changed to a method call
+    Game.oxygen += 2.0;  //TODO this should be changed to a method call
     SoundManager.instance.playSound(SoundManager.enumSoundOxygen);
    this.dead = true;
   }
