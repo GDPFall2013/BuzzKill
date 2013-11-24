@@ -89,7 +89,7 @@ void draw() {
     if (go.x + go.width/2 > camera.x  - drawSpace && 
         go.x - go.width/2 < camera.x + viewportWidth + drawSpace) {
       go.draw();
-      DrawColliderBox(go);
+     // DrawColliderBox(go);
     }   
   }
   
