@@ -1,6 +1,6 @@
 {
   "manifest_version": 2,
-  "name": "Boiler Plate",
+  "name": "BuzzKill",
   "version": "1",
   "minimum_chrome_version": "28",
   "icons": {
