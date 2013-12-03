@@ -36,16 +36,16 @@ class SoundManager {
   init(){
     sfxSource = this.audioManager.makeSource('sfxSource');
     
-    _jumpClip = audioManager.makeClip('jump', 'fastinvader3Wave.wav');
+    _jumpClip = audioManager.makeClip('jump', 'SlowJump.wav');
     _jumpClip.load();
     
-    _oxygenClip = audioManager.makeClip('oxygen', 'fastinvader4Wave.wav');
+    _oxygenClip = audioManager.makeClip('oxygen', 'Oxygen.wav');
     _oxygenClip.load();
     
-    _shipItemClip = audioManager.makeClip('shipItem', 'ufo_lowpitchWave.wav');
+    _shipItemClip = audioManager.makeClip('shipItem', 'ShipItem.wav');
     _shipItemClip.load();
     
-    _injureClip = audioManager.makeClip('injure', 'invaderKilledWave.wav');
+    _injureClip = audioManager.makeClip('injure', 'Injured.wav');
     _injureClip.load();
     
   }
