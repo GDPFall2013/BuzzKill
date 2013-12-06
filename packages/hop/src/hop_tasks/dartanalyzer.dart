@@ -53,7 +53,7 @@ Future _processDartAnalyzerFile(TaskContext context,
   int warningCount = 0;
 
   return Future.forEach(analyzerFilePaths, (String path) {
-    final logger = context.getSubContext(path);
+    var logger = context.getSubLogger(path);
     return _dartAnalyzer(logger, path, verbose, formatMachine)
         .then((int exitCode) {
           logger.dispose();

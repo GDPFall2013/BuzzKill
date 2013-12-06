@@ -1,39 +1,30 @@
 library hop.console_context;
 
-import 'dart:async';
 import 'dart:io' as io;
 import 'package:args/args.dart';
-import 'package:bot/bot.dart';
 import 'package:bot_io/completion.dart';
 import 'package:logging/logging.dart';
-import 'package:hop/hop.dart';
+import 'package:hop/hop_core.dart';
+import 'package:hop/src/shared.dart';
+import 'hop_runner.dart';
 
-class ConsoleContext extends TaskContext {
-  final Task task;
-  final ArgResults arguments;
-  bool _isDisposed = false;
+// TODO: deprecate this class, expose a top-level method
 
-  ConsoleContext.raw(this.arguments, this.task);
+class ConsoleContext extends TaskRuntime {
+  final ArgResults argResults;
+
+  ConsoleContext._(this.argResults);
 
   @override
-  void log(Level logLevel, String message) {
-    _assertNotDisposed();
+  void addLog(Level logLevel, String message, {List<String> source}) {
     if(logLevel >= Level.FINE) {
       print(message);
     }
   }
 
-  @override
-  TaskContext getSubContext(String name) {
-    throw new UnimplementedError('sub contexts are not supported yet');
-  }
+  Level get printAtLevel => null;
 
-  bool get isDisposed => _isDisposed;
-
-  void dispose() {
-    _assertNotDisposed();
-    _isDisposed = true;
-  }
+  bool get isDisposed => false;
 
   static void runTaskAsProcess(List<String> mainArgs, Task task) {
     assert(task != null);
@@ -50,18 +41,11 @@ class ConsoleContext extends TaskContext {
       print(parser.getUsage());
       io.exit(RunResult.BAD_USAGE.exitCode);
     }
-    final ctx = new ConsoleContext.raw(args, task);
+    final ctx = new ConsoleContext._(args);
 
     Runner.runTask(ctx, task)
       .then((RunResult rr) {
-        ctx.dispose();
         io.exit(rr.exitCode);
       });
-  }
-
-  void _assertNotDisposed() {
-    if(_isDisposed) {
-      throw new DisposedError();
-    }
   }
 }

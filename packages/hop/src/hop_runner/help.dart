@@ -1,14 +1,16 @@
-part of hop;
+part of hop.runner;
 
 const String _HOP_CMD_NAME = 'hop';
 
 class _HelpArgs {
   final TaskRegistry registry;
   ArgParser parser;
-  Printer printer = print;
+  _Printer printer = print;
 
   _HelpArgs(this.registry);
 }
+
+typedef _Printer(dynamic value);
 
 Task _getHelpTask(_HelpArgs helpArgs) {
   return new Task((TaskContext ctx) {
@@ -37,7 +39,7 @@ void _helpParserConfig(TaskRegistry config, ArgParser parser) {
   }
 }
 
-void _printHelpForTask(Printer printer, TaskRegistry config, String taskName, ArgParser hopArgParser) {
+void _printHelpForTask(_Printer printer, TaskRegistry config, String taskName, ArgParser hopArgParser) {
   final task = config.tasks[taskName];
   assert(task != null);
 
@@ -59,7 +61,7 @@ void _printHelpForTask(Printer printer, TaskRegistry config, String taskName, Ar
   _printHopArgsHelp(printer, hopArgParser);
 }
 
-void _printHelp(Printer printer, TaskRegistry registry, ArgParser parser) {
+void _printHelp(_Printer printer, TaskRegistry registry, ArgParser parser) {
 
   printer(_getUsage());
   printer('');
@@ -83,7 +85,7 @@ String _getUsage({bool showOptions: true, String taskName: '<task>', String exte
   return 'usage: $_HOP_CMD_NAME [<hop-options>] $taskName $taskOptions$extendedArgsUsage'.trim();
 }
 
-void _printHopArgsHelp(Printer printer, ArgParser hopArgParser) {
+void _printHopArgsHelp(_Printer printer, ArgParser hopArgParser) {
   printer(_getTitle('Hop options'));
   printer(_indent(hopArgParser.getUsage()));
   printer('');
@@ -92,8 +94,16 @@ void _printHopArgsHelp(Printer printer, ArgParser hopArgParser) {
 String _indent(String input) {
   return Util.splitLines(input)
       .map((String line) => '  ' + line)
+      .map(_trimTrailingWhitespace)
       .join(('\n'));
 }
+
+// DARTBUG: https://code.google.com/p/dart/issues/detail?id=5589
+String _trimTrailingWhitespace(String str) {
+  return str.replaceFirst(_trailingWhitespaceRegExp, "");
+}
+
+final _trailingWhitespaceRegExp = new RegExp(r"\s+$");
 
 ShellString _getTitle(String input) {
   assert(input != null);
@@ -102,7 +112,7 @@ ShellString _getTitle(String input) {
   return new ShellString.withAlt(input.toUpperCase(), AnsiColor.BOLD, '$input:');
 }
 
-void _printTaskTable(Printer printer, TaskRegistry config) {
+void _printTaskTable(_Printer printer, TaskRegistry config) {
   config._requireFrozen();
   final columns = [
                    new ColumnDefinition('name', (name) => '  ' + name),

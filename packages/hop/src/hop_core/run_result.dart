@@ -1,4 +1,4 @@
-part of hop;
+part of hop.core;
 
 /**
  * For explanations of exit codes see <http://tldp.org/LDP/abs/html/exitcodes.html>
@@ -28,6 +28,8 @@ class RunResult {
    */
   static final RunResult FAIL = const RunResult._internal(80, 'FAIL');
 
+  // TODO: for V1!! Check with naming on Error/Exception -- I think they need
+  // to be flipped?
   /**
    * Task was was started, but threw an exception
    *
@@ -35,6 +37,8 @@ class RunResult {
    */
   static final RunResult EXCEPTION = const RunResult._internal(81, 'EXCEPTION');
 
+  // NOTE: this is not used...yet. Should bubble up when context is used after
+  // a task has finished...see TODO on _TaskContext
   /**
    * Task misbehaved. Returned null, used [TaskContext] incorrectly, etc.
    *

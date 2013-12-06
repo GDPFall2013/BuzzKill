@@ -1,6 +1,12 @@
-part of hop;
+part of hop.core;
 
-abstract class TaskLogger {
+/**
+ * Allows logging of [Task] activities, spawning sub-loggers, and failing the
+ * current [Task];
+ */
+abstract class TaskLogger implements Disposable {
+
+  TaskLogger getSubLogger(String name);
 
   // level 300
   void finest(String message) {

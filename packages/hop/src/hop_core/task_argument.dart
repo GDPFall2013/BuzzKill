@@ -1,8 +1,6 @@
-part of hop;
+part of hop.core;
 
 class TaskArgument {
-  static final nameRegex = new RegExp(r'^[a-z](([a-z]|-)*[a-z])?$');
-
   final String name;
   final bool required;
   final bool multiple;
@@ -10,15 +8,25 @@ class TaskArgument {
   TaskArgument(this.name, {this.required: false, this.multiple: false}) {
     requireArgumentNotNull(required, 'required');
     requireArgumentNotNull(multiple, 'multiple');
-    requireArgumentContainsPattern(nameRegex, name, 'name');
+    validateTaskName(name);
   }
 
-  static void validateArgs(Iterable<TaskArgument> args) {
+  /**
+   * Validates that the provided [argrs] are valid.
+   *
+   *
+   * If not, throws.
+   *
+   * If yes, returns an unmodifiable clone of [args].
+   */
+  static List<TaskArgument> validateArgs(Iterable<TaskArgument> args) {
     requireArgumentNotNull(args, 'args');
+
+    var list = new UnmodifiableListView(args.toList(growable: false));
 
     bool finishRequired = false;
 
-    $(args).forEachWithIndex((arg, i) {
+    $(list).forEachWithIndex((arg, i) {
       final argName = 'args[$i]';
       requireArgumentNotNull(arg, argName);
 
@@ -30,13 +38,15 @@ class TaskArgument {
         finishRequired = true;
       }
 
-      if(arg.multiple && i != (args.length - 1)) {
+      if(arg.multiple && i != (list.length - 1)) {
         throw new DetailedArgumentError(argName, 'only the last argument can be multiple');
       }
 
-      for(final other in args.take(i)) {
+      for(final other in list.take(i)) {
         requireArgument(arg.name != other.name, argName, 'name ${arg.name} has already been defined');
       }
     });
+
+    return list;
   }
 }

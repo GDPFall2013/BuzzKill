@@ -2,7 +2,7 @@ library hop_tasks.unit_test;
 
 import 'dart:async';
 import 'package:args/args.dart';
-import 'package:hop/hop.dart';
+import 'package:hop/hop_core.dart';
 import 'package:unittest/unittest.dart' as unittest;
 
 const _LIST_FLAG = 'list';
@@ -11,6 +11,7 @@ const _SUMMARY_ALL = 'all';
 const _SUMARY_FAIL = 'fail';
 const _SUMMARY_PASS = 'pass';
 const _SUMMARY_ERROR = 'error';
+const _FILTER_ARG = 'filter';
 
 Task createUnitTestTask(void unitTestAction(unittest.Configuration config),
                         {Duration timeout: const Duration(seconds: 20)}) {
@@ -33,7 +34,7 @@ Task createUnitTestTask(void unitTestAction(unittest.Configuration config),
     // TODO: wrap this in a try/catch
     unitTestAction(config);
 
-    if(!ctx.arguments.rest.isEmpty) {
+    if(ctx.extendedArgs[_FILTER_ARG].isNotEmpty) {
       ctx.info('Filtering tests by: ${ctx.arguments.rest}');
 
       unittest.filterTests((unittest.TestCase tc) {
@@ -52,7 +53,7 @@ Task createUnitTestTask(void unitTestAction(unittest.Configuration config),
 
       ctx.info(list.join('\n'));
 
-      return new Future.value();
+      return null;
     }
 
     unittest.runTests();
@@ -60,7 +61,7 @@ Task createUnitTestTask(void unitTestAction(unittest.Configuration config),
   },
   config: _unittestParserConfig,
   description: 'Run unit tests in the console',
-  extendedArgs: [new TaskArgument('filter', multiple: true)]);
+  extendedArgs: [new TaskArgument(_FILTER_ARG, multiple: true)]);
 }
 
 void _unittestParserConfig(ArgParser parser) {
@@ -150,21 +151,21 @@ ${testCase.stackTrace}''');
 
 
     if(passSummary) {
-      final summaryCtx = _context.getSubContext('PASS');
+      final summaryCtx = _context.getSubLogger('PASS');
       results.where((tc) => tc.result == unittest.PASS).forEach((tc) {
         summaryCtx.info(tc.description);
       });
     }
 
     if(failSummary) {
-      final summaryCtx = _context.getSubContext('FAIL');
+      final summaryCtx = _context.getSubLogger('FAIL');
       results.where((tc) => tc.result == unittest.FAIL).forEach((tc) {
         summaryCtx.severe(tc.description);
       });
     }
 
     if(errorSummary) {
-      final summaryCtx = _context.getSubContext('ERROR');
+      final summaryCtx = _context.getSubLogger('ERROR');
       results.where((tc) => tc.result == unittest.ERROR).forEach((tc) {
         summaryCtx.severe(tc.description);
       });

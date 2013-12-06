@@ -199,8 +199,7 @@ class AssetPack {
   Future<AssetPack> loadPack(String name, String url) {
     Asset asset = registerAsset(name, 'pack', url, {}, {});
     asset.imported._parent = this;
-    return manager._loadAndImport(asset).then((_) =>
-        new Future.value(asset.imported));
+    return manager._loadAndImport(asset).then((_) => asset.imported);
   }
 
   /// Load many packs, adding each one as a child pack.
