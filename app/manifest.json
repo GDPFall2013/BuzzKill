@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "BuzzKill",
-  "version": "1",
+  "version": "0.0.1",
   "minimum_chrome_version": "28",
   "icons": {
     "16": "content/icon_16.png",
