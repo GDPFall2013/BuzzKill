@@ -33,10 +33,11 @@ class Spike extends Enemy {
     context.lineTo(left + 8 * width/10, bottom);
     context.lineTo(left + 9 * width/10, top);
     context.lineTo(left + 10 * width/10, bottom);
-    context.fillStyle = 'maroon';
+    context.fillStyle = 'yellow';
     context.stroke();
     context.fill();
     context.restore();
+    context.clearRect(x, y, width, height);
   }
   
   double injure() {
