@@ -80,9 +80,9 @@ void draw() {
   if (state == stateEnumPlay) {
   
   // Does a gray background so we can see the canvas size
-  context.fillStyle = 'gray';
-  context.fillRect(0, 0, 640, 480);
-  
+ // context.fillStyle = 'gray';
+//  context.fillRect(0, 0, 640, 480);
+    context.clearRect(0, 0, 640, 480);
   for (GameObject go in ObjectManager.instance.goList) {
     
     double drawSpace = viewportWidth/4;
@@ -121,7 +121,7 @@ void draw() {
  */
 drawHUD() {  //TODO: Change this information into Game Variables
   context.save();
-  context.fillStyle = 'black';
+  context.fillStyle = 'white';
   context.font = "normal 14pt calibri";
   context.fillText("BUZZKILL", 10, 20, 100);
   //context.fillText("Score:  ?????", viewportWidth/2 -35, 20, 100);  Do we have score in this game?

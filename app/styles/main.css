@@ -2,3 +2,7 @@ body {
   margin: 0px;
 }
 
+canvas
+{
+        background: #0d2648 url("../content/background.jpg") repeat-x bottom left;
+}
