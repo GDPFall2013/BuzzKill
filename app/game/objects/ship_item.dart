@@ -6,17 +6,22 @@ part of gdp;
  */
 class ShipItem extends Item{
   
+  SpriteSheet space_item = new SpriteSheet("./content/gameitems.png",0,100,90,90);
+  bool glow=true;
+  int repeat=1;
+  
   update(double dt) {
     //Inanimate object, does nothing
   }
   
   initialize(double x, double y) {
     super.initialize(x, y);
-    this.height = 50.0;
-    this.width = 50.0;
+    this.height = 90.0;
+    this.width = 90.0;
   }
   
   draw() {
+    /*
     context.save();
     context.beginPath();
     context.fillStyle = 'brown';
@@ -37,6 +42,96 @@ class ShipItem extends Item{
     context.fillStyle = 'black';
     context.fillText("Ship Item", x - camera.x - width/2, y - camera.y, width);
     context.restore();
+    */
+    double cx = this.x - camera.x;
+    double cy = this.y - camera.y;
+    
+    //glow logic
+      if(space_item.spritex >=450){
+        glow = false;
+      }
+      else if(space_item.spritex == 0){
+        glow = true;
+      }
+      
+    //reduce glow  
+    if(!glow){
+      //repeating a single sprite for smoother animation
+      if((repeat==1 || repeat==2 || repeat == 3 || repeat ==4 || repeat ==5
+              || repeat==6 || repeat==7 || repeat==8)){
+        if(repeat == 1){
+          repeat = 2;
+        }
+        else if(repeat == 2){
+          repeat = 3;
+        }
+        else if(repeat == 3){
+          repeat = 4;
+        }
+        else if(repeat == 4){
+          repeat = 5;
+        }
+        else if(repeat == 5){
+          repeat = 6;
+        }
+        else if(repeat == 6){
+          repeat = 7;
+        }
+        else if(repeat == 7){
+          repeat = 8;
+        }
+        else if(repeat == 8){
+          repeat = 9;
+        }}
+        else{  
+          repeat=1;
+      space_item.spritex -= 90;
+        }
+    
+    }
+
+    //increase glow
+      else{
+        glow = true;
+        //repeating a single sprite for smoother animation
+        if((repeat==1 || repeat==2 || repeat == 3 || repeat ==4 || repeat ==5
+            || repeat==6 || repeat==7 || repeat==8)){
+        
+        if(repeat == 1){
+          repeat = 2;
+        }
+        else if(repeat == 2){
+          repeat = 3;
+        }
+        else if(repeat == 3){
+          repeat = 4;
+        }
+        else if(repeat == 4){
+          repeat = 5;
+        }
+        else if(repeat == 5){
+          repeat = 6;
+        }
+        else if(repeat == 6){
+          repeat = 7;
+        }
+        else if(repeat == 7){
+          repeat = 8;
+        }
+        else if(repeat == 8){
+          repeat = 9;
+        }}
+        else{  
+          repeat=1;
+      space_item.spritex += 90;
+        }
+        
+      }
+    
+    
+    
+    
+    space_item.drawOnPosition(cx-this.width/2, cy-this.height/2, width , height);   
   }
   
   /*

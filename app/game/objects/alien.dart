@@ -17,19 +17,42 @@ class Alien extends Enemy{
   double imgOffsetX = 8.0;
   double imgOffsetY = -7.0;
   double lastDraw = 0.0;  // Used for timing Animation
+  double initialPos;
+  double endPos;
+  bool goingBack = false;
   
   initialize(double x, double y) {
     super.initialize(x, y);
     width = 83.0;
     height = 40.0;
     //y = GROUND_LEVEL;
-    sprite = new SpriteSheet("./content/alienturtle_spritesheet.png",0,0,97,50);
+    sprite = new SpriteSheet("./content/enemies_spritesheet.png",0,0,97,50);
     repeat = 0;
+    
+    initialPos = x;
+    endPos = x-150.0;
   }
   
   update (double dt) {
-  //move increment (assuming aliens will always be moving towards the left)
-   // x = x - 0.5 * dt;
+  
+    //move aliens back and forth
+    if(x >= endPos && goingBack==false){
+      x = x - 0.2 * dt;
+    }
+    else{
+      goingBack = true;
+      x = x + 0.2 * dt;
+    }
+    
+    if(x<initialPos && goingBack){
+      x = x + 0.2 * dt;
+    }
+    else{
+      goingBack = false;
+      x = x - 0.2 * dt;
+    }
+    
+    
     
     lastDraw += dt;
     if (lastDraw > 1.0) {
@@ -46,6 +69,11 @@ class Alien extends Enemy{
       else if(repeat==1 || repeat==2 || repeat == 3 || repeat ==4 || repeat ==5
               || repeat==6 || repeat==7 || repeat==8){
         sprite.spritex = sprite.spritex;
+        
+        if(goingBack){
+          sprite.spritey = 50;
+        }
+        else
         sprite.spritey = 0;
         
         if(repeat == 1){
@@ -74,9 +102,18 @@ class Alien extends Enemy{
         }
       }
       else{
+        //walking backwards animation
+        if(goingBack){
+          sprite.spritex = sprite.spritex + 97;
+          sprite.spritey = 50;
+          repeat = 1;
+        }
+        //walking forward animation
+        else{
         sprite.spritex = sprite.spritex + 97;
         sprite.spritey = 0;
         repeat = 1;
+        }
       }
     }
   }
