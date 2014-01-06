@@ -10,12 +10,15 @@ class LevelManager {
     
     switch(level) {  
       // enums aren't implemented yet, and switch only takes constants at the moment.
-      case 0: 
+      case 0:  
         setupLevelTest();
         break;
-      case 1: 
-       setupLevelOne();
+      case 1:  
+        setupLevelOne();
         break;  
     }
   }
 }
+
+
+

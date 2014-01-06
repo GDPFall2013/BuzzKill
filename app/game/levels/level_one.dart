@@ -9,7 +9,6 @@ void setupLevelOne() {
   // screen 1
   om.addBlock(new Block()..initialize(875.0, 420.0) // floor
       ..width = 1750.0 .. height = 140.0);
-  
   om.addItem(new Oxygen()..initialize(100.0, 290.0));
   om.addItem(new Oxygen()..initialize(150.0, 290.0));
   om.addItem(new Oxygen()..initialize(200.0, 290.0));
