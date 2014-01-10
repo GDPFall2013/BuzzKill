@@ -13,5 +13,6 @@ web/out/*
 *.map
 *.lock
 *.tmp
-
+!*interop.js
+!*dart.js
 !app/background.js
