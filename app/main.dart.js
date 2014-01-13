@@ -104,11 +104,11 @@ $$.BoundClosure$i1 = [G, {"": "BoundClosure;_self,__js_helper$_target,_receiver,
 
 $$.Closure$2 = [H, {"": "Closure;call$2,$name", $is_args2: true}];
 
-$$.Closure$1 = [H, {"": "Closure;call$1,$name", $is_args1: true}];
-
 $$.Closure$0 = [H, {"": "Closure;call$0,$name"}];
 
 $$.Closure$7 = [H, {"": "Closure;call$7,$name"}];
+
+$$.Closure$1 = [P, {"": "Closure;call$1,$name", $is_args1: true}];
 
 $$.Closure$20 = [P, {"": "Closure;call$2,$name",
   call$1: function(p0) {
@@ -249,7 +249,7 @@ Interceptor: {"": "Object;",
   toString$0: function(receiver) {
     return H.Primitives_objectToString(receiver);
   },
-  "%": "ArrayBuffer|AudioListener|AudioParam|CanvasGradient|CanvasPattern|DOMError|FileError|MediaError|MediaKeyError|Navigator|NavigatorUserMediaError|PositionError|SQLError|SVGAnimatedEnumeration|SVGAnimatedLength|SVGAnimatedLengthList|SVGAnimatedNumber|SVGAnimatedNumberList"
+  "%": "ArrayBuffer|CanvasGradient|CanvasPattern|DOMError|FileError|MediaError|MediaKeyError|Navigator|NavigatorUserMediaError|PositionError|SQLError|SVGAnimatedEnumeration|SVGAnimatedLength|SVGAnimatedLengthList|SVGAnimatedNumber|SVGAnimatedNumberList"
 },
 
 JSBool: {"": "bool/Interceptor;",
@@ -375,12 +375,6 @@ JSNumber: {"": "num/Interceptor;",
     }
     throw H.wrapException(P.UnsupportedError$('' + receiver));
   },
-  roundToDouble$0: function(receiver) {
-    if (receiver < 0)
-      return -Math.round(-receiver);
-    else
-      return Math.round(receiver);
-  },
   toString$0: function(receiver) {
     if (receiver === 0 && 1 / receiver < 0)
       return "-0.0";
@@ -389,30 +383,6 @@ JSNumber: {"": "num/Interceptor;",
   },
   get$hashCode: function(receiver) {
     return receiver & 0x1FFFFFFF;
-  },
-  $add: function(receiver, other) {
-    if (typeof other !== "number")
-      throw H.wrapException(new P.ArgumentError(other));
-    return receiver + other;
-  },
-  $mul: function(receiver, other) {
-    if (typeof other !== "number")
-      throw H.wrapException(new P.ArgumentError(other));
-    return receiver * other;
-  },
-  $mod: function(receiver, other) {
-    var result;
-    if (typeof other !== "number")
-      throw H.wrapException(new P.ArgumentError(other));
-    result = receiver % other;
-    if (result === 0)
-      return 0;
-    if (result > 0)
-      return result;
-    if (other < 0)
-      return result - other;
-    else
-      return result + other;
   },
   $tdiv: function(receiver, other) {
     if ((receiver | 0) === receiver && (other | 0) === other && 0 !== other && -1 !== other)
@@ -471,23 +441,6 @@ JSString: {"": "String/Interceptor;",
       throw H.wrapException(P.RangeError$value(index));
     return receiver.charCodeAt(index);
   },
-  $add: function(receiver, other) {
-    if (typeof other !== "string")
-      throw H.wrapException(new P.ArgumentError(other));
-    return receiver + other;
-  },
-  startsWith$2: function(receiver, pattern, index) {
-    var endIndex;
-    if (index < 0 || index > receiver.length)
-      throw H.wrapException(P.RangeError$range(index, 0, receiver.length));
-    endIndex = index + pattern.length;
-    if (endIndex > receiver.length)
-      return false;
-    return pattern === receiver.substring(index, endIndex);
-  },
-  startsWith$1: function($receiver, pattern) {
-    return this.startsWith$2($receiver, pattern, 0);
-  },
   substring$2: function(receiver, startIndex, endIndex) {
     if (endIndex == null)
       endIndex = receiver.length;
@@ -505,35 +458,6 @@ JSString: {"": "String/Interceptor;",
   },
   substring$1: function($receiver, startIndex) {
     return this.substring$2($receiver, startIndex, null);
-  },
-  trim$0: function(receiver) {
-    var endIndex, startIndex, codeUnit, endIndex0, endIndex1;
-    for (endIndex = receiver.length, startIndex = 0; startIndex < endIndex;) {
-      if (startIndex >= endIndex)
-        H.throwExpression(P.RangeError$value(startIndex));
-      codeUnit = receiver.charCodeAt(startIndex);
-      if (codeUnit === 32 || codeUnit === 13 || J.JSString__isWhitespace(codeUnit))
-        ++startIndex;
-      else
-        break;
-    }
-    if (startIndex === endIndex)
-      return "";
-    for (endIndex0 = endIndex; true; endIndex0 = endIndex1) {
-      endIndex1 = endIndex0 - 1;
-      if (endIndex1 < 0)
-        H.throwExpression(P.RangeError$value(endIndex1));
-      if (endIndex1 >= endIndex)
-        H.throwExpression(P.RangeError$value(endIndex1));
-      codeUnit = receiver.charCodeAt(endIndex1);
-      if (codeUnit === 32 || codeUnit === 13 || J.JSString__isWhitespace(codeUnit))
-        ;
-      else
-        break;
-    }
-    if (startIndex === 0 && endIndex0 === endIndex)
-      return receiver;
-    return receiver.substring(startIndex, endIndex0);
   },
   get$isEmpty: function(receiver) {
     return receiver.length === 0;
@@ -562,49 +486,7 @@ JSString: {"": "String/Interceptor;",
       throw H.wrapException(P.RangeError$value(index));
     return receiver[index];
   },
-  $isString: true,
-  static: {
-JSString__isWhitespace: function(codeUnit) {
-  if (codeUnit < 256)
-    switch (codeUnit) {
-      case 9:
-      case 10:
-      case 11:
-      case 12:
-      case 13:
-      case 32:
-      case 133:
-      case 160:
-        return true;
-      default:
-        return false;
-    }
-  switch (codeUnit) {
-    case 5760:
-    case 6158:
-    case 8192:
-    case 8193:
-    case 8194:
-    case 8195:
-    case 8196:
-    case 8197:
-    case 8198:
-    case 8199:
-    case 8200:
-    case 8201:
-    case 8202:
-    case 8232:
-    case 8233:
-    case 8239:
-    case 8287:
-    case 12288:
-    case 65279:
-      return true;
-    default:
-      return false;
-  }
-}}
-
+  $isString: true
 }}],
 ["_isolate_helper", "dart:_isolate_helper", , H, {
 _callInIsolate: function(isolate, $function) {
@@ -1519,77 +1401,6 @@ Primitives_objectHashCode: function(object) {
     object.$identityHash = hash;
   }
   return hash;
-},
-
-Primitives__throwFormatException: function(string) {
-  throw H.wrapException(P.FormatException$(string));
-},
-
-Primitives_parseInt: function(source, radix, handleError) {
-  var match, t1, maxCharCode, digitsPart, i, t2;
-  handleError = H.Primitives__throwFormatException$closure;
-  if (typeof source !== "string")
-    H.throwExpression(new P.ArgumentError(source));
-  match = /^\s*[+-]?((0x[a-f0-9]+)|(\d+)|([a-z0-9]+))\s*$/i.exec(source);
-  if (radix < 2 || radix > 36)
-    throw H.wrapException(P.RangeError$("Radix " + radix + " not in range 2..36"));
-  if (match != null) {
-    if (radix === 10) {
-      if (3 >= match.length)
-        throw H.ioore(match, 3);
-      t1 = match[3] != null;
-    } else
-      t1 = false;
-    if (t1)
-      return parseInt(source, 10);
-    if (radix >= 10) {
-      if (3 >= match.length)
-        throw H.ioore(match, 3);
-      t1 = match[3] == null;
-    } else
-      t1 = true;
-    if (t1) {
-      maxCharCode = radix <= 10 ? 48 + radix - 1 : 97 + radix - 10 - 1;
-      if (1 >= match.length)
-        throw H.ioore(match, 1);
-      digitsPart = match[1];
-      t1 = J.getInterceptor$asx(digitsPart);
-      i = 0;
-      while (true) {
-        t2 = t1.get$length(digitsPart);
-        if (typeof t2 !== "number")
-          throw H.iae(t2);
-        if (!(i < t2))
-          break;
-        t1.codeUnitAt$1(digitsPart, 0);
-        if (i >= digitsPart.length)
-          H.throwExpression(P.RangeError$value(i));
-        if (digitsPart.charCodeAt(i) > maxCharCode)
-          return handleError.call$1(source);
-        ++i;
-      }
-    }
-  }
-  if (match == null)
-    return handleError.call$1(source);
-  return parseInt(source, radix);
-},
-
-Primitives_parseDouble: function(source, handleError) {
-  var result, trimmed;
-  if (typeof source !== "string")
-    H.throwExpression(new P.ArgumentError(source));
-  handleError = H.Primitives__throwFormatException$closure;
-  if (!/^\s*[+-]?(?:Infinity|NaN|(?:\.\d+|\d+(?:\.\d*)?)(?:[eE][+-]?\d+)?)\s*$/.test(source))
-    return handleError.call$1(source);
-  result = parseFloat(source);
-  if (isNaN(result)) {
-    trimmed = J.trim$0$s(source);
-    if (trimmed === "NaN" || trimmed === "+NaN" || trimmed === "-NaN")
-      return result;
-    return handleError.call$1(source);
-  }
-  return result;
 },
 
 Primitives_objectTypeName: function(object) {
@@ -2637,17 +2448,6 @@ _registerErrorHandler: function(errorHandler, zone) {
     return errorHandler;
 },
 
-Future_Future$delayed: function(duration, computation, $T) {
-  var t1, completer, result;
-  t1 = null;
-  completer = new P._SyncCompleter(P._Future$(t1));
-  H.setRuntimeTypeInfo(completer, [t1]);
-  result = completer.future;
-  result = result.then$1(new P.Future_Future$delayed_closure(computation));
-  P.Timer_Timer(duration, new P.Future_Future$delayed_closure0(completer));
-  return result;
-},
-
 Future_wait: function(futures) {
   var t1, t2, t3, future, pos, t4, t5, result, completer;
   t1 = {};
@@ -2839,22 +2639,6 @@ _AsyncError: {"": "Object;error>,stackTrace<", $isError: true},
 
 Future: {"": "Object;", $isFuture: true},
 
-Future_Future$delayed_closure: {"": "Closure;computation_0",
-  call$1: function(ignored) {
-    return this.computation_0.call$0();
-  },
-  $is_args1: true
-},
-
-Future_Future$delayed_closure0: {"": "Closure;completer_1",
-  call$0: function() {
-    var t1 = this.completer_1.future;
-    if (t1._state !== 0)
-      H.throwExpression(P.StateError$("Future already completed"));
-    t1._complete$1(null);
-  }
-},
-
 Future_wait_handleError: {"": "Closure;box_0",
   call$1: function(error) {
     var t1 = this.box_0;
@@ -2906,10 +2690,11 @@ _AsyncCompleter: {"": "_Completer;future",
   completeError$1: function(error) {
     return this.completeError$2(error, null);
   },
+  get$completeError: function() {
+    return new P.BoundClosure$2(this, P._AsyncCompleter.prototype.completeError$2, null, "completeError$2");
+  },
   $as_Completer: null
 },
-
-_SyncCompleter: {"": "_Completer;future", $as_Completer: null},
 
 _Future: {"": "Object;_state,_zone<,_resultOrListeners,_nextListener<,_onValueCallback,_errorTestCallback,_onErrorCallback,_whenCompleteActionCallback",
   get$_isComplete: function() {
@@ -5239,15 +5024,7 @@ DateTime_toString_twoDigits: {"": "Closure;",
   $is_args1: true
 },
 
-Duration: {"": "Object;_duration<",
-  $add: function(_, other) {
-    return P.Duration$(0, 0, this._duration + other.get$_duration(), 0, 0, 0);
-  },
-  $mul: function(_, factor) {
-    if (typeof factor !== "number")
-      throw H.iae(factor);
-    return P.Duration$(0, 0, C.JSNumber_methods.toInt$0(C.JSNumber_methods.roundToDouble$0(this._duration * factor)), 0, 0, 0);
-  },
+Duration: {"": "Object;_duration",
   $lt: function(_, other) {
     return C.JSNumber_methods.$lt(this._duration, other.get$_duration());
   },
@@ -5348,10 +5125,6 @@ RangeError: {"": "ArgumentError;message",
     return "RangeError: " + H.S(this.message);
   },
   static: {
-RangeError$: function(message) {
-  return new P.RangeError(message);
-},
-
 RangeError$value: function(value) {
   return new P.RangeError("value " + H.S(value));
 },
@@ -5439,17 +5212,6 @@ _ExceptionImplementation: {"": "Object;message",
       return "Exception";
     return "Exception: " + H.S(t1);
   }
-},
-
-FormatException: {"": "Object;message",
-  toString$0: function(_) {
-    return "FormatException: " + H.S(this.message);
-  },
-  static: {
-FormatException$: function(message) {
-  return new P.FormatException(message);
-}}
-
 },
 
 Expando: {"": "Object;name",
@@ -5612,6 +5374,27 @@ _ElementFactoryProvider_createElement_tag: function(tag, typeExtension) {
   return document.createElement(tag);
 },
 
+HttpRequest_request: function(url, method, mimeType, onProgress, requestHeaders, responseType, sendData, withCredentials) {
+  var t1, completer, xhr, t2;
+  t1 = W.HttpRequest;
+  completer = new P._AsyncCompleter(P._Future$(t1));
+  H.setRuntimeTypeInfo(completer, [t1]);
+  xhr = new XMLHttpRequest();
+  C.HttpRequest_methods.open$3$async(xhr, "GET", url, true);
+  xhr.responseType = responseType;
+  t1 = C.EventStreamProvider_load.forTarget$1(xhr);
+  t2 = new W._EventStreamSubscription(0, t1._target, t1._eventType, W._wrapZone(new W.HttpRequest_request_closure(completer, xhr)), t1._useCapture);
+  H.setRuntimeTypeInfo(t2, [H.getRuntimeTypeArgument(t1, "_EventStream", 0)]);
+  t2._tryResume$0();
+  t2 = C.EventStreamProvider_error.forTarget$1(xhr);
+  t1 = completer.get$completeError();
+  t1 = new W._EventStreamSubscription(0, t2._target, t2._eventType, W._wrapZone(t1), t2._useCapture);
+  H.setRuntimeTypeInfo(t1, [H.getRuntimeTypeArgument(t2, "_EventStream", 0)]);
+  t1._tryResume$0();
+  xhr.send();
+  return completer.future;
+},
+
 ImageElement_ImageElement: function(height, src, width) {
   var e = document.createElement("img", null);
   return e;
@@ -5758,11 +5541,14 @@ FieldSetElement: {"": "HtmlElement;type=", "%": "HTMLFieldSetElement"},
 FormElement: {"": "HtmlElement;length=", "%": "HTMLFormElement"},
 
 HttpRequest: {"": "HttpRequestEventTarget;",
+  get$response: function(receiver) {
+    return W._convertNativeToDart_XHR_Response(receiver.response);
+  },
   open$5$async$password$user: function(receiver, method, url, async, password, user) {
     return receiver.open(method, url, async, user, password);
   },
-  open$2: function($receiver, method, url) {
-    return $receiver.open(method, url);
+  open$3$async: function($receiver, method, url, async) {
+    return $receiver.open(method, url, async);
   },
   send$1: function(receiver, data) {
     return receiver.send(data);
@@ -5789,12 +5575,7 @@ KeygenElement: {"": "HtmlElement;type=", "%": "HTMLKeygenElement"},
 
 LinkElement: {"": "HtmlElement;type=", "%": "HTMLLinkElement"},
 
-MediaElement: {"": "HtmlElement;duration=,error=,src}",
-  load$0: function(receiver) {
-    return receiver.load();
-  },
-  "%": "HTMLAudioElement;HTMLMediaElement"
-},
+MediaElement: {"": "HtmlElement;error=,src}", "%": "HTMLAudioElement;HTMLMediaElement"},
 
 MouseEvent: {"": "UIEvent;button=,_clientX:clientX=",
   get$client: function(receiver) {
@@ -6024,6 +5805,33 @@ _ClientRect: {"": "Interceptor;height=,left=,top=,width=",
   "%": "ClientRect|DOMRect"
 },
 
+HttpRequest_request_closure0: {"": "Closure;xhr_0",
+  call$2: function(header, value) {
+    this.xhr_0.setRequestHeader(header, value);
+  },
+  $is_args2: true
+},
+
+HttpRequest_request_closure: {"": "Closure;completer_1,xhr_2",
+  call$1: function(e) {
+    var t1, t2, t3;
+    t1 = this.xhr_2;
+    t2 = t1.status;
+    if (typeof t2 !== "number")
+      throw t2.$ge();
+    t2 = t2 >= 200 && t2 < 300 || t2 === 0 || t2 === 304;
+    t3 = this.completer_1;
+    if (t2) {
+      t2 = t3.future;
+      if (t2._state !== 0)
+        H.throwExpression(P.StateError$("Future already completed"));
+      t2._asyncComplete$1(t1);
+    } else
+      t3.completeError$1(e);
+  },
+  $is_args1: true
+},
+
 _ChildNodeListLazy: {"": "ListBase;_this",
   $indexSet: function(_, index, value) {
     var t1, t2;
@@ -6229,32 +6037,17 @@ TextPositioningElement: {"": "TextContentElement;x=,y=", "%": "SVGAltGlyphElemen
 
 UseElement: {"": "GraphicsElement;height=,width=,x=,y=", "%": "SVGUseElement"}}],
 ["dart.dom.web_audio", "dart:web_audio", , P, {
-AudioBuffer: {"": "Interceptor;duration=,length=", "%": "AudioBuffer"},
+AudioBuffer: {"": "Interceptor;length=", "%": "AudioBuffer"},
 
 AudioBufferSourceNode: {"": "AudioSourceNode;",
   start$3: function(receiver, when, grainOffset, grainDuration) {
     if (!!receiver.start)
-      if (grainDuration != null)
-        receiver.start(when, grainOffset, grainDuration);
-      else if (grainOffset != null)
-        receiver.start(when, grainOffset);
-      else
-        receiver.start(when);
-    else if (grainDuration != null)
-      receiver.noteOn(when, grainOffset, grainDuration);
-    else if (grainOffset != null)
-      receiver.noteOn(when, grainOffset);
+      receiver.start(when);
     else
       receiver.noteOn(when);
   },
   start$1: function($receiver, when) {
     return this.start$3($receiver, when, null, null);
-  },
-  stop$1: function(receiver, when) {
-    if (!!receiver.stop)
-      receiver.stop(when);
-    else
-      receiver.noteOff(when);
   },
   "%": "AudioBufferSourceNode"
 },
@@ -6271,16 +6064,10 @@ AudioContext: {"": "EventTarget;",
     this._decodeAudioData$3(receiver, audioData, new P.AudioContext_decodeAudioData_closure(completer), new P.AudioContext_decodeAudioData_closure0(completer));
     return completer.future;
   },
-  createGain$0: function(receiver) {
-    if (receiver.createGain !== undefined)
-      return receiver.createGain();
-    else
-      return receiver.createGainNode();
-  },
   "%": "AudioContext|OfflineAudioContext|webkitAudioContext"
 },
 
-AudioNode: {"": "EventTarget;", "%": "AudioDestinationNode|AudioGainNode|AudioPannerNode|GainNode|PannerNode;AudioNode"},
+AudioNode: {"": "EventTarget;", "%": "AudioDestinationNode;AudioNode"},
 
 AudioSourceNode: {"": "AudioNode;", "%": ";AudioSourceNode"},
 
@@ -6342,39 +6129,6 @@ Point: {"": "Object;x>,y>",
     t1 = J.get$hashCode$(this.x);
     t2 = J.get$hashCode$(this.y);
     return P._JenkinsSmiHash_finish0(P._JenkinsSmiHash_combine0(P._JenkinsSmiHash_combine0(0, t1), t2));
-  },
-  $add: function(_, other) {
-    var t1, t2, t3, t4;
-    t1 = this.x;
-    t2 = J.getInterceptor$x(other);
-    t3 = t2.get$x(other);
-    if (typeof t1 !== "number")
-      throw t1.$add();
-    if (typeof t3 !== "number")
-      throw H.iae(t3);
-    t4 = this.y;
-    t2 = t2.get$y(other);
-    if (typeof t4 !== "number")
-      throw t4.$add();
-    if (typeof t2 !== "number")
-      throw H.iae(t2);
-    t2 = new P.Point(t1 + t3, t4 + t2);
-    H.setRuntimeTypeInfo(t2, [H.getRuntimeTypeArgument(this, "Point", 0)]);
-    return t2;
-  },
-  $mul: function(_, factor) {
-    var t1, t2;
-    t1 = this.x;
-    if (typeof t1 !== "number")
-      throw t1.$mul();
-    if (typeof factor !== "number")
-      throw H.iae(factor);
-    t2 = this.y;
-    if (typeof t2 !== "number")
-      throw t2.$mul();
-    t2 = new P.Point(t1 * factor, t2 * factor);
-    H.setRuntimeTypeInfo(t2, [H.getRuntimeTypeArgument(this, "Point", 0)]);
-    return t2;
   },
   $isPoint: true
 },
@@ -8092,6 +7846,114 @@ CollisionSystem_CollisionSystem: function() {
 
 SpriteSheet: {"": "Object;spritex,spritey,framew,frameh,imgurl,img"},
 
+SoundManager: {"": "Object;ac,_muted,_jumpClip,_oxygenClip,_shipItemClip,_injureClip",
+  loadSounds$0: function() {
+    W.HttpRequest_request("content/Sound Files/SlowJump.wav", null, null, null, null, "arraybuffer", null, null).then$1(new U.SoundManager_loadSounds_closure(this));
+    W.HttpRequest_request("content/Sound Files/Oxygen.wav", null, null, null, null, "arraybuffer", null, null).then$1(new U.SoundManager_loadSounds_closure0(this));
+    W.HttpRequest_request("content/Sound Files/ShipItem.wav", null, null, null, null, "arraybuffer", null, null).then$1(new U.SoundManager_loadSounds_closure1(this));
+    W.HttpRequest_request("content/Sound Files/Injured.wav", null, null, null, null, "arraybuffer", null, null).then$1(new U.SoundManager_loadSounds_closure2(this));
+  },
+  playSound$1: function(enumSound) {
+    var t1, source;
+    if (this._muted)
+      return;
+    else {
+      t1 = this.ac;
+      source = t1.createBufferSource();
+      source.connect(t1.destination, 0, 0);
+      switch (enumSound) {
+        case 1:
+          source.buffer = this._jumpClip;
+          C.AudioBufferSourceNode_methods.start$1(source, 0);
+          break;
+        case 2:
+          source.buffer = this._oxygenClip;
+          C.AudioBufferSourceNode_methods.start$1(source, 0);
+          break;
+        case 3:
+          source.buffer = this._shipItemClip;
+          C.AudioBufferSourceNode_methods.start$1(source, 0);
+          break;
+        case 4:
+          source.buffer = this._injureClip;
+          C.AudioBufferSourceNode_methods.start$1(source, 0);
+          break;
+        default:
+      }
+    }
+  },
+  static: {
+"": "SoundManager_instance,SoundManager_enumSoundJump,SoundManager_enumSoundOxygen,SoundManager_enumSoundShipItem,SoundManager_enumSoundInjure",
+SoundManager_SoundManager: function() {
+  if ($.SoundManager_instance == null) {
+    $.SoundManager_instance = new U.SoundManager(new (window.AudioContext || window.webkitAudioContext)(), false, null, null, null, null);
+    $.SoundManager_instance.loadSounds$0();
+  }
+  return $.SoundManager_instance;
+}}
+
+},
+
+SoundManager_loadSounds_closure: {"": "Closure;this_0",
+  call$1: function(request) {
+    var t1 = this.this_0;
+    J.decodeAudioData$1$x(t1.ac, J.get$response$x(request)).then$1(new U.SoundManager_loadSounds__closure2(t1));
+  },
+  $is_args1: true
+},
+
+SoundManager_loadSounds__closure2: {"": "Closure;this_1",
+  call$1: function(buffer) {
+    this.this_1._jumpClip = buffer;
+  },
+  $is_args1: true
+},
+
+SoundManager_loadSounds_closure0: {"": "Closure;this_2",
+  call$1: function(request) {
+    var t1 = this.this_2;
+    J.decodeAudioData$1$x(t1.ac, J.get$response$x(request)).then$1(new U.SoundManager_loadSounds__closure1(t1));
+  },
+  $is_args1: true
+},
+
+SoundManager_loadSounds__closure1: {"": "Closure;this_3",
+  call$1: function(buffer) {
+    this.this_3._oxygenClip = buffer;
+  },
+  $is_args1: true
+},
+
+SoundManager_loadSounds_closure1: {"": "Closure;this_4",
+  call$1: function(request) {
+    var t1 = this.this_4;
+    J.decodeAudioData$1$x(t1.ac, J.get$response$x(request)).then$1(new U.SoundManager_loadSounds__closure0(t1));
+  },
+  $is_args1: true
+},
+
+SoundManager_loadSounds__closure0: {"": "Closure;this_5",
+  call$1: function(buffer) {
+    this.this_5._shipItemClip = buffer;
+  },
+  $is_args1: true
+},
+
+SoundManager_loadSounds_closure2: {"": "Closure;this_6",
+  call$1: function(request) {
+    var t1 = this.this_6;
+    J.decodeAudioData$1$x(t1.ac, J.get$response$x(request)).then$1(new U.SoundManager_loadSounds__closure(t1));
+  },
+  $is_args1: true
+},
+
+SoundManager_loadSounds__closure: {"": "Closure;this_7",
+  call$1: function(buffer) {
+    this.this_7._injureClip = buffer;
+  },
+  $is_args1: true
+},
+
 Game: {"": "Object;player,oxygenTimer,lastOxygenTick,levelManager,currentLevel,stateEnumPlay,stateEnumWin,stateEnumGameOver,state",
   Initialize$0: function() {
     var t1 = $.LevelManager_enumLevelOne;
@@ -8997,51 +8859,6 @@ Spike: {"": "Enemy;damage,x,y,height,width,dead",
   }
 },
 
-SoundManager: {"": "Object;audioManager,sfxSource,_muted,_jumpClip,_oxygenClip,_shipItemClip,_injureClip,_currentMusic",
-  init$0: function() {
-    var t1 = this.audioManager;
-    this.sfxSource = t1.makeSource$1("sfxSource");
-    this._jumpClip = t1.makeClip$2("jump", "SlowJump.wav");
-    J.load$0$x(this._jumpClip);
-    this._oxygenClip = t1.makeClip$2("oxygen", "Oxygen.wav");
-    J.load$0$x(this._oxygenClip);
-    this._shipItemClip = t1.makeClip$2("shipItem", "ShipItem.wav");
-    J.load$0$x(this._shipItemClip);
-    this._injureClip = t1.makeClip$2("injure", "Injured.wav");
-    J.load$0$x(this._injureClip);
-  },
-  playSound$1: function(enumSound) {
-    if (this._muted)
-      return;
-    else
-      switch (enumSound) {
-        case 1:
-          this.audioManager.playClipFromSourceIn$4(0, "sfxSource", "jump", false);
-          break;
-        case 2:
-          this.audioManager.playClipFromSourceIn$4(0, "sfxSource", "oxygen", false);
-          break;
-        case 3:
-          this.audioManager.playClipFromSourceIn$4(0, "sfxSource", "shipItem", false);
-          break;
-        case 4:
-          this.audioManager.playClipFromSourceIn$4(0, "sfxSource", "injure", false);
-          break;
-        default:
-      }
-  },
-  static: {
-"": "SoundManager_instance,SoundManager_enumSoundJump,SoundManager_enumSoundOxygen,SoundManager_enumSoundShipItem,SoundManager_enumSoundInjure",
-SoundManager_SoundManager: function() {
-  if ($.SoundManager_instance == null) {
-    $.SoundManager_instance = new U.SoundManager(Q.AudioManager$("content/Sound Files"), null, false, null, null, null, null, null);
-    $.SoundManager_instance.init$0();
-  }
-  return $.SoundManager_instance;
-}}
-
-},
-
 main_closure: {"": "Closure;game_0",
   call$1: function(gameLoop) {
     this.game_0.update$1(gameLoop.get$dt() * 100);
@@ -9152,913 +8969,23 @@ convertNativeToDart_AcceptStructuredClone_walk: {"": "Closure;mustCopy_4,findSlo
   },
   $is_args1: true
 }}],
-["simple_audio", "../packages/simple_audio/simple_audio.dart", , Q, {
-AudioClip: {"": "Object;_manager,_simple_audio$_name,_url,_buffer<,_simple_audio$_hasError,_errorString,_isReadyToPlay,_urlAbsolute",
-  _onDecode$2: function(buffer, completer) {
-    var t1;
-    if (buffer == null) {
-      this._simple_audio$_hasError = true;
-      this._errorString = "Error decoding buffer.";
-      t1 = completer.future;
-      if (t1._state !== 0)
-        H.throwExpression(P.StateError$("Future already completed"));
-      t1._asyncComplete$1(this);
-      return;
-    }
-    this._simple_audio$_hasError = false;
-    this._errorString = "OK";
-    this._buffer = buffer;
-    this._isReadyToPlay = true;
-    t1 = completer.future;
-    if (t1._state !== 0)
-      H.throwExpression(P.StateError$("Future already completed"));
-    t1._asyncComplete$1(this);
-  },
-  _onRequestSuccess$2: function(request, completer) {
-    var response = W._convertNativeToDart_XHR_Response(request.response);
-    J.decodeAudioData$1$x(this._manager._context, response).then$1(new Q.AudioClip__onRequestSuccess_closure(this, completer)).catchError$1(new Q.AudioClip__onRequestSuccess_closure0(this, completer));
-  },
-  load$0: function(_) {
-    var t1, request, t2, completer;
-    this._isReadyToPlay = false;
-    this._buffer = null;
-    t1 = this._url;
-    if (C.JSString_methods.startsWith$1(t1, "sfxr:"))
-      return P.Future_Future$delayed(P.Duration$(0, 0, 0, 1, 0, 0), new Q.AudioClip_load_closure(this), Q.AudioClip);
-    request = new XMLHttpRequest();
-    t2 = Q.AudioClip;
-    completer = new P._AsyncCompleter(P._Future$(t2));
-    H.setRuntimeTypeInfo(completer, [t2]);
-    if (this._urlAbsolute)
-      C.HttpRequest_methods.open$2(request, "GET", t1);
-    else
-      C.HttpRequest_methods.open$2(request, "GET", this._manager.baseURL + "/" + t1);
-    request.responseType = "arraybuffer";
-    t1 = C.EventStreamProvider_load.forTarget$1(request);
-    t2 = new W._EventStreamSubscription(0, t1._target, t1._eventType, W._wrapZone(new Q.AudioClip_load_closure0(this, request, completer)), t1._useCapture);
-    H.setRuntimeTypeInfo(t2, [H.getRuntimeTypeArgument(t1, "_EventStream", 0)]);
-    t2._tryResume$0();
-    t2 = C.EventStreamProvider_error.forTarget$1(request);
-    t1 = new W._EventStreamSubscription(0, t2._target, t2._eventType, W._wrapZone(new Q.AudioClip_load_closure1(this, request, completer)), t2._useCapture);
-    H.setRuntimeTypeInfo(t1, [H.getRuntimeTypeArgument(t2, "_EventStream", 0)]);
-    t1._tryResume$0();
-    t1 = C.EventStreamProvider_abort.forTarget$1(request);
-    t2 = new W._EventStreamSubscription(0, t1._target, t1._eventType, W._wrapZone(new Q.AudioClip_load_closure2(this, request, completer)), t1._useCapture);
-    H.setRuntimeTypeInfo(t2, [H.getRuntimeTypeArgument(t1, "_EventStream", 0)]);
-    t2._tryResume$0();
-    request.send();
-    return completer.future;
-  },
-  get$length: function(_) {
-    var t1 = this._buffer;
-    if (t1 == null)
-      return 0;
-    return J.get$duration$x(t1);
-  },
-  static: {
-"": "AudioClip_SFXR_PREFIX",
-}
-
-},
-
-AudioClip__onRequestSuccess_closure: {"": "Closure;this_0,completer_1",
-  call$1: function(buffer) {
-    this.this_0._onDecode$2(buffer, this.completer_1);
-  },
-  $is_args1: true
-},
-
-AudioClip__onRequestSuccess_closure0: {"": "Closure;this_2,completer_3",
-  call$1: function(e) {
-    this.this_2._onDecode$2(null, this.completer_3);
-  },
-  $is_args1: true
-},
-
-AudioClip_load_closure: {"": "Closure;this_0",
-  call$0: function() {
-    var t1 = this.this_0;
-    t1._buffer = Q.SfxrSynth_toAudioBuffer(t1._manager._context, C.JSString_methods.substring$1(t1._url, 5));
-    t1._isReadyToPlay = true;
-    return t1;
-  }
-},
-
-AudioClip_load_closure0: {"": "Closure;this_1,request_2,completer_3",
-  call$1: function(e) {
-    return this.this_1._onRequestSuccess$2(this.request_2, this.completer_3);
-  },
-  $is_args1: true
-},
-
-AudioClip_load_closure1: {"": "Closure;this_4,request_5,completer_6",
-  call$1: function(e) {
-    var t1, t2;
-    t1 = this.this_4;
-    t1._simple_audio$_hasError = true;
-    t1._errorString = "Error fetching data";
-    t2 = this.completer_6.future;
-    if (t2._state !== 0)
-      H.throwExpression(P.StateError$("Future already completed"));
-    t2._asyncComplete$1(t1);
-    return;
-  },
-  $is_args1: true
-},
-
-AudioClip_load_closure2: {"": "Closure;this_7,request_8,completer_9",
-  call$1: function(e) {
-    var t1, t2;
-    t1 = this.this_7;
-    t1._simple_audio$_hasError = true;
-    t1._errorString = "Error fetching data";
-    t2 = this.completer_9.future;
-    if (t2._state !== 0)
-      H.throwExpression(P.StateError$("Future already completed"));
-    t2._asyncComplete$1(t1);
-    return;
-  },
-  $is_args1: true
-},
-
-AudioManager: {"": "Object;_context,_destination,_listener,_masterGain,_musicGain,_sourceGain,baseURL,_clips,_sources,_music,_mutedVolume,_musicPaused,_sourcesPaused",
-  makeClip$2: function($name, url) {
-    var t1, clip;
-    t1 = this._clips;
-    clip = t1.$index(t1, $name);
-    if (clip != null)
-      return clip;
-    clip = new Q.AudioClip(this, $name, url, null, false, "", false, false);
-    t1.$indexSet(t1, $name, clip);
-    return clip;
-  },
-  makeSource$1: function($name) {
-    var t1, source;
-    t1 = this._sources;
-    source = t1.$index(t1, $name);
-    if (source != null)
-      return source;
-    source = Q.AudioSource$_internal(this, $name, this._sourceGain);
-    t1.$indexSet(t1, $name, source);
-    return source;
-  },
-  playClipFromSourceIn$4: function(delay, sourceName, clipName, looped) {
-    var t1, source, clip;
-    t1 = this._sources;
-    source = t1.$index(t1, sourceName);
-    if (source == null) {
-      P.print("Could not find source " + sourceName);
-      return;
-    }
-    t1 = this._clips;
-    clip = t1.$index(t1, clipName);
-    if (clip == null) {
-      P.print("Could not find clip " + clipName);
-      return;
-    }
-    if (looped)
-      return source.playLoopedIn$2(delay, clip);
-    else
-      return source.playOnceIn$2(delay, clip);
-  },
-  AudioManager$1: function(baseURL) {
-    this._context = new (window.AudioContext || window.webkitAudioContext)();
-    this._destination = this._context.destination;
-    this._listener = this._context.listener;
-    this._masterGain = J.createGain$0$x(this._context);
-    this._musicGain = J.createGain$0$x(this._context);
-    this._sourceGain = J.createGain$0$x(this._context);
-    this._masterGain.connect(this._destination, 0, 0);
-    this._musicGain.connect(this._masterGain, 0, 0);
-    this._sourceGain.connect(this._masterGain, 0, 0);
-    this._music = Q.AudioMusic$_internal(this, this._musicGain);
-  },
-  static: {
-AudioManager$: function(baseURL) {
-  var t1 = new Q.AudioManager(null, null, null, null, null, null, baseURL, P.LinkedHashMap_LinkedHashMap(null, null, null, J.JSString, Q.AudioClip), P.LinkedHashMap_LinkedHashMap(null, null, null, J.JSString, Q.AudioSource), null, null, false, false);
-  t1.AudioManager$1(baseURL);
-  return t1;
-}}
-
-},
-
-AudioMusic: {"": "Object;_manager,_source,_sound,_clip",
-  AudioMusic$_internal$2: function(_manager, output) {
-    this._source = Q.AudioSource$_internal(this._manager, "music", output);
-    this._source.set$positional(false);
-  },
-  static: {
-AudioMusic$_internal: function(_manager, output) {
-  var t1 = new Q.AudioMusic(_manager, null, null, null);
-  t1.AudioMusic$_internal$2(_manager, output);
-  return t1;
-}}
-
-},
-
-SfxrParams: {"": "Object;waveType,attackTime,sustainTime,sustainPunch,decayTime,startFrequency,minFrequency,slide,deltaSlide,vibratoDepth,vibratoSpeed,changeAmount,changeSpeed,squareDuty,dutySweep,repeatSpeed,phaserOffset,phaserSweep,lpFilterCutoff,lpFilterCutoffSweep,lpFilterResonance,hpFilterCutoff,hpFilterCutoffSweep,masterVolume",
-  SfxrParams$fromString$1: function(string) {
-    var values, totalTime, multiplier;
-    values = string.split(",");
-    if (0 >= values.length)
-      throw H.ioore(values, 0);
-    this.waveType = Q.SfxrParams__toInt(values[0]);
-    if (1 >= values.length)
-      throw H.ioore(values, 1);
-    this.attackTime = Q.SfxrParams__toDouble(values[1]);
-    if (2 >= values.length)
-      throw H.ioore(values, 2);
-    this.sustainTime = Q.SfxrParams__toDouble(values[2]);
-    if (3 >= values.length)
-      throw H.ioore(values, 3);
-    this.sustainPunch = Q.SfxrParams__toDouble(values[3]);
-    if (4 >= values.length)
-      throw H.ioore(values, 4);
-    this.decayTime = Q.SfxrParams__toDouble(values[4]);
-    if (5 >= values.length)
-      throw H.ioore(values, 5);
-    this.startFrequency = Q.SfxrParams__toDouble(values[5]);
-    if (6 >= values.length)
-      throw H.ioore(values, 6);
-    this.minFrequency = Q.SfxrParams__toDouble(values[6]);
-    if (7 >= values.length)
-      throw H.ioore(values, 7);
-    this.slide = Q.SfxrParams__toDouble(values[7]);
-    if (8 >= values.length)
-      throw H.ioore(values, 8);
-    this.deltaSlide = Q.SfxrParams__toDouble(values[8]);
-    if (9 >= values.length)
-      throw H.ioore(values, 9);
-    this.vibratoDepth = Q.SfxrParams__toDouble(values[9]);
-    if (10 >= values.length)
-      throw H.ioore(values, 10);
-    this.vibratoSpeed = Q.SfxrParams__toDouble(values[10]);
-    if (11 >= values.length)
-      throw H.ioore(values, 11);
-    this.changeAmount = Q.SfxrParams__toDouble(values[11]);
-    if (12 >= values.length)
-      throw H.ioore(values, 12);
-    this.changeSpeed = Q.SfxrParams__toDouble(values[12]);
-    if (13 >= values.length)
-      throw H.ioore(values, 13);
-    this.squareDuty = Q.SfxrParams__toDouble(values[13]);
-    if (14 >= values.length)
-      throw H.ioore(values, 14);
-    this.dutySweep = Q.SfxrParams__toDouble(values[14]);
-    if (15 >= values.length)
-      throw H.ioore(values, 15);
-    this.repeatSpeed = Q.SfxrParams__toDouble(values[15]);
-    if (16 >= values.length)
-      throw H.ioore(values, 16);
-    this.phaserOffset = Q.SfxrParams__toDouble(values[16]);
-    if (17 >= values.length)
-      throw H.ioore(values, 17);
-    this.phaserSweep = Q.SfxrParams__toDouble(values[17]);
-    if (18 >= values.length)
-      throw H.ioore(values, 18);
-    this.lpFilterCutoff = Q.SfxrParams__toDouble(values[18]);
-    if (19 >= values.length)
-      throw H.ioore(values, 19);
-    this.lpFilterCutoffSweep = Q.SfxrParams__toDouble(values[19]);
-    if (20 >= values.length)
-      throw H.ioore(values, 20);
-    this.lpFilterResonance = Q.SfxrParams__toDouble(values[20]);
-    if (21 >= values.length)
-      throw H.ioore(values, 21);
-    this.hpFilterCutoff = Q.SfxrParams__toDouble(values[21]);
-    if (22 >= values.length)
-      throw H.ioore(values, 22);
-    this.hpFilterCutoffSweep = Q.SfxrParams__toDouble(values[22]);
-    if (23 >= values.length)
-      throw H.ioore(values, 23);
-    this.masterVolume = Q.SfxrParams__toDouble(values[23]);
-    if (J.$lt$n(this.sustainTime, 0.01))
-      this.sustainTime = 0.01;
-    totalTime = J.$add$ns(J.$add$ns(this.attackTime, this.sustainTime), this.decayTime);
-    if (J.$lt$n(totalTime, 0.18)) {
-      if (typeof totalTime !== "number")
-        throw H.iae(totalTime);
-      multiplier = 0.18 / totalTime;
-      this.attackTime = J.$mul$n(this.attackTime, multiplier);
-      this.sustainTime = J.$mul$n(this.sustainTime, multiplier);
-      this.decayTime = J.$mul$n(this.decayTime, multiplier);
-    }
-  },
-  static: {
-SfxrParams$fromString: function(string) {
-  var t1 = new Q.SfxrParams(0, 0, 0, 0, 0, 0.3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-  t1.SfxrParams$fromString$1(string);
-  return t1;
-},
-
-SfxrParams__toInt: function(v) {
-  if (v == null || J.get$length$asx(v) === 0)
-    return 0;
-  return H.Primitives_parseInt(v, 10, null);
-},
-
-SfxrParams__toDouble: function(v) {
-  if (v == null || J.get$length$asx(v) === 0)
-    return 0;
-  return H.Primitives_parseDouble(v, null);
-}}
-
-},
-
-SfxrSynth: {"": "Object;_params,_envelopeLength0,_envelopeLength1,_envelopeLength2,_period,_maxPeriod,_slide,_deltaSlide,_changeAmount,_squareDuty,_dutySweep,_changeTime,_changeLimit",
-  reset$0: function(_) {
-    var p, t1, t2;
-    p = this._params;
-    t1 = p.startFrequency;
-    t1 = J.$add$ns(J.$mul$n(t1, t1), 0.001);
-    if (typeof t1 !== "number")
-      throw H.iae(t1);
-    this._period = 100 / t1;
-    t1 = p.minFrequency;
-    t1 = J.$add$ns(J.$mul$n(t1, t1), 0.001);
-    if (typeof t1 !== "number")
-      throw H.iae(t1);
-    this._maxPeriod = 100 / t1;
-    t1 = p.slide;
-    t1 = J.$mul$n(J.$mul$n(J.$mul$n(t1, t1), p.slide), 0.01);
-    if (typeof t1 !== "number")
-      throw H.iae(t1);
-    this._slide = 1 - t1;
-    t1 = p.deltaSlide;
-    if (typeof t1 !== "number")
-      throw t1.$negate();
-    this._deltaSlide = -t1 * t1 * t1 * 0.000001;
-    if (J.$eq(p.waveType, 0)) {
-      t1 = p.squareDuty;
-      if (typeof t1 !== "number")
-        throw t1.$div();
-      this._squareDuty = 0.5 - t1 / 2;
-      t1 = p.dutySweep;
-      if (typeof t1 !== "number")
-        throw t1.$negate();
-      this._dutySweep = -t1 * 0.00005;
-    }
-    t1 = J.$gt$n(p.changeAmount, 0);
-    t2 = p.changeAmount;
-    if (t1) {
-      t1 = J.$mul$n(J.$mul$n(t2, t2), 0.9);
-      if (typeof t1 !== "number")
-        throw H.iae(t1);
-      t1 = 1 - t1;
-    } else {
-      t1 = J.$mul$n(J.$mul$n(t2, t2), 10);
-      if (typeof t1 !== "number")
-        throw H.iae(t1);
-      t1 = 1 + t1;
-    }
-    this._changeAmount = t1;
-    this._changeTime = 0;
-    if (J.$eq(p.changeSpeed, 1))
-      t1 = 0;
-    else {
-      t1 = p.changeSpeed;
-      if (typeof t1 !== "number")
-        throw H.iae(t1);
-      t1 = 1 - t1;
-      t1 = t1 * t1 * 20000 + 32;
-    }
-    this._changeLimit = C.JSNumber_methods.toInt$0(t1);
-  },
-  totalReset$0: function() {
-    var p, t1;
-    this.reset$0(this);
-    p = this._params;
-    t1 = p.attackTime;
-    this._envelopeLength0 = J.$mul$n(J.$mul$n(t1, t1), 100000);
-    t1 = p.sustainTime;
-    this._envelopeLength1 = J.$mul$n(J.$mul$n(t1, t1), 100000);
-    t1 = p.decayTime;
-    this._envelopeLength2 = J.$add$ns(J.$mul$n(J.$mul$n(t1, t1), 100000), 10);
-    return J.toInt$0$n(J.$add$ns(J.$add$ns(this._envelopeLength0, this._envelopeLength1), this._envelopeLength2));
-  },
-  synthWave$2: function(buffer, $length) {
-    var p, _filters, t1, _hpFilterCutoff, _hpFilterDeltaCutoff, _lpFilterCutoff, _lpFilterDeltaCutoff, _lpFilterOn, _masterVolume, _minFreqency, _phaser, _phaserDeltaOffset, _phaserOffset, _repeatLimit, _sustainPunch, _vibratoAmplitude, _vibratoSpeed, _waveType, _envelopeLength, _envelopeOverLength0, _envelopeOverLength1, _envelopeOverLength2, _lpFilterDamping, _phaserBuffer, _noiseBuffer, i, t2, t3, t4, t5, _finished, _envelopeTime, _envelopeVolume, _hpFilterPos, _lpFilterDeltaPos, _lpFilterOldPos, _lpFilterPos, _pos, _sample, _vibratoPhase, _phase, _envelopeStage, _phaserPos, _phaserInt, _repeatTime, t6, t7, _periodTemp0, _periodTemp, _superSample, j, n, _lpFilterPos0;
-    p = this._params;
-    _filters = !J.$eq(p.lpFilterCutoff, 1) || !J.$eq(p.hpFilterCutoff, 0);
-    t1 = p.hpFilterCutoff;
-    _hpFilterCutoff = J.$mul$n(J.$mul$n(t1, t1), 0.1);
-    t1 = J.$mul$n(p.hpFilterCutoffSweep, 0.0003);
-    if (typeof t1 !== "number")
-      throw H.iae(t1);
-    _hpFilterDeltaCutoff = 1 + t1;
-    t1 = p.lpFilterCutoff;
-    _lpFilterCutoff = J.$mul$n(J.$mul$n(J.$mul$n(t1, t1), p.lpFilterCutoff), 0.1);
-    t1 = J.$mul$n(p.lpFilterCutoffSweep, 0.0001);
-    if (typeof t1 !== "number")
-      throw H.iae(t1);
-    _lpFilterDeltaCutoff = 1 + t1;
-    _lpFilterOn = !J.$eq(p.lpFilterCutoff, 1);
-    t1 = p.masterVolume;
-    _masterVolume = J.$mul$n(t1, t1);
-    _minFreqency = p.minFrequency;
-    _phaser = !J.$eq(p.phaserOffset, 0) || !J.$eq(p.phaserSweep, 0);
-    t1 = p.phaserSweep;
-    _phaserDeltaOffset = J.$mul$n(J.$mul$n(J.$mul$n(t1, t1), p.phaserSweep), 0.2);
-    t1 = p.phaserOffset;
-    t1 = J.$mul$n(t1, t1);
-    _phaserOffset = J.$mul$n(t1, J.$lt$n(p.phaserOffset, 0) ? -1020 : 1020);
-    if (!J.$eq(p.repeatSpeed, 0)) {
-      t1 = p.repeatSpeed;
-      if (typeof t1 !== "number")
-        throw H.iae(t1);
-      t1 = 1 - t1;
-      _repeatLimit = C.JSNumber_methods.toInt$0(t1 * t1 * 20000) + 32;
-    } else
-      _repeatLimit = 0;
-    _sustainPunch = p.sustainPunch;
-    t1 = p.vibratoDepth;
-    if (typeof t1 !== "number")
-      throw t1.$div();
-    _vibratoAmplitude = t1 / 2;
-    t1 = p.vibratoSpeed;
-    _vibratoSpeed = J.$mul$n(J.$mul$n(t1, t1), 0.01);
-    _waveType = p.waveType;
-    _envelopeLength = this._envelopeLength0;
-    if (typeof _envelopeLength !== "number")
-      throw H.iae(_envelopeLength);
-    _envelopeOverLength0 = 1 / _envelopeLength;
-    t1 = this._envelopeLength1;
-    if (typeof t1 !== "number")
-      throw H.iae(t1);
-    _envelopeOverLength1 = 1 / t1;
-    t1 = this._envelopeLength2;
-    if (typeof t1 !== "number")
-      throw H.iae(t1);
-    _envelopeOverLength2 = 1 / t1;
-    t1 = p.lpFilterResonance;
-    t1 = J.$mul$n(J.$mul$n(t1, t1), 20);
-    if (typeof t1 !== "number")
-      throw H.iae(t1);
-    if (typeof _lpFilterCutoff !== "number")
-      throw H.iae(_lpFilterCutoff);
-    _lpFilterDamping = 5 / (1 + t1) * (0.01 + _lpFilterCutoff);
-    _lpFilterDamping = 1 - (_lpFilterDamping > 0.8 ? 0.8 : _lpFilterDamping);
-    _phaserBuffer = P.List_List(1024, J.JSDouble);
-    H.setRuntimeTypeInfo(_phaserBuffer, [J.JSDouble]);
-    _noiseBuffer = P.List_List(32, J.JSDouble);
-    H.setRuntimeTypeInfo(_noiseBuffer, [J.JSDouble]);
-    for (i = 1023; i > -1; --i)
-      _phaserBuffer[i] = 0;
-    for (i = 31; i > -1; --i)
-      _noiseBuffer[i] = Math.random() * 2 - 1;
-    for (t1 = J.getInterceptor(_waveType), t2 = _vibratoAmplitude > 0, t3 = _repeatLimit !== 0, t4 = J.getInterceptor$n(_minFreqency), t5 = _hpFilterDeltaCutoff !== 0, _finished = false, _envelopeTime = 0, _envelopeVolume = 0, _hpFilterPos = 0, _lpFilterDeltaPos = 0, _lpFilterOldPos = 0, _lpFilterPos = 0, _pos = 0, _sample = 0, _vibratoPhase = 0, _phase = 0, _envelopeStage = 0, _phaserPos = 0, _phaserInt = 0, _repeatTime = 0, i = 0; i < $length; ++i) {
-      if (_finished)
-        return true;
-      if (t3) {
-        ++_repeatTime;
-        if (_repeatTime >= _repeatLimit) {
-          this.reset$0(this);
-          _repeatTime = 0;
-        }
-      }
-      if (this._changeLimit !== 0) {
-        t6 = this._changeTime;
-        if (typeof t6 !== "number")
-          throw t6.$add();
-        ++t6;
-        this._changeTime = t6;
-        t7 = this._changeLimit;
-        if (typeof t7 !== "number")
-          throw H.iae(t7);
-        if (t6 >= t7) {
-          this._changeLimit = 0;
-          t6 = this._period;
-          t7 = this._changeAmount;
-          if (typeof t6 !== "number")
-            throw t6.$mul();
-          if (typeof t7 !== "number")
-            throw H.iae(t7);
-          this._period = t6 * t7;
-        }
-      }
-      t6 = this._slide;
-      t7 = this._deltaSlide;
-      if (typeof t6 !== "number")
-        throw t6.$add();
-      if (typeof t7 !== "number")
-        throw H.iae(t7);
-      this._slide = t6 + t7;
-      t7 = this._period;
-      t6 = this._slide;
-      if (typeof t7 !== "number")
-        throw t7.$mul();
-      if (typeof t6 !== "number")
-        throw H.iae(t6);
-      this._period = t7 * t6;
-      t6 = this._period;
-      t7 = this._maxPeriod;
-      if (typeof t6 !== "number")
-        throw t6.$gt();
-      if (typeof t7 !== "number")
-        throw H.iae(t7);
-      if (t6 > t7) {
-        this._period = t7;
-        _finished = t4.$gt(_minFreqency, 0) && true;
-      } else
-        _finished = false;
-      _periodTemp0 = this._period;
-      if (t2) {
-        if (typeof _vibratoSpeed !== "number")
-          throw H.iae(_vibratoSpeed);
-        _vibratoPhase += _vibratoSpeed;
-        t6 = Math.sin(_vibratoPhase);
-        if (typeof _periodTemp0 !== "number")
-          throw _periodTemp0.$mul();
-        _periodTemp0 *= 1 + t6 * _vibratoAmplitude;
-      }
-      _periodTemp = J.toInt$0$n(_periodTemp0);
-      if (_periodTemp < 8)
-        _periodTemp = 8;
-      if (t1.$eq(_waveType, 0)) {
-        t6 = this._squareDuty;
-        t7 = this._dutySweep;
-        if (typeof t6 !== "number")
-          throw t6.$add();
-        if (typeof t7 !== "number")
-          throw H.iae(t7);
-        this._squareDuty = t6 + t7;
-        t6 = this._squareDuty;
-        if (typeof t6 !== "number")
-          throw t6.$lt();
-        if (t6 < 0)
-          this._squareDuty = 0;
-        else if (t6 > 0.5)
-          this._squareDuty = 0.5;
-      }
-      ++_envelopeTime;
-      if (typeof _envelopeLength !== "number")
-        throw H.iae(_envelopeLength);
-      if (_envelopeTime > _envelopeLength) {
-        ++_envelopeStage;
-        switch (_envelopeStage) {
-          case 1:
-            _envelopeLength = this._envelopeLength1;
-            break;
-          case 2:
-            _envelopeLength = this._envelopeLength2;
-            break;
-          default:
-        }
-        _envelopeTime = 0;
-      }
-      switch (_envelopeStage) {
-        case 0:
-          _envelopeVolume = _envelopeTime * _envelopeOverLength0;
-          break;
-        case 1:
-          if (typeof _sustainPunch !== "number")
-            throw H.iae(_sustainPunch);
-          _envelopeVolume = 1 + (1 - _envelopeTime * _envelopeOverLength1) * 2 * _sustainPunch;
-          break;
-        case 2:
-          _envelopeVolume = 1 - _envelopeTime * _envelopeOverLength2;
-          break;
-        case 3:
-          _finished = true;
-          _envelopeVolume = 0;
-          break;
-        default:
-      }
-      if (_phaser) {
-        _phaserOffset = J.$add$ns(_phaserOffset, _phaserDeltaOffset);
-        _phaserInt = J.toInt$0$n(_phaserOffset);
-        if (_phaserInt < 0)
-          _phaserInt = -_phaserInt;
-        else if (_phaserInt > 1023)
-          _phaserInt = 1023;
-      }
-      if (_filters && t5) {
-        _hpFilterCutoff = J.$mul$n(_hpFilterCutoff, _hpFilterDeltaCutoff);
-        t6 = J.getInterceptor$n(_hpFilterCutoff);
-        if (t6.$lt(_hpFilterCutoff, 0.00001))
-          _hpFilterCutoff = 0.00001;
-        else if (t6.$gt(_hpFilterCutoff, 0.1))
-          _hpFilterCutoff = 0.1;
-      }
-      for (_superSample = 0, j = 0; j < 8; ++j) {
-        ++_phase;
-        if (_phase >= _periodTemp) {
-          _phase = C.JSInt_methods.$mod(_phase, _periodTemp);
-          if (t1.$eq(_waveType, 3))
-            for (n = 31; n > -1; --n)
-              _noiseBuffer[n] = Math.random() * 2 - 1;
-        }
-        switch (_waveType) {
-          case 0:
-            t6 = this._squareDuty;
-            if (typeof t6 !== "number")
-              throw H.iae(t6);
-            _sample = _phase / _periodTemp < t6 ? 0.5 : -0.5;
-            break;
-          case 1:
-            _sample = 1 - _phase / _periodTemp * 2;
-            break;
-          case 2:
-            _pos = _phase / _periodTemp;
-            _pos = _pos > 0.5 ? (_pos - 1) * 6.28318531 : _pos * 6.28318531;
-            t6 = 1.27323954 * _pos;
-            t7 = 0.405284735 * _pos;
-            _sample = _pos < 0 ? t6 + t7 * _pos : t6 - t7 * _pos;
-            _sample = _sample < 0 ? 0.225 * (_sample * -_sample - _sample) + _sample : 0.225 * (_sample * _sample - _sample) + _sample;
-            break;
-          case 3:
-            t6 = C.JSNumber_methods.toInt$0(Math.abs(_phase * 32 / _periodTemp));
-            if (t6 < 0 || t6 >= 32)
-              throw H.ioore(_noiseBuffer, t6);
-            _sample = _noiseBuffer[t6];
-            break;
-          default:
-        }
-        if (_filters) {
-          _lpFilterCutoff *= _lpFilterDeltaCutoff;
-          if (_lpFilterCutoff < 0)
-            _lpFilterCutoff = 0;
-          else if (_lpFilterCutoff > 0.1)
-            _lpFilterCutoff = 0.1;
-          if (_lpFilterOn) {
-            if (typeof _sample !== "number")
-              throw _sample.$sub();
-            _lpFilterDeltaPos = (_lpFilterDeltaPos + (_sample - _lpFilterPos) * _lpFilterCutoff) * _lpFilterDamping;
-            _lpFilterPos0 = _lpFilterPos;
-          } else {
-            _lpFilterPos0 = _sample;
-            _lpFilterDeltaPos = 0;
-          }
-          if (typeof _lpFilterPos0 !== "number")
-            throw _lpFilterPos0.$add();
-          _lpFilterPos0 += _lpFilterDeltaPos;
-          if (typeof _hpFilterCutoff !== "number")
-            throw H.iae(_hpFilterCutoff);
-          _hpFilterPos = (_hpFilterPos + (_lpFilterPos0 - _lpFilterPos)) * (1 - _hpFilterCutoff);
-          _sample = _hpFilterPos;
-          _lpFilterOldPos = _lpFilterPos;
-          _lpFilterPos = _lpFilterPos0;
-        }
-        if (_phaser) {
-          t6 = C.JSInt_methods.$mod(_phaserPos, 1024);
-          if (t6 < 0 || t6 >= 1024)
-            throw H.ioore(_phaserBuffer, t6);
-          _phaserBuffer[t6] = _sample;
-          t6 = C.JSInt_methods.$mod(_phaserPos - _phaserInt + 1024, 1024);
-          if (t6 < 0 || t6 >= 1024)
-            throw H.ioore(_phaserBuffer, t6);
-          t6 = _phaserBuffer[t6];
-          if (typeof _sample !== "number")
-            throw _sample.$add();
-          if (typeof t6 !== "number")
-            throw H.iae(t6);
-          _sample += t6;
-          ++_phaserPos;
-        }
-        if (typeof _sample !== "number")
-          throw H.iae(_sample);
-        _superSample += _sample;
-      }
-      if (typeof _masterVolume !== "number")
-        throw H.iae(_masterVolume);
-      _superSample *= 0.125 * _envelopeVolume * _masterVolume;
-      if (_superSample >= 1)
-        _superSample = 1;
-      else if (_superSample <= -1)
-        _superSample = -1;
-      if (i >= C.JS_CONST_ZYJ(buffer))
-        throw H.ioore(buffer, i);
-      buffer[i] = _superSample;
-    }
-    return false;
-  },
-  static: {
-SfxrSynth_toAudioBuffer: function(audioContext, data) {
-  var synth, envelopeFullLength, buffer;
-  synth = new Q.SfxrSynth(Q.SfxrParams$fromString(data), null, null, null, null, null, null, null, null, null, null, null, null);
-  envelopeFullLength = synth.totalReset$0();
-  buffer = audioContext.createBuffer(2, envelopeFullLength, 44100);
-  synth.synthWave$2(buffer.getChannelData(0), envelopeFullLength);
-  return buffer;
-}}
-
-},
-
-AudioSound: {"": "Object;_source,_clip,_loop,_sourceNode,_pausedTime,_startTime,_scheduledTime",
-  _dumpSourceNode$0: function() {
-    var t1 = this._sourceNode;
-    if (t1 != null)
-      P.print(H.S(t1.playbackState));
-  },
-  _setupSourceNodeForPlayback$0: function() {
-    var t1, t2;
-    t1 = this._source;
-    this._sourceNode = t1._manager._context.createBufferSource();
-    t2 = this._clip;
-    if (t2 != null && t2.get$_buffer() != null) {
-      this._sourceNode.buffer = t2.get$_buffer();
-      this._sourceNode.loopStart = 0;
-      this._sourceNode.loopEnd = J.get$duration$x(t2._buffer);
-    }
-    this._sourceNode.loop = this._loop;
-    this._sourceNode.connect(t1._gainNode, 0, 0);
-  },
-  _simple_audio$_stop$1: function(when) {
-    var t1 = this._sourceNode;
-    if (t1 != null)
-      J.stop$1$x(t1, when);
-    this._sourceNode = null;
-  },
-  _simple_audio$_stop$0: function() {
-    return this._simple_audio$_stop$1(0);
-  },
-  set$pause: function(_, b) {
-    if (b) {
-      if (this._pausedTime != null)
-        return;
-      this._pause$0();
-    } else {
-      if (this._pausedTime == null)
-        return;
-      this._resume$0();
-    }
-  },
-  _computePausedTime$0: function() {
-    var now, t1, delta;
-    now = this._source._manager._context.currentTime;
-    t1 = this._startTime;
-    if (typeof now !== "number")
-      throw now.$sub();
-    if (typeof t1 !== "number")
-      throw H.iae(t1);
-    delta = now - t1;
-    t1 = this._scheduledTime;
-    if (typeof t1 !== "number")
-      throw H.iae(t1);
-    if (now < t1)
-      return now - t1;
-    if (this._loop) {
-      t1 = this._sourceNode.buffer.duration;
-      if (typeof t1 !== "number")
-        throw H.iae(t1);
-      return C.JSDouble_methods.$mod(delta, t1);
-    }
-    return delta;
-  },
-  _pause$1: function(when) {
-    if (this._startTime == null)
-      return;
-    P.print("Sound.pause");
-    this._dumpSourceNode$0();
-    if (this._sourceNode != null) {
-      this._pausedTime = this._computePausedTime$0();
-      this._simple_audio$_stop$1(when);
-      P.print("paused at " + H.S(this._pausedTime));
-    }
-  },
-  _pause$0: function() {
-    return this._pause$1(0);
-  },
-  _resume$0: function() {
-    var t1, t2, t3, t4, t5;
-    if (this._pausedTime == null)
-      return;
-    P.print("Sound.resume");
-    this._dumpSourceNode$0();
-    this._setupSourceNodeForPlayback$0();
-    t1 = this._pausedTime;
-    if (typeof t1 !== "number")
-      throw t1.$lt();
-    t2 = this._source;
-    if (t1 < 0) {
-      this._pausedTime = -t1;
-      P.print("Scheduling to play sound in " + H.S(this._pausedTime) + ".");
-      t1 = t2._manager;
-      t2 = t1._context.currentTime;
-      t3 = this._pausedTime;
-      if (typeof t2 !== "number")
-        throw t2.$add();
-      if (typeof t3 !== "number")
-        throw H.iae(t3);
-      this._scheduledTime = t2 + t3;
-      t3 = this._sourceNode;
-      J.start$3$x(t3, this._scheduledTime, 0, t3.buffer.duration);
-      this._startTime = t1._context.currentTime;
-    } else {
-      P.print("Starting to play at offset " + H.S(t1));
-      t1 = t2._manager;
-      this._scheduledTime = t1._context.currentTime;
-      t2 = this._sourceNode;
-      t3 = this._scheduledTime;
-      t4 = this._pausedTime;
-      t5 = t2.buffer.duration;
-      if (typeof t5 !== "number")
-        throw t5.$sub();
-      if (typeof t4 !== "number")
-        throw H.iae(t4);
-      J.start$3$x(t2, t3, t4, t5 - t4);
-      t1 = t1._context.currentTime;
-      t4 = this._pausedTime;
-      if (typeof t1 !== "number")
-        throw t1.$sub();
-      if (typeof t4 !== "number")
-        throw H.iae(t4);
-      this._startTime = t1 - t4;
-    }
-    this._pausedTime = null;
-  },
-  play$1: function(_, when) {
-    var t1, t2;
-    this._simple_audio$_stop$0();
-    this._setupSourceNodeForPlayback$0();
-    t1 = this._source._manager;
-    t2 = t1._context.currentTime;
-    if (typeof t2 !== "number")
-      throw t2.$add();
-    this._scheduledTime = t2 + when;
-    J.start$1$x(this._sourceNode, this._scheduledTime);
-    this._startTime = t1._context.currentTime;
-  }
-},
-
-AudioSource: {"": "Object;_manager,_simple_audio$_name,_output,_gainNode,_panNode,_sounds,_mutedVolume,_isPaused,_simple_audio$_x,_simple_audio$_y,_z,_positional",
-  _setupNodes$0: function() {
-    var t1, t2, t3;
-    this._panNode.disconnect(0);
-    this._gainNode.disconnect(0);
-    t1 = this._positional;
-    t2 = this._gainNode;
-    t3 = this._output;
-    if (t1) {
-      t2.connect(this._panNode, 0, 0);
-      this._panNode.connect(t3, 0, 0);
-    } else
-      t2.connect(t3, 0, 0);
-  },
-  set$positional: function(b) {
-    if (b !== this._positional) {
-      this._positional = b;
-      this._setupNodes$0();
-    }
-  },
-  playOnceIn$2: function(delay, clip) {
-    var sound = new Q.AudioSound(this, clip, false, null, null, null, null);
-    sound._setupSourceNodeForPlayback$0();
-    this._sounds.push(sound);
-    sound.play$1(sound, delay);
-    sound.set$pause(sound, this._isPaused);
-    return sound;
-  },
-  playLoopedIn$2: function(delay, clip) {
-    var sound = new Q.AudioSound(this, clip, true, null, null, null, null);
-    sound._setupSourceNodeForPlayback$0();
-    this._sounds.push(sound);
-    sound.play$1(sound, delay);
-    sound.set$pause(sound, this._isPaused);
-    return sound;
-  },
-  get$x: function(_) {
-    return this._simple_audio$_x;
-  },
-  get$y: function(_) {
-    return this._simple_audio$_y;
-  },
-  AudioSource$_internal$3: function(_manager, _name, _output) {
-    var t1 = this._manager;
-    this._gainNode = J.createGain$0$x(t1._context);
-    this._panNode = t1._context.createPanner();
-    this._panNode.coneOuterGain = 1;
-    this._setupNodes$0();
-    t1 = P.List_List(null, Q.AudioSound);
-    H.setRuntimeTypeInfo(t1, [Q.AudioSound]);
-    this._sounds = t1;
-  },
-  static: {
-AudioSource$_internal: function(_manager, _name, _output) {
-  var t1 = new Q.AudioSource(_manager, _name, _output, null, null, null, null, false, 0, 0, 0, true);
-  t1.AudioSource$_internal$3(_manager, _name, _output);
-  return t1;
-}}
-
-}}],
 ]);
 Isolate.$finishClasses($$, $, null);
 $$ = null;
 
 // Static function getters
 init.globalFunctions.IsolateNatives__processWorkerMessage$closure = H.IsolateNatives__processWorkerMessage$closure = new H.Closure$2(H.IsolateNatives__processWorkerMessage, "IsolateNatives__processWorkerMessage$closure");
-init.globalFunctions.Primitives__throwFormatException$closure = H.Primitives__throwFormatException$closure = new H.Closure$1(H.Primitives__throwFormatException, "Primitives__throwFormatException$closure");
 init.globalFunctions.toStringWrapper$closure = H.toStringWrapper$closure = new H.Closure$0(H.toStringWrapper, "toStringWrapper$closure");
 init.globalFunctions.invokeClosure$closure = H.invokeClosure$closure = new H.Closure$7(H.invokeClosure, "invokeClosure$closure");
 init.globalFunctions._asyncRunCallback$closure = P._asyncRunCallback$closure = new H.Closure$0(P._asyncRunCallback, "_asyncRunCallback$closure");
-init.globalFunctions._nullDataHandler$closure = P._nullDataHandler$closure = new H.Closure$1(P._nullDataHandler, "_nullDataHandler$closure");
+init.globalFunctions._nullDataHandler$closure = P._nullDataHandler$closure = new P.Closure$1(P._nullDataHandler, "_nullDataHandler$closure");
 init.globalFunctions._nullErrorHandler$closure = P._nullErrorHandler$closure = new P.Closure$20(P._nullErrorHandler, "_nullErrorHandler$closure");
 init.globalFunctions._nullDoneHandler$closure = P._nullDoneHandler$closure = new H.Closure$0(P._nullDoneHandler, "_nullDoneHandler$closure");
 init.globalFunctions._defaultEquals$closure = P._defaultEquals$closure = new H.Closure$2(P._defaultEquals, "_defaultEquals$closure");
-init.globalFunctions._defaultHashCode$closure = P._defaultHashCode$closure = new H.Closure$1(P._defaultHashCode, "_defaultHashCode$closure");
+init.globalFunctions._defaultHashCode$closure = P._defaultHashCode$closure = new P.Closure$1(P._defaultHashCode, "_defaultHashCode$closure");
 init.globalFunctions.identical$closure = P.identical$closure = new H.Closure$2(P.identical, "identical$closure");
-init.globalFunctions.identityHashCode$closure = P.identityHashCode$closure = new H.Closure$1(P.identityHashCode, "identityHashCode$closure");
-init.globalFunctions.Element__determineMouseWheelEventType$closure = W.Element__determineMouseWheelEventType$closure = new H.Closure$1(W.Element__determineMouseWheelEventType, "Element__determineMouseWheelEventType$closure");
+init.globalFunctions.identityHashCode$closure = P.identityHashCode$closure = new P.Closure$1(P.identityHashCode, "identityHashCode$closure");
+init.globalFunctions.Element__determineMouseWheelEventType$closure = W.Element__determineMouseWheelEventType$closure = new P.Closure$1(W.Element__determineMouseWheelEventType, "Element__determineMouseWheelEventType$closure");
 init.globalFunctions.main$closure = U.main$closure = new H.Closure$0(U.main, "main$closure");
 // Runtime type support
 J.JSInt.$isint = true;
@@ -10094,12 +9021,13 @@ B.GameLoopTimer.$isObject = true;
 B.DigitalButton.$isObject = true;
 G.GameLoopTouch.$isObject = true;
 G.GameLoopTouchPosition.$isObject = true;
-Q.AudioClip.$isObject = true;
+W.HttpRequest.$isHttpRequest = true;
+W.HttpRequest.$isEventTarget = true;
+W.HttpRequest.$isObject = true;
 W.ProgressEvent.$isEvent = true;
 W.ProgressEvent.$isObject = true;
+P.AudioBuffer.$isAudioBuffer = true;
 P.AudioBuffer.$isObject = true;
-Q.AudioSound.$isObject = true;
-Q.AudioSource.$isObject = true;
 W.ImageElement.$isEventTarget = true;
 W.ImageElement.$isObject = true;
 U.GameObject.$isObject = true;
@@ -10181,17 +9109,6 @@ J.getInterceptor$n = function(receiver) {
     return J.UnknownJavaScriptObject.prototype;
   return receiver;
 };
-J.getInterceptor$ns = function(receiver) {
-  if (typeof receiver == "number")
-    return J.JSNumber.prototype;
-  if (typeof receiver == "string")
-    return J.JSString.prototype;
-  if (receiver == null)
-    return receiver;
-  if (!(receiver instanceof P.Object))
-    return J.UnknownJavaScriptObject.prototype;
-  return receiver;
-};
 J.getInterceptor$s = function(receiver) {
   if (typeof receiver == "string")
     return J.JSString.prototype;
@@ -10210,10 +9127,10 @@ J.getInterceptor$x = function(receiver) {
     return receiver;
   return J.getNativeInterceptor(receiver);
 };
+C.AudioBufferSourceNode_methods = P.AudioBufferSourceNode.prototype;
 C.C__DelayedDone = new P._DelayedDone();
 C.C__RootZone = new P._RootZone();
 C.Duration_0 = new P.Duration(0);
-C.EventStreamProvider_abort = new W.EventStreamProvider("abort");
 C.EventStreamProvider_click = new W.EventStreamProvider("click");
 C.EventStreamProvider_error = new W.EventStreamProvider("error");
 C.EventStreamProvider_keydown = new W.EventStreamProvider("keydown");
@@ -10232,7 +9149,6 @@ C.EventStreamProvider_webkitfullscreenerror = new W.EventStreamProvider("webkitf
 C.EventStreamProvider_webkitpointerlockchange = new W.EventStreamProvider("webkitpointerlockchange");
 C.HttpRequest_methods = W.HttpRequest.prototype;
 C.JSArray_methods = J.JSArray.prototype;
-C.JSDouble_methods = J.JSDouble.prototype;
 C.JSInt_methods = J.JSInt.prototype;
 C.JSNumber_methods = J.JSNumber.prototype;
 C.JSString_methods = J.JSString.prototype;
@@ -10384,22 +9300,17 @@ $.Zone__current = C.C__RootZone;
 $.Expando__keyCount = 0;
 $.CollisionSystem_instance = null;
 $.ImageLoader_bufferedImages = null;
+$.SoundManager_instance = null;
 $.Game_instance = null;
 $.Game_oxygen = 100;
 $.Game_lives = 3;
 $.Input_instance = null;
 $.LevelManager_enumLevelOne = 1;
 $.ObjectManager_instance = null;
-$.SoundManager_instance = null;
 $.context = null;
 $.canvas = null;
 $.Device__isOpera = null;
 $.Device__isWebKit = null;
-J.$add$ns = function(receiver, a0) {
-  if (typeof receiver == "number" && typeof a0 == "number")
-    return receiver + a0;
-  return J.getInterceptor$ns(receiver).$add(receiver, a0);
-};
 J.$eq = function(receiver, a0) {
   if (receiver == null)
     return a0 == null;
@@ -10412,11 +9323,6 @@ J.$ge$n = function(receiver, a0) {
     return receiver >= a0;
   return J.getInterceptor$n(receiver).$ge(receiver, a0);
 };
-J.$gt$n = function(receiver, a0) {
-  if (typeof receiver == "number" && typeof a0 == "number")
-    return receiver > a0;
-  return J.getInterceptor$n(receiver).$gt(receiver, a0);
-};
 J.$index$asx = function(receiver, a0) {
   if (receiver.constructor == Array || typeof receiver == "string" || H.isJsIndexable(receiver, receiver[init.dispatchPropertyName]))
     if (a0 >>> 0 === a0 && a0 < receiver.length)
@@ -10427,16 +9333,6 @@ J.$indexSet$ax = function(receiver, a0, a1) {
   if ((receiver.constructor == Array || H.isJsIndexable(receiver, receiver[init.dispatchPropertyName])) && !receiver.immutable$list && a0 >>> 0 === a0 && a0 < receiver.length)
     return receiver[a0] = a1;
   return J.getInterceptor$ax(receiver).$indexSet(receiver, a0, a1);
-};
-J.$lt$n = function(receiver, a0) {
-  if (typeof receiver == "number" && typeof a0 == "number")
-    return receiver < a0;
-  return J.getInterceptor$n(receiver).$lt(receiver, a0);
-};
-J.$mul$n = function(receiver, a0) {
-  if (typeof receiver == "number" && typeof a0 == "number")
-    return receiver * a0;
-  return J.getInterceptor$n(receiver).$mul(receiver, a0);
 };
 J.abs$0$n = function(receiver) {
   return J.getInterceptor$n(receiver).abs$0(receiver);
@@ -10449,9 +9345,6 @@ J.beginPath$0$x = function(receiver) {
 };
 J.clearRect$4$x = function(receiver, a0, a1, a2, a3) {
   return J.getInterceptor$x(receiver).clearRect$4(receiver, a0, a1, a2, a3);
-};
-J.createGain$0$x = function(receiver) {
-  return J.getInterceptor$x(receiver).createGain$0(receiver);
 };
 J.createPatternFromImage$2$x = function(receiver, a0, a1) {
   return J.getInterceptor$x(receiver).createPatternFromImage$2(receiver, a0, a1);
@@ -10477,9 +9370,6 @@ J.forEach$1$ax = function(receiver, a0) {
 J.get$changedTouches$x = function(receiver) {
   return J.getInterceptor$x(receiver).get$changedTouches(receiver);
 };
-J.get$duration$x = function(receiver) {
-  return J.getInterceptor$x(receiver).get$duration(receiver);
-};
 J.get$error$x = function(receiver) {
   return J.getInterceptor$x(receiver).get$error(receiver);
 };
@@ -10495,6 +9385,9 @@ J.get$iterator$ax = function(receiver) {
 J.get$length$asx = function(receiver) {
   return J.getInterceptor$asx(receiver).get$length(receiver);
 };
+J.get$response$x = function(receiver) {
+  return J.getInterceptor$x(receiver).get$response(receiver);
+};
 J.get$type$x = function(receiver) {
   return J.getInterceptor$x(receiver).get$type(receiver);
 };
@@ -10503,9 +9396,6 @@ J.getContext$1$x = function(receiver, a0) {
 };
 J.lineTo$2$x = function(receiver, a0, a1) {
   return J.getInterceptor$x(receiver).lineTo$2(receiver, a0, a1);
-};
-J.load$0$x = function(receiver) {
-  return J.getInterceptor$x(receiver).load$0(receiver);
 };
 J.moveTo$2$x = function(receiver, a0, a1) {
   return J.getInterceptor$x(receiver).moveTo$2(receiver, a0, a1);
@@ -10543,26 +9433,11 @@ J.set$src$x = function(receiver, value) {
 J.set$width$x = function(receiver, value) {
   return J.getInterceptor$x(receiver).set$width(receiver, value);
 };
-J.start$1$x = function(receiver, a0) {
-  return J.getInterceptor$x(receiver).start$1(receiver, a0);
-};
-J.start$3$x = function(receiver, a0, a1, a2) {
-  return J.getInterceptor$x(receiver).start$3(receiver, a0, a1, a2);
-};
-J.stop$1$x = function(receiver, a0) {
-  return J.getInterceptor$x(receiver).stop$1(receiver, a0);
-};
 J.stroke$0$x = function(receiver) {
   return J.getInterceptor$x(receiver).stroke$0(receiver);
 };
-J.toInt$0$n = function(receiver) {
-  return J.getInterceptor$n(receiver).toInt$0(receiver);
-};
 J.toString$0 = function(receiver) {
   return J.getInterceptor(receiver).toString$0(receiver);
-};
-J.trim$0$s = function(receiver) {
-  return J.getInterceptor$s(receiver).trim$0(receiver);
 };
 Isolate.$lazy($, "globalThis", "globalThis", "get$globalThis", function() {
   return function() { return this; }();

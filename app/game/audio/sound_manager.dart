@@ -9,6 +9,8 @@ class SoundManager {
   //AudioManager audioManager = new AudioManager('content/Sound Files');
  // AudioSource sfxSource;
   
+  AudioContext ac = new AudioContext();
+  
   static SoundManager instance;
   factory SoundManager() {
     if (instance == null) {
@@ -21,12 +23,10 @@ class SoundManager {
   
   bool _muted = false;
   
- // AudioClip _jumpClip;
- // AudioClip _oxygenClip;
- // AudioClip _shipItemClip;
- // AudioClip _injureClip;
-  
- // AudioClip _currentMusic;
+  AudioBuffer _jumpClip;
+  AudioBuffer _oxygenClip;
+  AudioBuffer _shipItemClip;
+  AudioBuffer _injureClip;
  
   static final int enumSoundJump = 1;
   static final int enumSoundOxygen = 2;
@@ -34,20 +34,44 @@ class SoundManager {
   static final int enumSoundInjure = 4;
   
   init(){
-   // sfxSource = this.audioManager.makeSource('sfxSource');
-   // 
-   // _jumpClip = audioManager.makeClip('jump', 'SlowJump.wav');
-  //  _jumpClip.load();
-    
-  //  _oxygenClip = audioManager.makeClip('oxygen', 'Oxygen.wav');
-  //  _oxygenClip.load();
-    
-   // _shipItemClip = audioManager.makeClip('shipItem', 'ShipItem.wav');
-   // _shipItemClip.load();
-    
-   //// _injureClip = audioManager.makeClip('injure', 'Injured.wav');
-    //_injureClip.load();
-    
+    loadSounds();
+   // loadSound('content/Sound Files/SlowJump.wav', jumpClip);
+   // loadSound('content/Sound Files/Oxygen.wav', _oxygenClip);
+   // loadSound('content/Sound Files/ShipItem.wav', _shipItemClip);
+   // loadSound('content/Sound Files/Injured.wav', _injureClip);
+  }
+  
+  void loadSounds() {
+
+    HttpRequest.request('content/Sound Files/SlowJump.wav', responseType: 'arraybuffer')
+        .then((HttpRequest request) {
+          ac.decodeAudioData(request.response)
+              .then((AudioBuffer buffer) { 
+               // clip = buffer ;  Making this a parameter does not work. Can't tell why
+                _jumpClip = buffer;   // it works when non generic.
+              });
+        });
+    HttpRequest.request('content/Sound Files/Oxygen.wav', responseType: 'arraybuffer')
+      .then((HttpRequest request) {
+        ac.decodeAudioData(request.response)
+          .then((AudioBuffer buffer) { 
+            _oxygenClip = buffer;
+          });
+      });
+    HttpRequest.request('content/Sound Files/ShipItem.wav', responseType: 'arraybuffer')
+      .then((HttpRequest request) {
+        ac.decodeAudioData(request.response)
+          .then((AudioBuffer buffer) { 
+            _shipItemClip = buffer;
+          });
+      });
+    HttpRequest.request('content/Sound Files/Injured.wav', responseType: 'arraybuffer')
+      .then((HttpRequest request) {
+        ac.decodeAudioData(request.response)
+          .then((AudioBuffer buffer) { 
+            _injureClip = buffer;
+          });
+      });
   }
   
   void setMusic( int newMusic) {
@@ -114,19 +138,26 @@ class SoundManager {
     if (_muted){
       return;
     } else {
+      AudioBufferSourceNode source = ac.createBufferSource();
+      source.connectNode(ac.destination);
+      
       switch(enumSound) {  
         // enums aren't implemented yet, and switch only takes constants at the moment.
         case 1: 
-        //  audioManager.playClipFromSource('sfxSource', 'jump');
+          source.buffer = _jumpClip;
+          source.start(0);
           break;  
         case 2: 
-        //  audioManager.playClipFromSource('sfxSource', 'oxygen');
+          source.buffer = _oxygenClip;
+          source.start(0);
           break;
         case 3: 
-        //  audioManager.playClipFromSource('sfxSource', 'shipItem');
+          source.buffer = _shipItemClip;
+          source.start(0);
           break;
         case 4: 
-        //  audioManager.playClipFromSource('sfxSource', 'injure');
+          source.buffer = _injureClip;
+          source.start(0);
           break;
       }
     }

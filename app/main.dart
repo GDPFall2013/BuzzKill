@@ -10,11 +10,12 @@ import 'package:game_loop/game_loop_html.dart';
 
 import 'game/camera.dart';
 import 'dart:core';
+import 'dart:web_audio';
 
 part 'game/game.dart';
 part 'game/input_manager.dart';
 part 'game/object_manager.dart';
-part 'game/sound_manager.dart';
+part 'game/audio/sound_manager.dart';
 
 part 'game/objects/game_object.dart';
 part 'game/objects/block.dart';
