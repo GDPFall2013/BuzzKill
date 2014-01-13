@@ -6,7 +6,7 @@ import 'dart:collection';
 
 //import 'packages/js/js.dart' as js;
 import 'package:game_loop/game_loop_html.dart';
-import '../packages/simple_audio/simple_audio.dart';
+
 
 import 'game/camera.dart';
 import 'dart:core';
