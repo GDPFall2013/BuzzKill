@@ -5675,6 +5675,9 @@ CanvasRenderingContext2D: {"": "CanvasRenderingContext;fillStyle},font}",
   clearRect$4: function(receiver, x, y, width, height) {
     return receiver.clearRect(x, y, width, height);
   },
+  createPatternFromImage$2: function(receiver, image, repetitionType) {
+    return receiver.createPattern(image, repetitionType);
+  },
   fill$1: function(receiver, winding) {
     return receiver.fill(winding);
   },
@@ -5689,6 +5692,9 @@ CanvasRenderingContext2D: {"": "CanvasRenderingContext;fillStyle},font}",
   },
   moveTo$2: function(receiver, x, y) {
     return receiver.moveTo(x, y);
+  },
+  rect$4: function(receiver, x, y, width, height) {
+    return receiver.rect(x, y, width, height);
   },
   restore$0: function(receiver) {
     return receiver.restore();
@@ -8481,7 +8487,7 @@ Alien: {"": "Enemy;img,input,JUMPING,velocity_y,accel,sprite,repeat,imgOffsetX,i
 
 Block: {"": "GameObject;boulder,img,x,y,height,width,dead",
   draw$0: function() {
-    var t1, t2, t3, t4, t5, t6, t7, t8, t9;
+    var t1, t2, t3, t4, t5, t6, t7, t8, t9, pattern;
     t1 = this.height;
     t2 = this.x;
     if (t1 <= 100) {
@@ -8499,13 +8505,20 @@ Block: {"": "GameObject;boulder,img,x,y,height,width,dead",
       t9 = t5.frameh;
       J.drawImageScaledFromSource$9$x($.context, t5.img, t5.spritex, t5.spritey, t8, t9, t2 - t1 - t6 / 2, t3 - t4 - t7 / 2, t8, t9);
     } else {
-      $.get$camera().x;
+      t1 = $.get$camera().x;
       if (typeof t2 !== "number")
         throw t2.$sub();
-      t1 = this.y;
-      $.get$camera().y;
-      if (typeof t1 !== "number")
-        throw t1.$sub();
+      t3 = this.y;
+      t4 = $.get$camera().y;
+      if (typeof t3 !== "number")
+        throw t3.$sub();
+      pattern = J.createPatternFromImage$2$x($.context, this.img, "repeat");
+      t5 = $.context;
+      t6 = this.width;
+      t7 = this.height;
+      J.rect$4$x(t5, t2 - t1 - t6 / 2, t3 - t4 - t7 / 2, t6, t7);
+      J.set$fillStyle$x($.context, pattern);
+      J.fill$0$x($.context);
     }
   }
 },
@@ -10440,6 +10453,9 @@ J.clearRect$4$x = function(receiver, a0, a1, a2, a3) {
 J.createGain$0$x = function(receiver) {
   return J.getInterceptor$x(receiver).createGain$0(receiver);
 };
+J.createPatternFromImage$2$x = function(receiver, a0, a1) {
+  return J.getInterceptor$x(receiver).createPatternFromImage$2(receiver, a0, a1);
+};
 J.decodeAudioData$1$x = function(receiver, a0) {
   return J.getInterceptor$x(receiver).decodeAudioData$1(receiver, a0);
 };
@@ -10496,6 +10512,9 @@ J.moveTo$2$x = function(receiver, a0, a1) {
 };
 J.preventDefault$0$x = function(receiver) {
   return J.getInterceptor$x(receiver).preventDefault$0(receiver);
+};
+J.rect$4$x = function(receiver, a0, a1, a2, a3) {
+  return J.getInterceptor$x(receiver).rect$4(receiver, a0, a1, a2, a3);
 };
 J.removeEventListener$3$x = function(receiver, a0, a1, a2) {
   return J.getInterceptor$x(receiver).removeEventListener$3(receiver, a0, a1, a2);
