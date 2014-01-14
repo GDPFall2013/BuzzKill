@@ -8,18 +8,15 @@
   </head>
   <body>
     <canvas id='canvas' tabindex ='0'></canvas>
-    
-    <!-- Currently, when deploying your Chrome app, you'll need to compile -->
-    <!-- the Dart code to Javascript, remove the 'type' attribute below, and -->
-    <!-- change the 'src' reference to the .dart.js file. -->
-    <!-- Flip to the other for Dartium debuggin -->
         
-     <script src="main.dart" type="application/dart"></script> 
-    <!-- <script src = "main.dart.js"></script>  --> 
-   <!-- <script src = "main.dart.precompiled.js"></script> -->
+     <script src="main.dart" type="application/dart"></script>   
+     <script src = "main.dart.precompiled.js"></script>  
+     <!-- <script src = "main.dart.js"></script>  --> 
     
-    <!-- <script src="packages/browser/dart.js"></script> -->
-    <script src = "packages/browser/interop.js"></script>
+    <!-- This file automatically determines which should be run, the dart or js script -->
+     <script src="packages/browser/dart.js"></script>  
+     
+   <!--  <script src = "packages/browser/interop.js"></script>  Not needed.  This would allow us to access a javascript library --> 
    <!--  <script src="packages/js/dart_interop.js"></script> -->
   </body>
 </html>
