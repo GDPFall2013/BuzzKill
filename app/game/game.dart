@@ -78,15 +78,8 @@ void update(double dt) {
  */
 void draw() {
   if (state == stateEnumPlay) {
-  
-  // Does a gray background so we can see the canvas size
- // context.fillStyle = 'gray';
-//  context.fillRect(0, 0, 640, 480);
-    context.context.clearRect(
-        0, 
-        0,
-        640, 
-        480);
+    context.context.clearRect(0, 0,640, 480);
+    
   for (GameObject go in ObjectManager.instance.goList) {
     
     double drawSpace = viewportWidth/4;
@@ -123,7 +116,7 @@ void draw() {
  * Draws textual information around the edges of the screen that does not move with
  * the camera.
  */
-drawHUD() {  //TODO: Change this information into Game Variables
+drawHUD() {
   context.context.save();
   context.context.fillStyle = 'white';
   context.context.font = "normal 14pt calibri";

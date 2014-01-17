@@ -55,7 +55,7 @@ GameLoopHtml gameLoop = new GameLoopHtml(canvas);
  *  Does initial setup, creates the game, and starts the Game Loop
  */
 void main() {
-  context = new AdjustedContext(viewportWidth, viewportHeight);
+  context = new AdjustedContext(viewportWidth, viewportHeight, camera.screenRatio);
   buildCanvas();
 
   Game game = new Game();

@@ -22,10 +22,9 @@ class AdjustedContext {
   }
 
   
-  AdjustedContext(int viewportWidth, int viewportHeight) {
-    //TODO get these from the right spot
-    yAdjust = viewportHeight * (1 - .5);//Camera.instance.screenRatio);
-    xAdjust = viewportWidth * (1 - .75);
+  AdjustedContext(int viewportWidth, int viewportHeight, double screenRatio) {
+    yAdjust = viewportHeight * (1 - screenRatio);
+    xAdjust = viewportWidth * (1 - screenRatio * 1.8);// Is 1.8 a magic number?
   }
   
   void rect(num x, num y, num width, num height) {
