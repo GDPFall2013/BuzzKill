@@ -8,7 +8,7 @@ import 'dart:collection';
 import 'package:game_loop/game_loop_html.dart';
 
 
-import 'game/camera.dart';
+import 'game/camera/camera.dart';
 import 'dart:core';
 import 'dart:web_audio';
 

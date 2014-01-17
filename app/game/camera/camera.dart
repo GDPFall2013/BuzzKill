@@ -21,4 +21,6 @@ class Camera {
   double x = 0.0;
   double y = 0.0;
   
+  double screenRatio = 1.0;
+  
 }
