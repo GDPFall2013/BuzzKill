@@ -41,8 +41,8 @@ CanvasRenderingContext2D context;
 var canvas;
 // Size of the Canvas is only set once, but size should be 
 // Readable from anywhere
-final double viewportWidth = 640.0, 
-      viewportHeight = 480.0;
+final int viewportWidth = 640, 
+      viewportHeight = 480;
 
 // The camera is a singleton and should be accessible anywhere
 Camera camera = new Camera();
@@ -73,15 +73,13 @@ void main() {
   
   //var timers = gameLoop.addTimer((timer) => print('timer fired.'), 0.5);
 }
-
+//document.body.nodes.add(canvas);
 /**
  * Does some standard setup for the Canvas element.
  */
 void buildCanvas(){
   canvas = query('canvas');
-  canvas.width = viewportWidth.toInt();
-  
-  canvas.height = viewportHeight.toInt();
-  document.body.nodes.add(canvas);
+  canvas.width = viewportWidth;
+  canvas.height = viewportHeight;
   context = canvas.getContext("2d");
 }

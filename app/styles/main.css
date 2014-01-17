@@ -1,8 +1,25 @@
 body {
-  margin: 0px;
+  margin: 0px; /* required */
 }
 
-canvas
-{
-        background: #0d2648 url("../content/background.jpg") repeat-x bottom left;
+/* this is the div that has the canvas in it */
+#container {
+    width: 100%;
+    padding-top: 75%; /* defines aspect ratio */
+    background-color: black;
+}
+
+#container #canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+#canvas {
+  height: 100%;
+  margin: auto;
+  background: #0d2648 url("../content/background.jpg") repeat-x bottom left; 
+  background-size:100%;
 }

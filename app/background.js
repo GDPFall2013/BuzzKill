@@ -18,7 +18,7 @@ chrome.app.runtime.onLaunched.addListener(function() {
       left: Math.round((screenWidth-width)/2),
       top: Math.round((screenHeight-height)/2)
     }, 
-    frame: 'none'//,  // Change this to 'chrome' if you want buttons on the top (minimize, maximize, X)
-  	//state: 'fullscreen'
+    frame: 'none',  // Change this to 'chrome' if you want buttons on the top (minimize, maximize, X)
+  	state: 'fullscreen'
   });
 });

@@ -1159,21 +1159,22 @@ _Copier: {"": "_MessageTraverser;",
     return x;
   },
   visitList$1: function(list) {
-    var t1, copy, len, t2, i;
+    var t1, copy, len, i;
     t1 = this._visited;
     copy = t1.$index(t1, list);
     if (copy != null)
       return copy;
-    t1 = J.getInterceptor$asx(list);
-    len = t1.get$length(list);
+    len = J.get$length$asx(list);
     copy = P.List_List(len, null);
-    t2 = this._visited;
-    t2.$indexSet(t2, list, copy);
+    t1 = this._visited;
+    t1.$indexSet(t1, list, copy);
     for (i = 0; i < len; ++i) {
-      t2 = this._dispatch$1(t1.$index(list, i));
+      if (i >= list.length)
+        throw H.ioore(list, i);
+      t1 = this._dispatch$1(list[i]);
       if (i >= len)
         throw H.ioore(copy, i);
-      copy[i] = t2;
+      copy[i] = t1;
     }
     return copy;
   },
@@ -1233,15 +1234,16 @@ _Serializer: {"": "_MessageTraverser;",
     return ["map", id, keys, this._serializeList$1(P.List_List$from(t1, true, H.getRuntimeTypeArgument(t1, "IterableBase", 0)))];
   },
   _serializeList$1: function(list) {
-    var t1, len, result, i, t2;
-    t1 = J.getInterceptor$asx(list);
-    len = t1.get$length(list);
+    var len, result, i, t1;
+    len = J.get$length$asx(list);
     result = P.List_List(len, null);
     for (i = 0; i < len; ++i) {
-      t2 = this._dispatch$1(t1.$index(list, i));
+      if (i >= list.length)
+        throw H.ioore(list, i);
+      t1 = this._dispatch$1(list[i]);
       if (i >= len)
         throw H.ioore(result, i);
-      result[i] = t2;
+      result[i] = t1;
     }
     return result;
   }
@@ -4654,8 +4656,6 @@ IterableBase: {"": "Object;",
   }
 },
 
-ListBase: {"": "Object+ListMixin;", $isList: true, $asList: null, $isEfficientLength: true},
-
 ListMixin: {"": "Object;",
   get$iterator: function(receiver) {
     return new H.ListIterator(receiver, this.get$length(receiver), 0, null);
@@ -4667,8 +4667,10 @@ ListMixin: {"": "Object;",
     var $length, i;
     $length = this.get$length(receiver);
     for (i = 0; i < $length; ++i) {
-      action.call$1(this.$index(receiver, i));
-      if ($length !== this.get$length(receiver))
+      if (i >= receiver.length)
+        throw H.ioore(receiver, i);
+      action.call$1(receiver[i]);
+      if ($length !== receiver.length)
         throw H.wrapException(P.ConcurrentModificationError$(receiver));
     }
   },
@@ -5497,8 +5499,6 @@ CanvasRenderingContext2D: {"": "CanvasRenderingContext;fillStyle},font}",
   "%": "CanvasRenderingContext2D"
 },
 
-CharacterData: {"": "Node;length=", "%": "CDATASection|CharacterData|Comment|ProcessingInstruction|Text"},
-
 Document: {"": "Node;", $isDocument: true, "%": "Document|HTMLDocument|SVGDocument"},
 
 DomException: {"": "Interceptor;",
@@ -5596,34 +5596,7 @@ Node: {"": "EventTarget;",
     var t1 = receiver.nodeValue;
     return t1 == null ? J.Interceptor.prototype.toString$0.call(this, receiver) : t1;
   },
-  "%": "Attr|DocumentFragment|DocumentType|Entity|Notation|ShadowRoot;Node"
-},
-
-NodeList: {"": "Interceptor_ListMixin_ImmutableListMixin;",
-  get$length: function(receiver) {
-    return receiver.length;
-  },
-  $index: function(receiver, index) {
-    var t1 = receiver.length;
-    if (index >>> 0 !== index || index >= t1)
-      throw H.wrapException(P.RangeError$range(index, 0, t1));
-    return receiver[index];
-  },
-  $indexSet: function(receiver, index, value) {
-    throw H.wrapException(P.UnsupportedError$("Cannot assign element of immutable List."));
-  },
-  elementAt$1: function(receiver, index) {
-    if (index < 0 || index >= receiver.length)
-      throw H.ioore(receiver, index);
-    return receiver[index];
-  },
-  $asList: function() {
-    return [W.Node];
-  },
-  $isList: true,
-  $isEfficientLength: true,
-  $isJavaScriptIndexingBehavior: true,
-  "%": "NodeList|RadioNodeList"
+  "%": ";Node"
 },
 
 OListElement: {"": "HtmlElement;type=", "%": "HTMLOListElement"},
@@ -5650,7 +5623,7 @@ Touch: {"": "Interceptor;identifier=", "%": "Touch"},
 
 TouchEvent: {"": "UIEvent;changedTouches=", "%": "TouchEvent"},
 
-TouchList: {"": "Interceptor_ListMixin_ImmutableListMixin0;",
+TouchList: {"": "Interceptor_ListMixin_ImmutableListMixin;",
   get$length: function(receiver) {
     return receiver.length;
   },
@@ -5832,39 +5805,9 @@ HttpRequest_request_closure: {"": "Closure;completer_1,xhr_2",
   $is_args1: true
 },
 
-_ChildNodeListLazy: {"": "ListBase;_this",
-  $indexSet: function(_, index, value) {
-    var t1, t2;
-    t1 = this._this;
-    t2 = t1.childNodes;
-    if (index >>> 0 !== index || index >= t2.length)
-      throw H.ioore(t2, index);
-    t1.replaceChild(value, t2[index]);
-  },
-  get$iterator: function(_) {
-    return C.NodeList_methods.get$iterator(this._this.childNodes);
-  },
-  get$length: function(_) {
-    return this._this.childNodes.length;
-  },
-  $index: function(_, index) {
-    var t1 = this._this.childNodes;
-    if (index >>> 0 !== index || index >= t1.length)
-      throw H.ioore(t1, index);
-    return t1[index];
-  },
-  $asList: function() {
-    return [W.Node];
-  }
-},
-
 Interceptor_ListMixin: {"": "Interceptor+ListMixin;", $isList: true, $asList: null, $isEfficientLength: true},
 
 Interceptor_ListMixin_ImmutableListMixin: {"": "Interceptor_ListMixin+ImmutableListMixin;", $asList: null, $isList: true, $isEfficientLength: true},
-
-Interceptor_ListMixin0: {"": "Interceptor+ListMixin;", $isList: true, $asList: null, $isEfficientLength: true},
-
-Interceptor_ListMixin_ImmutableListMixin0: {"": "Interceptor_ListMixin0+ImmutableListMixin;", $asList: null, $isList: true, $isEfficientLength: true},
 
 EventStreamProvider: {"": "Object;_eventType",
   forTarget$2$useCapture: function(e, useCapture) {
@@ -7791,11 +7734,8 @@ main: function() {
 
 buildCanvas: function() {
   $.canvas = document.querySelector("canvas");
-  J.set$width$x($.canvas, C.JSInt_methods.toInt$0(640));
-  J.set$height$x($.canvas, C.JSInt_methods.toInt$0(480));
-  var t1 = document.body;
-  t1.toString;
-  new W._ChildNodeListLazy(t1)._this.appendChild($.canvas);
+  J.set$width$x($.canvas, 640);
+  J.set$height$x($.canvas, 480);
   $.context = J.getContext$1$x($.canvas, "2d");
 },
 
@@ -8995,8 +8935,6 @@ W.Touch.$isTouch = true;
 W.Touch.$isObject = true;
 J.JSDouble.$isnum = true;
 J.JSDouble.$isObject = true;
-W.Node.$isEventTarget = true;
-W.Node.$isObject = true;
 J.JSString.$isString = true;
 J.JSString.$isObject = true;
 J.JSNumber.$isnum = true;
@@ -9276,7 +9214,6 @@ Isolate.makeConstantList = function(list) {
   return list;
 };
 C.List_empty = Isolate.makeConstantList([]);
-C.NodeList_methods = W.NodeList.prototype;
 C.Type_oqh = H.createRuntimeType('Uint64List');
 C.Type_qxd = H.createRuntimeType('Int64List');
 C.UnknownJavaScriptObject_methods = J.UnknownJavaScriptObject.prototype;
