@@ -1,5 +1,8 @@
 library camera;
 
+import 'dart:html';
+
+part 'adjusted_context.dart';
 /**
  *  The Camera class is a singleton that represents what piece of the world is being
  *  shown at a given time.  This is used to deterime position on the screen, and also 
@@ -22,5 +25,4 @@ class Camera {
   double y = 0.0;
   
   double screenRatio = 1.0;
-  
 }

@@ -37,7 +37,8 @@ part 'game/Collision_System/CollisionSystem.dart';
 
 // Global Variables  ******
 // Canvas and context are available anywhere for drawing purposes
-CanvasRenderingContext2D context;
+//CanvasRenderingContext2D context;
+AdjustedContext context;
 var canvas;
 // Size of the Canvas is only set once, but size should be 
 // Readable from anywhere
@@ -54,6 +55,7 @@ GameLoopHtml gameLoop = new GameLoopHtml(canvas);
  *  Does initial setup, creates the game, and starts the Game Loop
  */
 void main() {
+  context = new AdjustedContext();
   buildCanvas();
 
   Game game = new Game();
@@ -81,5 +83,5 @@ void buildCanvas(){
   canvas = query('canvas');
   canvas.width = viewportWidth;
   canvas.height = viewportHeight;
-  context = canvas.getContext("2d");
+  context.context = canvas.getContext("2d");
 }
