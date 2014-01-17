@@ -47,9 +47,9 @@ class Block extends GameObject {
       double cx = x - camera.x;
       double cy = y - camera.y;
       
-      CanvasPattern pattern = context.createPatternFromImage(img, 'repeat');
+      CanvasPattern pattern = context.context.createPatternFromImage(img, 'repeat');
       context.rect(cx-this.width/2,cy-this.height/2, width, height);
-      context.fillStyle = pattern;
+      context.context.fillStyle = pattern;
       context.fill();
     }
   }
