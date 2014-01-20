@@ -2,7 +2,8 @@ library gdp_test;
 
 import 'package:unittest/unittest.dart';
 import 'package:unittest/html_config.dart';
-//import 'package:../app/main.dart';
+import '../app/main.dart';
+//import 'package:unittest/html_enhanced_config.dart';
 
 
 part 'animations/sprite_sheet_test.dart';
@@ -30,5 +31,5 @@ part 'object_manager_test.dart';
 
 main() {
   useHtmlConfiguration();
-  test("bacon", () {expect(2, equals(1));});
+  test("Testing if value is 2", () {expect(2, equals(1));});
 }
