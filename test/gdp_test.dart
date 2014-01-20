@@ -32,4 +32,12 @@ part 'object_manager_test.dart';
 main() {
   useHtmlConfiguration();
   test("Testing if value is 2", () {expect(2, equals(1));});
+  
+  group('Object Test Group', () {
+    gameObjectTests();
+    // run another group
+    // etc
+  });
+  
+  
 }
