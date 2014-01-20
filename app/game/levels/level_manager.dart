@@ -13,9 +13,12 @@ class LevelManager {
       case 0:  
         setupLevelTest();
         break;
-      case 1:  
-        setupLevelOne();
-        break;  
+      //case 1:  
+        //setupLevelOne();
+        //break;  
+      case 1:
+        setupLevelTwo();
+        break;
     }
   }
 }

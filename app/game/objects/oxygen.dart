@@ -8,8 +8,6 @@ part of gdp;
 class Oxygen extends Item {
   
   SpriteSheet sprite = new SpriteSheet("./content/gameitems.png",0,0,50,50);
-  SpriteSheet boulder = new SpriteSheet("./content/gameitems.png",50,0,120,100);
-  bool collected = false;
   
   update(double dt){
     // inanimate object, does nothing
@@ -17,7 +15,7 @@ class Oxygen extends Item {
   
   initialize(double x, double y) {
     super.initialize(x, y);
-    this.width = 30.0;
+    this.width = 50.0;
     this.height = 10.0;
   }
   
@@ -32,20 +30,17 @@ class Oxygen extends Item {
     context.fillText("Oxygen", x - camera.x - width/2, y - camera.y, width);
     context.restore();
     */
-    if(collected){
-      boulder.drawOnPosition(x-camera.x, y-camera.y, 120.0 , 100.0);  
-    }
-    else{
-    sprite.drawOnPosition(x-camera.x, y-camera.y, width , height);
-    }
+    
+    double cx = x - camera.x;
+    double cy = y - camera.y;
+    sprite.drawOnPosition(cx-this.width/2, cy-this.height/2, width , height);
+    
   }
   
   /*
    * This method to be called when Buzz touches the object.  
    */
   collect() {
-    collected = true;
-    boulder.drawOnPosition(x-camera.x, y-camera.y, 120.0 , 100.0);
     Game.oxygen += 2.0;  //TODO this should be changed to a method call
     SoundManager.instance.playSound(SoundManager.enumSoundOxygen);
    this.dead = true;

@@ -26,12 +26,14 @@ part 'game/objects/ship_item.dart';
 part 'game/objects/spike.dart';
 part 'game/objects/item.dart';
 part 'game/objects/enemy.dart';
+part 'game/objects/gorilla.dart';
 
 part 'game/animations/sprite_sheet.dart';
 
 part 'game/levels/level_manager.dart';
 part 'game/levels/level_one.dart';
 part 'game/levels/level_test.dart';
+part 'game/levels/level_two.dart';
 
 part 'game/Collision_System/CollisionSystem.dart';
 
