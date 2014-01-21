@@ -41,6 +41,8 @@ part 'game/Collision_System/collision_system.dart';
 // Canvas and context are available anywhere for drawing purposes
 //CanvasRenderingContext2D context;
 AdjustedContext context;
+CanvasRenderingContext2D normContext;
+
 var canvas;
 // Size of the Canvas is only set once, but size should be 
 // Readable from anywhere
@@ -86,4 +88,5 @@ void buildCanvas(){
   canvas.width = viewportWidth;
   canvas.height = viewportHeight;
   context.context = canvas.getContext("2d");
+  normContext = canvas.getContext("2d");
 }

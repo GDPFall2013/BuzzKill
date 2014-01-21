@@ -1,24 +1,27 @@
 part of camera;
 
-
+/*
+ * This class is designed to be used instead of a 
+ * CanvasRenderingContext2D object for when you want the 
+ * operations to be affected by the camera
+ */
 class AdjustedContext {
   CanvasRenderingContext2D context;
 
   double yAdjust;
   double xAdjust;
-  String get fillStyle => context.fillStyle;
+  String get fillStyle => throw new UnimplementedError();
   void set fillStyle(var newFillStyle) {
-    context.fillStyle = newFillStyle;  //TODO this is not working with block
+    throw new UnimplementedError("Use the normal context");
   }
-
   
-  String get font => context.font;
+  String get font => throw new UnimplementedError("Use the normal context");
   void set font(String newFont) {
-    context.font = newFont;
+    throw new UnimplementedError("Use the normal context");
   }
-  String get strokeStyle => context.strokeStyle;
+  String get strokeStyle => throw new UnimplementedError("Use the normal context");
   void set strokeStyle(String newStrokeStyle) {
-    context.strokeStyle = newStrokeStyle;
+    throw new UnimplementedError("Use the normal context");
   }
 
   
@@ -97,9 +100,9 @@ class AdjustedContext {
     context.createPatternFromImage(image, repetitionType);
   }
   
- // void drawImageScaled(CanvasImageSource source, num destX, num destY, num destWidth, num destHeight){
- //   context.drawImageScaled(source, destX, destY, destWidth, destHeight);
- // }
+  void drawImageScaled(CanvasImageSource source, num destX, num destY, num destWidth, num destHeight){
+   throw new UnimplementedError();
+  }
   
   void drawImageScaledFromSource(CanvasImageSource source, num sourceX, num sourceY, num sourceWidth, num sourceHeight, num destX, num destY, num destWidth, num destHeight){
     context.drawImageScaledFromSource(source, sourceX, sourceY, sourceWidth, sourceHeight, 
