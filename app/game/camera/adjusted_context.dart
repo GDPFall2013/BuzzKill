@@ -10,19 +10,47 @@ class AdjustedContext {
 
   double yAdjust;
   double xAdjust;
-  String get fillStyle => throw new UnimplementedError();
-  void set fillStyle(var newFillStyle) {
-    throw new UnimplementedError("Use the normal context");
-  }
   
-  String get font => throw new UnimplementedError("Use the normal context");
-  void set font(String newFont) {
-    throw new UnimplementedError("Use the normal context");
-  }
-  String get strokeStyle => throw new UnimplementedError("Use the normal context");
-  void set strokeStyle(String newStrokeStyle) {
-    throw new UnimplementedError("Use the normal context");
-  }
+//  String get backingStorePixelRatio => throw new UnimplementedError();
+//  void set backingStorePixelRatio(var ratio) {
+//    throw new UnimplementedError("Use the normal context");
+//  }
+//  
+//  get canvas =>  throw new UnimplementedError();
+//  void set canvas(var canvas) {
+//    throw new UnimplementedError("Use the normal context");
+//  }
+//  
+//  Path get currentPath =>  throw new UnimplementedError();
+//  void set currentPath(var path) {
+//    throw new UnimplementedError("Use the normal context");
+//  }
+//  
+//  get fillStyle => throw new UnimplementedError();
+//  void set fillStyle(var newFillStyle) {
+//    throw new UnimplementedError("Use the normal context");
+//  }
+//  
+//  String get font => throw new UnimplementedError("Use the normal context");
+//  void set font(String newFont) {
+//    throw new UnimplementedError("Use the normal context");
+//  }
+//  
+//  num get globalAlpha => throw new UnimplementedError("Use the normal context");
+//  void set globalAlpha(num newAlpha) {
+//    throw new UnimplementedError("Use the normal context");
+//  }
+//  
+//  String get globalCompositeOperation => throw new UnimplementedError("Use the normal context");
+//  void set globalCompositeOperation(string newOperation) {
+//    throw new UnimplementedError("Use the normal context");
+//  }
+//  
+//  
+//  String get strokeStyle => throw new UnimplementedError("Use the normal context");
+//  void set strokeStyle(String newStrokeStyle) {
+//    throw new UnimplementedError("Use the normal context");
+//  }
 
   
   AdjustedContext(int viewportWidth, int viewportHeight, double screenRatio) {
