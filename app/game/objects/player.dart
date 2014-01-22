@@ -42,7 +42,6 @@ class Player extends GameObject{
     width = 46.0;
     height = 78.0;
     img = new Element.tag("img");
-    img.src = "./content/buzz.png";
 
     input = new Input();
     sprite = new SpriteSheet("./content/buzzspritesheet.png",0,0,75,100);
