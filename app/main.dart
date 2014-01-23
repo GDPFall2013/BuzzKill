@@ -27,6 +27,7 @@ part 'game/objects/spike.dart';
 part 'game/objects/item.dart';
 part 'game/objects/enemy.dart';
 part 'game/objects/gorilla.dart';
+part 'game/objects/droid.dart';
 
 part 'game/animations/sprite_sheet.dart';
 

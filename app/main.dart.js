@@ -8017,12 +8017,12 @@ var $$ = {};
           t1.height = 10;
           t2.push(t1);
           t5.push(t1);
-          t1 = new U.Gorilla(W.ImageElement_ImageElement(null, null, null), null, false, 0, 10, null, 0, 8, -7, 0, null, null, false, null, null, 0, 0, false);
+          t1 = new U.Droid(W.ImageElement_ImageElement(null, null, null), null, false, 0, 10, null, 0, 8, -7, 0, null, null, false, null, null, 0, 0, false);
           U.GameObject.prototype.initialize$2.call(t1, 1700, 295);
-          t1.width = 126;
-          t1.height = 173;
-          t6 = new U.SpriteSheet(0, 273, 126, 173, "./content/enemies_spritesheet copy.png", null);
-          t6.img = U.ImageLoader_getImage("./content/enemies_spritesheet copy.png");
+          t1.width = 115;
+          t1.height = 160;
+          t6 = new U.SpriteSheet(0, 430, 115, 160, "./content/enemies_spritesheet.png", null);
+          t6.img = U.ImageLoader_getImage("./content/enemies_spritesheet.png");
           t1.sprite = t6;
           t1.repeat = 0;
           t1.initialPos = 1700;
@@ -8646,25 +8646,7 @@ var $$ = {};
       }
     }
   },
-  Enemy: {
-    "": "GameObject;",
-    injure$0: function() {
-      return;
-    }
-  },
-  GameObject: {
-    "": "Object;x>,y>,height>,width>",
-    draw$0: function() {
-      return;
-    },
-    update$1: function(dt) {
-    },
-    initialize$2: function(x, y) {
-      this.x = x;
-      this.y = y;
-    }
-  },
-  Gorilla: {
+  Droid: {
     "": "Enemy;img,input,JUMPING,velocity_y,accel,sprite,repeat,imgOffsetX,imgOffsetY,lastDraw,initialPos,endPos,goingBack,x,y,height,width,dead",
     update$1: function(dt) {
       var t1, t2, t3;
@@ -8701,17 +8683,18 @@ var $$ = {};
         this.lastDraw = t1 - 1;
         t1 = this.sprite;
         t2 = t1.spritex;
-        if (t2 >= 875) {
+        if (t2 >= 920) {
           t1.spritex = 0;
-          t1.spritey = 273;
+          t1.spritey = 430;
           this.repeat = 1;
         } else {
           t3 = this.repeat;
-          if (t3 >= 1 && t3 < 13) {
+          if (t3 === 1 || t3 === 2 || t3 === 3 || t3 === 4 || t3 === 5 || t3 === 6 || t3 === 7 || t3 === 8) {
+            t1.spritex = t2;
             if (this.goingBack)
-              t1.spritey = 100;
+              t1.spritey = 590;
             else
-              t1.spritey = 273;
+              t1.spritey = 430;
             if (t3 === 1)
               this.repeat = 2;
             else if (t3 === 2)
@@ -8728,23 +8711,15 @@ var $$ = {};
               this.repeat = 8;
             else if (t3 === 8)
               this.repeat = 9;
-            else if (t3 === 9)
-              this.repeat = 10;
-            else if (t3 === 10)
-              this.repeat = 11;
-            else if (t3 === 11)
-              this.repeat = 12;
-            else if (t3 === 12)
-              this.repeat = 13;
           } else {
-            t2 += 125;
+            t2 += 115;
             if (this.goingBack) {
               t1.spritex = t2;
-              t1.spritey = 100;
+              t1.spritey = 590;
               this.repeat = 1;
             } else {
               t1.spritex = t2;
-              t1.spritey = 273;
+              t1.spritey = 430;
               this.repeat = 1;
             }
           }
@@ -8776,7 +8751,25 @@ var $$ = {};
     injure$0: function() {
       return 10;
     },
-    static: {"": "Gorilla_GROUND_LEVEL"}
+    static: {"": "Droid_GROUND_LEVEL"}
+  },
+  Enemy: {
+    "": "GameObject;",
+    injure$0: function() {
+      return;
+    }
+  },
+  GameObject: {
+    "": "Object;x>,y>,height>,width>",
+    draw$0: function() {
+      return;
+    },
+    update$1: function(dt) {
+    },
+    initialize$2: function(x, y) {
+      this.x = x;
+      this.y = y;
+    }
   },
   Item: {
     "": "GameObject;",
