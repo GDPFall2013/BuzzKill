@@ -55,7 +55,7 @@ class AdjustedContext {
   
   AdjustedContext(int viewportWidth, int viewportHeight, double screenRatio) {
     yAdjust = viewportHeight * (1 - screenRatio);
-    xAdjust = viewportWidth * (1 - screenRatio * 1.8);// Is 1.8 a magic number?
+    xAdjust = viewportWidth * (1 - screenRatio) * 0.3;// Is 1.8 a magic number?
   }
   
   void rect(num x, num y, num width, num height) {
@@ -138,6 +138,21 @@ class AdjustedContext {
         destY * Camera.instance.screenRatio  + yAdjust, 
         destWidth * Camera.instance.screenRatio, 
         destHeight* Camera.instance.screenRatio);
+  }
+  
+// Does not need to be adjusted, it is relative
+  // I'm not sure this is right.  Still have issues
+  // in some implementations
+  void scale(num sx, num sy){
+    context.scale(
+        sx , 
+        sy);
+  }
+  
+  void translate(num tx , num ty) {
+    context.translate(
+        tx * Camera.instance.screenRatio , 
+        ty * Camera.instance.screenRatio );
   }
   
 }
