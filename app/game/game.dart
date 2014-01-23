@@ -33,6 +33,13 @@ int stateEnumGameOver = 3;
 
 int state;
 
+// variables for Performance testing
+double updatesPerSecond = 0.0;
+double rendersPerSecond = 0.0;
+double debuggingDisplayTime = 0.0;
+double numberOfUpdates = 0.0;
+double numberOfRenders = 0.0;
+
 Initialize() {
  // currentLevel = LevelManager.enumLevelTest;
  // levelManager.loadLevel(LevelManager.enumLevelTest);
@@ -69,6 +76,18 @@ void update(double dt) {
     }
     
     ObjectManager.instance.removeDeadObjects();
+    
+  }
+  
+  // Frames per second debugging Information
+  numberOfUpdates += 1.0;
+  debuggingDisplayTime += dt;
+  if (debuggingDisplayTime > 100.0) {
+    debuggingDisplayTime -= 100.0;
+    updatesPerSecond = numberOfUpdates;
+    rendersPerSecond = numberOfRenders;
+    numberOfUpdates = 0.0;
+    numberOfRenders = 0.0;
   }
 }
 
@@ -109,7 +128,8 @@ void draw() {
     
   }
   
-  
+  // Used for Frames Per Second Debugging Information
+  numberOfRenders += 1.0;
 }
 
 /**
@@ -124,6 +144,13 @@ drawHUD() {
   //context.fillText("Score:  ?????", viewportWidth/2 -35, 20, 100);  Do we have score in this game?
   normContext.fillText("Lives: $lives", 10, viewportHeight-15, 100);
   normContext.fillText("Remaining Oxygen: $oxygen", viewportWidth - 200, viewportHeight-15, 500);
+  normContext.restore();
+  
+// Variables for Performance monitoring
+  normContext.fillStyle = 'white';
+  normContext.font = "normal 8pt calibri";
+  normContext.fillText("ups: $updatesPerSecond", 10, 35, 100);
+  normContext.fillText("rps: $rendersPerSecond", 10, 50, 100);
   normContext.restore();
 }
 
