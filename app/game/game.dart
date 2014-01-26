@@ -34,6 +34,13 @@ int stateEnumGameOver = 3;
 
 int state;
 
+// variables for Performance testing
+double updatesPerSecond = 0.0;
+double rendersPerSecond = 0.0;
+double debuggingDisplayTime = 0.0;
+double numberOfUpdates = 0.0;
+double numberOfRenders = 0.0;
+
 Initialize() {
  // currentLevel = LevelManager.enumLevelTest;
  // levelManager.loadLevel(LevelManager.enumLevelTest);
@@ -72,6 +79,18 @@ void update(double dt) {
     }
     
     ObjectManager.instance.removeDeadObjects();
+    
+  }
+  
+  // Frames per second debugging Information
+  numberOfUpdates += 1.0;
+  debuggingDisplayTime += dt;
+  if (debuggingDisplayTime > 100.0) {
+    debuggingDisplayTime -= 100.0;
+    updatesPerSecond = numberOfUpdates;
+    rendersPerSecond = numberOfRenders;
+    numberOfUpdates = 0.0;
+    numberOfRenders = 0.0;
   }
 }
 
@@ -81,7 +100,7 @@ void update(double dt) {
  */
 void draw() {
   if (state == stateEnumPlay) {
-    context.context.clearRect(0, 0,640, 480);
+    normContext.clearRect(0, 0,640, 480);
     
   for (GameObject go in ObjectManager.instance.goList) {
     
@@ -96,27 +115,26 @@ void draw() {
   drawHUD();
   
   } else if (state == stateEnumWin) {
+
+    normContext.fillStyle = 'black';
+    normContext.fillRect(0, 0, 640, 480);
     
-    context.context.fillStyle = 'black';
-    context.context.fillRect(0, 0, 640, 480);
-    
-    context.context.fillStyle = 'white';
-    context.context.font = "normal 30pt calibri";
-    context.context.fillText("YOU WIN!", viewportWidth/2 - 70, viewportHeight/2 - 40, 1000);
-    
-    
-    
+    normContext.fillStyle = 'white';
+    normContext.font = "normal 30pt calibri";
+    normContext.fillText("YOU WIN!", viewportWidth/2 - 70, viewportHeight/2 - 40, 1000);
+
   } else if (state == stateEnumGameOver){
-    context.context.fillStyle = 'black';
-    context.context.fillRect(0, 0, 640, 480);
+    normContext.fillStyle = 'black';
+    normContext.fillRect(0, 0, 640, 480);
     
-    context.context.fillStyle = 'white';
-    context.context.font = "normal 30pt calibri";
-    context.context.fillText("Buzz didn't make it...", viewportWidth/2 - 120, viewportHeight/2 - 40, 1000);
+    normContext.fillStyle = 'white';
+    normContext.font = "normal 30pt calibri";
+    normContext.fillText("Buzz didn't make it...", viewportWidth/2 - 120, viewportHeight/2 - 40, 1000);
     
   }
   
-  
+  // Used for Frames Per Second Debugging Information
+  numberOfRenders += 1.0;
 }
 
 /**
@@ -124,14 +142,21 @@ void draw() {
  * the camera.
  */
 drawHUD() {
-  context.context.save();
-  context.context.fillStyle = 'white';
-  context.context.font = "normal 14pt calibri";
-  context.context.fillText("BUZZKILL", 10, 20, 100);
+  normContext.save();
+  normContext.fillStyle = 'white';
+  normContext.font = "normal 14pt calibri";
+  normContext.fillText("BUZZKILL", 10, 20, 100);
   //context.fillText("Score:  ?????", viewportWidth/2 -35, 20, 100);  Do we have score in this game?
-  context.context.fillText("Lives: $lives", 10, viewportHeight-15, 100);
-  context.context.fillText("Remaining Oxygen: $oxygen", viewportWidth - 200, viewportHeight-15, 500);
-  context.context.restore();
+  normContext.fillText("Lives: $lives", 10, viewportHeight-15, 100);
+  normContext.fillText("Remaining Oxygen: $oxygen", viewportWidth - 200, viewportHeight-15, 500);
+  normContext.restore();
+  
+// Variables for Performance monitoring
+  normContext.fillStyle = 'white';
+  normContext.font = "normal 8pt calibri";
+  normContext.fillText("ups: $updatesPerSecond", 10, 35, 100);
+  normContext.fillText("rps: $rendersPerSecond", 10, 50, 100);
+  normContext.restore();
 }
 
 /**

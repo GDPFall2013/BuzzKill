@@ -1,30 +1,61 @@
 part of camera;
 
-
+/*
+ * This class is designed to be used instead of a 
+ * CanvasRenderingContext2D object for when you want the 
+ * operations to be affected by the camera
+ */
 class AdjustedContext {
   CanvasRenderingContext2D context;
 
   double yAdjust;
   double xAdjust;
-  String get fillStyle => context.fillStyle;
-  void set fillStyle(var newFillStyle) {
-    context.fillStyle = newFillStyle;  //TODO this is not working with block
-  }
-
   
-  String get font => context.font;
-  void set font(String newFont) {
-    context.font = newFont;
-  }
-  String get strokeStyle => context.strokeStyle;
-  void set strokeStyle(String newStrokeStyle) {
-    context.strokeStyle = newStrokeStyle;
-  }
+//  String get backingStorePixelRatio => throw new UnimplementedError();
+//  void set backingStorePixelRatio(var ratio) {
+//    throw new UnimplementedError("Use the normal context");
+//  }
+//  
+//  get canvas =>  throw new UnimplementedError();
+//  void set canvas(var canvas) {
+//    throw new UnimplementedError("Use the normal context");
+//  }
+//  
+//  Path get currentPath =>  throw new UnimplementedError();
+//  void set currentPath(var path) {
+//    throw new UnimplementedError("Use the normal context");
+//  }
+//  
+//  get fillStyle => throw new UnimplementedError();
+//  void set fillStyle(var newFillStyle) {
+//    throw new UnimplementedError("Use the normal context");
+//  }
+//  
+//  String get font => throw new UnimplementedError("Use the normal context");
+//  void set font(String newFont) {
+//    throw new UnimplementedError("Use the normal context");
+//  }
+//  
+//  num get globalAlpha => throw new UnimplementedError("Use the normal context");
+//  void set globalAlpha(num newAlpha) {
+//    throw new UnimplementedError("Use the normal context");
+//  }
+//  
+//  String get globalCompositeOperation => throw new UnimplementedError("Use the normal context");
+//  void set globalCompositeOperation(string newOperation) {
+//    throw new UnimplementedError("Use the normal context");
+//  }
+//  
+//  
+//  String get strokeStyle => throw new UnimplementedError("Use the normal context");
+//  void set strokeStyle(String newStrokeStyle) {
+//    throw new UnimplementedError("Use the normal context");
+//  }
 
   
   AdjustedContext(int viewportWidth, int viewportHeight, double screenRatio) {
     yAdjust = viewportHeight * (1 - screenRatio);
-    xAdjust = viewportWidth * (1 - screenRatio * 1.8);// Is 1.8 a magic number?
+    xAdjust = viewportWidth * (1 - screenRatio) * 0.3;// Is 1.8 a magic number?
   }
   
   void rect(num x, num y, num width, num height) {
@@ -97,9 +128,9 @@ class AdjustedContext {
     context.createPatternFromImage(image, repetitionType);
   }
   
- // void drawImageScaled(CanvasImageSource source, num destX, num destY, num destWidth, num destHeight){
- //   context.drawImageScaled(source, destX, destY, destWidth, destHeight);
- // }
+  void drawImageScaled(CanvasImageSource source, num destX, num destY, num destWidth, num destHeight){
+   throw new UnimplementedError();
+  }
   
   void drawImageScaledFromSource(CanvasImageSource source, num sourceX, num sourceY, num sourceWidth, num sourceHeight, num destX, num destY, num destWidth, num destHeight){
     context.drawImageScaledFromSource(source, sourceX, sourceY, sourceWidth, sourceHeight, 
@@ -107,6 +138,21 @@ class AdjustedContext {
         destY * Camera.instance.screenRatio  + yAdjust, 
         destWidth * Camera.instance.screenRatio, 
         destHeight* Camera.instance.screenRatio);
+  }
+  
+// Does not need to be adjusted, it is relative
+  // I'm not sure this is right.  Still have issues
+  // in some implementations
+  void scale(num sx, num sy){
+    context.scale(
+        sx , 
+        sy);
+  }
+  
+  void translate(num tx , num ty) {
+    context.translate(
+        tx * Camera.instance.screenRatio , 
+        ty * Camera.instance.screenRatio );
   }
   
 }
