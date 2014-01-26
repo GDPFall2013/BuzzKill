@@ -42,15 +42,15 @@ void setupLevelTwo() {
   om.addBlock(new Block()..initialize(1500.0, 420.0) // floor
       ..width = 1000.0 .. height = 140.0);
   //om.addEnemy(new Alien()..initialize(1200.0, 330.0));
-  om.addBlock(new Block()..initialize(1400.0, 300.0) // Boulder
+  om.addBlock(new Block()..initialize(1300.0, 300.0) // Boulder
       ..width = 120.0 .. height = 100.0);
 
   
   // screen 2.5
+  om.addItem(new Oxygen()..initialize(1100.0, 290.0));
   om.addItem(new Oxygen()..initialize(1150.0, 290.0));
   om.addItem(new Oxygen()..initialize(1200.0, 290.0));
-  om.addItem(new Oxygen()..initialize(1250.0, 290.0));
-  om.addEnemy(new Droid()..initialize(1700.0, 295.0));
+  om.addEnemy(new Droid()..initialize(1600.0, 305.0));
   //om.addEnemy(new Spike()..initialize(1900.0, 340.0)
   //    ..width = 100.0 .. height = 20.0);
   
@@ -147,5 +147,73 @@ void setupLevelTwo() {
   //screen 8
   om.addBlock(new Block()..initialize(9400.0, 420.0) // floor
       ..width = 1500.0 .. height = 140.0);
+  om.addBlock(new Block()..initialize(9000.0, 300.0) // Boulder
+      ..width = 120.0 .. height = 100.0);  
+  om.addBlock(new Block()..initialize(9400.0, 120.0) // floor
+      ..width = 300.0 .. height = 140.0);
+  om.addItem(new Oxygen()..initialize(9350.0, 0.0));
+  om.addItem(new Oxygen()..initialize(9400.0, 0.0));
+  om.addItem(new Oxygen()..initialize(9450.0, 0.0));
+  om.addItem(new Oxygen()..initialize(9500.0, 0.0));
+  
+  om.addBlock(new Block()..initialize(9800.0, 0.0) // floor
+      ..width = 300.0 .. height = 140.0);
+  om.addItem(new Oxygen()..initialize(9800.0, -120.0));
+  om.addItem(new Oxygen()..initialize(9850.0, -120.0));
+  om.addItem(new Oxygen()..initialize(9900.0, -120.0));
+  om.addItem(new Oxygen()..initialize(9950.0, -120.0));
+  
+  om.addItem(new Oxygen()..initialize(9600.0, 290.0));
+  om.addItem(new Oxygen()..initialize(9650.0, 290.0));
+  om.addItem(new Oxygen()..initialize(9700.0, 290.0));
+  om.addItem(new Oxygen()..initialize(9750.0, 290.0));
+  om.addItem(new Oxygen()..initialize(9800.0, 290.0));
+  
+  om.addItem(new Oxygen()..initialize(10140.0, -150.0));
+  om.addItem(new Oxygen()..initialize(10180.0, -150.0));
+  //om.addItem(new Oxygen()..initialize(10180.0, -150.0));
+  
+
+  om.addBlock(new Block()..initialize(10250.0, 500.0) // floor
+      ..width = 200.0 .. height = 101.0);
+ 
+  om.addItem(new Oxygen()..initialize(10200.0, 380.0));
+  om.addItem(new Oxygen()..initialize(10250.0, 380.0));
+  om.addItem(new Oxygen()..initialize(10300.0, 380.0));
+  
+  
+  //screen 9
+  om.addBlock(new Block()..initialize(10550.0, 420.0) // floor
+      ..width = 400.0 .. height = 140.0);
+  
+  om.addBlock(new Block()..initialize(11200.0, 350.0) // floor
+      ..width = 600.0 .. height = 240.0);
+  om.addEnemy(new Droid()..initialize(11400.0, 185.0));
+  
+  om.addBlock(new Block()..initialize(12600.0, 420.0) // floor
+      ..width = 2000.0 .. height = 140.0);
+  om.addBlock(new Block()..initialize(11850.0, 100.0) // floor
+      ..width = 300.0 .. height = 101.0);
+  om.addItem(new Oxygen()..initialize(11850.0, -20.0));
+  om.addItem(new Oxygen()..initialize(11900.0, -20.0));
+  om.addItem(new Oxygen()..initialize(11950.0, -20.0));
+  om.addItem(new Oxygen()..initialize(12000.0, -20.0));
+  om.addItem(new Oxygen()..initialize(12250.0, -20.0));
+  
+  //screen 10
+  om.addItem(new Oxygen()..initialize(12300.0, 290.0));
+  om.addItem(new Oxygen()..initialize(12350.0, 290.0));
+  om.addItem(new Oxygen()..initialize(12400.0, 290.0));
+  om.addItem(new Oxygen()..initialize(12450.0, 290.0));
+  om.addItem(new Oxygen()..initialize(12500.0, 290.0));
+  om.addItem(new Oxygen()..initialize(12550.0, 290.0));
+  om.addItem(new Oxygen()..initialize(12600.0, 290.0));
+  om.addBlock(new Block()..initialize(12800.0, 300.0) // Boulder
+      ..width = 120.0 .. height = 100.0);
+  
+  
+  om.addEnemy(new Gorilla()..initialize(13100.0, 290.0));
+  om.addItem(new ShipItem()..initialize(13500.0, 290.0)
+      ..level = 2);
   
 }

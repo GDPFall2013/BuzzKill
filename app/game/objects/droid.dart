@@ -23,10 +23,10 @@ class Droid extends Enemy{
   
   initialize(double x, double y) {
     super.initialize(x, y);
-    width = 115.0;
-    height = 160.0;
+    width = 78.0;
+    height = 108.0;
     //y = GROUND_LEVEL;
-    sprite = new SpriteSheet("./content/enemies_spritesheet.png",0,430,115,160);
+    sprite = new SpriteSheet("./content/enemies_spritesheet copy.png",0,442,78,108);
     repeat = 0;
     
     initialPos = x;
@@ -58,9 +58,9 @@ class Droid extends Enemy{
     if (lastDraw > 1.0) {
     lastDraw -= 1.0;
       //sprite logic
-      if(sprite.spritex >= 920){
+      if(sprite.spritex >= 620){
         sprite.spritex = 0;
-        sprite.spritey = 430;
+        sprite.spritey = 442;
         
         repeat = 1;
       }
@@ -71,10 +71,10 @@ class Droid extends Enemy{
         sprite.spritex = sprite.spritex;
         
         if(goingBack){
-          sprite.spritey = 590;
+          sprite.spritey = 550;
         }
         else
-        sprite.spritey = 430;
+        sprite.spritey = 442;
         
         if(repeat == 1){
           repeat = 2;
@@ -104,14 +104,14 @@ class Droid extends Enemy{
       else{
         //walking backwards animation
         if(goingBack){
-          sprite.spritex = sprite.spritex + 115;
-          sprite.spritey = 590;
+          sprite.spritex = sprite.spritex + 78;
+          sprite.spritey = 550;
           repeat = 1;
         }
         //walking forward animation
         else{
-        sprite.spritex = sprite.spritex + 115;
-        sprite.spritey = 430;
+        sprite.spritex = sprite.spritex + 78;
+        sprite.spritey = 442;
         repeat = 1;
         }
       }

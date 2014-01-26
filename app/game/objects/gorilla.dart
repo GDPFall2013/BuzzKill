@@ -24,9 +24,9 @@ class Gorilla extends Enemy{
   initialize(double x, double y) {
     super.initialize(x, y);
     width = 126.0;
-    height = 173.0;
+    height = 166.0;
     //y = GROUND_LEVEL;
-    sprite = new SpriteSheet("./content/enemies_spritesheet copy.png",0,273,126,173);
+    sprite = new SpriteSheet("./content/enemies_spritesheet copy.png",0,266,126,166);
     repeat = 0;
     
     initialPos = x;
@@ -65,7 +65,7 @@ class Gorilla extends Enemy{
       //sprite logic
       if(sprite.spritex >= 875){
         sprite.spritex = 0;
-        sprite.spritey = 273;
+        sprite.spritey = 266;
         
         repeat = 1;
       }
@@ -79,7 +79,7 @@ class Gorilla extends Enemy{
           sprite.spritey = 100;
         }
         else{
-        sprite.spritey = 273;
+        sprite.spritey = 266;
         //sprite.spritex = 885;
         }
         
@@ -130,7 +130,7 @@ class Gorilla extends Enemy{
         //walking forward animation
         else{
         sprite.spritex = sprite.spritex + 125;
-        sprite.spritey = 273;
+        sprite.spritey = 266;
         repeat = 1;
         }
       }

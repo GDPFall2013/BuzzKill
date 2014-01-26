@@ -35,6 +35,9 @@ part 'game/levels/level_manager.dart';
 part 'game/levels/level_one.dart';
 part 'game/levels/level_test.dart';
 part 'game/levels/level_two.dart';
+part 'game/levels/level_three.dart';
+part 'game/levels/level_menu.dart';
+part 'game/levels/main_menu.dart';
 
 part 'game/Collision_System/collision_system.dart';
 

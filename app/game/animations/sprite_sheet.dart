@@ -26,6 +26,12 @@ class SpriteSheet {
   {
     context.drawImageScaledFromSource(img,spritex,spritey,framew,frameh, x,y,framew,frameh);
   }
+  
+  drawOnPositionn(double x, double y, double frameX, double frameY)
+  {
+    CanvasRenderingContext2D context2;
+    context2.drawImageScaledFromSource(img,spritex,spritey,framew,frameh, x,y,framew,frameh);
+  }
 
 
 

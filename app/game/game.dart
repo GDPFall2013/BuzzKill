@@ -18,6 +18,7 @@ class Game{
   
   
 Player player = new Player();
+MainMenu menu = new MainMenu();
 static double oxygen = 100.0; 
 Stopwatch oxygenTimer = new Stopwatch();
 double lastOxygenTick = 0.0;
@@ -36,11 +37,13 @@ int state;
 Initialize() {
  // currentLevel = LevelManager.enumLevelTest;
  // levelManager.loadLevel(LevelManager.enumLevelTest);
-  currentLevel = LevelManager.enumLevelOne;
-  levelManager.loadLevel(LevelManager.enumLevelOne);
+  currentLevel = LevelManager.enumMainMenu;
+  levelManager.loadLevel(LevelManager.enumMainMenu);
     state = stateEnumPlay;
 
-    oxygenTimer.start();
+    if(currentLevel >= LevelManager.enumLevelOne){
+    oxygenTimer.start();}
+    
     SoundManager sm = new SoundManager();
 }
 
@@ -63,7 +66,7 @@ void update(double dt) {
     }
     
     //Drain Oxygen
-    if (oxygenTimer.elapsedMilliseconds > 250 + lastOxygenTick){
+    if (oxygenTimer.elapsedMilliseconds > 250 + lastOxygenTick && currentLevel>=LevelManager.enumLevelOne){
       lastOxygenTick += 250;
       oxygen -= 1;
     }
@@ -93,12 +96,16 @@ void draw() {
   drawHUD();
   
   } else if (state == stateEnumWin) {
+    
     context.context.fillStyle = 'black';
     context.context.fillRect(0, 0, 640, 480);
     
     context.context.fillStyle = 'white';
     context.context.font = "normal 30pt calibri";
     context.context.fillText("YOU WIN!", viewportWidth/2 - 70, viewportHeight/2 - 40, 1000);
+    
+    
+    
   } else if (state == stateEnumGameOver){
     context.context.fillStyle = 'black';
     context.context.fillRect(0, 0, 640, 480);
@@ -134,6 +141,7 @@ win() {
   // music to be placed here in the future
   
   state = stateEnumWin;
+  
 }
 
 gameOver() {
@@ -146,6 +154,8 @@ reloadLevel() {
   ObjectManager.instance.clear();
   levelManager.loadLevel(currentLevel);
   player.resetPlayer();
+  if(currentLevel >= LevelManager.enumLevelOne){
+    oxygenTimer.start();}
 }
 
 restartGame() {

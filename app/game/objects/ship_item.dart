@@ -9,6 +9,7 @@ class ShipItem extends Item{
   SpriteSheet space_item = new SpriteSheet("./content/gameitems.png",0,100,90,90);
   bool glow=true;
   int repeat=1;
+  int level;
   
   update(double dt) {
     //Inanimate object, does nothing
