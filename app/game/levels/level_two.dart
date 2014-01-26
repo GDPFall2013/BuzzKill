@@ -137,11 +137,11 @@ void setupLevelTwo() {
       ..width = 300.0 .. height = 140.0);
   om.addBlock(new Block()..initialize(8300.0, 320.0) // floor
       ..width = 400.0 .. height = 400.0);
-  om.addItem(new Oxygen()..initialize(8250.0, 200.0));
-  om.addItem(new Oxygen()..initialize(8300.0, 200.0));
-  om.addItem(new Oxygen()..initialize(8350.0, 200.0));
-  om.addItem(new Oxygen()..initialize(8400.0, 200.0));
-  om.addItem(new Oxygen()..initialize(8450.0, 200.0));
+  om.addItem(new Oxygen()..initialize(7800.0, 100.0));
+  om.addItem(new Oxygen()..initialize(7850.0, 100.0));
+  om.addItem(new Oxygen()..initialize(7900.0, 100.0));
+  om.addItem(new Oxygen()..initialize(7950.0, 100.0));
+  om.addItem(new Oxygen()..initialize(8000.0, 100.0));
  
   
   //screen 8

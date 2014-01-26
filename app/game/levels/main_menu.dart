@@ -91,6 +91,8 @@ class MainMenu extends GameObject{
     
     //Select 'Play Game'
     if(input.wasPressed(KeyCode.ENTER) && playGame){
+     // ObjectManager om = ObjectManager.instance;
+     // om.clear();
       Game.instance.currentLevel = LevelManager.enumLevelTwo;
       Game.instance.reloadLevel();
     }

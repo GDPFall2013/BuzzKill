@@ -2649,8 +2649,9 @@ var $$ = {};
       J.drawImageScaledFromSource$9$x(t1, source, sourceX, sourceY, sourceWidth, sourceHeight, destX * t2 + this.xAdjust, destY * t2 + this.yAdjust, destWidth * t2, destHeight * t2);
     },
     AdjustedContext$3: function(viewportWidth, viewportHeight, screenRatio) {
-      this.yAdjust = viewportHeight * (1 - screenRatio);
-      this.xAdjust = viewportWidth * (1 - screenRatio * 1.8);
+      var t1 = 1 - screenRatio;
+      this.yAdjust = viewportHeight * t1;
+      this.xAdjust = viewportWidth * t1 * 0.3;
     }
   },
   Camera: {
@@ -5781,7 +5782,7 @@ var $$ = {};
     "%": "WebGLRenderingContext;CanvasRenderingContext"
   },
   CanvasRenderingContext2D: {
-    "": "CanvasRenderingContext;fillStyle},font}",
+    "": "CanvasRenderingContext;fillStyle}",
     beginPath$0: function(receiver) {
       return receiver.beginPath();
     },
@@ -5796,9 +5797,6 @@ var $$ = {};
     },
     fill$0: function($receiver) {
       return $receiver.fill();
-    },
-    fillRect$4: function(receiver, x, y, width, height) {
-      return receiver.fillRect(x, y, width, height);
     },
     lineTo$2: function(receiver, x, y) {
       return receiver.lineTo(x, y);
@@ -5884,6 +5882,10 @@ var $$ = {};
   FormElement: {
     "": "HtmlElement;length=",
     "%": "HTMLFormElement"
+  },
+  Gamepad: {
+    "": "Interceptor;",
+    "%": "Gamepad"
   },
   HtmlCollection: {
     "": "Interceptor_ListMixin_ImmutableListMixin;",
@@ -6213,6 +6215,37 @@ var $$ = {};
     },
     "%": "ClientRect|DOMRect"
   },
+  _GamepadList: {
+    "": "Interceptor_ListMixin_ImmutableListMixin2;",
+    get$length: function(receiver) {
+      return receiver.length;
+    },
+    $index: function(receiver, index) {
+      var t1 = receiver.length;
+      if (index >>> 0 !== index || index >= t1)
+        throw H.wrapException(P.RangeError$range(index, 0, t1));
+      return receiver[index];
+    },
+    $indexSet: function(receiver, index, value) {
+      throw H.wrapException(P.UnsupportedError$("Cannot assign element of immutable List."));
+    },
+    get$first: function(receiver) {
+      if (receiver.length > 0)
+        return receiver[0];
+      throw H.wrapException(P.StateError$("No elements"));
+    },
+    elementAt$1: function(receiver, index) {
+      if (index < 0 || index >= receiver.length)
+        return H.ioore(receiver, index);
+      return receiver[index];
+    },
+    $isList: true,
+    $asList: function() {
+      return [W.Gamepad];
+    },
+    $isJavaScriptIndexingBehavior: true,
+    "%": "GamepadList"
+  },
   Interceptor_ListMixin: {
     "": "Interceptor+ListMixin;",
     $isList: true,
@@ -6278,6 +6311,20 @@ var $$ = {};
     $isList: true,
     $asList: function() {
       return [W.Touch];
+    }
+  },
+  Interceptor_ListMixin2: {
+    "": "Interceptor+ListMixin;",
+    $isList: true,
+    $asList: function() {
+      return [W.Gamepad];
+    }
+  },
+  Interceptor_ListMixin_ImmutableListMixin2: {
+    "": "Interceptor_ListMixin2+ImmutableListMixin;",
+    $isList: true,
+    $asList: function() {
+      return [W.Gamepad];
     }
   },
   EventStreamProvider: {
@@ -7586,6 +7633,7 @@ var $$ = {};
     t2.set$width(t1, 640);
     t2.set$height(t1, 480);
     $.context.context = t2.getContext$1(t1, "2d");
+    $.normContext = J.getContext$1$x($.canvas, "2d");
     if ($.Game_instance == null) {
       t1 = W.ImageElement_ImageElement(null, null, null);
       t2 = $.CollisionSystem_instance;
@@ -7604,7 +7652,7 @@ var $$ = {};
       t1.MainMenu$0();
       t3 = new P.Stopwatch(null, null);
       t4 = new U.LevelManager();
-      t1 = new U.Game(t2, t1, t3, 0, t4, null, 1, 2, 3, null);
+      t1 = new U.Game(t2, t1, t3, 0, t4, null, 1, 2, 3, null, 0, 0, 0, 0, 0);
       $.Game_instance = t1;
       t2 = $.LevelManager_enumMainMenu;
       t1.currentLevel = t2;
@@ -7796,7 +7844,7 @@ var $$ = {};
     }
   },
   Game: {
-    "": "Object;player,menu,oxygenTimer,lastOxygenTick,levelManager,currentLevel,stateEnumPlay,stateEnumWin,stateEnumGameOver,state",
+    "": "Object;player,menu,oxygenTimer,lastOxygenTick,levelManager,currentLevel,stateEnumPlay,stateEnumWin,stateEnumGameOver,state,updatesPerSecond,rendersPerSecond,debuggingDisplayTime,numberOfUpdates,numberOfRenders",
     update$1: function(dt) {
       var t1, t2, t3;
       if (this.state === this.stateEnumPlay) {
@@ -7826,16 +7874,27 @@ var $$ = {};
           t1 = false;
         if (t1) {
           this.lastOxygenTick = t2 + 250;
-          $.Game_oxygen = $.Game_oxygen - 1;
+          $.Game_oxygen = $.Game_oxygen - 0;
         }
         $.ObjectManager_instance.removeDeadObjects$0();
+      }
+      t1 = this.numberOfUpdates + 1;
+      this.numberOfUpdates = t1;
+      t2 = this.debuggingDisplayTime + dt;
+      this.debuggingDisplayTime = t2;
+      if (t2 > 100) {
+        this.debuggingDisplayTime = t2 - 100;
+        this.updatesPerSecond = t1;
+        this.rendersPerSecond = this.numberOfRenders;
+        this.numberOfUpdates = 0;
+        this.numberOfRenders = 0;
       }
     },
     draw$0: function() {
       var t1, go, t2, t3, t4;
       t1 = this.state;
       if (t1 === this.stateEnumPlay) {
-        J.clearRect$4$x($.context.context, 0, 0, 640, 480);
+        J.clearRect$4$x($.normContext, 0, 0, 640, 480);
         for (t1 = $.ObjectManager_instance.goList, t1 = new H.ListIterator(t1, t1.length, 0, null); t1.moveNext$0();) {
           go = t1._current;
           t2 = J.getInterceptor$x(go);
@@ -7858,31 +7917,38 @@ var $$ = {};
           if (t2)
             go.draw$0();
         }
-        J.save$0$x($.context.context);
-        t1 = $.context;
-        J.set$fillStyle$x(t1.context, "white");
-        J.set$font$x(t1.context, "normal 14pt calibri");
-        J.fillText$4$x(t1.context, "BUZZKILL", 10, 20, 100);
-        J.fillText$4$x($.context.context, "Lives: " + $.Game_lives, 10, 465, 100);
-        J.fillText$4$x($.context.context, "Remaining Oxygen: " + $.Game_oxygen, 440, 465, 500);
-        J.restore$0$x($.context.context);
+        J.save$0$x($.normContext);
+        t1 = $.normContext;
+        J.getInterceptor$x(t1).set$fillStyle(t1, "white");
+        t1.font = "normal 14pt calibri";
+        C.CanvasRenderingContext2D_methods.fillText$4(t1, "BUZZKILL", 10, 20, 100);
+        J.fillText$4$x($.normContext, "Lives: " + $.Game_lives, 10, 465, 100);
+        J.fillText$4$x($.normContext, "Remaining Oxygen: " + $.Game_oxygen, 440, 465, 500);
+        J.restore$0$x($.normContext);
+        t1 = $.normContext;
+        J.getInterceptor$x(t1).set$fillStyle(t1, "white");
+        t1.font = "normal 8pt calibri";
+        C.CanvasRenderingContext2D_methods.fillText$4(t1, "ups: " + this.updatesPerSecond, 10, 35, 100);
+        J.fillText$4$x($.normContext, "rps: " + this.rendersPerSecond, 10, 50, 100);
+        J.restore$0$x($.normContext);
       } else if (t1 === this.stateEnumWin) {
-        t1 = $.context;
-        J.set$fillStyle$x(t1.context, "black");
-        J.fillRect$4$x(t1.context, 0, 0, 640, 480);
-        t1 = $.context;
-        J.set$fillStyle$x(t1.context, "white");
-        J.set$font$x(t1.context, "normal 30pt calibri");
-        J.fillText$4$x(t1.context, "YOU WIN!", 250, 200, 1000);
+        t1 = $.normContext;
+        J.set$fillStyle$x(t1, "black");
+        t1.fillRect(0, 0, 640, 480);
+        t1 = $.normContext;
+        J.getInterceptor$x(t1).set$fillStyle(t1, "white");
+        t1.font = "normal 30pt calibri";
+        C.CanvasRenderingContext2D_methods.fillText$4(t1, "YOU WIN!", 250, 200, 1000);
       } else if (t1 === this.stateEnumGameOver) {
-        t1 = $.context;
-        J.set$fillStyle$x(t1.context, "black");
-        J.fillRect$4$x(t1.context, 0, 0, 640, 480);
-        t1 = $.context;
-        J.set$fillStyle$x(t1.context, "white");
-        J.set$font$x(t1.context, "normal 30pt calibri");
-        J.fillText$4$x(t1.context, "Buzz didn't make it...", 200, 200, 1000);
+        t1 = $.normContext;
+        J.set$fillStyle$x(t1, "black");
+        t1.fillRect(0, 0, 640, 480);
+        t1 = $.normContext;
+        J.getInterceptor$x(t1).set$fillStyle(t1, "white");
+        t1.font = "normal 30pt calibri";
+        C.CanvasRenderingContext2D_methods.fillText$4(t1, "Buzz didn't make it...", 200, 200, 1000);
       }
+      this.numberOfRenders = this.numberOfRenders + 1;
     },
     gameOver$0: function() {
       $.get$gameLoop().addTimer$2(new U.Game_gameOver_closure(this), 3);
@@ -7920,11 +7986,19 @@ var $$ = {};
     }
   },
   Input: {
-    "": "Object;",
+    "": "Object;gp",
+    wasButtonPressed$1: function(buttonCode) {
+      var t1 = C._GamepadList_methods.get$first(window.navigator.webkitGetGamepads());
+      this.gp = t1;
+      if (t1.buttons != null)
+        return true;
+      $.get$gameLoop()._gamepad0.buttons;
+      return false;
+    },
     static: {"": "Input_instance,Input__keys", Input_Input: function() {
         var t1 = $.Input_instance;
         if (t1 == null) {
-          t1 = new U.Input();
+          t1 = new U.Input(null);
           $.Input_instance = t1;
         }
         return t1;
@@ -8744,7 +8818,7 @@ var $$ = {};
           t1 = new U.SpriteSheet(0, 0, 50, 50, "./content/gameitems.png", null);
           t1.img = U.ImageLoader_getImage("./content/gameitems.png");
           t1 = new U.Oxygen(t1, null, null, 0, 0, false);
-          U.GameObject.prototype.initialize$2.call(t1, 8250, 200);
+          U.GameObject.prototype.initialize$2.call(t1, 7800, 100);
           t1.width = 50;
           t1.height = 10;
           t2.push(t1);
@@ -8752,7 +8826,7 @@ var $$ = {};
           t1 = new U.SpriteSheet(0, 0, 50, 50, "./content/gameitems.png", null);
           t1.img = U.ImageLoader_getImage("./content/gameitems.png");
           t1 = new U.Oxygen(t1, null, null, 0, 0, false);
-          U.GameObject.prototype.initialize$2.call(t1, 8300, 200);
+          U.GameObject.prototype.initialize$2.call(t1, 7850, 100);
           t1.width = 50;
           t1.height = 10;
           t2.push(t1);
@@ -8760,7 +8834,7 @@ var $$ = {};
           t1 = new U.SpriteSheet(0, 0, 50, 50, "./content/gameitems.png", null);
           t1.img = U.ImageLoader_getImage("./content/gameitems.png");
           t1 = new U.Oxygen(t1, null, null, 0, 0, false);
-          U.GameObject.prototype.initialize$2.call(t1, 8350, 200);
+          U.GameObject.prototype.initialize$2.call(t1, 7900, 100);
           t1.width = 50;
           t1.height = 10;
           t2.push(t1);
@@ -8768,7 +8842,7 @@ var $$ = {};
           t1 = new U.SpriteSheet(0, 0, 50, 50, "./content/gameitems.png", null);
           t1.img = U.ImageLoader_getImage("./content/gameitems.png");
           t1 = new U.Oxygen(t1, null, null, 0, 0, false);
-          U.GameObject.prototype.initialize$2.call(t1, 8400, 200);
+          U.GameObject.prototype.initialize$2.call(t1, 7950, 100);
           t1.width = 50;
           t1.height = 10;
           t2.push(t1);
@@ -8776,7 +8850,7 @@ var $$ = {};
           t1 = new U.SpriteSheet(0, 0, 50, 50, "./content/gameitems.png", null);
           t1.img = U.ImageLoader_getImage("./content/gameitems.png");
           t1 = new U.Oxygen(t1, null, null, 0, 0, false);
-          U.GameObject.prototype.initialize$2.call(t1, 8450, 200);
+          U.GameObject.prototype.initialize$2.call(t1, 8000, 100);
           t1.width = 50;
           t1.height = 10;
           t2.push(t1);
@@ -9464,16 +9538,15 @@ var $$ = {};
         t1 = t1.y;
         if (typeof t4 !== "number")
           return t4.$sub();
-        pattern = J.createPatternFromImage$2$x($.context.context, this.img, "repeat");
+        pattern = J.createPatternFromImage$2$x($.normContext, this.img, "repeat");
         t5 = $.context;
         t6 = this.width;
         t7 = this.height;
         t8 = t5.context;
         t9 = $.Camera_instance.screenRatio;
         J.rect$4$x(t8, (t2 - t3 - t6 / 2) * t9 + t5.xAdjust, (t4 - t1 - t7 / 2) * t9 + t5.yAdjust, t6 * t9, t7 * t9);
-        t9 = $.context;
-        J.set$fillStyle$x(t9.context, pattern);
-        J.fill$0$x(t9.context);
+        J.set$fillStyle$x($.normContext, pattern);
+        J.fill$0$x($.context.context);
       }
     }
   },
@@ -9880,7 +9953,7 @@ var $$ = {};
       t1 = this.stateEnumDead;
       if (this.state !== t1) {
         this.input.toString;
-        if ($.get$gameLoop()._keyboard.isDown$1(38))
+        if ($.get$gameLoop()._keyboard.isDown$1(38) || this.input.wasButtonPressed$1(1))
           if (this.JUMPING)
             ;
           else {
@@ -10167,9 +10240,8 @@ var $$ = {};
       t3.lineTo$2(t3, left + 9 * this.width / 10, $top);
       t3 = $.context;
       t3.lineTo$2(t3, left + 10 * this.width / 10, bottom);
-      t3 = $.context;
-      J.set$fillStyle$x(t3.context, "yellow");
-      J.stroke$0$x(t3.context);
+      J.set$fillStyle$x($.normContext, "yellow");
+      J.stroke$0$x($.context.context);
       J.fill$0$x($.context.context);
       J.restore$0$x($.context.context);
       t3 = $.context;
@@ -10308,6 +10380,7 @@ J.JSDouble.$isnum = true;
 J.JSDouble.$isObject = true;
 W.Node.$isEventTarget = true;
 W.Node.$isObject = true;
+W.Gamepad.$isObject = true;
 J.JSNumber.$isnum = true;
 J.JSNumber.$isObject = true;
 J.JSString.$isString = true;
@@ -10506,9 +10579,6 @@ J.drawImageScaledFromSource$9$x = function(receiver, a0, a1, a2, a3, a4, a5, a6,
 J.fill$0$x = function(receiver) {
   return J.getInterceptor$x(receiver).fill$0(receiver);
 };
-J.fillRect$4$x = function(receiver, a0, a1, a2, a3) {
-  return J.getInterceptor$x(receiver).fillRect$4(receiver, a0, a1, a2, a3);
-};
 J.fillText$4$x = function(receiver, a0, a1, a2, a3) {
   return J.getInterceptor$x(receiver).fillText$4(receiver, a0, a1, a2, a3);
 };
@@ -10539,6 +10609,9 @@ J.get$response$x = function(receiver) {
 J.get$type$x = function(receiver) {
   return J.getInterceptor$x(receiver).get$type(receiver);
 };
+J.getContext$1$x = function(receiver, a0) {
+  return J.getInterceptor$x(receiver).getContext$1(receiver, a0);
+};
 J.lineTo$2$x = function(receiver, a0, a1) {
   return J.getInterceptor$x(receiver).lineTo$2(receiver, a0, a1);
 };
@@ -10566,9 +10639,6 @@ J.send$1$x = function(receiver, a0) {
 J.set$fillStyle$x = function(receiver, value) {
   return J.getInterceptor$x(receiver).set$fillStyle(receiver, value);
 };
-J.set$font$x = function(receiver, value) {
-  return J.getInterceptor$x(receiver).set$font(receiver, value);
-};
 J.set$src$x = function(receiver, value) {
   return J.getInterceptor$x(receiver).set$src(receiver, value);
 };
@@ -10582,6 +10652,7 @@ C.AudioBufferSourceNode_methods = P.AudioBufferSourceNode.prototype;
 C.C_DynamicRuntimeType = new H.DynamicRuntimeType();
 C.C__DelayedDone = new P._DelayedDone();
 C.C__RootZone = new P._RootZone();
+C.CanvasRenderingContext2D_methods = W.CanvasRenderingContext2D.prototype;
 C.Duration_0 = new P.Duration(0);
 C.EventStreamProvider_click = new W.EventStreamProvider("click");
 C.EventStreamProvider_error = new W.EventStreamProvider("error");
@@ -10743,6 +10814,7 @@ C.UnknownJavaScriptObject_methods = J.UnknownJavaScriptObject.prototype;
 C.WheelEvent_methods = W.WheelEvent.prototype;
 C.Window_methods = W.Window.prototype;
 C._CustomEventStreamProvider__determineMouseWheelEventType = new W._CustomEventStreamProvider(W.Element__determineMouseWheelEventType$closure());
+C._GamepadList_methods = W._GamepadList.prototype;
 $.controlPort = null;
 $.RawReceivePortImpl__nextFreeId = 1;
 $.Primitives_mirrorFunctionCacheName = "$cachedFunction";
@@ -10774,6 +10846,7 @@ $.LevelManager_enumLevelOne = 1;
 $.LevelManager_enumLevelTwo = 2;
 $.ObjectManager_instance = null;
 $.context = null;
+$.normContext = null;
 $.canvas = null;
 $.Device__isOpera = null;
 $.Device__isWebKit = null;

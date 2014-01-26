@@ -58,6 +58,9 @@ Initialize() {
  *  Update is called once per game Loop
  */
 void update(double dt) {
+  if(ObjectManager.instance.goList.isEmpty){
+  menu.update(dt);}
+  
   if (state == stateEnumPlay) {
     
     // Adjust the camera position
@@ -75,7 +78,7 @@ void update(double dt) {
     //Drain Oxygen
     if (oxygenTimer.elapsedMilliseconds > 250 + lastOxygenTick && currentLevel>=LevelManager.enumLevelOne){
       lastOxygenTick += 250;
-      oxygen -= 1;
+      oxygen -= 0;
     }
     
     ObjectManager.instance.removeDeadObjects();
@@ -99,8 +102,12 @@ void update(double dt) {
  *  By the Game Loop
  */
 void draw() {
+ 
   if (state == stateEnumPlay) {
     normContext.clearRect(0, 0,640, 480);
+    
+    if(ObjectManager.instance.goList.isEmpty){
+    menu.draw();}
     
   for (GameObject go in ObjectManager.instance.goList) {
     
@@ -189,6 +196,8 @@ restartGame() {
   levelManager.loadLevel(currentLevel);
   player.resetPlayer();
   state = stateEnumPlay;
+  if(currentLevel >= LevelManager.enumLevelOne){
+    oxygenTimer.start();}
 }
 
 }
