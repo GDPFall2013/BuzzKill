@@ -76,9 +76,10 @@ void update(double dt) {
     }
     
     //Drain Oxygen
-    if (oxygenTimer.elapsedMilliseconds > 250 + lastOxygenTick && currentLevel>=LevelManager.enumLevelOne){
+    if (oxygenTimer.elapsedMilliseconds > 250 + lastOxygenTick && currentLevel>=LevelManager.enumLevelOne &&
+        oxygen >0){
       lastOxygenTick += 250;
-      oxygen -= 0;
+      oxygen -= 1;
     }
     
     ObjectManager.instance.removeDeadObjects();
@@ -180,6 +181,7 @@ gameOver() {
   // TODO music to be placed here in the future
   gameLoop.addTimer((restart) => restartGame(), 3.0);
   state = stateEnumGameOver;
+  oxygenTimer.stop();
 }
 
 reloadLevel() {
