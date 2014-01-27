@@ -1,4 +1,4 @@
-part of camera;
+part of canvas;
 
   /*
    * This class is designed to be used instead of a 

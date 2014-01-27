@@ -1,4 +1,45 @@
-part of gdp;
+library gdp;
+
+import 'dart:html';
+import 'dart:collection';
+
+//import 'packages/js/js.dart' as js;
+import 'package:game_loop/game_loop_html.dart';
+
+import 'camera/canvas.dart';
+import 'dart:core';
+import 'dart:web_audio';
+
+part 'input_manager.dart';
+part 'object_manager.dart';
+part 'audio/sound_manager.dart';
+
+part 'objects/game_object.dart';
+part 'objects/block.dart';
+part 'objects/player.dart';
+part 'objects/alien.dart';
+part 'objects/oxygen.dart';
+part 'objects/ship_item.dart';
+part 'objects/spike.dart';
+part 'objects/item.dart';
+part 'objects/enemy.dart';
+part 'objects/gorilla.dart';
+part 'objects/droid.dart';
+
+part 'animations/sprite_sheet.dart';
+
+part 'levels/level_manager.dart';
+part 'levels/level_one.dart';
+part 'levels/level_test.dart';
+part 'levels/level_two.dart';
+part 'levels/level_three.dart';
+part 'levels/level_menu.dart';
+part 'levels/main_menu.dart';
+
+part 'Collision_System/collision_system.dart';
+
+//The Game Loop
+GameLoopHtml gameLoop = new GameLoopHtml(canvas);
 
 /**
  *  The Game class holds the root of the game.  It is started by Main
@@ -41,7 +82,14 @@ double debuggingDisplayTime = 0.0;
 double numberOfUpdates = 0.0;
 double numberOfRenders = 0.0;
 
+
+
 Initialize() {
+  buildCanvas();
+  gameLoop.onUpdate = ((gameLoop) {update(gameLoop.dt * 100);});
+  gameLoop.onRender = ((gameLoop) {draw();});
+  gameLoop.start();
+  
  // currentLevel = LevelManager.enumLevelTest;
  // levelManager.loadLevel(LevelManager.enumLevelTest);
   currentLevel = LevelManager.enumMainMenu;

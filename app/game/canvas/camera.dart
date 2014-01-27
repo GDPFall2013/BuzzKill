@@ -1,7 +1,4 @@
-library camera;
-
-import 'dart:html';
-part 'adjusted_context.dart';
+part of canvas;
 
 /**
  *  The Camera class is a singleton that represents what piece of the world is being
