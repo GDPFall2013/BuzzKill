@@ -22,31 +22,6 @@ class ShipItem extends Item{
   }
   
   draw() {
-    /*
-    context.save();
-    context.beginPath();
-    context.fillStyle = 'brown';
-    context.strokeStyle = 'black';
-    
-    double cx = this.x - camera.x;
-    double cy = this.y - camera.y;
-    
-    context.moveTo(cx - this.width/2, cy - this.height/2);
-    context.lineTo(cx + this.width/2, cy - this.height/2);
-    context.lineTo(cx + this.width/2, cy + this.height/2);
-    context.lineTo(cx - this.width/2, cy + this.height/2);
-    context.lineTo(cx - this.width/2, cy - this.height/2);
- 
-    
-    context.stroke();
-    context.fill();
-    context.fillStyle = 'black';
-    context.fillText("Ship Item", x - camera.x - width/2, y - camera.y, width);
-    context.restore();
-    */
-    double cx = this.x - camera.x;
-    double cy = this.y - camera.y;
-    
     //glow logic
       if(space_item.spritex >=450){
         glow = false;
@@ -129,10 +104,7 @@ class ShipItem extends Item{
         
       }
     
-    
-    
-    
-    space_item.drawOnPosition(cx-this.width/2, cy-this.height/2, width , height);   
+    space_item.drawOnPosition(x-this.width/2, y-this.height/2, width , height);   
   }
   
   /*

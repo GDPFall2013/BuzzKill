@@ -28,10 +28,7 @@ class MainMenu extends GameObject{
 
   
   draw(){
-    double cx = this.x - camera.x;
-    double cy = this.y - camera.y;
-    
-    sprite.drawOnPosition(cx-this.width/2, cy-this.height/2, 225.0 , 221.0);
+    sprite.drawOnPosition(x-this.width/2, y-this.height/2, 225.0 , 221.0);
   }
   
   

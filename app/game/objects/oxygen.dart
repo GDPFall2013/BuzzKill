@@ -20,21 +20,7 @@ class Oxygen extends Item {
   }
   
   draw() {
-    /*
-    context.save();
-    context.beginPath();
-    context.fillStyle = 'green';
-    context.arc(x - camera.x, y - camera.y,width/2,0,2*PI);
-    context.fill();
-    context.fillStyle = 'black';
-    context.fillText("Oxygen", x - camera.x - width/2, y - camera.y, width);
-    context.restore();
-    */
-    
-    double cx = x - camera.x;
-    double cy = y - camera.y;
-    sprite.drawOnPosition(cx-this.width/2, cy-this.height/2, width , height);
-    
+    sprite.drawOnPosition(x-this.width/2, y-this.height/2, width , height);
   }
   
   /*

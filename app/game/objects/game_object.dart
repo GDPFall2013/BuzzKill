@@ -49,16 +49,9 @@ DrawColliderBox(GameObject go){
   assert(go.height > 0.0);
   assert(go.width > 0.0);
   
-  double cx = go.x - camera.x;
-  double cy = go.y - camera.y;
-  
   context.save();
   context.beginPath(); 
-  context.moveTo(cx - go.width/2, cy - go.height/2);
-  context.lineTo(cx + go.width/2, cy - go.height/2);
-  context.lineTo(cx + go.width/2, cy + go.height/2);
-  context.lineTo(cx - go.width/2, cy + go.height/2);
-  context.lineTo(cx - go.width/2, cy - go.height/2);
+  context.rect(go.x + go.width/2, go.y - go.height/2, go.width, go.height);
   normContext.strokeStyle = "black";  //Should this be capitalized?
   context.stroke();
   context.restore();

@@ -138,11 +138,7 @@ class Gorilla extends Enemy{
   }
   
    draw(){
-
-     double cx = this.x - camera.x;
-     double cy = this.y - camera.y;
-     
-    sprite.drawOnPosition(cx-width/2 - imgOffsetX, cy-height/2 + imgOffsetY, width , height);
+    sprite.drawOnPosition(x-width/2 - imgOffsetX, y-height/2 + imgOffsetY, width , height);
      
     //context.drawImageScaled(img, cx - width/2, cy - height/2, width, height);
 

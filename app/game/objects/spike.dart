@@ -12,12 +12,10 @@ class Spike extends Enemy {
   }
   
   draw() {
-    double cx = this.x - camera.x;
-    double cy = this.y - camera.y;
     
-    double left = cx - width/2;
-    double bottom = cy + height/2;
-    double top = cy - height/2;
+    double left = x - width/2;
+    double bottom = y + height/2;
+    double top = y - height/2;
     
     
     context.save();
