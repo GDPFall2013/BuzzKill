@@ -37,7 +37,7 @@ class Spike extends Enemy {
     context.stroke();
     context.fill();
     context.restore();
-    context.clearRect(x, y, width, height);
+   
   }
   
   double injure() {
