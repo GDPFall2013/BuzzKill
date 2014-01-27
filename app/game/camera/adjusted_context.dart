@@ -68,24 +68,24 @@ class AdjustedContext {
   
   void clearRect(num x, num y, num width, num height) {
     context.clearRect(
-        x * Camera.instance.screenRatio + xAdjust, 
-        y * Camera.instance.screenRatio + yAdjust, 
+        (x - Camera.instance.x) * Camera.instance.screenRatio + xAdjust, 
+        (y - Camera.instance.y) * Camera.instance.screenRatio + yAdjust, 
         width * Camera.instance.screenRatio, 
         height * Camera.instance.screenRatio);
   }
   
   void fillRect(num x, num y, num width, num height) {
     context.fillRect(
-        x * Camera.instance.screenRatio + xAdjust, 
-        y * Camera.instance.screenRatio + yAdjust, 
+        (x - Camera.instance.x) * Camera.instance.screenRatio + xAdjust, 
+        (y - Camera.instance.y) * Camera.instance.screenRatio + yAdjust, 
         width * Camera.instance.screenRatio, 
         height * Camera.instance.screenRatio);
   }
   
   void fillText(String text, num x, num y, [num maxWidth]){
     context.fillText(text, 
-        x * Camera.instance.screenRatio + xAdjust, 
-        y * Camera.instance.screenRatio  + yAdjust);//, [numMaxWidth]); //TODO fix this
+        (x - Camera.instance.x) * Camera.instance.screenRatio + xAdjust, 
+        (y - Camera.instance.y) * Camera.instance.screenRatio  + yAdjust);//, [numMaxWidth]); //TODO fix this
   }
   
   void save() {
