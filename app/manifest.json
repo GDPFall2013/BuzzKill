@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "BuzzKill",
   "description" : "Buzz has to collect the pieces of his spaceship to get home!",
-  "version": "0.0.1",
+  "version": "0.0.17",
   "minimum_chrome_version": "28",
   "icons": {
     "16": "content/icon_16.png",

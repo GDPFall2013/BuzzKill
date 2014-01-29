@@ -132,8 +132,7 @@ class Player extends GameObject{
      
      if (state != stateEnumDead) {
        
-       if (input.isDown(KeyCode.UP) ||
-           input.wasButtonPressed(1)){
+       if (input.isDown(KeyCode.UP) ){
          
          //if currently jumping
          if(JUMPING){

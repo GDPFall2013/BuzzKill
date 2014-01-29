@@ -22,23 +22,23 @@ class Input {
     isUp(int keyCode) =>  gameLoop.keyboard.isUp(keyCode);
     wasPressed(int keyCode) => gameLoop.keyboard.pressed(keyCode);
     wasReleased(int keyCode) => gameLoop.keyboard.released(keyCode);
-    wasButtonPressed(int buttonCode) {
-      List gamepads = window.navigator.getGamepads();
-      gp = gamepads.first;
-      if (null != gp) {  
-      // buttons is always equal to null, seems not implemented
-        if(gp.buttons != null) {  
-          
-          return true;
-        }
-      }
-      // again this is always equal to null
-      if (null != gameLoop.gamepad0.buttons) {
-        return true;
-      }
-      
-      return false;
-    }
+//    wasButtonPressed(int buttonCode) {
+//      List gamepads = window.navigator.getGamepads();
+//      gp = gamepads.first;
+//      if (null != gp) {  
+//      // buttons is always equal to null, seems not implemented
+//        if(gp.buttons != null) {  
+//          
+//          return true;
+//        }
+//      }
+//      // again this is always equal to null
+//      if (null != gameLoop.gamepad0.buttons) {
+//        return true;
+//      }
+//      
+//      return false;
+//    }
     
     //wasPressed(gameLoop.GameLoopGamePad.BUTTON0) =>gameLoop.gamepad0;
   /**
