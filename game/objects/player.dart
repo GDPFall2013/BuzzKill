@@ -231,7 +231,7 @@ class Player extends GameObject{
      //move, then check if player is colliding with stuff.  If he is, move him back.
        this.x += direction * amount;
        for (Block block in ObjectManager.instance.blockList) {
-         if (ObjectManager.instance.checkForCollision(this, block)){
+         if (CollisionSystem.instance.checkForCollision(this, block)){
            this.x -= direction * amount;   //Undo the movement
            return;
          }
