@@ -188,6 +188,12 @@ void setupLevelTwo() {
   
   om.addBlock(new Block()..initialize(11200.0, 350.0) // floor
       ..width = 600.0 .. height = 240.0);
+  om.addItem(new Oxygen()..initialize(11000.0, 160.0));
+    om.addItem(new Oxygen()..initialize(11050.0, 160.0));
+    om.addItem(new Oxygen()..initialize(11100.0, 160.0));
+    om.addItem(new Oxygen()..initialize(11150.0, 160.0));
+    om.addItem(new Oxygen()..initialize(11200.0, 160.0));
+  
   om.addEnemy(new Droid()..initialize(11400.0, 185.0));
   
   om.addBlock(new Block()..initialize(12600.0, 420.0) // floor
@@ -212,8 +218,16 @@ void setupLevelTwo() {
       ..width = 120.0 .. height = 100.0);
   
   
+  
+  //boss
+  om.addBlock(new Block()..initialize(13700.0, 420.0) // floor
+        ..width = 200.0 .. height = 140.0);
   om.addEnemy(new Gorilla()..initialize(13100.0, 290.0));
-  om.addItem(new ShipItem()..initialize(13500.0, 290.0)
+  om.addBlock(new Block()..initialize(13900.0, 420.0) // obstacle
+        ..width = 200.0 .. height = 1500.0);
+  om.addBlock(new Block()..initialize(14100.0, 420.0) // obstacle
+          ..width = 200.0 .. height = 140.0);
+  om.addItem(new ShipItem()..initialize(14100.0, 290.0)
       ..level = 2);
   
 }

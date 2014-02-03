@@ -27,7 +27,10 @@ class SpriteSheet {
     context.drawImageScaledFromSource(img,spritex,spritey,framew,frameh, x,y,framew,frameh);
   }
   
-
+  drawOnPositionn(double x, double y, double frameX, double frameY)
+    {
+      normContext.drawImageScaledFromSource(img,spritex,spritey,framew,frameh, x,y,framew,frameh);
+    }
 
 
 

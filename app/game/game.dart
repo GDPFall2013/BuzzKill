@@ -25,6 +25,8 @@ part 'objects/item.dart';
 part 'objects/enemy.dart';
 part 'objects/gorilla.dart';
 part 'objects/droid.dart';
+part 'objects/ingame_menu.dart';
+
 
 part 'animations/sprite_sheet.dart';
 
@@ -60,6 +62,7 @@ class Game{
   
 Player player = new Player();
 MainMenu menu = new MainMenu();
+InGameMenu gameMenu = new InGameMenu();
 static double oxygen = 100.0; 
 Stopwatch oxygenTimer = new Stopwatch();
 double lastOxygenTick = 0.0;
@@ -72,6 +75,8 @@ int currentLevel;
 int stateEnumPlay = 1;
 int stateEnumWin = 2;
 int stateEnumGameOver = 3;
+int stateEnumPause = 4;
+int stateEnumMain = 5;
 
 int state;
 
@@ -82,7 +87,7 @@ double debuggingDisplayTime = 0.0;
 double numberOfUpdates = 0.0;
 double numberOfRenders = 0.0;
 
-
+Input input = new Input();
 
 Initialize() {
   buildCanvas();
@@ -106,11 +111,17 @@ Initialize() {
  *  Update is called once per game Loop
  */
 void update(double dt) {
-  if(ObjectManager.instance.goList.isEmpty){
-  menu.update(dt);}
+  //if(ObjectManager.instance.goList.isEmpty){
   
-  if (state == stateEnumPlay) {
+  
+  //Main Menu
+    if(currentLevel == LevelManager.enumMainMenu){
+  menu.update(dt);
+  menu.draw();}
+  
     
+  //Play Game
+  if (state == stateEnumPlay) {
     // Adjust the camera position
     if (player.x - camera.x > viewportWidth - 205) {
       camera.x = player.x - (viewportWidth - 205);
@@ -132,7 +143,29 @@ void update(double dt) {
     
     ObjectManager.instance.removeDeadObjects();
     
+    
+    //Bring up in-game menu
+    if(input.wasPressed(KeyCode.ESC)){
+       
+       state = stateEnumPause;
+       gameMenu.draw();
+       gameMenu.update(dt);       
+     }    
   }
+
+  
+  //in-game menu
+  if(state == stateEnumPause){
+    gameMenu.draw();
+    gameMenu.update(dt);
+    
+    //pause oxygen drain
+    if(oxygenTimer.elapsedMilliseconds > 250 + lastOxygenTick){
+      lastOxygenTick += 250;
+          oxygen -= 0;
+    }
+  }
+  
   
   // Frames per second debugging Information
   numberOfUpdates += 1.0;
@@ -152,11 +185,21 @@ void update(double dt) {
  */
 void draw() {
  
+  if(currentLevel == LevelManager.enumMainMenu){
+    normContext.clearRect(0, 0,640, 480);
+    menu.draw();
+  }
+  
   if (state == stateEnumPlay) {
     normContext.clearRect(0, 0,640, 480);
     
-    if(ObjectManager.instance.goList.isEmpty){
+    //if(ObjectManager.instance.goList.isEmpty){
+    if(currentLevel == LevelManager.enumMainMenu){
     menu.draw();}
+    
+    if(state == stateEnumPause){
+      gameMenu.draw();
+    }
     
   for (GameObject go in ObjectManager.instance.goList) {
     
@@ -238,6 +281,7 @@ reloadLevel() {
   player.resetPlayer();
   if(currentLevel >= LevelManager.enumLevelOne){
     oxygenTimer.start();}
+  state = stateEnumPlay;
 }
 
 restartGame() {
