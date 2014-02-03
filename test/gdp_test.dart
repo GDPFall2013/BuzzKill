@@ -41,7 +41,7 @@ main() {
     canvasTest();
     spriteSheetTest();
     collisionSystemTest();
-    
+    objectManagerTest();
     
   });
   
