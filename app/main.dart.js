@@ -2607,7 +2607,7 @@ var $$ = {};
     }
   }
 }],
-["canvas", "game/canvas/canvas.dart", , D, {
+["canvas", "../game/canvas/canvas.dart", , D, {
   "": "",
   AdjustedContext: {
     "": "Object;context,yAdjust,xAdjust",
@@ -7561,7 +7561,7 @@ var $$ = {};
     }
   }
 }],
-["gdp", "game/game.dart", , U, {
+["gdp", "../game/game.dart", , U, {
   "": "",
   ImageLoader_getImage: function(url) {
     var t1, img;
