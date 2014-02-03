@@ -67,6 +67,7 @@ double lastOxygenTick = 0.0;
 static int lives = 3;
 
 LevelManager levelManager = new LevelManager();
+ObjectManager objectManager = new ObjectManager();
 int currentLevel;
 
 int stateEnumPlay = 1;
