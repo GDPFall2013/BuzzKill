@@ -16,41 +16,41 @@ class CollisionSystem
       
    PlayerCollideWithItem(Player player)
    {
-    // Collision Check for player colliding with items
-    for (Item item in ObjectManager.instance.itemList) 
-    {
-      if (checkForCollision(player, item))
+      // Collision Check for player colliding with items
+      for (Item item in ObjectManager.instance.itemList) 
       {
-        item.collect();   
+          if (checkForCollision(player, item))
+          {
+            item.collect();   
+          }
       }
-    }
    }
      
    PlayerCollideWithEnemy(Player player)
    {
-     // Collision Check for player colliding with enemies
-    for (Enemy enemy in ObjectManager.instance.enemyList) 
-    {
-      if (checkForCollision(player, enemy))
-      {
-        player.injureBuzz (enemy.injure());  
-        
+       // Collision Check for player colliding with enemies
+      for (Enemy enemy in ObjectManager.instance.enemyList) 
+        {
+          if (checkForCollision(player, enemy))
+          {
+            player.injureBuzz (enemy.injure());  
+            
+          }
       }
-    }
    }
      
    PlayerCollideWithBlock(Player player)
    {
-    //Collision Check for player colliding with blocks
-    for (Block block in ObjectManager.instance.blockList) 
-    {
-      if (checkForCollision(player, block))
+      //Collision Check for player colliding with blocks
+      for (Block block in ObjectManager.instance.blockList) 
       {
-         player.velocity_y = 0.0;
-         player.JUMPING = false;
-         player.y = block.y - block.height/2 - player.height/2;      
+          if (checkForCollision(player, block))
+          {
+             player.velocity_y = 0.0;
+             player.JUMPING = false;
+             player.y = block.y - block.height/2 - player.height/2;      
+          }
       }
-    }
    }  
      
 // given two objects, check for a collision between them

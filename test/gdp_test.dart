@@ -14,6 +14,8 @@ part 'canvas/camera_test.dart';
 part 'canvas/adjusted_context_test.dart';
 part 'canvas/canvas_test.dart';
 
+part 'collision/collision_system_test.dart';
+
 part 'levels/level_manager_test.dart';
 
 part 'objects/game_object_test.dart';
@@ -38,7 +40,7 @@ main() {
   group('Framework,  ', () {
     canvasTest();
     spriteSheetTest();
- //   collisionSystemTest();
+    collisionSystemTest();
     
     
   });

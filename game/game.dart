@@ -41,7 +41,7 @@ part 'levels/main_menu.dart';
 part 'levels/controls.dart';
 
 
-part 'Collision_System/collision_system.dart';
+part 'collision/collision_system.dart';
 
 //The Game Loop
 GameLoopHtml gameLoop = new GameLoopHtml(canvas);
