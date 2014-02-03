@@ -7712,7 +7712,7 @@ var $$ = {};
     }
   },
   Game: {
-    "": "Object;player,menu,gameMenu,oxygenTimer,lastOxygenTick,levelManager,currentLevel,stateEnumPlay,stateEnumWin,stateEnumGameOver,stateEnumPause,stateEnumMain,state,updatesPerSecond,rendersPerSecond,debuggingDisplayTime,numberOfUpdates,numberOfRenders,input",
+    "": "Object;player,menu,gameMenu,controls,oxygenTimer,lastOxygenTick,levelManager,currentLevel,stateEnumPlay,stateEnumWin,stateEnumGameOver,stateEnumPause,stateEnumMain,stateEnumControls,state,updatesPerSecond,rendersPerSecond,debuggingDisplayTime,numberOfUpdates,numberOfRenders,input",
     Initialize$0: function() {
       var t1, t2, t3, t4;
       t1 = new D.AdjustedContext(null, null, null);
@@ -7783,7 +7783,7 @@ var $$ = {};
     },
     update$1: function(dt) {
       var t1, t2, t3;
-      if (this.currentLevel === $.LevelManager_enumMainMenu) {
+      if (this.currentLevel === $.LevelManager_enumMainMenu || this.state === this.stateEnumMain) {
         t1 = this.menu;
         t1.update$1(dt);
         t1.draw$0();
@@ -7836,6 +7836,15 @@ var $$ = {};
           $.Game_oxygen = $.Game_oxygen - 0;
         }
       }
+      if (this.state === this.stateEnumControls) {
+        this.controls.update$1(dt);
+        t1 = C.JSNumber_methods._tdivFast$1(this.oxygenTimer.get$elapsedTicks() * 1000, 1000000);
+        t2 = this.lastOxygenTick;
+        if (t1 > 250 + t2) {
+          this.lastOxygenTick = t2 + 250;
+          $.Game_oxygen = $.Game_oxygen - 0;
+        }
+      }
       t1 = this.numberOfUpdates + 1;
       this.numberOfUpdates = t1;
       t2 = this.debuggingDisplayTime + dt;
@@ -7850,10 +7859,12 @@ var $$ = {};
     },
     draw$0: function() {
       var t1, go, t2, t3, t4;
-      if (this.currentLevel === $.LevelManager_enumMainMenu) {
+      if (this.currentLevel === $.LevelManager_enumMainMenu || this.state === this.stateEnumMain) {
         J.clearRect$4$x($.normContext, 0, 0, 640, 480);
         this.menu.draw$0();
       }
+      if (this.state === this.stateEnumControls)
+        this.controls.draw$0();
       t1 = this.state;
       if (t1 === this.stateEnumPlay) {
         J.clearRect$4$x($.normContext, 0, 0, 640, 480);
@@ -7977,6 +7988,63 @@ var $$ = {};
         }
         return t1;
       }}
+  },
+  Controls: {
+    "": "GameObject;input,sprite,x:gdp$Controls$x*,y:gdp$Controls$y*,width:gdp$Controls$width>,height:gdp$Controls$height>,spritex,spritey,resume,options,controls,quit,x,y,height,width,dead",
+    draw$0: function() {
+      var t1, t2, t3, t4, t5;
+      t1 = $.Game_instance;
+      if (t1.state === t1.stateEnumControls) {
+        t1 = this.sprite;
+        t2 = this.gdp$Controls$x;
+        t3 = this.gdp$Controls$y;
+        t4 = t1.framew;
+        t5 = t1.frameh;
+        J.drawImageScaledFromSource$9$x($.normContext, t1.img, t1.spritex, t1.spritey, t4, t5, t2, t3, t4, t5);
+      }
+    },
+    update$1: function(dt) {
+      var t1, t2;
+      t1 = $.Game_instance;
+      if (t1.state === t1.stateEnumControls) {
+        this.input.toString;
+        if ($.get$gameLoop()._keyboard.pressed$1(27)) {
+          t1 = $.Game_instance.currentLevel;
+          t2 = $.LevelManager_enumMainMenu;
+          if (typeof t1 !== "number")
+            return t1.$gt();
+          t2 = t1 > t2;
+          t1 = t2;
+        } else
+          t1 = false;
+        if (t1) {
+          t1 = $.Game_instance;
+          t1.state = t1.stateEnumPause;
+        } else {
+          this.input.toString;
+          if (!$.get$gameLoop()._keyboard.pressed$1(27)) {
+            this.input.toString;
+            t1 = $.get$gameLoop()._keyboard.pressed$1(8);
+          } else
+            t1 = true;
+          if (t1) {
+            t1 = $.Game_instance;
+            t1.state = t1.stateEnumMain;
+          }
+        }
+      }
+    },
+    Controls$0: function() {
+      this.gdp$Controls$width = 640;
+      this.gdp$Controls$height = 480;
+      this.gdp$Controls$x = 0;
+      this.gdp$Controls$y = 0;
+      this.input = U.Input_Input();
+      this.resume = true;
+      var t1 = new U.SpriteSheet(this.spritex, this.spritey, 640, 480, "./content/controls.png", null);
+      t1.img = U.ImageLoader_getImage("./content/controls.png");
+      this.sprite = t1;
+    }
   },
   LevelManager: {
     "": "Object;",
@@ -9270,8 +9338,6 @@ var $$ = {};
     update$1: function(dt) {
       var t1;
       this.i = this.i + 1;
-      P.print("Update main menu");
-      P.print(this.i);
       this.input.toString;
       if ($.get$gameLoop()._keyboard.pressed$1(39) && this.playGame) {
         this.playGame = false;
@@ -9334,6 +9400,16 @@ var $$ = {};
         t1.currentLevel = $.LevelManager_enumLevelTwo;
         t1.reloadLevel$0();
         this.playGame = false;
+      } else {
+        if (this.controls) {
+          this.input.toString;
+          t1 = $.get$gameLoop()._keyboard.pressed$1(13);
+        } else
+          t1 = false;
+        if (t1) {
+          t1 = $.Game_instance;
+          t1.state = t1.stateEnumControls;
+        }
       }
     },
     MainMenu$0: function() {
@@ -9944,24 +10020,34 @@ var $$ = {};
           t1 = $.Game_instance;
           t1.state = t1.stateEnumPlay;
         } else {
-          if (this.quit) {
+          if (this.controls) {
             this.input.toString;
             t1 = $.get$gameLoop()._keyboard.pressed$1(13);
           } else
             t1 = false;
           if (t1) {
-            C.JSArray_methods.set$length($.ObjectManager_instance.goList, 0);
-            t1 = this.sprite;
-            t2 = this.gdp$InGameMenu$x;
-            t3 = this.gdp$InGameMenu$width;
-            t4 = this.gdp$InGameMenu$y;
-            t5 = this.gdp$InGameMenu$height;
-            t6 = t1.framew;
-            t7 = t1.frameh;
-            J.drawImageScaledFromSource$9$x($.normContext, t1.img, t1.spritex, t1.spritey, t6, t7, t2 - t3 / 2, t4 - t5 / 2, t6, t7);
-            t7 = $.Game_instance;
-            t7.currentLevel = $.LevelManager_enumMainMenu;
-            t7.state = t7.stateEnumMain;
+            t1 = $.Game_instance;
+            t1.state = t1.stateEnumControls;
+          } else {
+            if (this.quit) {
+              this.input.toString;
+              t1 = $.get$gameLoop()._keyboard.pressed$1(13);
+            } else
+              t1 = false;
+            if (t1) {
+              C.JSArray_methods.set$length($.ObjectManager_instance.goList, 0);
+              t1 = this.sprite;
+              t2 = this.gdp$InGameMenu$x;
+              t3 = this.gdp$InGameMenu$width;
+              t4 = this.gdp$InGameMenu$y;
+              t5 = this.gdp$InGameMenu$height;
+              t6 = t1.framew;
+              t7 = t1.frameh;
+              J.drawImageScaledFromSource$9$x($.normContext, t1.img, t1.spritex, t1.spritey, t6, t7, t2 - t3 / 2, t4 - t5 / 2, t6, t7);
+              t7 = $.Game_instance;
+              t7.currentLevel = $.LevelManager_enumMainMenu;
+              t7.state = t7.stateEnumMain;
+            }
           }
         }
       }
@@ -10110,13 +10196,13 @@ var $$ = {};
             $.context.drawImageScaledFromSource$9(0, t1.img, t2, 100, t7, t8, t3 - t4 / 2 - this.imgXOffset, t5 - t6 / 2 + this.imgYOffset, t7, t8);
           } else {
             t1 = this.LOOK_LEFT;
-            t2 = $.context;
-            t3 = this.sprite;
+            t2 = this.sprite;
+            t3 = $.context;
             t4 = this.imgXOffset;
             t5 = this.imgYOffset;
             if (t1) {
-              t3.spritex = 825;
-              t3.spritey = 100;
+              t2.spritex = 825;
+              t2.spritey = 100;
               t1 = this.x;
               t6 = this.width;
               if (typeof t1 !== "number")
@@ -10125,12 +10211,12 @@ var $$ = {};
               t8 = this.height;
               if (typeof t7 !== "number")
                 return t7.$sub();
-              t9 = t3.framew;
-              t10 = t3.frameh;
-              t2.drawImageScaledFromSource$9(0, t3.img, 825, 100, t9, t10, t1 - t6 / 2 - t4, t7 - t8 / 2 + t5, t9, t10);
+              t9 = t2.framew;
+              t10 = t2.frameh;
+              t3.drawImageScaledFromSource$9(0, t2.img, 825, 100, t9, t10, t1 - t6 / 2 - t4, t7 - t8 / 2 + t5, t9, t10);
             } else {
-              t3.spritex = 0;
-              t3.spritey = 0;
+              t2.spritex = 0;
+              t2.spritey = 0;
               t1 = this.x;
               t6 = this.width;
               if (typeof t1 !== "number")
@@ -10139,9 +10225,9 @@ var $$ = {};
               t8 = this.height;
               if (typeof t7 !== "number")
                 return t7.$sub();
-              t9 = t3.framew;
-              t10 = t3.frameh;
-              t2.drawImageScaledFromSource$9(0, t3.img, 0, 0, t9, t10, t1 - t6 / 2 - t4, t7 - t8 / 2 + t5, t9, t10);
+              t9 = t2.framew;
+              t10 = t2.frameh;
+              t3.drawImageScaledFromSource$9(0, t2.img, 0, 0, t9, t10, t1 - t6 / 2 - t4, t7 - t8 / 2 + t5, t9, t10);
             }
           }
         }
@@ -10529,7 +10615,7 @@ var $$ = {};
 ["", "main.dart", , F, {
   "": "",
   main: [function() {
-    var t1, t2, t3;
+    var t1, t2, t3, t4;
     if ($.Game_instance == null) {
       t1 = W.ImageElement_ImageElement(null, null, null);
       t2 = $.CollisionSystem_instance;
@@ -10548,9 +10634,11 @@ var $$ = {};
       t1.MainMenu$0();
       t3 = new U.InGameMenu(null, null, null, null, null, null, 0, 147, false, false, false, false, null, null, 0, 0, false);
       t3.InGameMenu$0();
-      t3 = new U.Game(t2, t1, t3, new P.Stopwatch(null, null), 0, new U.LevelManager(), null, 1, 2, 3, 4, 5, null, 0, 0, 0, 0, 0, U.Input_Input());
-      $.Game_instance = t3;
-      t3.Initialize$0();
+      t4 = new U.Controls(null, null, null, null, null, null, 0, 0, false, false, false, false, null, null, 0, 0, false);
+      t4.Controls$0();
+      t4 = new U.Game(t2, t1, t3, t4, new P.Stopwatch(null, null), 0, new U.LevelManager(), null, 1, 2, 3, 4, 5, 6, null, 0, 0, 0, 0, 0, U.Input_Input());
+      $.Game_instance = t4;
+      t4.Initialize$0();
     }
   }, "call$0", "main$closure", 0, 0, 0]
 },

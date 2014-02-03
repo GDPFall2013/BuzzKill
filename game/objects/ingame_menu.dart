@@ -127,13 +127,13 @@ class InGameMenu extends GameObject{
   
   //Select 'Resume'
   if(resume && input.wasPressed(KeyCode.ENTER)){
-   // ObjectManager om = ObjectManager.instance;
-   // om.clear();
-   // Game.instance.currentLevel = LevelManager.enumLevelTwo;
-   // Game.instance.reloadLevel();
-    
     Game.instance.state = Game.instance.stateEnumPlay;
   }
+  
+  else if(controls && input.wasPressed(KeyCode.ENTER)){
+    Game.instance.state = Game.instance.stateEnumControls;
+  }
+  
   
   else if(quit && input.wasPressed(KeyCode.ENTER)){
     ObjectManager.instance.goList.clear();

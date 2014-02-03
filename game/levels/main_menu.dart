@@ -36,8 +36,8 @@ class MainMenu extends GameObject{
   
   update(double dt){
     i = i+1;
-    print("Update main menu");
-    print(i);
+    //print("Update main menu");
+    //print(i);
     
     //down
     if (input.wasPressed(KeyCode.RIGHT) && playGame){
@@ -99,6 +99,12 @@ class MainMenu extends GameObject{
       Game.instance.reloadLevel();
       playGame = false;
     }
+    
+    
+    else if(controls && input.wasPressed(KeyCode.ENTER)){
+       Game.instance.state = Game.instance.stateEnumControls;
+     }
+     
     
   }
   

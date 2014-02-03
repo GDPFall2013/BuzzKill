@@ -28,6 +28,7 @@ part 'objects/droid.dart';
 part 'objects/ingame_menu.dart';
 
 
+
 part 'animations/sprite_sheet.dart';
 
 part 'levels/level_manager.dart';
@@ -37,6 +38,8 @@ part 'levels/level_two.dart';
 part 'levels/level_three.dart';
 part 'levels/level_menu.dart';
 part 'levels/main_menu.dart';
+part 'levels/controls.dart';
+
 
 part 'Collision_System/collision_system.dart';
 
@@ -63,6 +66,8 @@ class Game{
 Player player = new Player();
 MainMenu menu = new MainMenu();
 InGameMenu gameMenu = new InGameMenu();
+Controls controls = new Controls();
+
 static double oxygen = 100.0; 
 Stopwatch oxygenTimer = new Stopwatch();
 double lastOxygenTick = 0.0;
@@ -72,11 +77,13 @@ static int lives = 3;
 LevelManager levelManager = new LevelManager();
 int currentLevel;
 
+
 int stateEnumPlay = 1;
 int stateEnumWin = 2;
 int stateEnumGameOver = 3;
 int stateEnumPause = 4;
 int stateEnumMain = 5;
+int stateEnumControls = 6;
 
 int state;
 
@@ -115,7 +122,7 @@ void update(double dt) {
   
   
   //Main Menu
-    if(currentLevel == LevelManager.enumMainMenu){
+    if(currentLevel == LevelManager.enumMainMenu || state == stateEnumMain){
   menu.update(dt);
   menu.draw();}
   
@@ -167,6 +174,16 @@ void update(double dt) {
   }
   
   
+  //controls screen
+  if(state == stateEnumControls){
+    controls.update(dt);
+    //pause oxygen drain
+    if(oxygenTimer.elapsedMilliseconds > 250 + lastOxygenTick){
+    lastOxygenTick += 250;
+        oxygen -= 0;
+    }
+  }
+  
   // Frames per second debugging Information
   numberOfUpdates += 1.0;
   debuggingDisplayTime += dt;
@@ -185,9 +202,14 @@ void update(double dt) {
  */
 void draw() {
  
-  if(currentLevel == LevelManager.enumMainMenu){
+  if(currentLevel == LevelManager.enumMainMenu || state == stateEnumMain){
     normContext.clearRect(0, 0,640, 480);
     menu.draw();
+  }
+  
+  //controls screen
+  if(state == stateEnumControls){
+  controls.draw();
   }
   
   if (state == stateEnumPlay) {
