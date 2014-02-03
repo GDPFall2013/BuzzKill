@@ -2,15 +2,17 @@ library gdp_test;
 
 import 'package:unittest/unittest.dart';
 import 'package:unittest/html_config.dart';
-import '../app/main.dart';
+import '../game/game.dart';
+import '../game/canvas/canvas.dart';
 //import 'package:unittest/html_enhanced_config.dart';
 
 
 part 'animations/sprite_sheet_test.dart';
 part 'audio/sound_manager_test.dart';
 
-part 'camera/camera_test.dart';
-part 'camera/adjusted_context_test.dart';
+part 'canvas/camera_test.dart';
+part 'canvas/adjusted_context_test.dart';
+part 'canvas/canvas_test.dart';
 
 part 'levels/level_manager_test.dart';
 
@@ -32,6 +34,12 @@ part 'object_manager_test.dart';
 main() {
   useHtmlConfiguration();
   test("Testing if value is 2", () {expect(2, equals(1));});
+  
+  group('Framework,  ', () {
+    canvasTest();
+    spriteSheetTest();
+  });
+  
   
   group('Object Test Group', () {
     gameObjectTests();
