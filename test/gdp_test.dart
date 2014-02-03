@@ -2,6 +2,7 @@ library gdp_test;
 
 import 'package:unittest/unittest.dart';
 import 'package:unittest/html_config.dart';
+import 'dart:html';
 import '../game/game.dart';
 import '../game/canvas/canvas.dart';
 //import 'package:unittest/html_enhanced_config.dart';

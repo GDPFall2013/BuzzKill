@@ -10,30 +10,25 @@ class SpriteSheet {
 
   int spritex;
   int spritey;
-  int framew;
-  int frameh;  
-  String imgurl = "";
-  ImageElement img;
+  int _framew;
+  int _frameh;  
+  String _imgurl = "";
+  ImageElement _img;
   
-  SpriteSheet(this.imgurl, this.spritex, this.spritey,this.framew,this.frameh)
+  SpriteSheet(this._imgurl, this.spritex, this.spritey,this._framew,this._frameh)
   {
-    img = ImageLoader.getImage(imgurl); 
-    
-
+    _img = ImageLoader.getImage(_imgurl);     
   }
   
   drawOnPosition(double x, double y, double frameX, double frameY)
   {
-    context.drawImageScaledFromSource(img,spritex,spritey,framew,frameh, x,y,framew,frameh);
+    context.drawImageScaledFromSource(_img,spritex,spritey,_framew,_frameh, x,y,_framew,_frameh);
   }
   
   drawOnPositionn(double x, double y, double frameX, double frameY)
     {
-      normContext.drawImageScaledFromSource(img,spritex,spritey,framew,frameh, x,y,framew,frameh);
+      normContext.drawImageScaledFromSource(_img,spritex,spritey,_framew,_frameh, x,y,_framew,_frameh);
     }
-
-
-
 }
 
 
