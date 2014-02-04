@@ -2,6 +2,7 @@ name: BuzzKill
 description: Game
 dependencies:
   browser: any
+  chrome: any
   game_loop:
     git: https://github.com/johnmccutchan/game_loop.git
   js: any
