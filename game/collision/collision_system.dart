@@ -47,9 +47,15 @@ class CollisionSystem
       {
           if (checkForCollision(player, block))
           {
+             
+             if (player.velocity_y > 0) { // This means he is hitting the block from below
+               player.y = block.y + block.height/2 + player.height/2; 
+             } else {  // He is falling
+               onblock = true;
+               player.y = block.y - block.height/2 - player.height/2;     
+             }
+             
              player.velocity_y = 0.0;
-             onblock = true;
-             player.y = block.y - block.height/2 - player.height/2;      
           }
       }
       if (onblock) {
