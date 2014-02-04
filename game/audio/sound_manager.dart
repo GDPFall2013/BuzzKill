@@ -10,6 +10,8 @@ class SoundManager {
  // AudioSource sfxSource;
   
   AudioContext ac = new AudioContext();
+  AudioBufferSourceNode source;
+  
   
   static SoundManager instance;
   factory SoundManager() {
@@ -33,8 +35,18 @@ class SoundManager {
   static final int enumSoundShipItem = 3;
   static final int enumSoundInjure = 4;
   
+  GainNode volume;
+  int volumeNumber;
+  
   init(){
     loadSounds();
+    volume = ac.createGain();
+    source = ac.createBufferSource();
+    source.connectNode(volume);
+    volume.connectNode(ac.destination);
+    volumeNumber = 50;
+    volume.gain.value = volumeNumber;
+    
    // loadSound('content/Sound Files/SlowJump.wav', jumpClip);
    // loadSound('content/Sound Files/Oxygen.wav', _oxygenClip);
    // loadSound('content/Sound Files/ShipItem.wav', _shipItemClip);
@@ -130,7 +142,11 @@ class SoundManager {
   }
   
   void toggleMute() {
-  //  audioManager.mute = !audioManager.mute;
+    if (volume.gain.value == 0) {
+      volume.gain.value = volumeNumber;
+    } else {
+      volume.gain.value = 0;
+    }
   }
  
 
