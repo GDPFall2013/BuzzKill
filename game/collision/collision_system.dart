@@ -41,15 +41,21 @@ class CollisionSystem
      
    PlayerCollideWithBlock(Player player)
    {
+     bool onblock = false;
       //Collision Check for player colliding with blocks
       for (Block block in ObjectManager.instance.blockList) 
       {
           if (checkForCollision(player, block))
           {
              player.velocity_y = 0.0;
-             player.JUMPING = false;
+             onblock = true;
              player.y = block.y - block.height/2 - player.height/2;      
           }
+      }
+      if (onblock) {
+        player.JUMPING = false;
+      } else {
+        player.JUMPING = true;
       }
    }  
      
