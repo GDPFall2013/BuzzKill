@@ -114,6 +114,7 @@ Initialize() {
     oxygenTimer.start();}
     
     SoundManager sm = new SoundManager();
+    CollisionSystem cs = new CollisionSystem();
 }
 
 /**

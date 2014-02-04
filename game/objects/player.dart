@@ -1,7 +1,5 @@
 part of gdp;
 
-
-
 class Player extends GameObject{
   
   ImageElement img = new ImageElement();
@@ -14,13 +12,11 @@ class Player extends GameObject{
   
   double velocity_y = 0.0;
   double accel = 1.5;
-  //static double GROUND_LEVEL = 300.0;
   SpriteSheet sprite;
   
   int stateEnumAlive = 1;
   int stateEnumInjured = 2;
   int stateEnumDead = 3;
-  
   
   int state;
   
@@ -29,8 +25,6 @@ class Player extends GameObject{
   
   double playerStartX = 0.0;  //TODO: This should be moved to level object later
   double playerStartY = 300.0; 
-  
-  CollisionSystem collision = new CollisionSystem(); //utilized for testing purposes
   
   double imgXOffset = 16.0;
   double imgYOffset = - 12.0;
@@ -45,42 +39,29 @@ class Player extends GameObject{
 
     input = new Input();
     sprite = new SpriteSheet("./content/buzzspritesheet.png",0,0,75,100);
-    //WALKING = true;
-    //print("begin");
     
   }
   
    draw(){
-     
-     if (state != stateEnumDead && !blink) {
-
-      //context.drawImageScaled(img, cx - width/2, cy - height/2, width, height);
-       
-       
-       
-       
-       if(JUMPING && LOOK_RIGHT){
-  
+      if (state != stateEnumDead && !blink) {
+        if(JUMPING && LOOK_RIGHT){
+          
           sprite.spritex = 225;
           sprite.spritey = 200;
-  
-         sprite.drawOnPosition((x-width/2) - imgXOffset, y - height/2 + imgYOffset, width , height);
+          sprite.drawOnPosition((x-width/2) - imgXOffset, y - height/2 + imgYOffset, width , height);
          
+        }
+        else if(JUMPING && LOOK_LEFT){
+          
+          sprite.spritex = 225;
+          sprite.spritey = 300;
+          sprite.drawOnPosition((x-width/2)  - imgXOffset, y - height/2 + imgYOffset, width , height);
+          
        }
-       
-       else if(JUMPING && LOOK_LEFT){
-        
-           sprite.spritex = 225;
-           sprite.spritey = 300;
-  
-         sprite.drawOnPosition((x-width/2)  - imgXOffset, y - height/2 + imgYOffset, width , height);
-       }
-       
        else if(JUMPING){
          
          sprite.spritex = 225;
          sprite.spritey = 200;
-         
          sprite.drawOnPosition((x-width/2) - imgXOffset, y - height/2 + imgYOffset, width , height);
          
        }
@@ -95,23 +76,22 @@ class Player extends GameObject{
          sprite.spritey = 0;
          }
          
-         //print(sprite.spritex  + sprite.spritey);
          sprite.drawOnPosition((x-width/2)  - imgXOffset, y - height/2 + imgYOffset, width , height);
        }
        
-       else if(WALKING && LOOK_LEFT){
+      else if(WALKING && LOOK_LEFT){
          if(sprite.spritex <= 0){
            sprite.spritex = 825;
            sprite.spritey = 100;
          }
          else{
-         sprite.spritex = sprite.spritex - 75;
-         sprite.spritey = 100;
+           sprite.spritex = sprite.spritex - 75;
+           sprite.spritey = 100;
          }
          sprite.drawOnPosition((x-width/2)  - imgXOffset, y - height/2 + imgYOffset, width , height);
        }
        
-       else {
+      else {
          if(LOOK_LEFT){
            sprite.spritex = 825;
            sprite.spritey = 100;
@@ -122,10 +102,8 @@ class Player extends GameObject{
            sprite.spritey = 0;
            sprite.drawOnPosition((x-width/2)  - imgXOffset, y - height/2 + imgYOffset, width , height);
          }
-         
-         
-       }
-     }
+      }
+    }
   }
    
    update(double dt){
@@ -134,29 +112,16 @@ class Player extends GameObject{
        
        if (input.isDown(KeyCode.UP) ){
          
-         //if currently jumping
-         if(JUMPING){
-           //do nothing 
+         if(!JUMPING){
+           SoundManager.instance.playSound(SoundManager.enumSoundJump);
+           JUMPING = true;
+           velocity_y = 25.0;
          }
-         
-         //start jump motion
-         else{
-         SoundManager.instance.playSound(SoundManager.enumSoundJump);
-         JUMPING = true;
-         velocity_y = 25.0;}
-  
-       }
-     
-       
-       //down key does nothing for now
-       if (input.isDown(KeyCode.DOWN)){
-         //y += 1;    
        }
        
        //move right
        if (input.isDown(KeyCode.RIGHT)){
          movePlayer(1.0, 3*dt);
-        // x += 3 * dt;
          WALKING = true;
          LOOK_RIGHT = true;
          LOOK_LEFT = false;
@@ -171,7 +136,6 @@ class Player extends GameObject{
        //move left
        if (input.isDown(KeyCode.LEFT)){
          movePlayer(-1.0, 3*dt);
-      //   x -= 3 * dt;
          WALKING = true;
          LOOK_LEFT = true;
          LOOK_RIGHT = false;
@@ -181,13 +145,11 @@ class Player extends GameObject{
          WALKING = false;}
          //LOOK_LEFT = false;
        }
-       
-         
 
          //Gravity
          if(velocity_y > - 130.0){
             velocity_y = velocity_y - accel;
-            y = y - velocity_y * dt;// - 50);
+            y = y - velocity_y * dt;
             
             if(LOOK_RIGHT && input.isDown(KeyCode.RIGHT)){
             movePlayer (1.0, 1 * dt);
@@ -213,12 +175,12 @@ class Player extends GameObject{
         }
         
       //  if (state == stateEnumAlive || state == stateEnumInjured) {
-          collision.PlayerCollideWithItem(this);
+          CollisionSystem.instance.PlayerCollideWithItem(this);
        // }
         if (state == stateEnumAlive) {
-          collision.PlayerCollideWithEnemy(this);
+          CollisionSystem.instance.PlayerCollideWithEnemy(this);
         }
-        collision.PlayerCollideWithBlock(this);
+        CollisionSystem.instance.PlayerCollideWithBlock(this);
      }
        
    }
