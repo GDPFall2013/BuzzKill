@@ -75,8 +75,7 @@ double lastOxygenTick = 0.0;
 
 static int lives = 3;
 
-LevelManager levelManager = new LevelManager();
-ObjectManager objectManager = new ObjectManager();
+
 int currentLevel;
 
 
@@ -96,10 +95,15 @@ double debuggingDisplayTime = 0.0;
 double numberOfUpdates = 0.0;
 double numberOfRenders = 0.0;
 
-Input input = new Input();
+LevelManager levelManager = new LevelManager();
 
 Initialize() {
   buildCanvas();
+  SoundManager sm = new SoundManager();
+  CollisionSystem cs = new CollisionSystem();
+  ObjectManager objectManager = new ObjectManager();
+  Input input = new Input();
+  
   gameLoop.onUpdate = ((gameLoop) {update(gameLoop.dt * 100);});
   gameLoop.onRender = ((gameLoop) {draw();});
   gameLoop.start();
@@ -113,8 +117,7 @@ Initialize() {
     if(currentLevel >= LevelManager.enumLevelOne){
     oxygenTimer.start();}
     
-    SoundManager sm = new SoundManager();
-    CollisionSystem cs = new CollisionSystem();
+
 }
 
 /**
@@ -155,7 +158,7 @@ void update(double dt) {
     
     
     //Bring up in-game menu
-    if(input.wasPressed(KeyCode.ESC)){
+    if(Input.instance.wasPressed(KeyCode.ESC)){
        
        state = stateEnumPause;
        gameMenu.draw();
@@ -227,10 +230,11 @@ void draw() {
     }
     
   for (GameObject go in ObjectManager.instance.goList) {
+    double goRightEdge = go.x + go.width/2;
+    double goLeftEdge = go.x - go.width/2;
     
-    double drawSpace = viewportWidth/4;
-    if (go.x + go.width/2 > (camera.x /  - drawSpace)/ Camera.instance.screenRatio && 
-        go.x - go.width/2 < (camera.x + viewportWidth + drawSpace) / Camera.instance.screenRatio) {
+    if (goRightEdge > (camera.x - (viewportWidth / Camera.instance.screenRatio))  && 
+        goLeftEdge < (camera.x + (viewportWidth / Camera.instance.screenRatio))) {
       go.draw();
      // DrawColliderBox(go);
     }   
