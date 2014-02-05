@@ -30,7 +30,7 @@ class Controls extends GameObject{
   
   draw(){
     if(Game.instance.state == Game.instance.stateEnumControls){
-      sprite.drawOnPositionn(x, y, 640.0 , 480.0);
+      sprite.drawOnPositionNormal(x, y, 640.0 , 480.0);
    }
   //  else{
       //sprite.drawOnPositionn(x-this.width/2, y-this.height/2, 0.0 , 0.0);

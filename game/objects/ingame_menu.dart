@@ -30,7 +30,7 @@ class InGameMenu extends GameObject{
   
   draw(){
     if(Game.instance.state == Game.instance.stateEnumPause){
-      sprite.drawOnPositionn(x-this.width/2, y-this.height/2, 150.0 , 198.0);
+      sprite.drawOnPositionNormal(x-this.width/2, y-this.height/2, 150.0 , 198.0);
    }
   //  else{
       //sprite.drawOnPositionn(x-this.width/2, y-this.height/2, 0.0 , 0.0);
@@ -138,7 +138,7 @@ class InGameMenu extends GameObject{
   else if(quit && input.wasPressed(KeyCode.ENTER)){
     ObjectManager.instance.goList.clear();
     //normContext.clearRect(0, 0,640, 480);
-    sprite.drawOnPositionn(x-this.width/2, y-this.height/2, 0.0 , 0.0);
+    sprite.drawOnPositionNormal(x-this.width/2, y-this.height/2, 0.0 , 0.0);
     Game.instance.currentLevel = LevelManager.enumMainMenu;
     Game.instance.state = Game.instance.stateEnumMain;
   }

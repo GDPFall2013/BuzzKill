@@ -5,7 +5,6 @@ part of gdp;
  * A SpriteSheet (SS) is a set of sprites that make up an animation for an object.
  * They can either be line drawings, or images.
  */
-
 class SpriteSheet {
 
   int spritex;
@@ -14,6 +13,13 @@ class SpriteSheet {
   int _frameh;  
   String _imgurl = "";
   ImageElement _img;
+  
+  double lastDraw = 0.0;
+  double frameChangeRate;
+  int numberOfFrames;
+  int spriteFrame = 0;
+
+  int spriteXInitial = 0;
   
   SpriteSheet(this._imgurl, this.spritex, this.spritey,this._framew,this._frameh)
   {
@@ -25,10 +31,29 @@ class SpriteSheet {
     context.drawImageScaledFromSource(_img,spritex,spritey,_framew,_frameh, x,y,_framew,_frameh);
   }
   
-  drawOnPositionn(double x, double y, double frameX, double frameY)
-    {
+  /* 
+   * For drawing that is not adjusted by the Camera
+   */
+  drawOnPositionNormal(double x, double y, double frameX, double frameY)
+  {
       normContext.drawImageScaledFromSource(_img,spritex,spritey,_framew,_frameh, x,y,_framew,_frameh);
+  }
+  
+  update(double dt)
+  {
+    lastDraw += dt; 
+    if (lastDraw > frameChangeRate) {
+    lastDraw -= frameChangeRate;
+      if (spriteFrame >= numberOfFrames) {  
+        spriteFrame = 1;
+      }
+      else{
+        spriteFrame++;
+      }
+      // The minus one is because the first frame starts at 0
+      spritex = spriteXInitial + (spriteFrame - 1)  * _framew;
     }
+  }
 }
 
 

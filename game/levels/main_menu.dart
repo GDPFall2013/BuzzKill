@@ -30,7 +30,7 @@ class MainMenu extends GameObject{
 
   
   draw(){
-    sprite.drawOnPositionn(x-this.width/2, y-this.height/2, 150.0 , 147.0);
+    sprite.drawOnPositionNormal(x-this.width/2, y-this.height/2, 150.0 , 147.0);
   }
   
   
