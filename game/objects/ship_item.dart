@@ -6,27 +6,37 @@ part of gdp;
  */
 class ShipItem extends Item{
   
-  SpriteSheet space_item = new SpriteSheet("./content/gameitems.png",0,100,90,90);
+  SpriteSheet sprite;
+  int spriteXInitial = 0;
+  int spriteYInitial = 100;
+  int spriteWidth = 90;
+  int spriteHeight = 90;
+  num spriteFrames = 6;
+  
   bool glow=true;
   int repeat=1;
   int level;
-  
-  update(double dt) {
-    //Inanimate object, does nothing
-  }
   
   initialize(double x, double y) {
     super.initialize(x, y);
     this.height = 90.0;
     this.width = 90.0;
+    sprite = new SpriteSheet("./content/gameitems.png",
+        spriteXInitial,spriteYInitial,spriteWidth,spriteHeight);
   }
+
+  
+  update(double dt) {
+    //Inanimate object, does nothing
+  }
+  
   
   draw() {
     //glow logic
-      if(space_item.spritex >=450){
+      if(sprite.spritex >=450){
         glow = false;
       }
-      else if(space_item.spritex == 0){
+      else if(sprite.spritex == 0){
         glow = true;
       }
       
@@ -61,7 +71,7 @@ class ShipItem extends Item{
         }}
         else{  
           repeat=1;
-      space_item.spritex -= 90;
+          sprite.spritex -= 90;
         }
     
     }
@@ -99,12 +109,12 @@ class ShipItem extends Item{
         }}
         else{  
           repeat=1;
-      space_item.spritex += 90;
+          sprite.spritex += 90;
         }
         
       }
     
-    space_item.drawOnPosition(x-this.width/2, y-this.height/2, width , height);   
+    sprite.drawOnPosition(x-this.width/2, y-this.height/2, width , height);   
   }
   
   /*

@@ -5,10 +5,10 @@ class Droid extends Enemy{
   ImageElement img = new ImageElement();
 
   SpriteSheet sprite;
-  int spriteWidth = 78;
-  int spriteHeight = 108;
   int spriteXInitial = 0;
   int spriteYInitial = 442;
+  int spriteWidth = 78;
+  int spriteHeight = 108;
   
   double imgOffsetX = 8.0;
   double imgOffsetY = -7.0;

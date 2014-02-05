@@ -1,22 +1,18 @@
 part of gdp;
 
-
-
 class Alien extends Enemy{
   
   ImageElement img = new ImageElement();
 
-  Input input;
-  bool JUMPING = false;
-  double velocity_y = 0.0;
-  double accel = 10.0;
-  static double GROUND_LEVEL = 300.0;
   SpriteSheet sprite;
-  int repeat = 0;
+  int spriteXInitial = 0;
+  int spriteYInitial = 0;
+  int spriteWidth = 97;
+  int spriteHeight = 50;
   
   double imgOffsetX = 8.0;
   double imgOffsetY = -7.0;
-  double lastDraw = 0.0;  // Used for timing Animation
+
   double initialPos;
   double endPos;
   bool goingBack = false;
@@ -25,104 +21,44 @@ class Alien extends Enemy{
     super.initialize(x, y);
     width = 83.0;
     height = 40.0;
-    //y = GROUND_LEVEL;
-    sprite = new SpriteSheet("./content/enemies_spritesheet.png",0,0,97,50);
-    repeat = 0;
+
+    sprite = new SpriteSheet("./content/enemies_spritesheet.png",
+        spriteXInitial,spriteYInitial,spriteWidth,spriteHeight);
     
     initialPos = x;
     endPos = x-150.0;
+    
+    sprite.frameChangeRate = 10.0;
+    sprite.numberOfFrames = 4;
   }
   
   update (double dt) {
   
+    double speed = 0.4 * dt;
+    
     //move aliens back and forth
-    if(x >= endPos && goingBack==false){
-      x = x - 0.2 * dt;
-    }
-    else{
-      goingBack = true;
-      x = x + 0.2 * dt;
-    }
-    
-    if(x<initialPos && goingBack){
-      x = x + 0.2 * dt;
-    }
-    else{
-      goingBack = false;
-      x = x - 0.2 * dt;
-    }
-    
-    
-    
-    lastDraw += dt;
-    if (lastDraw > 1.0) {
-    lastDraw -= 1.0;
-      //sprite logic
-      if(sprite.spritex >= 380){
-        sprite.spritex = 0;
-        sprite.spritey = 0;
-        
-        repeat = 1;
-      }
-      
-      //repeating a single sprite for smoother animation
-      else if(repeat==1 || repeat==2 || repeat == 3 || repeat ==4 || repeat ==5
-              || repeat==6 || repeat==7 || repeat==8){
-        sprite.spritex = sprite.spritex;
-        
-        if(goingBack){
-          sprite.spritey = 50;
-        }
-        else
-        sprite.spritey = 0;
-        
-        if(repeat == 1){
-          repeat = 2;
-        }
-        else if(repeat == 2){
-          repeat = 3;
-        }
-        else if(repeat == 3){
-          repeat = 4;
-        }
-        else if(repeat == 4){
-          repeat = 5;
-        }
-        else if(repeat == 5){
-          repeat = 6;
-        }
-        else if(repeat == 6){
-          repeat = 7;
-        }
-        else if(repeat == 7){
-          repeat = 8;
-        }
-        else if(repeat == 8){
-          repeat = 9;
-        }
+    if (goingBack == false) {
+      if(x >= endPos){
+        x = x - speed;
       }
       else{
-        //walking backwards animation
-        if(goingBack){
-          sprite.spritex = sprite.spritex + 97;
-          sprite.spritey = 50;
-          repeat = 1;
-        }
-        //walking forward animation
-        else{
-        sprite.spritex = sprite.spritex + 97;
+        goingBack = true;
+        sprite.spritey = 50;
+      }
+    } else {
+      if(x<initialPos){
+        x = x + speed;
+      }
+      else{
+        goingBack = false;
         sprite.spritey = 0;
-        repeat = 1;
-        }
       }
     }
+    sprite.update(dt);
   }
   
-   draw(){
+  draw(){
     sprite.drawOnPosition(x-width/2 - imgOffsetX, y-height/2 + imgOffsetY, width , height);
-     
-    //context.drawImageScaled(img, cx - width/2, cy - height/2, width, height);
-
   }
   
    double injure() {
