@@ -11,7 +11,7 @@ class Droid extends Enemy{
   int spriteHeight = 108;
   
   double imgOffsetX = 8.0;
-  double imgOffsetY = -7.0;
+  double imgOffsetY = -4.0;
 
   double initialPos;
   double endPos;
@@ -19,8 +19,8 @@ class Droid extends Enemy{
   
   initialize(double x, double y) {
     super.initialize(x, y);
-    width = 78.0;
-    height = 108.0;
+    width = 54.0;
+    height = 104.0;
     sprite = new SpriteSheet("./content/enemies_spritesheet copy.png",
         spriteXInitial,spriteYInitial,spriteWidth,spriteHeight);
     

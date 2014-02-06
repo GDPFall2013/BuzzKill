@@ -51,8 +51,8 @@ DrawColliderBox(GameObject go){
   
   context.save();
   context.beginPath(); 
-  context.rect(go.x + go.width/2, go.y - go.height/2, go.width, go.height);
-  normContext.strokeStyle = "black";  //Should this be capitalized?
+  context.rect(go.x - go.width/2, go.y - go.height/2, go.width, go.height);
+  normContext.strokeStyle = "white";  //Should this be capitalized?
   context.stroke();
   context.restore();
 }

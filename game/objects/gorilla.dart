@@ -10,8 +10,8 @@ class Gorilla extends Enemy{
   int spriteWidth = 126;
   int spriteHeight = 166;
   
-  double imgOffsetX = 8.0;
-  double imgOffsetY = -7.0;
+  double imgOffsetX = 0.0;
+  double imgOffsetY = -20.0;
 
   double initialPos;
   double endPos;
@@ -19,8 +19,8 @@ class Gorilla extends Enemy{
   
   initialize(double x, double y) {
     super.initialize(x, y);
-    width = 126.0;
-    height = 166.0;
+    width = 100.0;
+    height = 140.0;
     
     sprite = new SpriteSheet("./content/enemies_spritesheet copy.png",0,266,126,166);
     

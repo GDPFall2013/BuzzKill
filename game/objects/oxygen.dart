@@ -16,7 +16,7 @@ class Oxygen extends Item {
   initialize(double x, double y) {
     super.initialize(x, y);
     this.width = 50.0;
-    this.height = 10.0;
+    this.height = 45.0;
   }
   
   draw() {
