@@ -58,6 +58,12 @@ void setupLevelTwo() {
   // screen 3
   om.addBlock(new Block()..initialize(2350.0, 480.0) // floor
       ..width = 350.0 .. height = 140.0);
+  
+  om.addItem(new Oxygen()..initialize(2200.0, 350.0));
+  om.addItem(new Oxygen()..initialize(2250.0, 350.0));
+  om.addItem(new Oxygen()..initialize(2300.0, 350.0));
+  om.addItem(new Oxygen()..initialize(2350.0, 350.0));
+  om.addItem(new Oxygen()..initialize(2400.0, 350.0));
 
   
   // screen 3.5
@@ -108,6 +114,14 @@ void setupLevelTwo() {
   //screen 6
   om.addBlock(new Block()..initialize(5400.0, 420.0) // floor
       ..width = 700.0 .. height = 140.0);
+  om.addItem(new Oxygen()..initialize(4900.0, 290.0));
+  om.addItem(new Oxygen()..initialize(4950.0, 290.0));
+  om.addItem(new Oxygen()..initialize(5000.0, 290.0));
+  om.addItem(new Oxygen()..initialize(5050.0, 290.0));
+  om.addItem(new Oxygen()..initialize(5100.0, 290.0));
+  om.addItem(new Oxygen()..initialize(5150.0, 290.0));
+  om.addItem(new Oxygen()..initialize(5200.0, 290.0));
+  
   om.addEnemy(new Alien()..initialize(5400.0, 330.0));
   om.addBlock(new Block()..initialize(5900.0, 320.0) // floor
       ..width = 100.0 .. height = 101.0);
@@ -149,7 +163,7 @@ void setupLevelTwo() {
       ..width = 1500.0 .. height = 140.0);
   om.addBlock(new Block()..initialize(9000.0, 300.0) // Boulder
       ..width = 120.0 .. height = 100.0);  
-  om.addBlock(new Block()..initialize(9400.0, 120.0) // floor
+  om.addBlock(new Block()..initialize(9350.0, 120.0) // floor
       ..width = 300.0 .. height = 140.0);
   om.addItem(new Oxygen()..initialize(9350.0, 0.0));
   om.addItem(new Oxygen()..initialize(9400.0, 0.0));
@@ -196,15 +210,21 @@ void setupLevelTwo() {
   
   om.addEnemy(new Droid()..initialize(11400.0, 185.0));
   
-  om.addBlock(new Block()..initialize(12600.0, 420.0) // floor
-      ..width = 2000.0 .. height = 140.0);
-  om.addBlock(new Block()..initialize(11850.0, 100.0) // floor
+  om.addBlock(new Block()..initialize(12100.0, 420.0) // floor
+      ..width = 1500.0 .. height = 140.0);
+  om.addBlock(new Block()..initialize(11800.0, 100.0)
       ..width = 300.0 .. height = 101.0);
+  
+  Block bossFloor = (new Block()..initialize(13070.0, 420.0) // boss floor
+  ..width = 440.0 .. height = 140.0);
+  om.addBlock(bossFloor);
+  
+  om.addItem(new Oxygen()..initialize(11800.0, -20.0));
   om.addItem(new Oxygen()..initialize(11850.0, -20.0));
   om.addItem(new Oxygen()..initialize(11900.0, -20.0));
   om.addItem(new Oxygen()..initialize(11950.0, -20.0));
-  om.addItem(new Oxygen()..initialize(12000.0, -20.0));
-  om.addItem(new Oxygen()..initialize(12250.0, -20.0));
+  
+  om.addItem(new Oxygen()..initialize(12200.0, -20.0));
   
   //screen 10
   om.addItem(new Oxygen()..initialize(12300.0, 290.0));
@@ -220,14 +240,27 @@ void setupLevelTwo() {
   
   
   //boss
-  om.addBlock(new Block()..initialize(13700.0, 420.0) // floor
-        ..width = 200.0 .. height = 140.0);
-  om.addEnemy(new Gorilla()..initialize(13100.0, 290.0));
-  om.addBlock(new Block()..initialize(13900.0, 420.0) // obstacle
-        ..width = 200.0 .. height = 1500.0);
-  om.addBlock(new Block()..initialize(14100.0, 420.0) // obstacle
+  om.addBlock(new Block()..initialize(13445.0, 420.0) // trigger floor
+        ..width = 310.0 .. height = 140.0);
+  Trigger trigger = new Trigger()..initialize(13530.0, 340.0)
+  ..width = 120.0 .. height = 20.0;
+  
+  
+  Enemy boss = (new Gorilla()..initialize(13100.0, 290.0));
+  om.addEnemy(boss);
+  
+  
+  
+  Block floorObstacle = new Block()..initialize(13700.0, 0.0) // obstacle
+  ..width = 200.0 .. height = 1000.0 ..isObstacle = true;
+  om.addBlock(floorObstacle);
+  
+  trigger.setTriggerObjects(bossFloor, boss, floorObstacle);
+  om.addTrigger(trigger);
+  
+  om.addBlock(new Block()..initialize(13900.0, 420.0) 
           ..width = 200.0 .. height = 140.0);
-  om.addItem(new ShipItem()..initialize(14100.0, 290.0)
+  om.addItem(new ShipItem()..initialize(13900.0, 290.0)
       ..level = 2);
   
 }

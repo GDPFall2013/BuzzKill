@@ -16,6 +16,7 @@ class Gorilla extends Enemy{
   double initialPos;
   double endPos;
   bool goingBack = false;
+  bool triggerFall = false;
   
   initialize(double x, double y) {
     super.initialize(x, y);
@@ -34,7 +35,37 @@ class Gorilla extends Enemy{
   update (double dt) {
     double speed = 0.4 * dt;
     
+    if(triggerFall){
+      y += 1;
+      sprite.spritey = 100;
+      
+      /*
+      if (sprite.lastDraw > sprite.frameChangeRate) {
+          sprite.lastDraw -= sprite.frameChangeRate;
+            if (sprite.spriteFrame >= sprite.numberOfFrames) {  
+              sprite.spriteFrame = 1;
+            }
+            else{
+              sprite.spriteFrame++;
+            }
+            // The minus one is because the first frame starts at 0
+            if(sprite.spritex!=378 && sprite.spritex!=504 && sprite.spritex!=630){
+                 sprite.spritex = 378;}
+                 else{
+                   if(sprite.spritex == 630){
+                     sprite.spritex = 378;
+                   }
+                   else{
+                     sprite.spritex += 126;
+                   }
+                 }
+          }
+      */
+    }
+    
+    
     //move aliens back and forth
+    else{
     if (goingBack == false) {
       if(x >= endPos){
         x = x - speed;
@@ -43,7 +74,8 @@ class Gorilla extends Enemy{
         goingBack = true;
         sprite.spritey = 100;
       }
-    } else {
+    }
+    else {
       if(x<initialPos){
         x = x + speed;
       }
@@ -52,6 +84,8 @@ class Gorilla extends Enemy{
         sprite.spritey = 266;
       }
     }
+    }
+    
     sprite.update(dt);  
   }
   

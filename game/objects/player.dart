@@ -176,6 +176,7 @@ class Player extends GameObject{
         
       //  if (state == stateEnumAlive || state == stateEnumInjured) {
           CollisionSystem.instance.PlayerCollideWithItem(this);
+          CollisionSystem.instance.PlayerCollideWithTrigger(this);
        // }
         if (state == stateEnumAlive) {
           CollisionSystem.instance.PlayerCollideWithEnemy(this);

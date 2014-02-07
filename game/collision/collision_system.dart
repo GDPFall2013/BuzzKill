@@ -63,7 +63,24 @@ class CollisionSystem
       } else {
         player.JUMPING = true;
       }
-   }  
+   }
+   
+   
+   PlayerCollideWithTrigger(Player player){
+     bool onTrigger = false;
+     for (Trigger trigger in ObjectManager.instance.triggerList){
+       if (checkForCollision(player, trigger)){
+         trigger.collapse();
+         if(trigger.y == trigger.originalY){
+         trigger.y += 20;
+         }
+      }
+       
+       else if(trigger.y != trigger.originalY){
+         trigger.y -=20;
+       }
+      }
+   }
      
 // given two objects, check for a collision between them
      bool checkForCollision(GameObject a, GameObject b){

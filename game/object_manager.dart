@@ -15,6 +15,7 @@ class ObjectManager {
   List<GameObject> blockList = new List<Block>();
   List<Enemy> enemyList = new List<Enemy>();
   List<Item> itemList = new List<Item>();
+  List<Trigger> triggerList = new List<Trigger>();
   
   /*
    * Adds an object to the master list of objects
@@ -36,6 +37,11 @@ class ObjectManager {
   void addEnemy(Enemy enemy) {
     goList.add(enemy);
     enemyList.add(enemy);
+  }
+  
+  void addTrigger(Trigger trigger){
+    goList.add(trigger);
+    triggerList.add(trigger);
   }
   
   void removeDeadObjects() {

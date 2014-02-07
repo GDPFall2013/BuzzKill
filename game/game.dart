@@ -27,7 +27,7 @@ part 'objects/enemy.dart';
 part 'objects/gorilla.dart';
 part 'objects/droid.dart';
 part 'objects/ingame_menu.dart';
-
+part 'objects/trigger.dart';
 
 
 part 'animations/sprite_sheet.dart';
