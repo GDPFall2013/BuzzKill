@@ -19,8 +19,8 @@ class ShipItem extends Item{
   
   initialize(double x, double y) {
     super.initialize(x, y);
-    this.height = 90.0;
-    this.width = 90.0;
+    this.height = 80.0;
+    this.width = 80.0;
     sprite = new SpriteSheet("./content/gameitems.png",
         spriteXInitial,spriteYInitial,spriteWidth,spriteHeight);
   }
