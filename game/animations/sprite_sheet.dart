@@ -28,7 +28,7 @@ class SpriteSheet {
   
   drawOnPosition(double x, double y, double frameX, double frameY)
   {
-    context.drawImageScaledFromSource(_img,spritex,spritey,_framew,_frameh, x,y,_framew,_frameh);
+    ctx.drawImageScaledFromSource(_img,spritex,spritey,_framew,_frameh, x,y,_framew,_frameh);
   }
   
   /* 

@@ -22,6 +22,10 @@ class Input {
     isUp(int keyCode) =>  gameLoop.keyboard.isUp(keyCode);
     wasPressed(int keyCode) => gameLoop.keyboard.pressed(keyCode);
     wasReleased(int keyCode) => gameLoop.keyboard.released(keyCode);
+    
+    /**
+     * This section is Dart code that should work, but is not implemented in Dart yet
+     */
 //    wasButtonPressed(int buttonCode) {
 //      List gamepads = window.navigator.getGamepads();
 //      gp = gamepads.first;
@@ -39,6 +43,42 @@ class Input {
 //      
 //      return false;
 //    }
+    bool controllerButtonPushed = false;
+    bool controllerAxesRight = false;
+    bool controllerAxesLeft = false;
+    
+    void update() {
+
+      JsObject jsControllers = context['controllers'];
+      LinkedHashMap controllers = convert(jsControllers);
+      
+      controllers.forEach((index, controller) {
+        List buttons = controller["buttons"];
+        for (var button in buttons){
+          if (button == 1){
+            controllerButtonPushed = true;
+          }
+        }
+        List axes = controller["axes"];
+        var axeOne = axes[0];
+        var axeTwo = axes[1];
+        var axeThree = axes[2];
+        var axeFour = axes[3];
+       if (axeOne > 0.5) {
+         controllerAxesRight = true;
+       }
+       if (axeOne < -0.5) {
+         controllerAxesLeft = true;
+       }
+       
+      });
+    }
+    
+    convert( JsObject object )
+    {
+      return JSON.decode( context['JSON'].callMethod("stringify", [ object ] ) );
+    }
+    
     
     //wasPressed(gameLoop.GameLoopGamePad.BUTTON0) =>gameLoop.gamepad0;
   /**

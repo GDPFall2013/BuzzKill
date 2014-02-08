@@ -18,25 +18,25 @@ class Spike extends Enemy {
     double top = y - height/2;
     
     
-    context.save();
-    context.beginPath();
-    context.moveTo(left, bottom);
-    context.lineTo(left + 1 * width/10, top);
-    context.lineTo(left + 2 * width/10, bottom);
-    context.lineTo(left + 3 * width/10, top);
-    context.lineTo(left + 4 * width/10, bottom);
-    context.lineTo(left + 5 * width/10, top);
-    context.lineTo(left + 6 * width/10, bottom);
-    context.lineTo(left + 7 * width/10, top);
-    context.lineTo(left + 8 * width/10, bottom);
-    context.lineTo(left + 9 * width/10, top);
-    context.lineTo(left + 10 * width/10, bottom);
+    ctx.save();
+    ctx.beginPath();
+    ctx.moveTo(left, bottom);
+    ctx.lineTo(left + 1 * width/10, top);
+    ctx.lineTo(left + 2 * width/10, bottom);
+    ctx.lineTo(left + 3 * width/10, top);
+    ctx.lineTo(left + 4 * width/10, bottom);
+    ctx.lineTo(left + 5 * width/10, top);
+    ctx.lineTo(left + 6 * width/10, bottom);
+    ctx.lineTo(left + 7 * width/10, top);
+    ctx.lineTo(left + 8 * width/10, bottom);
+    ctx.lineTo(left + 9 * width/10, top);
+    ctx.lineTo(left + 10 * width/10, bottom);
     normContext.fillStyle = 'yellow';
     normContext.closePath();
-    context.stroke();
-    context.fill();
+    ctx.stroke();
+    ctx.fill();
     
-    context.restore();
+    ctx.restore();
    
   }
   
