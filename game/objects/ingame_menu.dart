@@ -134,11 +134,10 @@ class InGameMenu extends GameObject{
     Game.instance.state = Game.instance.stateEnumControls;
   }
   
-  
   else if(quit && input.wasPressed(KeyCode.ENTER)){
     ObjectManager.instance.goList.clear();
     //normContext.clearRect(0, 0,640, 480);
-    sprite.drawOnPositionNormal(x-this.width/2, y-this.height/2, 0.0 , 0.0);
+    //sprite.drawOnPositionNormal(x-this.width/2, y-this.height/2, 0.0 , 0.0);
     Game.instance.currentLevel = LevelManager.enumMainMenu;
     Game.instance.state = Game.instance.stateEnumMain;
   }

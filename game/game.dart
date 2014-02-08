@@ -87,7 +87,7 @@ int stateEnumGameOver = 3;
 int stateEnumPause = 4;
 int stateEnumMain = 5;
 int stateEnumControls = 6;
-
+bool resetMainMenu = false; //used to reset main menu if prev screen was pause menu
 int state;
 
 // variables for Performance testing
@@ -131,12 +131,18 @@ void update(double dt) {
   Input.instance.controllerAxesLeft = false;
   Input.instance.update();
   //if(ObjectManager.instance.goList.isEmpty){
- 
+
   
   //Main Menu
     if(currentLevel == LevelManager.enumMainMenu || state == stateEnumMain){
+     if(resetMainMenu){
+      menu = new MainMenu();
+      }
+      
+  resetMainMenu = false;
   menu.update(dt);
-  menu.draw();}
+  menu.draw();
+  }
   
     
   //Play Game
@@ -164,8 +170,8 @@ void update(double dt) {
     
     
     //Bring up in-game menu
-    if(Input.instance.wasPressed(KeyCode.ESC)){
-       
+    if(Input.instance.isUp(KeyCode.ESC)){
+      resetMainMenu = true;
        state = stateEnumPause;
        gameMenu.draw();
        gameMenu.update(dt);       

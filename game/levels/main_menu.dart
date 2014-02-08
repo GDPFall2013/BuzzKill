@@ -44,6 +44,7 @@ class MainMenu extends GameObject{
         playGame = false;
         options = true;
         sprite.spritex = 150;   
+        print("options selected");
       }
       
     else if(input.wasPressed(KeyCode.RIGHT) && options){
