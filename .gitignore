@@ -16,3 +16,4 @@ web/out/*
 !*interop.js
 !*dart.js
 !app/background.js
+!app/gamepad.js
