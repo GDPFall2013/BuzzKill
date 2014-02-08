@@ -170,7 +170,7 @@ void update(double dt) {
     
     
     //Bring up in-game menu
-    if(Input.instance.isUp(KeyCode.ESC)){
+    if(Input.instance.isDown(KeyCode.ESC)){
       resetMainMenu = true;
        state = stateEnumPause;
        gameMenu.draw();
