@@ -42,6 +42,7 @@ part 'levels/level_three.dart';
 part 'levels/level_menu.dart';
 part 'levels/main_menu.dart';
 part 'levels/controls.dart';
+part 'levels/level_transition.dart';
 
 
 part 'collision/collision_system.dart';
@@ -70,6 +71,7 @@ Player player = new Player();
 MainMenu menu = new MainMenu();
 InGameMenu gameMenu = new InGameMenu();
 Controls controls = new Controls();
+LevelTransition transition = new LevelTransition();
 
 static double oxygen = 100.0; 
 Stopwatch oxygenTimer = new Stopwatch();
@@ -87,6 +89,8 @@ int stateEnumGameOver = 3;
 int stateEnumPause = 4;
 int stateEnumMain = 5;
 int stateEnumControls = 6;
+int stateEnumTransition = 7;
+
 bool resetMainMenu = false; //used to reset main menu if prev screen was pause menu
 int state;
 
@@ -135,13 +139,15 @@ void update(double dt) {
   
   //Main Menu
     if(currentLevel == LevelManager.enumMainMenu || state == stateEnumMain){
+      
      if(resetMainMenu){
       menu = new MainMenu();
+      gameMenu = new InGameMenu();
       }
       
-  resetMainMenu = false;
-  menu.update(dt);
-  menu.draw();
+      resetMainMenu = false;
+      menu.update(dt);
+      menu.draw();
   }
   
     
@@ -202,6 +208,13 @@ void update(double dt) {
     }
   }
   
+  
+  //Level transition screen
+  if(state == stateEnumTransition){
+    transition.update(dt);
+  }
+  
+  
   // Frames per second debugging Information
   numberOfUpdates += 1.0;
   debuggingDisplayTime += dt;
@@ -256,12 +269,24 @@ void draw() {
   
   } else if (state == stateEnumWin) {
 
-    normContext.fillStyle = 'black';
-    normContext.fillRect(0, 0, 640, 480);
     
-    normContext.fillStyle = 'white';
-    normContext.font = "normal 30pt calibri";
-    normContext.fillText("YOU WIN!", viewportWidth/2 - 70, viewportHeight/2 - 40, 1000);
+    //For beta-testing only. Need to change so "You Win" message shows after level 4
+    if(currentLevel < LevelManager.enumLevelTwo){
+      //currentLevel += 1;
+      //reloadLevel();
+      state = stateEnumTransition;
+      transition.update(0.0);
+      transition.draw();
+    }
+    
+    else{
+          normContext.fillStyle = 'black';
+          normContext.fillRect(0, 0, 640, 480);
+          
+          normContext.fillStyle = 'white';
+          normContext.font = "normal 30pt calibri";
+          normContext.fillText("YOU WIN!", viewportWidth/2 - 70, viewportHeight/2 - 40, 1000);
+    }
 
   } else if (state == stateEnumGameOver){
     normContext.fillStyle = 'black';
@@ -320,8 +345,12 @@ reloadLevel() {
   ObjectManager.instance.clear();
   levelManager.loadLevel(currentLevel);
   player.resetPlayer();
+  
+  //reset oxygen
   if(currentLevel >= LevelManager.enumLevelOne){
+    oxygenTimer.reset(); lastOxygenTick = 0.0;
     oxygenTimer.start();}
+  
   state = stateEnumPlay;
 }
 
@@ -331,7 +360,10 @@ restartGame() {
   levelManager.loadLevel(currentLevel);
   player.resetPlayer();
   state = stateEnumPlay;
+  
+  //reset oxygen
   if(currentLevel >= LevelManager.enumLevelOne){
+    oxygenTimer.reset(); lastOxygenTick = 0.0;
     oxygenTimer.start();}
 }
 

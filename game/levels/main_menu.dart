@@ -44,7 +44,6 @@ class MainMenu extends GameObject{
         playGame = false;
         options = true;
         sprite.spritex = 150;   
-        print("options selected");
       }
       
     else if(input.wasPressed(KeyCode.RIGHT) && options){
@@ -96,8 +95,10 @@ class MainMenu extends GameObject{
     if(Game.instance.currentLevel == LevelManager.enumMainMenu && input.wasPressed(KeyCode.ENTER) && playGame){
      // ObjectManager om = ObjectManager.instance;
      // om.clear();
-      Game.instance.currentLevel = LevelManager.enumLevelTwo;
-      Game.instance.reloadLevel();
+      //Game.instance.currentLevel = LevelManager.enumLevelOne;
+     // Game.instance.reloadLevel();
+      Game.instance.state = Game.instance.stateEnumTransition;
+      Game.instance.transition.draw();
       playGame = false;
     }
     
