@@ -9,7 +9,7 @@ part 'camera.dart';
 // Global Variables  ******
 // Canvas and context are available anywhere for drawing purposes
 //CanvasRenderingContext2D context;
-AdjustedContext context;
+AdjustedContext ctx;
 CanvasRenderingContext2D normContext;
 
 var canvas;
@@ -25,10 +25,10 @@ Camera camera = new Camera();
  * Does some standard setup for the Canvas element.
  */
 void buildCanvas(){
-  context = new AdjustedContext(viewportWidth, viewportHeight, camera.screenRatio);
+  ctx = new AdjustedContext(viewportWidth, viewportHeight, camera.screenRatio);
   canvas = query('canvas');
   canvas.width = viewportWidth;
   canvas.height = viewportHeight;
-  context.context = canvas.getContext("2d");
+  ctx.context = canvas.getContext("2d");
   normContext = canvas.getContext("2d");
 }

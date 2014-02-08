@@ -33,12 +33,12 @@ class Block extends GameObject {
         y = y + 5;
         height = height - 10.5;
         normContext.save();
-        context.beginPath();
+        ctx.beginPath();
         CanvasPattern pattern = normContext.createPatternFromImage(img, 'repeat');
-        context.rect(x-this.width/2,y-this.height/2, width, height);
+        ctx.rect(x-this.width/2,y-this.height/2, width, height);
         normContext.fillStyle = pattern;
         normContext.closePath();
-        context.fill();
+        ctx.fill();
         normContext.restore();
         
       }
@@ -48,12 +48,12 @@ class Block extends GameObject {
         
         y += 3;
         normContext.save();
-        context.beginPath();
+        ctx.beginPath();
         CanvasPattern pattern = normContext.createPatternFromImage(img, 'repeat');
-        context.rect(x-this.width/2,y-this.height/2, width, height);
+        ctx.rect(x-this.width/2,y-this.height/2, width, height);
         normContext.fillStyle = pattern;
         normContext.closePath();
-        context.fill();
+        ctx.fill();
         normContext.restore();
         
       }
@@ -61,12 +61,12 @@ class Block extends GameObject {
       //regular inanimate floor
       else{
       normContext.save();
-      context.beginPath();
+      ctx.beginPath();
       CanvasPattern pattern = normContext.createPatternFromImage(img, 'repeat');
-      context.rect(x-this.width/2,y-this.height/2, width, height);
+      ctx.rect(x-this.width/2,y-this.height/2, width, height);
       normContext.fillStyle = pattern;
       normContext.closePath();
-      context.fill();
+      ctx.fill();
       normContext.restore();
       }
     }

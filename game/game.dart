@@ -2,6 +2,8 @@ library gdp;
 
 import 'dart:html';
 import 'dart:collection';
+import "dart:convert";
+import "dart:js";
 
 //import 'packages/js/js.dart' as js;
 import 'package:game_loop/game_loop_html.dart';
@@ -124,8 +126,12 @@ Initialize() {
  *  Update is called once per game Loop
  */
 void update(double dt) {
+  Input.instance.controllerButtonPushed = false;
+  Input.instance.controllerAxesRight = false;
+  Input.instance.controllerAxesLeft = false;
+  Input.instance.update();
   //if(ObjectManager.instance.goList.isEmpty){
- // print(state);
+
   
   //Main Menu
     if(currentLevel == LevelManager.enumMainMenu || state == stateEnumMain){

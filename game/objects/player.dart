@@ -23,7 +23,7 @@ class Player extends GameObject{
   double invincibilityTimer = 0.0;
   bool blink = false;
   
-  double playerStartX = 12000.0;  //TODO: This should be moved to level object later
+  double playerStartX = 0.0;  //TODO: This should be moved to level object later
   double playerStartY = 300.0; 
   
   double imgXOffset = 16.0;
@@ -110,7 +110,7 @@ class Player extends GameObject{
      
      if (state != stateEnumDead) {
        
-       if (input.isDown(KeyCode.UP) ){
+       if (input.isDown(KeyCode.UP) || input.controllerButtonPushed){
          
          if(!JUMPING){
            SoundManager.instance.playSound(SoundManager.enumSoundJump);
@@ -120,8 +120,14 @@ class Player extends GameObject{
        }
        
        //move right
-       if (input.isDown(KeyCode.RIGHT)){
-         movePlayer(1.0, 3*dt);
+       if (input.isDown(KeyCode.RIGHT) || input.controllerAxesRight){
+         double movementSpeed;
+         if (input.controllerAxesRight){
+           movementSpeed = 3.5;
+         } else {
+           movementSpeed = 3.0;
+         }
+         movePlayer(1.0, movementSpeed*dt);
          WALKING = true;
          LOOK_RIGHT = true;
          LOOK_LEFT = false;
@@ -134,7 +140,13 @@ class Player extends GameObject{
        }
        
        //move left
-       if (input.isDown(KeyCode.LEFT)){
+       if (input.isDown(KeyCode.LEFT) || input.controllerAxesLeft){
+         double movementSpeed;
+         if (input.controllerAxesLeft){
+           movementSpeed = 3.5;
+         } else {
+           movementSpeed = 3.0;
+         }
          movePlayer(-1.0, 3*dt);
          WALKING = true;
          LOOK_LEFT = true;
