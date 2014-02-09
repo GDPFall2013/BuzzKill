@@ -95,11 +95,14 @@ class MainMenu extends GameObject{
     if(Game.instance.currentLevel == LevelManager.enumMainMenu && input.wasPressed(KeyCode.ENTER) && playGame){
      // ObjectManager om = ObjectManager.instance;
      // om.clear();
-      //Game.instance.currentLevel = LevelManager.enumLevelOne;
+     // Game.instance.currentLevel = LevelManager.enumLevelOne;
      // Game.instance.reloadLevel();
-      Game.instance.state = Game.instance.stateEnumTransition;
-      Game.instance.transition.draw();
+      //print(input.timeReleased(KeyCode.ENTER));
+      Game.instance.state = Game.instance.stateEnumIntro;
+      //Game.instance.transition.draw();
       playGame = false;
+      Game.instance.lastENTER = input.timePressed(KeyCode.ENTER);
+      Game.instance.transition = new LevelTransition();
     }
     
     

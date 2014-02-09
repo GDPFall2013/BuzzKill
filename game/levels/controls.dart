@@ -32,9 +32,11 @@ class Controls extends GameObject{
     if(Game.instance.state == Game.instance.stateEnumControls){
       sprite.drawOnPositionNormal(x, y, 640.0 , 480.0);
    }
-  //  else{
-      //sprite.drawOnPositionn(x-this.width/2, y-this.height/2, 0.0 , 0.0);
-  //  }
+    /*
+   else{
+      sprite.drawOnPosition(x-this.width/2, y-this.height/2, 0.0 , 0.0);
+    }
+    */
   }
   
   
@@ -48,13 +50,22 @@ class Controls extends GameObject{
       
   //down
     if(Game.instance.state == Game.instance.stateEnumControls){
-      if (input.wasPressed(KeyCode.ESC) && Game.instance.currentLevel > LevelManager.enumMainMenu){
+      if (input.wasPressed(KeyCode.ESC) && Game.instance.state == Game.instance.stateEnumPlay){
+       
            Game.instance.state = Game.instance.stateEnumPause; 
            //normContext.clearRect(x, y, width, height);
          }
       
+      
+      else if((input.wasPressed(KeyCode.ESC) || input.wasPressed(KeyCode.BACKSPACE)) &&
+              Game.instance.currentLevel == LevelManager.enumMainMenu){
+        Game.instance.state = Game.instance.stateEnumMain;
+      }
       else if (input.wasPressed(KeyCode.ESC) || input.wasPressed(KeyCode.BACKSPACE)){
-      Game.instance.state = Game.instance.stateEnumMain; 
+       // normContext.clearRect(x, y, width, height);
+        //normContext.restore();
+      Game.instance.state = Game.instance.stateEnumPause; 
+      
     }
 
     }

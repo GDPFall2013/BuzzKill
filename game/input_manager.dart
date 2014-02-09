@@ -17,12 +17,13 @@ class Input {
     }
     
     Input._internal();
-
+  
     isDown(int keyCode) => gameLoop.keyboard.isDown(keyCode);
     isUp(int keyCode) =>  gameLoop.keyboard.isUp(keyCode);
     wasPressed(int keyCode) => gameLoop.keyboard.pressed(keyCode);
     wasReleased(int keyCode) => gameLoop.keyboard.released(keyCode);
-    
+    timeReleased(int keyCode) => gameLoop.keyboard.timeReleased(keyCode);
+    timePressed(int keyCode) => gameLoop.keyboard.timePressed(keyCode);
     /**
      * This section is Dart code that should work, but is not implemented in Dart yet
      */

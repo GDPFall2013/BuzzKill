@@ -8,7 +8,7 @@ part of gdp;
 class SpriteSheet {
 
   int spritex;
-  int spritey;
+  num spritey;
   int _framew;
   int _frameh;  
   String _imgurl = "";

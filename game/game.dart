@@ -78,10 +78,11 @@ Stopwatch oxygenTimer = new Stopwatch();
 double lastOxygenTick = 0.0;
 
 static int lives = 3;
-
+Input input = new Input();
 
 int currentLevel;
-
+double lastENTER=0.0;
+double lastESC = 0.0;
 
 int stateEnumPlay = 1;
 int stateEnumWin = 2;
@@ -90,6 +91,7 @@ int stateEnumPause = 4;
 int stateEnumMain = 5;
 int stateEnumControls = 6;
 int stateEnumTransition = 7;
+int stateEnumIntro = 8;
 
 bool resetMainMenu = false; //used to reset main menu if prev screen was pause menu
 int state;
@@ -108,7 +110,7 @@ Initialize() {
   SoundManager sm = new SoundManager();
   CollisionSystem cs = new CollisionSystem();
   ObjectManager objectManager = new ObjectManager();
-  Input input = new Input();
+  //Input input = new Input();
   
   gameLoop.onUpdate = ((gameLoop) {update(gameLoop.dt * 100);});
   gameLoop.onRender = ((gameLoop) {draw();});
@@ -136,7 +138,7 @@ void update(double dt) {
   Input.instance.update();
   //if(ObjectManager.instance.goList.isEmpty){
 
-  
+  //print(input.timeReleased(KeyCode.ENTER));
   //Main Menu
     if(currentLevel == LevelManager.enumMainMenu || state == stateEnumMain){
       
@@ -174,20 +176,23 @@ void update(double dt) {
     
     ObjectManager.instance.removeDeadObjects();
     
-    
     //Bring up in-game menu
     if(Input.instance.isDown(KeyCode.ESC)){
-      resetMainMenu = true;
-       state = stateEnumPause;
-       gameMenu.draw();
-       gameMenu.update(dt);       
-     }    
+      
+      if(input.timePressed(KeyCode.ESC) - Game.instance.lastESC > 0.0){
+        lastESC = input.timePressed(KeyCode.ESC);
+        resetMainMenu = true;
+        state = stateEnumPause;
+        gameMenu.draw();
+        gameMenu.update(dt);
+     }  
+    }
   }
 
   
   //in-game menu
   if(state == stateEnumPause){
-    gameMenu.draw();
+    //gameMenu.draw();
     gameMenu.update(dt);
     
     //pause oxygen drain
@@ -210,8 +215,10 @@ void update(double dt) {
   
   
   //Level transition screen
-  if(state == stateEnumTransition){
+  if(state == stateEnumTransition || state == stateEnumIntro){
+    normContext.clearRect(0, 0,640, 480);
     transition.update(dt);
+    transition.draw();
   }
   
   
@@ -238,12 +245,37 @@ void draw() {
     menu.draw();
   }
   
+  if(state==stateEnumTransition || state == stateEnumIntro){
+    normContext.clearRect(0, 0,640, 480);
+    transition.draw();
+  }
+  
   //controls screen
   if(state == stateEnumControls){
   controls.draw();
   }
   
-  if (state == stateEnumPlay) {
+  //pause menu
+  if(state == stateEnumPause){
+        
+        normContext.clearRect(0, 0,640, 480);
+        
+        for (GameObject go in ObjectManager.instance.goList) {
+          double goRightEdge = go.x + go.width/2;
+          double goLeftEdge = go.x - go.width/2;
+                      
+            if (goRightEdge > (camera.x - (viewportWidth / Camera.instance.screenRatio))  && 
+              goLeftEdge < (camera.x + (viewportWidth / Camera.instance.screenRatio))) {
+              go.draw();
+            }
+        }
+        
+        gameMenu.draw();
+      }
+  
+  
+  //playing
+  else if (state == stateEnumPlay) {
     normContext.clearRect(0, 0,640, 480);
     
     //if(ObjectManager.instance.goList.isEmpty){
@@ -267,7 +299,9 @@ void draw() {
   
   drawHUD();
   
-  } else if (state == stateEnumWin) {
+  } 
+  
+  else if (state == stateEnumWin) {
 
     
     //For beta-testing only. Need to change so "You Win" message shows after level 4

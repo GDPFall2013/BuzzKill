@@ -130,8 +130,16 @@ class InGameMenu extends GameObject{
     Game.instance.state = Game.instance.stateEnumPlay;
   }
   
+  else if(input.wasPressed(KeyCode.ESC)){
+    if(input.timePressed(KeyCode.ESC) - Game.instance.lastESC > 0.0){
+      Game.instance.lastESC = input.timePressed(KeyCode.ESC);
+      Game.instance.state = Game.instance.stateEnumPlay;
+    }
+  }
+  
   else if(controls && input.wasPressed(KeyCode.ENTER)){
     Game.instance.state = Game.instance.stateEnumControls;
+    //normContext.save();
   }
   
   else if(quit && input.wasPressed(KeyCode.ENTER)){
@@ -140,11 +148,6 @@ class InGameMenu extends GameObject{
     //sprite.drawOnPositionNormal(x-this.width/2, y-this.height/2, 0.0 , 0.0);
     Game.instance.currentLevel = LevelManager.enumMainMenu;
     Game.instance.state = Game.instance.stateEnumMain;
-    
-    //quit = false;
-    //resume = true;
-    //this.update(dt);
-    //this.draw();
   }
   
     }
