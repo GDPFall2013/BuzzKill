@@ -27,7 +27,7 @@ class LevelTransition extends GameObject{
     x = 0.0;
     y = 0.0;
     input = new Input();
-    alien = new Alien()..initialize(300.0, 0.0);
+    alien = new Alien()..initialize(500.0, 0.0);
     droid = new Droid()..initialize(300.0, 0.0);
     
     introBG = new SpriteSheet("./content/intro_bg.png",spritex,spritey,640,480);
@@ -60,7 +60,11 @@ class LevelTransition extends GameObject{
         
         else if(repeat2==13){
                 
-          if(buzz2x <= 425){
+          if(buzz2x <= 725){
+            if(buzz2.spritex>=850){
+             buzz2.spritex = 0;
+                               }
+            
           buzz2.spritex += 75;
           buzz2x += 37;
           repeat2=0;
@@ -81,7 +85,7 @@ class LevelTransition extends GameObject{
           }
          }       
         buzz2.drawOnPosition(buzz2x, 300.0, 75.0 , 100.0);
-        buzz.drawOnPosition(500.0, 300.0, 75.0 , 100.0);
+        buzz.drawOnPosition(800.0, 300.0, 75.0 , 100.0);
       }
 
       introText.drawOnPositionNormal(0.0, 0.0, width , height);
