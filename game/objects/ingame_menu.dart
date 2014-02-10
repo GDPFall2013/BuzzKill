@@ -139,8 +139,17 @@ class InGameMenu extends GameObject{
   
   else if(controls && input.wasPressed(KeyCode.ENTER)){
     Game.instance.state = Game.instance.stateEnumControls;
+    Game.instance.lastENTER = input.timePressed(KeyCode.ENTER);
     //normContext.save();
   }
+  
+  else if(options && input.wasPressed(KeyCode.ENTER)){
+        options = false;
+        resume = true;
+        Game.instance.state = Game.instance.stateEnumOptions;
+        Game.instance.lastENTER = input.timePressed(KeyCode.ENTER);
+        //print(Game.instance.lastENTER);
+      }
   
   else if(quit && input.wasPressed(KeyCode.ENTER)){
     //ObjectManager.instance.goList.clear();
@@ -148,6 +157,7 @@ class InGameMenu extends GameObject{
     //sprite.drawOnPositionNormal(x-this.width/2, y-this.height/2, 0.0 , 0.0);
     Game.instance.currentLevel = LevelManager.enumMainMenu;
     Game.instance.state = Game.instance.stateEnumMain;
+    Game.instance.lastENTER = input.timePressed(KeyCode.ENTER);
   }
   
     }

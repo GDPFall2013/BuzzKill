@@ -43,6 +43,7 @@ part 'levels/level_menu.dart';
 part 'levels/main_menu.dart';
 part 'levels/controls.dart';
 part 'levels/level_transition.dart';
+part 'levels/options_screen.dart';
 
 
 part 'collision/collision_system.dart';
@@ -71,6 +72,7 @@ Player player = new Player();
 MainMenu menu = new MainMenu();
 InGameMenu gameMenu = new InGameMenu();
 Controls controls = new Controls();
+Options options = new Options();
 LevelTransition transition = new LevelTransition();
 
 static double oxygen = 100.0; 
@@ -92,6 +94,7 @@ int stateEnumMain = 5;
 int stateEnumControls = 6;
 int stateEnumTransition = 7;
 int stateEnumIntro = 8;
+int stateEnumOptions = 9;
 
 bool resetMainMenu = false; //used to reset main menu if prev screen was pause menu
 int state;
@@ -120,12 +123,12 @@ Initialize() {
  // levelManager.loadLevel(LevelManager.enumLevelTest);
   currentLevel = LevelManager.enumMainMenu;
   levelManager.loadLevel(LevelManager.enumMainMenu);
-    state = stateEnumPlay;
+    state = stateEnumMain;
 
     if(currentLevel >= LevelManager.enumLevelOne){
     oxygenTimer.start();}
     
-
+ 
 }
 
 /**
@@ -200,6 +203,11 @@ void update(double dt) {
       lastOxygenTick += 250;
           oxygen -= 0;
     }
+    /*
+    if(resetMainMenu){
+      gameMenu = new InGameMenu();
+    }
+    */
   }
   
   
@@ -212,6 +220,17 @@ void update(double dt) {
         oxygen -= 0;
     }
   }
+
+  
+  //options screen
+  if(state == stateEnumOptions){
+    options.update(dt);
+    //pause oxygen drain
+    if(oxygenTimer.elapsedMilliseconds > 250 + lastOxygenTick){
+    lastOxygenTick += 250;
+        oxygen -= 0;
+    }
+  }  
   
   
   //Level transition screen
@@ -253,6 +272,11 @@ void draw() {
   //controls screen
   if(state == stateEnumControls){
   controls.draw();
+  }
+
+  //options screen
+  if(state == stateEnumOptions){
+  options.draw();
   }
   
   //pause menu

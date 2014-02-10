@@ -130,7 +130,7 @@ class LevelTransition extends GameObject{
   
   update(double dt){
     
-    //in level transition state
+    //level transition state
     if(Game.instance.state == Game.instance.stateEnumTransition){
       
       if(Game.instance.input.isDown(KeyCode.ENTER)){
@@ -154,7 +154,7 @@ class LevelTransition extends GameObject{
       
     }
     
-    //in game intro state
+    //game intro state
     else if(Game.instance.state == Game.instance.stateEnumIntro){
       if(Game.instance.input.isDown(KeyCode.ENTER) || Game.instance.input.isDown(KeyCode.ESC)){
         

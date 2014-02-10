@@ -92,24 +92,44 @@ class MainMenu extends GameObject{
     
     
     //Select 'Play Game'
-    if(Game.instance.currentLevel == LevelManager.enumMainMenu && input.wasPressed(KeyCode.ENTER) && playGame){
+    if(
+        //Game.instance.currentLevel == LevelManager.enumMainMenu 
+       Game.instance.state == Game.instance.stateEnumMain
+        && input.isDown(KeyCode.ENTER) && playGame){
      // ObjectManager om = ObjectManager.instance;
      // om.clear();
      // Game.instance.currentLevel = LevelManager.enumLevelOne;
      // Game.instance.reloadLevel();
       //print(input.timeReleased(KeyCode.ENTER));
-      Game.instance.state = Game.instance.stateEnumIntro;
-      //Game.instance.transition.draw();
-      playGame = false;
-      Game.instance.lastENTER = input.timePressed(KeyCode.ENTER);
-      Game.instance.transition = new LevelTransition();
+     
+      
+      
+      if(input.timePressed(KeyCode.ENTER) - Game.instance.lastENTER > 0.0){
+              //Game.instance.state = Game.instance.stateEnumMain;
+              //print('Enter pressed');
+              //Game.instance.resetMainMenu = true;
+              //Game.instance.lastENTER = input.timePressed(KeyCode.ENTER);
+              Game.instance.state = Game.instance.stateEnumIntro;
+              //Game.instance.transition.draw();
+              playGame = false;
+              Game.instance.lastENTER = input.timePressed(KeyCode.ENTER);
+              Game.instance.transition = new LevelTransition();
+             }
     }
     
     
     else if(controls && input.wasPressed(KeyCode.ENTER)){
+       controls = false;
        Game.instance.state = Game.instance.stateEnumControls;
      }
      
+    else if(options && input.wasPressed(KeyCode.ENTER)){
+      options = false;
+      playGame = true;
+      Game.instance.state = Game.instance.stateEnumOptions;
+      Game.instance.lastENTER = input.timePressed(KeyCode.ENTER);
+      //print(Game.instance.lastENTER);
+    }
     
   }
   

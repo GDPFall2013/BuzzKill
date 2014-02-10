@@ -49,24 +49,32 @@ class Controls extends GameObject{
       
       
   //down
-    if(Game.instance.state == Game.instance.stateEnumControls){
+    //if(Game.instance.state == Game.instance.stateEnumControls){
+    
+    
       if (input.wasPressed(KeyCode.ESC) && Game.instance.state == Game.instance.stateEnumPlay){
        
            Game.instance.state = Game.instance.stateEnumPause; 
+           Game.instance.lastESC = input.timePressed(KeyCode.ESC);
+           //Game.instance.resetMainMenu = true;
            //normContext.clearRect(x, y, width, height);
          }
       
       
       else if((input.wasPressed(KeyCode.ESC) || input.wasPressed(KeyCode.BACKSPACE)) &&
-              Game.instance.currentLevel == LevelManager.enumMainMenu){
-        Game.instance.state = Game.instance.stateEnumMain;
+              Game.instance.currentLevel > LevelManager.enumMainMenu){
+        Game.instance.state = Game.instance.stateEnumPause;
+        Game.instance.lastESC = input.timePressed(KeyCode.ESC);
+       // Game.instance.resetMainMenu = true;
       }
       else if (input.wasPressed(KeyCode.ESC) || input.wasPressed(KeyCode.BACKSPACE)){
        // normContext.clearRect(x, y, width, height);
         //normContext.restore();
-      Game.instance.state = Game.instance.stateEnumPause; 
+      Game.instance.state = Game.instance.stateEnumMain; 
+      Game.instance.resetMainMenu = true;
+      Game.instance.lastESC = input.timePressed(KeyCode.ESC);
       
-    }
+   // }
 
     }
     
