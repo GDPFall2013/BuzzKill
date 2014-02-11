@@ -4,10 +4,14 @@ class MainMenu extends GameObject{
   
   Input input;
   SpriteSheet sprite;
+  SpriteSheet instructions;
   double x;
   double y;
   double width;
   double height;
+  
+  double xx;
+  double yy;
   
   int i =0;
   
@@ -19,6 +23,7 @@ class MainMenu extends GameObject{
   bool controls = false;
   bool exit = false;
   
+  
   MainMenu(){
     width = 150.0;
     height = 48.0;
@@ -27,11 +32,18 @@ class MainMenu extends GameObject{
     input = new Input();
     playGame = true;
     sprite = new SpriteSheet("./content/menu.png",spritex,spritey,150,196);
+    instructions = new SpriteSheet("./content/instructions.png",0,0,258,114);
+    
+    xx = 750.0;
+    yy = 400.0;
   }
 
   
   draw(){
     sprite.drawOnPositionNormal(x-this.width/2, y-this.height/2, 150.0 , 196.0);
+    
+    
+    instructions.drawOnPosition(xx-258.0/2, yy-114.0/2, 258.0 , 114.0);
   }
   
   
@@ -150,11 +162,12 @@ class MainMenu extends GameObject{
       chrome.app.window.current().close();
     }
     
+    /*
     else if(input.wasPressed(KeyCode.ESC)){
-      if(input.timePressed(KeyCode.ENTER) - Game.instance.lastENTER > 0.0){
+      if(input.timePressed(KeyCode.ESC) - Game.instance.lastESC > 0.0){
         chrome.app.window.current().close();
       }
-    }
+    }*/
     
   }
   

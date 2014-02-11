@@ -165,6 +165,7 @@ class InGameMenu extends GameObject{
     Game.instance.lastENTER = input.timePressed(KeyCode.ENTER);
     Game.instance.resetMainMenu = true;
     Game.instance.menu.playGame = true;
+
   }
   
     }
