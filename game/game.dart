@@ -153,6 +153,9 @@ void update(double dt) {
       resetMainMenu = false;
       menu.update(dt);
       menu.draw();
+      
+     
+         
   }
   
     
@@ -203,11 +206,12 @@ void update(double dt) {
       lastOxygenTick += 250;
           oxygen -= 0;
     }
-    /*
+    
     if(resetMainMenu){
       gameMenu = new InGameMenu();
+      resetMainMenu = false;
     }
-    */
+    
   }
   
   

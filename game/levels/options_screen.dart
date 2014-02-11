@@ -62,21 +62,24 @@ class Options extends GameObject{
   //down
   //  if(Game.instance.state == Game.instance.stateEnumOptions){
       
-     if(back && Game.instance.input.isDown(KeyCode.ENTER)){
-        //print('options update');
-        //print( Game.instance.input.timeReleased(KeyCode.ENTER));
-        //Game.instance.lastENTER = input.timePressed(KeyCode.ENTER);
+     if(back && Game.instance.input.wasPressed(KeyCode.ENTER)){
         
-        if(input.timePressed(KeyCode.ENTER) - Game.instance.lastENTER > 0.0){
-         Game.instance.state = Game.instance.stateEnumMain;
-         //print('Enter pressed');
-         Game.instance.resetMainMenu = true;
-         Game.instance.lastENTER = input.timePressed(KeyCode.ENTER);
+        if(input.timePressed(KeyCode.ENTER) - Game.instance.lastENTER > 0.0 &&
+          Game.instance.currentLevel > LevelManager.enumMainMenu){
+          Game.instance.state = Game.instance.stateEnumPause;
+         //Game.instance.resetMainMenu = true;
+          Game.instance.lastENTER = input.timePressed(KeyCode.ENTER);
         }
-       
-        //Game.instance.state = Game.instance.stateEnumMain;
+        
+        else if(input.timePressed(KeyCode.ENTER) - Game.instance.lastENTER > 0.0 &&
+          Game.instance.currentLevel == LevelManager.enumMainMenu){
+          Game.instance.state = Game.instance.stateEnumMain;
+          Game.instance.resetMainMenu = true;
+          Game.instance.lastENTER = input.timePressed(KeyCode.ENTER);
+        }
+
       }
-      
+     /* 
       else 
     
     if (input.wasPressed(KeyCode.ESC) && Game.instance.state == Game.instance.stateEnumPlay){
@@ -86,26 +89,23 @@ class Options extends GameObject{
            Game.instance.resetMainMenu = true;
            Game.instance.lastESC = input.timePressed(KeyCode.ESC);
          }
-      
+      */
       
       else if((input.wasPressed(KeyCode.ESC) || input.wasPressed(KeyCode.BACKSPACE)) &&
-              Game.instance.currentLevel == LevelManager.enumMainMenu){
+        Game.instance.currentLevel == LevelManager.enumMainMenu){
         Game.instance.state = Game.instance.stateEnumMain;
-        //Game.instance.resetMainMenu = true;
-        Game.instance.gameMenu = new InGameMenu();
+        Game.instance.resetMainMenu = true;
         Game.instance.lastESC = input.timePressed(KeyCode.ESC);
       }
+     
       else if (input.wasPressed(KeyCode.ESC) || input.wasPressed(KeyCode.BACKSPACE)){
-       // normContext.clearRect(x, y, width, height);
-        //normContext.restore();
-      Game.instance.state = Game.instance.stateEnumPause; 
-      //Game.instance.resetMainMenu = true;
-      Game.instance.gameMenu = new InGameMenu();
-      Game.instance.lastESC = input.timePressed(KeyCode.ESC);
+        Game.instance.state = Game.instance.stateEnumPause; 
+        Game.instance.resetMainMenu = true;
+        //Game.instance.gameMenu = new InGameMenu();
+        Game.instance.lastESC = input.timePressed(KeyCode.ESC);
       
     }
 
- //   }
     
     
     

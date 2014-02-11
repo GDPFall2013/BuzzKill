@@ -10,7 +10,7 @@ class InGameMenu extends GameObject{
   double height;
   
   int spritex=0;
-  int spritey=147;
+  int spritey=196;
   
   bool resume = false;
   bool options = false;
@@ -19,7 +19,7 @@ class InGameMenu extends GameObject{
   
   InGameMenu(){
     width = 150.0;
-    height = 49.0;
+    height = 48.0;
     x = 300.0;
     y = 200.0;
     input = new Input();
@@ -128,18 +128,22 @@ class InGameMenu extends GameObject{
   //Select 'Resume'
   if(resume && input.wasPressed(KeyCode.ENTER)){
     Game.instance.state = Game.instance.stateEnumPlay;
+    Game.instance.lastENTER = input.timePressed(KeyCode.ENTER);
+    Game.instance.resetMainMenu = true;
   }
   
   else if(input.wasPressed(KeyCode.ESC)){
     if(input.timePressed(KeyCode.ESC) - Game.instance.lastESC > 0.0){
       Game.instance.lastESC = input.timePressed(KeyCode.ESC);
       Game.instance.state = Game.instance.stateEnumPlay;
+      Game.instance.resetMainMenu = true;
     }
   }
   
   else if(controls && input.wasPressed(KeyCode.ENTER)){
     Game.instance.state = Game.instance.stateEnumControls;
     Game.instance.lastENTER = input.timePressed(KeyCode.ENTER);
+    Game.instance.resetMainMenu = true;
     //normContext.save();
   }
   
@@ -148,6 +152,7 @@ class InGameMenu extends GameObject{
         resume = true;
         Game.instance.state = Game.instance.stateEnumOptions;
         Game.instance.lastENTER = input.timePressed(KeyCode.ENTER);
+        Game.instance.resetMainMenu = true;
         //print(Game.instance.lastENTER);
       }
   
@@ -158,6 +163,8 @@ class InGameMenu extends GameObject{
     Game.instance.currentLevel = LevelManager.enumMainMenu;
     Game.instance.state = Game.instance.stateEnumMain;
     Game.instance.lastENTER = input.timePressed(KeyCode.ENTER);
+    Game.instance.resetMainMenu = true;
+    Game.instance.menu.playGame = true;
   }
   
     }

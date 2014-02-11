@@ -17,20 +17,21 @@ class MainMenu extends GameObject{
   bool playGame = false;
   bool options = false;
   bool controls = false;
+  bool exit = false;
   
   MainMenu(){
     width = 150.0;
-    height = 49.0;
+    height = 48.0;
     x = 300.0;
     y = 200.0;
     input = new Input();
     playGame = true;
-    sprite = new SpriteSheet("./content/menu.png",spritex,spritey,150,147);
+    sprite = new SpriteSheet("./content/menu.png",spritex,spritey,150,196);
   }
 
   
   draw(){
-    sprite.drawOnPositionNormal(x-this.width/2, y-this.height/2, 150.0 , 147.0);
+    sprite.drawOnPositionNormal(x-this.width/2, y-this.height/2, 150.0 , 196.0);
   }
   
   
@@ -51,6 +52,12 @@ class MainMenu extends GameObject{
         controls = true;
         sprite.spritex = 300;    
       }
+    
+    else if(input.wasPressed(KeyCode.RIGHT) && controls){
+            controls = false;
+            exit = true;
+            sprite.spritex = 450;    
+          }
       
     if (input.wasPressed(KeyCode.DOWN) && playGame){
       playGame = false;
@@ -62,6 +69,12 @@ class MainMenu extends GameObject{
         options = false;
         controls = true;
         sprite.spritex = 300;    
+      }
+    
+    else if(input.wasPressed(KeyCode.DOWN) && controls){
+        controls = false;
+        exit = true;
+        sprite.spritex = 450;    
       }
     
     
@@ -77,7 +90,13 @@ class MainMenu extends GameObject{
         options = true;
         sprite.spritex = 150;
       }
-     
+    
+    else if(input.wasPressed(KeyCode.LEFT) && exit){
+            exit = false;
+            controls = true;
+            sprite.spritex = 300;
+          }
+    
     if(input.wasPressed(KeyCode.UP) && options){
       options = false;
       playGame = true;
@@ -90,25 +109,17 @@ class MainMenu extends GameObject{
         sprite.spritex = 150;
       }
     
+    else if(input.wasPressed(KeyCode.UP) && exit){
+            exit = false;
+            controls = true;
+            sprite.spritex = 300;
+          }
     
-    //Select 'Play Game'
-    if(
-        //Game.instance.currentLevel == LevelManager.enumMainMenu 
-       Game.instance.state == Game.instance.stateEnumMain
+    //SELECT 'PLAY GAME'
+    if(Game.instance.state == Game.instance.stateEnumMain
         && input.isDown(KeyCode.ENTER) && playGame){
-     // ObjectManager om = ObjectManager.instance;
-     // om.clear();
-     // Game.instance.currentLevel = LevelManager.enumLevelOne;
-     // Game.instance.reloadLevel();
-      //print(input.timeReleased(KeyCode.ENTER));
-     
-      
       
       if(input.timePressed(KeyCode.ENTER) - Game.instance.lastENTER > 0.0){
-              //Game.instance.state = Game.instance.stateEnumMain;
-              //print('Enter pressed');
-              //Game.instance.resetMainMenu = true;
-              //Game.instance.lastENTER = input.timePressed(KeyCode.ENTER);
               Game.instance.state = Game.instance.stateEnumIntro;
               //Game.instance.transition.draw();
               playGame = false;
@@ -117,18 +128,32 @@ class MainMenu extends GameObject{
              }
     }
     
-    
+    //SELECT CONTROLS
     else if(controls && input.wasPressed(KeyCode.ENTER)){
        controls = false;
        Game.instance.state = Game.instance.stateEnumControls;
+       Game.instance.lastENTER = input.timePressed(KeyCode.ENTER);
+       playGame = true;
      }
      
+    //SELECT OPTIONS
     else if(options && input.wasPressed(KeyCode.ENTER)){
       options = false;
       playGame = true;
       Game.instance.state = Game.instance.stateEnumOptions;
       Game.instance.lastENTER = input.timePressed(KeyCode.ENTER);
-      //print(Game.instance.lastENTER);
+    }
+    
+    
+    //EXIT GAME
+    else if(exit && input.wasPressed(KeyCode.ENTER)){
+      chrome.app.window.current().close();
+    }
+    
+    else if(input.wasPressed(KeyCode.ESC)){
+      if(input.timePressed(KeyCode.ENTER) - Game.instance.lastENTER > 0.0){
+        chrome.app.window.current().close();
+      }
     }
     
   }

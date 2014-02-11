@@ -56,7 +56,7 @@ class Controls extends GameObject{
        
            Game.instance.state = Game.instance.stateEnumPause; 
            Game.instance.lastESC = input.timePressed(KeyCode.ESC);
-           //Game.instance.resetMainMenu = true;
+           Game.instance.resetMainMenu = true;
            //normContext.clearRect(x, y, width, height);
          }
       
@@ -65,7 +65,7 @@ class Controls extends GameObject{
               Game.instance.currentLevel > LevelManager.enumMainMenu){
         Game.instance.state = Game.instance.stateEnumPause;
         Game.instance.lastESC = input.timePressed(KeyCode.ESC);
-       // Game.instance.resetMainMenu = true;
+        Game.instance.resetMainMenu = true;
       }
       else if (input.wasPressed(KeyCode.ESC) || input.wasPressed(KeyCode.BACKSPACE)){
        // normContext.clearRect(x, y, width, height);
