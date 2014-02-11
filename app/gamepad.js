@@ -100,5 +100,5 @@ function scangamepads() {
 window.addEventListener("gamepadconnected", connecthandler);
 window.addEventListener("gamepaddisconnected", disconnecthandler);
 if (navigator.webkitGetGamepads) {
-  setInterval(scangamepads, 500);
+  setInterval(scangamepads, 10);
 }
