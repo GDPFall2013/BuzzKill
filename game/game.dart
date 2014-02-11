@@ -51,6 +51,7 @@ part 'collision/collision_system.dart';
 //The Game Loop
 GameLoopHtml gameLoop = new GameLoopHtml(canvas);
 
+
 /**
  *  The Game class holds the root of the game.  It is started by Main
  *  and controls all other parts of the application. 
