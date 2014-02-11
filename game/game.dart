@@ -138,6 +138,8 @@ void update(double dt) {
   Input.instance.controllerButtonPushed = false;
   Input.instance.controllerAxesRight = false;
   Input.instance.controllerAxesLeft = false;
+  Input.instance.controllerAxesDown = false;
+  Input.instance.controllerAxesUp = false;
   Input.instance.update();
   //if(ObjectManager.instance.goList.isEmpty){
 
@@ -398,6 +400,7 @@ win() {
 
 gameOver() {
   // TODO music to be placed here in the future
+  currentLevel = LevelManager.enumLevelOne;
   gameLoop.addTimer((restart) => restartGame(), 3.0);
   state = stateEnumGameOver;
   oxygenTimer.stop();

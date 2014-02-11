@@ -47,6 +47,8 @@ class Input {
     bool controllerButtonPushed = false;
     bool controllerAxesRight = false;
     bool controllerAxesLeft = false;
+    bool controllerAxesUp = false;
+    bool controllerAxesDown = false;
     
     void update() {
 
@@ -70,6 +72,12 @@ class Input {
        }
        if (axeOne < -0.5) {
          controllerAxesLeft = true;
+       }
+       if (axeTwo > 0.5) {
+         controllerAxesDown = true;
+       }
+       if (axeTwo < -0.5) {
+         controllerAxesUp = true;
        }
        
       });
