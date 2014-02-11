@@ -9323,8 +9323,16 @@ var $$ = {};
           J.fillText$4$x($.normContext, "Press Enter to continue.", 420, 420, 1000);
           J.restore$0$x($.normContext);
           this.input.toString;
-          if ($.get$gameLoop()._keyboard.isDown$1(13))
-            this.state = this.stateEnumMain;
+          if ($.get$gameLoop()._keyboard.isDown$1(13)) {
+            t1 = $.Game_instance;
+            t1.currentLevel = $.LevelManager_enumMainMenu;
+            t1.state = t1.stateEnumMain;
+            this.input.toString;
+            t1.lastENTER = $.get$gameLoop()._keyboard.timePressed$1(13);
+            t1 = $.Game_instance;
+            t1.resetMainMenu = true;
+            t1.menu.playGame = true;
+          }
         }
       } else if (t1 === this.stateEnumGameOver) {
         J.set$fillStyle$x($.normContext, "black");
