@@ -67,8 +67,8 @@ class HtmlEnhancedConfiguration extends SimpleConfiguration {
     //initialize and load CSS
     final String _CSSID = '_unittestcss_';
 
-    var cssElement = document.head.query('#${_CSSID}');
-    if (cssElement == null){
+    var cssElement = document.head.querySelector('#${_CSSID}');
+    if (cssElement == null) {
       cssElement = new StyleElement();
       cssElement.id = _CSSID;
       document.head.append(cssElement);
@@ -134,9 +134,9 @@ class HtmlEnhancedConfiguration extends SimpleConfiguration {
        """));
 
       // handle the click event for the collapse all button
-      te.query('#btnCollapseAll').onClick.listen((_){
+      te.querySelector('#btnCollapseAll').onClick.listen((_){
         document
-          .queryAll('.unittest-row')
+          .querySelectorAll('.unittest-row')
           .forEach((el) => el.attributes['class'] = el.attributes['class']
               .replaceAll('unittest-row ', 'unittest-row-hidden '));
       });
@@ -148,8 +148,8 @@ class HtmlEnhancedConfiguration extends SimpleConfiguration {
       // order by group and sort numerically within each group
       var groupedBy = new LinkedHashMap<String, List<TestCase>>();
 
-      for (final t in results){
-        if (!groupedBy.containsKey(t.currentGroup)){
+      for (final t in results) {
+        if (!groupedBy.containsKey(t.currentGroup)) {
           groupedBy[t.currentGroup] = new List<TestCase>();
         }
 
@@ -174,9 +174,9 @@ class HtmlEnhancedConfiguration extends SimpleConfiguration {
 
         // replace everything but numbers and letters from the group name with
         // '_' so we can use in id and class properties.
-        var safeGroup = test_.currentGroup.replaceAll(nonAlphanumeric,'_');
+        var safeGroup = test_.currentGroup.replaceAll(nonAlphanumeric, '_');
 
-        if (test_.currentGroup != previousGroup){
+        if (test_.currentGroup != previousGroup) {
 
           previousGroup = test_.currentGroup;
 
@@ -207,16 +207,17 @@ class HtmlEnhancedConfiguration extends SimpleConfiguration {
             </div>"""));
 
           // 'safeGroup' could be empty
-          var grp = (safeGroup == '') ? null : te.query('#${safeGroup}');
-          if (grp != null){
-            grp.onClick.listen((_){
-              var row = document.query('.unittest-row-${safeGroup}');
+          var grp = (safeGroup == '') ?
+              null : te.querySelector('#${safeGroup}');
+          if (grp != null) {
+            grp.onClick.listen((_) {
+              var row = document.querySelector('.unittest-row-${safeGroup}');
               if (row.attributes['class'].contains('unittest-row ')){
-                document.queryAll('.unittest-row-${safeGroup}').forEach(
+                document.querySelectorAll('.unittest-row-${safeGroup}').forEach(
                     (e) => e.attributes['class'] =  e.attributes['class']
                         .replaceAll('unittest-row ', 'unittest-row-hidden '));
               }else{
-                document.queryAll('.unittest-row-${safeGroup}').forEach(
+                document.querySelectorAll('.unittest-row-${safeGroup}').forEach(
                     (e) => e.attributes['class'] = e.attributes['class']
                         .replaceAll('unittest-row-hidden', 'unittest-row'));
               }
@@ -255,8 +256,8 @@ class HtmlEnhancedConfiguration extends SimpleConfiguration {
     }
 
     if (!test_.isComplete) {
-       addRowElement('${test_.id}', 'NO STATUS', 'Test did not complete.');
-       return;
+      addRowElement('${test_.id}', 'NO STATUS', 'Test did not complete.');
+      return;
     }
 
     addRowElement('${test_.id}', '${test_.result.toUpperCase()}',
