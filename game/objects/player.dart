@@ -121,7 +121,12 @@ class Player extends GameObject{
        
        //move right
        if (input.isDown(KeyCode.RIGHT) || input.controllerAxesRight){
-         double movementSpeed = 3.0;
+         double movementSpeed;
+         if (input.controllerAxesRight){
+           movementSpeed = 3.5;
+         } else {
+           movementSpeed = 3.0;
+         }
          movePlayer(1.0, movementSpeed*dt);
          WALKING = true;
          LOOK_RIGHT = true;
@@ -136,7 +141,12 @@ class Player extends GameObject{
        
        //move left
        if (input.isDown(KeyCode.LEFT) || input.controllerAxesLeft){
-         double movementSpeed = 3.0;
+         double movementSpeed;
+         if (input.controllerAxesLeft){
+           movementSpeed = 3.5;
+         } else {
+           movementSpeed = 3.0;
+         }
          movePlayer(-1.0, 3*dt);
          WALKING = true;
          LOOK_LEFT = true;
