@@ -351,6 +351,15 @@ void draw() {
           normContext.fillStyle = 'white';
           normContext.font = "normal 30pt calibri";
           normContext.fillText("YOU WIN!", viewportWidth/2 - 70, viewportHeight/2 - 40, 1000);
+          
+          normContext.save();
+          normContext.font = "normal 15pt calibri";
+          normContext.fillText('Press Enter to continue.', 420, 420, 1000);
+          normContext.restore();
+          //TODO Put this code somewhere else!  This was a last minute bugfix for Beta
+          if (input.isDown(KeyCode.ENTER)) {
+            state = stateEnumMain;
+          }
     }
 
   } else if (state == stateEnumGameOver){

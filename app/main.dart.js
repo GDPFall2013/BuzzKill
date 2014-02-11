@@ -9318,6 +9318,13 @@ var $$ = {};
           J.set$fillStyle$x($.normContext, "white");
           J.set$font$x($.normContext, "normal 30pt calibri");
           J.fillText$4$x($.normContext, "YOU WIN!", 250, 200, 1000);
+          J.save$0$x($.normContext);
+          J.set$font$x($.normContext, "normal 15pt calibri");
+          J.fillText$4$x($.normContext, "Press Enter to continue.", 420, 420, 1000);
+          J.restore$0$x($.normContext);
+          this.input.toString;
+          if ($.get$gameLoop()._keyboard.isDown$1(13))
+            this.state = this.stateEnumMain;
         }
       } else if (t1 === this.stateEnumGameOver) {
         J.set$fillStyle$x($.normContext, "black");
