@@ -9,6 +9,7 @@ class Player extends GameObject{
   bool WALKING = false;
   bool LOOK_RIGHT = false;
   bool LOOK_LEFT = false;
+  bool ATTACKED = false;
   
   double velocity_y = 0.0;
   double accel = 1.5;
@@ -23,8 +24,9 @@ class Player extends GameObject{
   double invincibilityTimer = 0.0;
   bool blink = false;
   
-  double playerStartX = 0.0;  //TODO: This should be moved to level object later
+  double playerStartX = 12000.0;  //TODO: This should be moved to level object later
   double playerStartY = 300.0; 
+  double originalX;
   
   double imgXOffset = 16.0;
   double imgYOffset = - 12.0;
@@ -43,23 +45,20 @@ class Player extends GameObject{
   }
   
    draw(){
-      if (state != stateEnumDead && !blink) {
+      if (state != stateEnumDead && !blink && !ATTACKED) {
         if(JUMPING && LOOK_RIGHT){
-          
           sprite.spritex = 225;
           sprite.spritey = 200;
           sprite.drawOnPosition((x-width/2) - imgXOffset, y - height/2 + imgYOffset, width , height);
-         
+          
         }
         else if(JUMPING && LOOK_LEFT){
-          
           sprite.spritex = 225;
           sprite.spritey = 300;
           sprite.drawOnPosition((x-width/2)  - imgXOffset, y - height/2 + imgYOffset, width , height);
           
        }
        else if(JUMPING){
-         
          sprite.spritex = 225;
          sprite.spritey = 200;
          sprite.drawOnPosition((x-width/2) - imgXOffset, y - height/2 + imgYOffset, width , height);
@@ -77,6 +76,7 @@ class Player extends GameObject{
          }
          
          sprite.drawOnPosition((x-width/2)  - imgXOffset, y - height/2 + imgYOffset, width , height);
+         
        }
        
       else if(WALKING && LOOK_LEFT){
@@ -108,15 +108,14 @@ class Player extends GameObject{
    
    update(double dt){
      
-     if (state != stateEnumDead) {
+     if (state != stateEnumDead && !ATTACKED) {
        
        if (input.isDown(KeyCode.UP) || input.controllerButtonPushed){
-         
-         if(!JUMPING){
+          if(!JUMPING){
            SoundManager.instance.playSound(SoundManager.enumSoundJump);
            JUMPING = true;
            velocity_y = 25.0;
-         }
+          }
        }
        
        //move right
@@ -132,6 +131,7 @@ class Player extends GameObject{
          LOOK_RIGHT = true;
          LOOK_LEFT = false;
          
+     
        }
        
        else{
@@ -155,6 +155,7 @@ class Player extends GameObject{
        else{
          if(!WALKING){
          WALKING = false;}
+         
          //LOOK_LEFT = false;
        }
 
@@ -177,7 +178,7 @@ class Player extends GameObject{
             && state != stateEnumDead) {
           Game.lives -= 1;
           state = stateEnumDead;
-          
+          ATTACKED = false;
           if (Game.lives <= 0) {
            Game.instance.gameOver();
           } else {
@@ -232,6 +233,7 @@ class Player extends GameObject{
      invincibilityTimer = 1.5;
      blink = true;
      gameLoop.addTimer((invincibilityTimer) => invincibilityCountDown(), 0.1);
+     hideBuzz();
    }
    
    invincibilityCountDown() {
@@ -242,7 +244,21 @@ class Player extends GameObject{
      } else {
        if (state != stateEnumDead) {
         state = stateEnumAlive;
+        unHideBuzz();
        }
      }
+   }
+   
+   hideBuzz(){
+     ATTACKED = true;
+     sprite.spritex = -500;
+     originalX = this.x;
+     
+   }
+   
+   unHideBuzz(){
+     ATTACKED = false;
+     sprite.spritex = 0;
+     this.x = originalX - 200.0;
    }
 }

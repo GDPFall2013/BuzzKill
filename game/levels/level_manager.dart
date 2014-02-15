@@ -18,7 +18,7 @@ class LevelManager {
         setupMainMenu();
         break;
       case 1:  
-        setupLevelOne();
+        setupLevelTwo();
         break;  
       case 2:
         setupLevelTwo();

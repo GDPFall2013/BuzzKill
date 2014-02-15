@@ -177,7 +177,10 @@ void update(double dt) {
     }
     
     //Drain Oxygen
-    if (oxygenTimer.elapsedMilliseconds > 250 + lastOxygenTick && currentLevel>=LevelManager.enumLevelOne &&
+    if(player.ATTACKED){
+      pauseOxygenDrain();
+    }
+    else if (oxygenTimer.elapsedMilliseconds > 250 + lastOxygenTick && currentLevel>=LevelManager.enumLevelOne &&
         oxygen >0){
       lastOxygenTick += 250;
       oxygen -= 1;
@@ -196,6 +199,7 @@ void update(double dt) {
         gameMenu.update(dt);
      }  
     }
+    
   }
 
   
@@ -205,10 +209,7 @@ void update(double dt) {
     gameMenu.update(dt);
     
     //pause oxygen drain
-    if(oxygenTimer.elapsedMilliseconds > 250 + lastOxygenTick){
-      lastOxygenTick += 250;
-          oxygen -= 0;
-    }
+    pauseOxygenDrain();
     
     if(resetMainMenu){
       gameMenu = new InGameMenu();
@@ -222,10 +223,7 @@ void update(double dt) {
   if(state == stateEnumControls){
     controls.update(dt);
     //pause oxygen drain
-    if(oxygenTimer.elapsedMilliseconds > 250 + lastOxygenTick){
-    lastOxygenTick += 250;
-        oxygen -= 0;
-    }
+    pauseOxygenDrain();
   }
 
   
@@ -233,10 +231,7 @@ void update(double dt) {
   if(state == stateEnumOptions){
     options.update(dt);
     //pause oxygen drain
-    if(oxygenTimer.elapsedMilliseconds > 250 + lastOxygenTick){
-    lastOxygenTick += 250;
-        oxygen -= 0;
-    }
+    pauseOxygenDrain();
   }  
   
   
@@ -258,6 +253,8 @@ void update(double dt) {
     numberOfUpdates = 0.0;
     numberOfRenders = 0.0;
   }
+  
+
 }
 
 /**
@@ -440,6 +437,13 @@ restartGame() {
   if(currentLevel >= LevelManager.enumLevelOne){
     oxygenTimer.reset(); lastOxygenTick = 0.0;
     oxygenTimer.start();}
+}
+
+pauseOxygenDrain(){
+  if(oxygenTimer.elapsedMilliseconds > 250 + lastOxygenTick){
+        lastOxygenTick += 250;
+         oxygen -= 0;
+      }
 }
 
 }
