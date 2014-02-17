@@ -11,6 +11,8 @@ class SpriteSheet {
   num spritey;
   int _framew;
   int _frameh;  
+  num scaledw;
+  num scaledh;
   String _imgurl = "";
   ImageElement _img;
   
@@ -23,12 +25,14 @@ class SpriteSheet {
   
   SpriteSheet(this._imgurl, this.spritex, this.spritey,this._framew,this._frameh)
   {
-    _img = ImageLoader.getImage(_imgurl);     
+    _img = ImageLoader.getImage(_imgurl); 
+    this.scaledh = this._frameh;
+    this.scaledw = this._framew;
   }
   
   drawOnPosition(double x, double y, double frameX, double frameY)
   {
-    ctx.drawImageScaledFromSource(_img,spritex,spritey,_framew,_frameh, x,y,_framew,_frameh);
+    ctx.drawImageScaledFromSource(_img,spritex,spritey,_framew,_frameh, x,y,scaledw,scaledh);
   }
   
   /* 

@@ -34,7 +34,9 @@ class Gorilla extends Enemy{
     sprite.numberOfFrames = 6;
     
     attackSprite.frameChangeRate = 25.0;
-        attackSprite.numberOfFrames = 3;
+    attackSprite.numberOfFrames = 4;
+        
+     TYPE = "BOSS";
   }
   
   update (double dt) {
@@ -99,10 +101,11 @@ class Gorilla extends Enemy{
        else{
          attackSprite.spritex += 200;
        }*/
-      if(attackSprite.spritex>=400){
+      if(attackSprite.spriteFrame > 3){
         attack = false;
         attackSprite.spritex = 0;
         sprite.spritex = 0;
+        attackSprite.spriteFrame = 1;
         }
       else{
       if(goingBack){

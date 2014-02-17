@@ -24,7 +24,7 @@ class Player extends GameObject{
   double invincibilityTimer = 0.0;
   bool blink = false;
   
-  double playerStartX = 12000.0;  //TODO: This should be moved to level object later
+  double playerStartX = 0.0;  //TODO: This should be moved to level object later
   double playerStartY = 300.0; 
   double originalX;
   
@@ -45,7 +45,7 @@ class Player extends GameObject{
   }
   
    draw(){
-      if (state != stateEnumDead && !blink && !ATTACKED) {
+      if (state != stateEnumDead && !blink && !ATTACKED && Game.instance.state != Game.instance.stateEnumCollected) {
         if(JUMPING && LOOK_RIGHT){
           sprite.spritex = 225;
           sprite.spritey = 200;
@@ -108,7 +108,7 @@ class Player extends GameObject{
    
    update(double dt){
      
-     if (state != stateEnumDead && !ATTACKED) {
+     if (state != stateEnumDead && !ATTACKED && Game.instance.state != Game.instance.stateEnumCollected) {
        
        if (input.isDown(KeyCode.UP) || input.controllerButtonPushed){
           if(!JUMPING){
@@ -226,14 +226,17 @@ class Player extends GameObject{
      state = stateEnumAlive;
    }
   
-   injureBuzz (double injuryAmount) {
+   injureBuzz (double injuryAmount,bool boss) {
      Game.oxygen -= injuryAmount;
      SoundManager.instance.playSound(SoundManager.enumSoundInjure);
      state = stateEnumInjured;
      invincibilityTimer = 1.5;
      blink = true;
      gameLoop.addTimer((invincibilityTimer) => invincibilityCountDown(), 0.1);
+     
+     if(boss){
      hideBuzz();
+     }
    }
    
    invincibilityCountDown() {
@@ -244,7 +247,9 @@ class Player extends GameObject{
      } else {
        if (state != stateEnumDead) {
         state = stateEnumAlive;
+        if(ATTACKED){
         unHideBuzz();
+        }
        }
      }
    }
