@@ -96,6 +96,7 @@ int stateEnumControls = 6;
 int stateEnumTransition = 7;
 int stateEnumIntro = 8;
 int stateEnumOptions = 9;
+int stateEnumCollected = 10;
 
 bool resetMainMenu = false; //used to reset main menu if prev screen was pause menu
 int state;
@@ -177,7 +178,10 @@ void update(double dt) {
     }
     
     //Drain Oxygen
-    if (oxygenTimer.elapsedMilliseconds > 250 + lastOxygenTick && currentLevel>=LevelManager.enumLevelOne &&
+    if(player.ATTACKED){
+      pauseOxygenDrain();
+    }
+    else if (oxygenTimer.elapsedMilliseconds > 250 + lastOxygenTick && currentLevel>=LevelManager.enumLevelOne &&
         oxygen >0){
       lastOxygenTick += 250;
       oxygen -= 1;
@@ -196,6 +200,7 @@ void update(double dt) {
         gameMenu.update(dt);
      }  
     }
+    
   }
 
   
@@ -205,10 +210,7 @@ void update(double dt) {
     gameMenu.update(dt);
     
     //pause oxygen drain
-    if(oxygenTimer.elapsedMilliseconds > 250 + lastOxygenTick){
-      lastOxygenTick += 250;
-          oxygen -= 0;
-    }
+    pauseOxygenDrain();
     
     if(resetMainMenu){
       gameMenu = new InGameMenu();
@@ -222,10 +224,7 @@ void update(double dt) {
   if(state == stateEnumControls){
     controls.update(dt);
     //pause oxygen drain
-    if(oxygenTimer.elapsedMilliseconds > 250 + lastOxygenTick){
-    lastOxygenTick += 250;
-        oxygen -= 0;
-    }
+    pauseOxygenDrain();
   }
 
   
@@ -233,10 +232,7 @@ void update(double dt) {
   if(state == stateEnumOptions){
     options.update(dt);
     //pause oxygen drain
-    if(oxygenTimer.elapsedMilliseconds > 250 + lastOxygenTick){
-    lastOxygenTick += 250;
-        oxygen -= 0;
-    }
+    pauseOxygenDrain();
   }  
   
   
@@ -245,6 +241,26 @@ void update(double dt) {
     normContext.clearRect(0, 0,640, 480);
     transition.update(dt);
     transition.draw();
+  }
+  
+  //Space Item collected
+  if(state == stateEnumCollected){
+    //normContext.clearRect(0, 0,640, 480);
+    //transition.update(dt);
+    //transition.draw();
+    pauseOxygenDrain();
+    for (GameObject go in ObjectManager.instance.goList) {
+          go.update(dt);
+        }
+    
+// Adjust the camera position
+ if (player.x - camera.x > viewportWidth - 205) {
+   camera.x = player.x - (viewportWidth - 205);
+ }
+ if (player.x - camera.x < 205) {
+   camera.x = player.x - 205;
+ }
+ 
   }
   
   
@@ -258,6 +274,8 @@ void update(double dt) {
     numberOfUpdates = 0.0;
     numberOfRenders = 0.0;
   }
+  
+
 }
 
 /**
@@ -330,7 +348,23 @@ void draw() {
   
   drawHUD();
   
-  } 
+  }
+  
+  else if(state == stateEnumCollected){
+    normContext.clearRect(0, 0,640, 480);
+    for (GameObject go in ObjectManager.instance.goList) {
+        double goRightEdge = go.x + go.width/2;
+        double goLeftEdge = go.x - go.width/2;
+        
+        if (goRightEdge > (camera.x - (viewportWidth / Camera.instance.screenRatio))  && 
+            goLeftEdge < (camera.x + (viewportWidth / Camera.instance.screenRatio))) {
+          go.draw();
+        //  DrawColliderBox(go);
+        }   
+      }
+      
+      drawHUD();
+  }
   
   else if (state == stateEnumWin) {
 
@@ -378,6 +412,8 @@ void draw() {
     
   }
   
+  
+  
   // Used for Frames Per Second Debugging Information
   numberOfRenders += 1.0;
 }
@@ -414,6 +450,10 @@ win() {
   
 }
 
+
+collected(){
+  state = stateEnumCollected;
+}
 gameOver() {
   // TODO music to be placed here in the future
   currentLevel = LevelManager.enumLevelOne;
@@ -446,6 +486,13 @@ restartGame() {
   if(currentLevel >= LevelManager.enumLevelOne){
     oxygenTimer.reset(); lastOxygenTick = 0.0;
     oxygenTimer.start();}
+}
+
+pauseOxygenDrain(){
+  if(oxygenTimer.elapsedMilliseconds > 250 + lastOxygenTick){
+        lastOxygenTick += 250;
+         oxygen -= 0;
+      }
 }
 
 }

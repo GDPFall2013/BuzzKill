@@ -5,6 +5,7 @@ part of gdp;
 */
 abstract class Enemy extends GameObject {
   bool triggerFall;
+  String TYPE;
   
   double injure() {}
  

@@ -27,13 +27,16 @@ class CollisionSystem
    }
      
    PlayerCollideWithEnemy(Player player)
-   {
+   { bool boss = false;
        // Collision Check for player colliding with enemies
       for (Enemy enemy in ObjectManager.instance.enemyList) 
         {
           if (checkForCollision(player, enemy))
           {
-            player.injureBuzz (enemy.injure());  
+            if(enemy.TYPE == "BOSS"){
+              boss = true;
+            }
+            player.injureBuzz (enemy.injure(),boss);  
             
           }
       }

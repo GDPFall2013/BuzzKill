@@ -5,6 +5,7 @@ class Gorilla extends Enemy{
   ImageElement img = new ImageElement();
 
   SpriteSheet sprite;
+  SpriteSheet attackSprite;
   int spriteXInitial = 0;
   int spriteYInitial = 266;
   int spriteWidth = 126;
@@ -17,6 +18,7 @@ class Gorilla extends Enemy{
   double endPos;
   bool goingBack = false;
   bool triggerFall = false;
+  bool attack = false;
   
   initialize(double x, double y) {
     super.initialize(x, y);
@@ -24,12 +26,17 @@ class Gorilla extends Enemy{
     height = 140.0;
     
     sprite = new SpriteSheet("./content/enemies_spritesheet copy.png",0,266,126,166);
-    
+    attackSprite = new SpriteSheet("./content/gorilla battle.png",0,240,200,240);
     initialPos = x;
     endPos = x-150.0;
     
     sprite.frameChangeRate = 50.0;
     sprite.numberOfFrames = 6;
+    
+    attackSprite.frameChangeRate = 25.0;
+    attackSprite.numberOfFrames = 4;
+        
+     TYPE = "BOSS";
   }
   
   update (double dt) {
@@ -87,13 +94,42 @@ class Gorilla extends Enemy{
     }
     
     sprite.update(dt);  
+    
+    if(attack){
+      /* if(attackSprite.spritex >= 400){
+         attackSprite.spritex =0;}
+       else{
+         attackSprite.spritex += 200;
+       }*/
+      if(attackSprite.spriteFrame > 3){
+        attack = false;
+        attackSprite.spritex = 0;
+        sprite.spritex = 0;
+        attackSprite.spriteFrame = 1;
+        }
+      else{
+      if(goingBack){
+        attackSprite.spritey = 240;
+        sprite.spritex = -200;
+      }
+      else{
+        attackSprite.spritey = 0;
+        sprite.spritex = -200;
+      }
+      attackSprite.update(dt);
+    }
+    }
   }
   
   draw(){
     sprite.drawOnPosition(x-width/2 - imgOffsetX, y-height/2 + imgOffsetY, width , height);
+    if(attack){
+    attackSprite.drawOnPosition(x-width/2 - imgOffsetX, y-height/2 + (-100), width , height);
+    }
   }
   
    double injure() {
+    attack = true;
     return 10.0;
    }
 }

@@ -7,15 +7,28 @@ part of gdp;
 class ShipItem extends Item{
   
   SpriteSheet sprite;
+  //ImageElement img = new Element.tag("img");
+  SpriteSheet panel;
+  
+  SpriteSheet levelSprite;
+  
   int spriteXInitial = 0;
   int spriteYInitial = 100;
   int spriteWidth = 90;
   int spriteHeight = 90;
   num spriteFrames = 6;
+  Stopwatch timer = new Stopwatch();
+  
   
   bool glow=true;
+  bool collected = false;
+  
   int repeat=1;
   int level;
+  num initialX;
+  num initialY;
+  num xx;
+  num yy;
   
   initialize(double x, double y) {
     super.initialize(x, y);
@@ -23,6 +36,32 @@ class ShipItem extends Item{
     this.width = 80.0;
     sprite = new SpriteSheet("./content/gameitems.png",
         spriteXInitial,spriteYInitial,spriteWidth,spriteHeight);
+    
+    levelSprite = new SpriteSheet("./content/panel_level.png",
+            0,0,491,311);
+    levelSprite.numberOfFrames = 1;
+    //img.src = "./content/gameitems.png";
+    
+    this.initialX = 0;
+    this.initialY = 0;
+    
+    xx=x;
+    yy=y;
+    
+    panel = new SpriteSheet("./content/panel.png",0,0,491,311);
+    panel.numberOfFrames = 1;
+    
+    
+    
+    if(Game.instance.currentLevel == LevelManager.enumLevelOne){
+    levelSprite.spritex = 0;}
+    else if(Game.instance.currentLevel == LevelManager.enumLevelTwo){
+    levelSprite.spritex = 491;}
+    else if(Game.instance.currentLevel == LevelManager.enumLevelThree){
+    levelSprite.spritex = 982;}
+    else if(Game.instance.currentLevel == LevelManager.enumLevelFour){
+    levelSprite.spritex = 1473;} 
+    
   }
 
   
@@ -32,6 +71,9 @@ class ShipItem extends Item{
   
   
   draw() {
+    
+    
+    
     //glow logic
       if(sprite.spritex >=450){
         glow = false;
@@ -74,6 +116,37 @@ class ShipItem extends Item{
           sprite.spritex -= 90;
         }
     
+      if(collected){
+        panel.drawOnPosition(xx+300, yy-200, 491.0 , 311.0); 
+        levelSprite.drawOnPosition(xx+300, yy-200, 491.0 , 311.0); 
+        timer.start();
+
+             if(initialX <= 400){
+             this.x -= 1;
+             this.y -= 4.5;
+             sprite.scaledw += 0.5; 
+             sprite.scaledh += 0.5;
+             initialX += 5;}
+             else{
+               if(Game.instance.currentLevel == LevelManager.enumLevelOne){
+               levelSprite.spritex = 491;}
+               else if(Game.instance.currentLevel == LevelManager.enumLevelTwo){
+               levelSprite.spritex = 982;}
+               else if(Game.instance.currentLevel == LevelManager.enumLevelThree){
+               levelSprite.spritex = 1473;}
+               else if(Game.instance.currentLevel == LevelManager.enumLevelFour){
+               levelSprite.spritex = 1964;}
+             }
+             
+             if(timer.elapsedMilliseconds >= 4000){
+               Game.instance.win();
+             }
+      }
+      
+      else{
+        xx = camera.x;
+        yy = camera.y;
+      }
     }
 
     //increase glow
@@ -112,7 +185,46 @@ class ShipItem extends Item{
           sprite.spritex += 90;
         }
         
-      }
+        if(collected){
+          panel.drawOnPosition(xx+300, yy-200, 491.0 , 311.0);
+          levelSprite.drawOnPosition(xx+300, yy-200, 491.0 , 311.0);
+          
+                timer.start();
+                
+                     //move space item
+                     if(initialX <= 400){ 
+                     this.x -= 1;
+                     this.y -= 4.5;
+                     sprite.scaledw += 0.5; 
+                     sprite.scaledh += 0.5;
+                     initialX += 5;
+                     }
+                     //increment space items collected once moving space item is stationary
+                     else{
+                       if(Game.instance.currentLevel == LevelManager.enumLevelOne){
+                       levelSprite.spritex = 491;}
+                       else if(Game.instance.currentLevel == LevelManager.enumLevelTwo){
+                       levelSprite.spritex = 982;}
+                       else if(Game.instance.currentLevel == LevelManager.enumLevelThree){
+                       levelSprite.spritex = 1473;}
+                       else if(Game.instance.currentLevel == LevelManager.enumLevelFour){
+                       levelSprite.spritex = 1964;}                       
+                     }
+                     
+                     //timer, after 3 seconds move to next level transition
+                    if(timer.elapsedMilliseconds >= 4000){
+                       Game.instance.win();                     
+                       }
+              }
+        
+        else{
+                xx = camera.x;
+                yy = camera.y;
+              }
+      
+    }
+
+     
     
     sprite.drawOnPosition(x-this.width/2, y-this.height/2, width , height);   
   }
@@ -122,6 +234,7 @@ class ShipItem extends Item{
    */
   collect() {
     SoundManager.instance.playSound(SoundManager.enumSoundShipItem);
-    Game.instance.win();
+    collected = true;
+    Game.instance.collected();
   }
 }
