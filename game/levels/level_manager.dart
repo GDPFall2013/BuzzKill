@@ -11,7 +11,8 @@ class LevelManager {
   static int enumLevelFour = 4;
   
   loadLevel(int level) {
-    
+    SoundManager.instance.stopMusic(); //TODO: This should be placed in a clear previous level function
+    ObjectManager.instance.clear();
     switch(level) {  
       // enums aren't implemented yet, and switch only takes constants at the moment.
       case 0:  

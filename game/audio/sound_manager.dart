@@ -11,7 +11,7 @@ class SoundManager {
   
   AudioContext ac = new AudioContext();
   AudioBufferSourceNode source;
-  
+  AudioBufferSourceNode musicSource;
   
   static SoundManager instance;
   factory SoundManager() {
@@ -29,28 +29,40 @@ class SoundManager {
   AudioBuffer _oxygenClip;
   AudioBuffer _shipItemClip;
   AudioBuffer _injureClip;
+  
+  AudioBuffer _mainMenuMusicClip;
+  AudioBuffer _levelOneMusicClip;
+  
+  AudioBuffer _currentMusic;
  
   static final int enumSoundJump = 1;
   static final int enumSoundOxygen = 2;
   static final int enumSoundShipItem = 3;
   static final int enumSoundInjure = 4;
   
-  GainNode volume;
-  int volumeNumber;
+  static final int musicMainMenu = 1;
+  static final int musicLevelOne = 2;
+  
+  GainNode sfxVolume;
+  double sfxVolumeNumber;
+  GainNode musicVolume;
+  double musicVolumeNumber;
   
   init(){
     loadSounds();
-    volume = ac.createGain();
-    source = ac.createBufferSource();
-    source.connectNode(volume);
-    volume.connectNode(ac.destination);
-    volumeNumber = 50;
-    volume.gain.value = volumeNumber;
-    
-   // loadSound('content/Sound Files/SlowJump.wav', jumpClip);
-   // loadSound('content/Sound Files/Oxygen.wav', _oxygenClip);
-   // loadSound('content/Sound Files/ShipItem.wav', _shipItemClip);
-   // loadSound('content/Sound Files/Injured.wav', _injureClip);
+    sfxVolume = ac.createGain();
+     source = ac.createBufferSource();
+     source.connectNode(sfxVolume);
+     sfxVolume.connectNode(ac.destination);
+     sfxVolumeNumber = 0.5;
+     sfxVolume.gain.value = sfxVolumeNumber;
+     
+     musicVolume = ac.createGain();
+     musicSource = ac.createBufferSource();
+     musicSource.connectNode(musicVolume);
+     musicVolume.connectNode(ac.destination);
+     musicVolumeNumber = 0.5;
+     musicVolume.gain.value = musicVolumeNumber;
   }
   
   void loadSounds() {
@@ -87,25 +99,54 @@ class SoundManager {
   }
   
   void setMusic( int newMusic) {
-  //  audioManager.music.clip = null;
-    // load correct piece of music
-  //  audioManager.music.clip = _currentMusic;
+        _currentMusic = null;
+       if        (newMusic == musicMainMenu) {
+         _currentMusic = _mainMenuMusicClip;
+       } else if (newMusic == musicLevelOne){
+         _currentMusic = _levelOneMusicClip;
+       }
   }
   
   void startMusic(){
-    /// audioManager.music.play();
+     musicSource = ac.createBufferSource();
+     musicSource.connectNode(musicVolume);
+     musicSource.buffer = _currentMusic;
+     musicSource.loop = true;
+     musicSource.start(0);
   }
  
   
   //Loads music then calls the function when finished
-  void loadMusic(Function callback){
-    //_currentMusic.load().then((_) {
-   //   callback();
-   // });
+  void loadMusic(int musicClip, Function callback){
+    switch(musicClip) {  
+          // enums aren't implemented yet, and switch only takes constants at the moment.
+          case 1: //(musicMainMenu)
+            HttpRequest.request('content/Sound Files/MainMenu.wav', responseType: 'arraybuffer')
+              .then((HttpRequest request) {
+                ac.decodeAudioData(request.response)
+                  .then((AudioBuffer buffer) { 
+                    _mainMenuMusicClip = buffer;  
+                    callback();
+                  });
+              });
+            break;
+          case 2: //(musicLevelOne)
+            HttpRequest.request('content/Sound Files/LevelMusic.wav', responseType: 'arraybuffer')
+              .then((HttpRequest request) {
+                ac.decodeAudioData(request.response)
+                  .then((AudioBuffer buffer) { 
+                    _levelOneMusicClip = buffer;
+                    callback();
+                  });
+              });
+            break;  
+        }
   }
   
   void stopMusic() {
-   // audioManager.music.stop();
+    if (musicSource != null && musicSource.buffer != null) {
+             musicSource.stop(0);
+       }
   }
   
   void pauseMusic() {
@@ -125,29 +166,35 @@ class SoundManager {
   }
   
   //TODO:  Refactor these so they follow Dart's ability to hide getters and setters
-  num getMusicVolume() {
-  //  return audioManager.musicVolume;
-  }
-  
-  num getSfxVolume() {
-  //  return sfxSource.volume;
-  }
-  
-  void setSfxVolume(num newVolume) {
-  //  sfxSource.volume = newVolume;
-  }
-  
-  void setMusicVolume(num newVolume) {
-  //  audioManager.musicVolume = newVolume;
-  }
-  
-  void toggleMute() {
-    if (volume.gain.value == 0) {
-      volume.gain.value = volumeNumber;
-    } else {
-      volume.gain.value = 0;
-    }
-  }
+   double getMusicVolume() {
+     return musicVolumeNumber;
+   }
+   
+   double getSfxVolume() {
+    return sfxVolumeNumber;
+   }
+   
+   void setSfxVolume(num newVolume) {
+     sfxVolumeNumber = newVolume;
+     sfxVolume.gain.value = sfxVolumeNumber;
+   }
+   
+   void setMusicVolume(num newVolume) {
+     musicVolumeNumber = newVolume;
+     musicVolume.gain.value = musicVolumeNumber;
+   }
+   
+   void toggleMute() {
+     if (_muted) {
+       sfxVolume.gain.value = sfxVolumeNumber;
+       musicVolume.gain.value = musicVolumeNumber;
+       _muted = false;
+     } else {
+       sfxVolume.gain.value = 0;
+       musicVolume.gain.value = 0;
+       _muted = true;
+     }
+   }
  
 
   void playSound(int enumSound){

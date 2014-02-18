@@ -125,10 +125,11 @@ Initialize() {
  // levelManager.loadLevel(LevelManager.enumLevelTest);
   currentLevel = LevelManager.enumMainMenu;
   levelManager.loadLevel(LevelManager.enumMainMenu);
-    state = stateEnumMain;
+  state = stateEnumMain;
 
-    if(currentLevel >= LevelManager.enumLevelOne){
-    oxygenTimer.start();}
+  if(currentLevel >= LevelManager.enumLevelOne){
+    oxygenTimer.start();
+  }
     
  
 }
@@ -463,7 +464,6 @@ gameOver() {
 }
 
 reloadLevel() {
-  ObjectManager.instance.clear();
   levelManager.loadLevel(currentLevel);
   player.resetPlayer();
   
@@ -476,7 +476,6 @@ reloadLevel() {
 }
 
 restartGame() {
-  ObjectManager.instance.clear();
   lives = 3;
   levelManager.loadLevel(currentLevel);
   player.resetPlayer();

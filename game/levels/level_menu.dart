@@ -1,11 +1,14 @@
 part of gdp;
 
 void setupMainMenu() {
-  /*
+  startMusic() {
+    SoundManager.instance.setMusic(SoundManager.musicMainMenu);
+    SoundManager.instance.startMusic();
+  }
   
-  ObjectManager om = ObjectManager.instance;
+  SoundManager.instance.loadMusic(SoundManager.musicMainMenu,  startMusic);
   
-  om.addObject(Game.instance.menu);
-*/
- 
+  
+
 }
+

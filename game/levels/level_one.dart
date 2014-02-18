@@ -1,6 +1,14 @@
 part of gdp;
 
 void setupLevelOne() {
+  
+  startMusic() {
+      SoundManager.instance.setMusic(SoundManager.musicLevelOne);
+      SoundManager.instance.startMusic();
+    }
+    
+  SoundManager.instance.loadMusic(SoundManager.musicLevelOne,  startMusic);
+  
   ObjectManager om = ObjectManager.instance;
   
   om.addObject(Game.instance.player);
