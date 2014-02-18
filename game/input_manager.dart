@@ -8,7 +8,7 @@ class Input {
     Gamepad gp;
 
     static Input instance;
-    static HashMap<int, int> _keys = new HashMap<int, int>();
+
     factory Input() {
       if (instance == null) {
         instance = new Input._internal();
