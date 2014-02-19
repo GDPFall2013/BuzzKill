@@ -53,10 +53,11 @@ class MainMenu extends GameObject{
     //print(i);
     
     //down
+    if(Game.instance.state == Game.instance.stateEnumMain){
     if (input.wasPressed(KeyCode.RIGHT) && playGame){
         playGame = false;
         options = true;
-        sprite.spritex = 150;   
+        sprite.spritex = 150;  
       }
       
     else if(input.wasPressed(KeyCode.RIGHT) && options){
@@ -137,6 +138,7 @@ class MainMenu extends GameObject{
               playGame = false;
               Game.instance.lastENTER = input.timePressed(KeyCode.ENTER);
               Game.instance.transition = new LevelTransition();
+              Game.instance.currentLevel = Game.instance.startLevel;
              }
     }
     
@@ -169,6 +171,7 @@ class MainMenu extends GameObject{
       }
     }*/
     
+  }
   }
   
 }

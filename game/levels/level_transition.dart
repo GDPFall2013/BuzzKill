@@ -141,8 +141,10 @@ class LevelTransition extends GameObject{
         //to avoid reading two 'ENTER' presses as the same keystroke
         if(input.timePressed(KeyCode.ENTER) - Game.instance.lastENTER > 0.0){
           ObjectManager.instance.goList.clear();
+          
           Game.instance.currentLevel += 1;
           Game.instance.reloadLevel();
+          
         }
       }
       

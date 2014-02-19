@@ -84,6 +84,7 @@ static int lives = 3;
 Input input = new Input();
 
 int currentLevel;
+int startLevel;
 double lastENTER=0.0;
 double lastESC = 0.0;
 
@@ -124,6 +125,7 @@ Initialize() {
  // currentLevel = LevelManager.enumLevelTest;
  // levelManager.loadLevel(LevelManager.enumLevelTest);
   currentLevel = LevelManager.enumMainMenu;
+  startLevel = LevelManager.enumMainMenu;
   levelManager.loadLevel(LevelManager.enumMainMenu);
   state = stateEnumMain;
 
@@ -477,10 +479,11 @@ reloadLevel() {
 
 restartGame() {
   lives = 3;
-  levelManager.loadLevel(currentLevel);
+  levelManager.loadLevel(startLevel);
   player.resetPlayer();
   state = stateEnumPlay;
   
+  currentLevel = startLevel;
   //reset oxygen
   if(currentLevel >= LevelManager.enumLevelOne){
     oxygenTimer.reset(); lastOxygenTick = 0.0;
