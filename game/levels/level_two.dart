@@ -57,7 +57,8 @@ void setupLevelTwo() {
   om.addItem(new Oxygen()..initialize(1100.0, 290.0));
   om.addItem(new Oxygen()..initialize(1150.0, 290.0));
   om.addItem(new Oxygen()..initialize(1200.0, 290.0));
-  om.addEnemy(new Droid()..initialize(1600.0, 305.0));
+  om.addEnemy(new Bullet()..initialize(2000.0, 330.0));
+  om.addEnemy(new Droid()..initialize(2000.0, 305.0));
   //om.addEnemy(new Spike()..initialize(1900.0, 340.0)
   //    ..width = 100.0 .. height = 20.0);
   

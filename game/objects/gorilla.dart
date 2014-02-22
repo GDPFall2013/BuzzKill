@@ -7,9 +7,9 @@ class Gorilla extends Enemy{
   SpriteSheet sprite;
   SpriteSheet attackSprite;
   int spriteXInitial = 0;
-  int spriteYInitial = 266;
-  int spriteWidth = 126;
-  int spriteHeight = 166;
+  int spriteYInitial = 360;
+  int spriteWidth = 140;
+  int spriteHeight = 200;
   
   double imgOffsetX = 0.0;
   double imgOffsetY = -20.0;
@@ -17,24 +17,26 @@ class Gorilla extends Enemy{
   double initialPos;
   double endPos;
   bool goingBack = false;
+  
+  
   bool triggerFall = false;
   bool attack = false;
   
   initialize(double x, double y) {
     super.initialize(x, y);
-    width = 100.0;
-    height = 140.0;
+    width = 140.0;
+    height = 200.0;
     
-    sprite = new SpriteSheet("./content/enemies_spritesheet copy.png",0,266,126,166);
-    attackSprite = new SpriteSheet("./content/gorilla battle.png",0,240,200,240);
+    sprite = new SpriteSheet("./content/enemies_spritesheet copy.png",0,360,140,200);
+    attackSprite = new SpriteSheet("./content/enemies_attack_spritesheet.png",0,633,240,280);
     initialPos = x;
     endPos = x-150.0;
     
     sprite.frameChangeRate = 50.0;
-    sprite.numberOfFrames = 6;
+    sprite.numberOfFrames = 4;
     
     attackSprite.frameChangeRate = 25.0;
-    attackSprite.numberOfFrames = 4;
+    attackSprite.numberOfFrames = 7;
         
      TYPE = "BOSS";
   }
@@ -44,7 +46,7 @@ class Gorilla extends Enemy{
     
     if(triggerFall){
       y += 1;
-      sprite.spritey = 100;
+      sprite.spritey = 130;
       
       /*
       if (sprite.lastDraw > sprite.frameChangeRate) {
@@ -71,7 +73,7 @@ class Gorilla extends Enemy{
     }
     
     
-    //move aliens back and forth
+    //move gorilla back and forth
     else{
     if (goingBack == false) {
       if(x >= endPos){
@@ -79,7 +81,7 @@ class Gorilla extends Enemy{
       }
       else{
         goingBack = true;
-        sprite.spritey = 100;
+        sprite.spritey = 130;
       }
     }
     else {
@@ -88,7 +90,7 @@ class Gorilla extends Enemy{
       }
       else{
         goingBack = false;
-        sprite.spritey = 266;
+        sprite.spritey = 360;
       }
     }
     }
@@ -101,7 +103,7 @@ class Gorilla extends Enemy{
        else{
          attackSprite.spritex += 200;
        }*/
-      if(attackSprite.spriteFrame > 3){
+      if(attackSprite.spriteFrame > 7){
         attack = false;
         attackSprite.spritex = 0;
         sprite.spritex = 0;
@@ -109,11 +111,11 @@ class Gorilla extends Enemy{
         }
       else{
       if(goingBack){
-        attackSprite.spritey = 240;
+        attackSprite.spritey = 250;
         sprite.spritex = -200;
       }
       else{
-        attackSprite.spritey = 0;
+        attackSprite.spritey = 633;
         sprite.spritex = -200;
       }
       attackSprite.update(dt);
