@@ -21,7 +21,7 @@ class Droid extends Enemy{
     super.initialize(x, y);
     width = 80.0;
     height = 115.0;
-    sprite = new SpriteSheet("./content/enemies_spritesheet copy.png",
+    sprite = new SpriteSheet("./content/enemies_spritesheet.png",
         spriteXInitial,spriteYInitial,spriteWidth,spriteHeight);
     
     initialPos = x;

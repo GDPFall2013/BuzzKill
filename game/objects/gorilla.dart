@@ -27,8 +27,8 @@ class Gorilla extends Enemy{
     width = 140.0;
     height = 200.0;
     
-    sprite = new SpriteSheet("./content/enemies_spritesheet copy.png",0,360,140,200);
-    attackSprite = new SpriteSheet("./content/enemies_attack_spritesheet.png",0,633,240,280);
+    sprite = new SpriteSheet("./content/enemies_spritesheet.png",0,360,140,200);
+    attackSprite = new SpriteSheet("./content/enemies_attack_spritesheet.png",0,500,240,250);
     initialPos = x;
     endPos = x-150.0;
     
@@ -103,7 +103,7 @@ class Gorilla extends Enemy{
        else{
          attackSprite.spritex += 200;
        }*/
-      if(attackSprite.spriteFrame > 7){
+      if(attackSprite.spriteFrame > 6){
         attack = false;
         attackSprite.spritex = 0;
         sprite.spritex = 0;
@@ -115,7 +115,7 @@ class Gorilla extends Enemy{
         sprite.spritex = -200;
       }
       else{
-        attackSprite.spritey = 633;
+        attackSprite.spritey = 500;
         sprite.spritex = -200;
       }
       attackSprite.update(dt);
