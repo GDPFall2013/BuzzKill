@@ -10,6 +10,10 @@ class Player extends GameObject{
   bool LOOK_RIGHT = false;
   bool LOOK_LEFT = false;
   bool ATTACKED = false;
+  bool MOVINGBLOCK = false;
+  
+  Block movingBlockk;
+  double playerBlockX=0.0;
   
   double velocity_y = 0.0;
   double accel = 1.5;
@@ -24,7 +28,7 @@ class Player extends GameObject{
   double invincibilityTimer = 0.0;
   bool blink = false;
   
-  double playerStartX = 0.0;  //TODO: This should be moved to level object later
+  double playerStartX = 14500.0;  //TODO: This should be moved to level object later
   double playerStartY = 300.0; 
   double originalX;
   
@@ -190,11 +194,24 @@ class Player extends GameObject{
       //  if (state == stateEnumAlive || state == stateEnumInjured) {
           CollisionSystem.instance.PlayerCollideWithItem(this);
           CollisionSystem.instance.PlayerCollideWithTrigger(this);
+          
        // }
         if (state == stateEnumAlive) {
           CollisionSystem.instance.PlayerCollideWithEnemy(this);
         }
-        CollisionSystem.instance.PlayerCollideWithBlock(this);
+        movingBlockk = CollisionSystem.instance.PlayerCollideWithBlock(this);
+        
+       
+        if(movingBlockk != null){
+          if(!WALKING){
+         movePlayerWithBlock(0.0,0.0,movingBlockk);
+          }
+          MOVINGBLOCK = true;
+        }
+        else{
+          MOVINGBLOCK = false;
+        }
+        
      }
        
    }
@@ -205,15 +222,67 @@ class Player extends GameObject{
     */
    movePlayer(double direction, double amount) {
      //move, then check if player is colliding with stuff.  If he is, move him back.
-       this.x += direction * amount;
+       
+       
+       if(MOVINGBLOCK){
+         movePlayerWithBlock(direction,amount,movingBlockk);
+         playerBlockX = this.x;
+       }
+       else{
+         this.x += direction * amount;
        for (Block block in ObjectManager.instance.blockList) {
          if (CollisionSystem.instance.checkForCollision(this, block)){
+           
+           
+         /*  if(block.moving){
+             print('update moving');
+             //if(this.velocity_y <=0){
+                      this.x =  block.x;
+                      
+             //}
+           }
+           
+           else{*/
            this.x -= direction * amount;   //Undo the movement
            return;
+           //}
          }
+       /*  
+         if(block.moving == true){
+        */ 
+          /* 
+           if(CollisionSystem.instance.PlayerCollideWithBlock(this)){
+             
+           print('update moving');
+           this.y = block.y - block.height/2 - this.height/2;
+           this.x += (direction * amount + block.x);
+           
+           print('update moving');
+           CollisionSystem.instance.PlayerCollideWithMovingBlock(this, block);
+           
+         }*/
+         
        }
+       }
+       }
+     
+   movePlayerWithBlock(double direction, double amount, Block block){
+     this.x += direction * amount;
+    /* if(WALKING){
+       //this.x = block.x;
+       this.x += direction * amount;
+       playerBlockX = x;
+       print(block.x);
+       print(x);
+       //print(amount);
+       print('walking on block');
      }
-   
+     
+     else{*/
+     //this.x =  (block.x + this.x) / 2;
+     //}
+     
+   }
    
    
    resetPlayer() {

@@ -31,7 +31,7 @@ part 'objects/droid.dart';
 part 'objects/ingame_menu.dart';
 part 'objects/trigger.dart';
 part 'objects/bullet.dart';
-
+part 'objects/moving_block.dart';
 
 part 'animations/sprite_sheet.dart';
 
@@ -188,7 +188,7 @@ void update(double dt) {
     else if (oxygenTimer.elapsedMilliseconds > 250 + lastOxygenTick && currentLevel>=LevelManager.enumLevelOne &&
         oxygen >0){
       lastOxygenTick += 250;
-      oxygen -= 1;
+      oxygen -= 0;
     }
     
     ObjectManager.instance.removeDeadObjects();

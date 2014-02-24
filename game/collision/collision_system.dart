@@ -42,8 +42,9 @@ class CollisionSystem
       }
    }
      
-   PlayerCollideWithBlock(Player player)
+   Block PlayerCollideWithBlock(Player player)
    {
+     Block movingBlock;
      bool onblock = false;
       //Collision Check for player colliding with blocks
       for (Block block in ObjectManager.instance.blockList) 
@@ -53,7 +54,11 @@ class CollisionSystem
              
              if (player.velocity_y > 0) { // This means he is hitting the block from below
                player.y = block.y + block.height/2 + player.height/2; 
-             } else {  // He is falling
+             } 
+             else {  // He is falling
+               if(block.moving){
+                movingBlock = block;
+                }
                onblock = true;
                player.y = block.y - block.height/2 - player.height/2;     
              }
@@ -63,10 +68,17 @@ class CollisionSystem
       }
       if (onblock) {
         player.JUMPING = false;
-      } else {
+        }
+
+       else {
         player.JUMPING = true;
       }
+      return movingBlock;
    }
+   
+
+   
+   
    
    
    PlayerCollideWithTrigger(Player player){

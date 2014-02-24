@@ -12,11 +12,12 @@ class Block extends GameObject {
   var img = new ImageElement();
   bool isObstacle = false;
   bool triggerFall = false;
+  bool moving = false;
   
   initialize(double x, double y) {
     super.initialize(x, y);
     img.src = "./content/platform.png"; 
-    
+   
   }
   
 
