@@ -48,7 +48,7 @@ class LevelTransition extends GameObject{
       introBG.drawOnPositionNormal(0.0, 0.0, width , height);
       
       if(introText.spritey <= 0){
-      introText.spritey += 0.1;
+      introText.spritey += 0.12;
       }
       
       else{

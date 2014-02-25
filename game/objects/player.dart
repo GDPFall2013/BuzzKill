@@ -190,7 +190,7 @@ class Player extends GameObject{
            Game.instance.gameOver();
           } else {
             // TODO: play some death music
-            gameLoop.addTimer((reload) => Game.instance.reloadLevel(), 2.0);
+            gameLoop.addTimer((reload) => Game.instance.reloadLevel(), 3.0);
           }
         }
         

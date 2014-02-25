@@ -8833,6 +8833,413 @@ var $$ = {};
   setupMainMenu: [function() {
     $.SoundManager_instance.loadMusic$2(1, new U.setupMainMenu_startMusic());
   }, "call$0", "setupMainMenu$closure", 0, 0, null],
+  setupLevelOne: [function() {
+    var om, t1, t2, t3, t4, t5;
+    $.SoundManager_instance.loadMusic$2(2, new U.setupLevelOne_startMusic());
+    om = $.ObjectManager_instance;
+    t1 = $.Game_instance.player;
+    t2 = om.goList;
+    t2.push(t1);
+    t1 = new U.SpriteSheet(50, 0, 120, 100, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
+    t1._img = U.ImageLoader_getImage("./content/gameitems.png");
+    t1.scaledh = 100;
+    t1.scaledw = 120;
+    t1 = new U.Block(t1, W.ImageElement_ImageElement(null, null, null), false, false, false, null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 875, 420);
+    J.set$src$x(t1.img, "./content/platform.png");
+    t1.width = 1750;
+    t1.height = 140;
+    t2.push(t1);
+    t3 = om.blockList;
+    t3.push(t1);
+    t1 = new U.SpriteSheet(0, 0, 50, 50, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
+    t1._img = U.ImageLoader_getImage("./content/gameitems.png");
+    t1.scaledh = 50;
+    t1.scaledw = 50;
+    t1 = new U.Oxygen(t1, null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 100, 290);
+    t1.width = 50;
+    t1.height = 45;
+    t2.push(t1);
+    t4 = om.itemList;
+    t4.push(t1);
+    t1 = new U.SpriteSheet(0, 0, 50, 50, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
+    t1._img = U.ImageLoader_getImage("./content/gameitems.png");
+    t1.scaledh = 50;
+    t1.scaledw = 50;
+    t1 = new U.Oxygen(t1, null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 150, 290);
+    t1.width = 50;
+    t1.height = 45;
+    t2.push(t1);
+    t4.push(t1);
+    t1 = new U.SpriteSheet(0, 0, 50, 50, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
+    t1._img = U.ImageLoader_getImage("./content/gameitems.png");
+    t1.scaledh = 50;
+    t1.scaledw = 50;
+    t1 = new U.Oxygen(t1, null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 200, 290);
+    t1.width = 50;
+    t1.height = 45;
+    t2.push(t1);
+    t4.push(t1);
+    t1 = new U.SpriteSheet(50, 0, 120, 100, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
+    t1._img = U.ImageLoader_getImage("./content/gameitems.png");
+    t1.scaledh = 100;
+    t1.scaledw = 120;
+    t1 = new U.Block(t1, W.ImageElement_ImageElement(null, null, null), false, false, false, null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 330, 300);
+    J.set$src$x(t1.img, "./content/platform.png");
+    t1.width = 120;
+    t1.height = 100;
+    t2.push(t1);
+    t3.push(t1);
+    t1 = new U.SpriteSheet(0, 0, 50, 50, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
+    t1._img = U.ImageLoader_getImage("./content/gameitems.png");
+    t1.scaledh = 50;
+    t1.scaledw = 50;
+    t1 = new U.Oxygen(t1, null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 440, 290);
+    t1.width = 50;
+    t1.height = 45;
+    t2.push(t1);
+    t4.push(t1);
+    t1 = new U.SpriteSheet(0, 0, 50, 50, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
+    t1._img = U.ImageLoader_getImage("./content/gameitems.png");
+    t1.scaledh = 50;
+    t1.scaledw = 50;
+    t1 = new U.Oxygen(t1, null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 490, 290);
+    t1.width = 50;
+    t1.height = 45;
+    t2.push(t1);
+    t4.push(t1);
+    t1 = new U.SpriteSheet(0, 0, 50, 50, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
+    t1._img = U.ImageLoader_getImage("./content/gameitems.png");
+    t1.scaledh = 50;
+    t1.scaledw = 50;
+    t1 = new U.Oxygen(t1, null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 540, 290);
+    t1.width = 50;
+    t1.height = 45;
+    t2.push(t1);
+    t4.push(t1);
+    t1 = new U.SpriteSheet(50, 0, 120, 100, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
+    t1._img = U.ImageLoader_getImage("./content/gameitems.png");
+    t1.scaledh = 100;
+    t1.scaledw = 120;
+    t1 = new U.Block(t1, W.ImageElement_ImageElement(null, null, null), false, false, false, null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 640, 300);
+    J.set$src$x(t1.img, "./content/platform.png");
+    t1.width = 120;
+    t1.height = 100;
+    t2.push(t1);
+    t3.push(t1);
+    t1 = new U.SpriteSheet(0, 0, 50, 50, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
+    t1._img = U.ImageLoader_getImage("./content/gameitems.png");
+    t1.scaledh = 50;
+    t1.scaledw = 50;
+    t1 = new U.Oxygen(t1, null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 730, 290);
+    t1.width = 50;
+    t1.height = 45;
+    t2.push(t1);
+    t4.push(t1);
+    t1 = new U.Spike(10, null, null, null, null, 0, 0, false);
+    t1.x = 850;
+    t1.y = 340;
+    t1.width = 100;
+    t1.height = 20;
+    t2.push(t1);
+    t5 = om.enemyList;
+    t5.push(t1);
+    t1 = new U.SpriteSheet(0, 0, 50, 50, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
+    t1._img = U.ImageLoader_getImage("./content/gameitems.png");
+    t1.scaledh = 50;
+    t1.scaledw = 50;
+    t1 = new U.Oxygen(t1, null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 1050, 290);
+    t1.width = 50;
+    t1.height = 45;
+    t2.push(t1);
+    t4.push(t1);
+    t1 = new U.SpriteSheet(0, 0, 50, 50, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
+    t1._img = U.ImageLoader_getImage("./content/gameitems.png");
+    t1.scaledh = 50;
+    t1.scaledw = 50;
+    t1 = new U.Oxygen(t1, null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 1100, 290);
+    t1.width = 50;
+    t1.height = 45;
+    t2.push(t1);
+    t4.push(t1);
+    t1 = new U.SpriteSheet(0, 0, 50, 50, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
+    t1._img = U.ImageLoader_getImage("./content/gameitems.png");
+    t1.scaledh = 50;
+    t1.scaledw = 50;
+    t1 = new U.Oxygen(t1, null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 1150, 290);
+    t1.width = 50;
+    t1.height = 45;
+    t2.push(t1);
+    t4.push(t1);
+    t1 = new U.SpriteSheet(0, 0, 50, 50, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
+    t1._img = U.ImageLoader_getImage("./content/gameitems.png");
+    t1.scaledh = 50;
+    t1.scaledw = 50;
+    t1 = new U.Oxygen(t1, null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 1200, 290);
+    t1.width = 50;
+    t1.height = 45;
+    t2.push(t1);
+    t4.push(t1);
+    t1 = new U.SpriteSheet(50, 0, 120, 100, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
+    t1._img = U.ImageLoader_getImage("./content/gameitems.png");
+    t1.scaledh = 100;
+    t1.scaledw = 120;
+    t1 = new U.Block(t1, W.ImageElement_ImageElement(null, null, null), false, false, false, null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 1300, 300);
+    J.set$src$x(t1.img, "./content/platform.png");
+    t1.width = 120;
+    t1.height = 100;
+    t2.push(t1);
+    t3.push(t1);
+    t1 = new U.SpriteSheet(0, 0, 50, 50, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
+    t1._img = U.ImageLoader_getImage("./content/gameitems.png");
+    t1.scaledh = 50;
+    t1.scaledw = 50;
+    t1 = new U.Oxygen(t1, null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 1450, 290);
+    t1.width = 50;
+    t1.height = 45;
+    t2.push(t1);
+    t4.push(t1);
+    t1 = new U.SpriteSheet(0, 0, 50, 50, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
+    t1._img = U.ImageLoader_getImage("./content/gameitems.png");
+    t1.scaledh = 50;
+    t1.scaledw = 50;
+    t1 = new U.Oxygen(t1, null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 1500, 290);
+    t1.width = 50;
+    t1.height = 45;
+    t2.push(t1);
+    t4.push(t1);
+    t1 = new U.Spike(10, null, null, null, null, 0, 0, false);
+    t1.x = 1600;
+    t1.y = 340;
+    t1.width = 100;
+    t1.height = 20;
+    t2.push(t1);
+    t5.push(t1);
+    t1 = new U.SpriteSheet(0, 0, 50, 50, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
+    t1._img = U.ImageLoader_getImage("./content/gameitems.png");
+    t1.scaledh = 50;
+    t1.scaledw = 50;
+    t1 = new U.Oxygen(t1, null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 1800, 200);
+    t1.width = 50;
+    t1.height = 45;
+    t2.push(t1);
+    t4.push(t1);
+    t1 = new U.SpriteSheet(50, 0, 120, 100, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
+    t1._img = U.ImageLoader_getImage("./content/gameitems.png");
+    t1.scaledh = 100;
+    t1.scaledw = 120;
+    t1 = new U.Block(t1, W.ImageElement_ImageElement(null, null, null), false, false, false, null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 2875, 420);
+    J.set$src$x(t1.img, "./content/platform.png");
+    t1.width = 1875;
+    t1.height = 140;
+    t2.push(t1);
+    t3.push(t1);
+    t1 = new U.SpriteSheet(0, 0, 50, 50, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
+    t1._img = U.ImageLoader_getImage("./content/gameitems.png");
+    t1.scaledh = 50;
+    t1.scaledw = 50;
+    t1 = new U.Oxygen(t1, null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 2000, 290);
+    t1.width = 50;
+    t1.height = 45;
+    t2.push(t1);
+    t4.push(t1);
+    t1 = new U.SpriteSheet(0, 0, 50, 50, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
+    t1._img = U.ImageLoader_getImage("./content/gameitems.png");
+    t1.scaledh = 50;
+    t1.scaledw = 50;
+    t1 = new U.Oxygen(t1, null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 2050, 290);
+    t1.width = 50;
+    t1.height = 45;
+    t2.push(t1);
+    t4.push(t1);
+    t1 = new U.SpriteSheet(0, 0, 50, 50, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
+    t1._img = U.ImageLoader_getImage("./content/gameitems.png");
+    t1.scaledh = 50;
+    t1.scaledw = 50;
+    t1 = new U.Oxygen(t1, null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 2100, 290);
+    t1.width = 50;
+    t1.height = 45;
+    t2.push(t1);
+    t4.push(t1);
+    t1 = new U.SpriteSheet(0, 0, 50, 50, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
+    t1._img = U.ImageLoader_getImage("./content/gameitems.png");
+    t1.scaledh = 50;
+    t1.scaledw = 50;
+    t1 = new U.Oxygen(t1, null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 2150, 290);
+    t1.width = 50;
+    t1.height = 45;
+    t2.push(t1);
+    t4.push(t1);
+    t1 = new U.SpriteSheet(50, 0, 120, 100, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
+    t1._img = U.ImageLoader_getImage("./content/gameitems.png");
+    t1.scaledh = 100;
+    t1.scaledw = 120;
+    t1 = new U.Block(t1, W.ImageElement_ImageElement(null, null, null), false, false, false, null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 2300, 300);
+    J.set$src$x(t1.img, "./content/platform.png");
+    t1.width = 120;
+    t1.height = 100;
+    t2.push(t1);
+    t3.push(t1);
+    t1 = new U.SpriteSheet(0, 0, 50, 50, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
+    t1._img = U.ImageLoader_getImage("./content/gameitems.png");
+    t1.scaledh = 50;
+    t1.scaledw = 50;
+    t1 = new U.Oxygen(t1, null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 2800, 290);
+    t1.width = 50;
+    t1.height = 45;
+    t2.push(t1);
+    t4.push(t1);
+    t1 = new U.SpriteSheet(0, 0, 50, 50, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
+    t1._img = U.ImageLoader_getImage("./content/gameitems.png");
+    t1.scaledh = 50;
+    t1.scaledw = 50;
+    t1 = new U.Oxygen(t1, null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 2850, 290);
+    t1.width = 50;
+    t1.height = 45;
+    t2.push(t1);
+    t4.push(t1);
+    t1 = new U.SpriteSheet(0, 0, 50, 50, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
+    t1._img = U.ImageLoader_getImage("./content/gameitems.png");
+    t1.scaledh = 50;
+    t1.scaledw = 50;
+    t1 = new U.Oxygen(t1, null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 2900, 290);
+    t1.width = 50;
+    t1.height = 45;
+    t2.push(t1);
+    t4.push(t1);
+    t1 = new U.Alien(W.ImageElement_ImageElement(null, null, null), null, 0, 0, 97, 50, 8, -7, null, null, false, null, null, null, null, 0, 0, false);
+    t1.initialize$2(3250, 330);
+    t2.push(t1);
+    t5.push(t1);
+    t1 = new U.Spike(10, null, null, null, null, 0, 0, false);
+    t1.x = 3500;
+    t1.y = 340;
+    t1.width = 100;
+    t1.height = 20;
+    t2.push(t1);
+    t5.push(t1);
+    t1 = new U.SpriteSheet(0, 0, 50, 50, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
+    t1._img = U.ImageLoader_getImage("./content/gameitems.png");
+    t1.scaledh = 50;
+    t1.scaledw = 50;
+    t1 = new U.Oxygen(t1, null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 3600, 290);
+    t1.width = 50;
+    t1.height = 45;
+    t2.push(t1);
+    t4.push(t1);
+    t1 = new U.SpriteSheet(0, 0, 50, 50, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
+    t1._img = U.ImageLoader_getImage("./content/gameitems.png");
+    t1.scaledh = 50;
+    t1.scaledw = 50;
+    t1 = new U.Oxygen(t1, null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 3650, 290);
+    t1.width = 50;
+    t1.height = 45;
+    t2.push(t1);
+    t4.push(t1);
+    t1 = new U.SpriteSheet(0, 0, 50, 50, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
+    t1._img = U.ImageLoader_getImage("./content/gameitems.png");
+    t1.scaledh = 50;
+    t1.scaledw = 50;
+    t1 = new U.Oxygen(t1, null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 3800, 290);
+    t1.width = 50;
+    t1.height = 45;
+    t2.push(t1);
+    t4.push(t1);
+    t1 = new U.SpriteSheet(50, 0, 120, 100, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
+    t1._img = U.ImageLoader_getImage("./content/gameitems.png");
+    t1.scaledh = 100;
+    t1.scaledw = 120;
+    t1 = new U.Block(t1, W.ImageElement_ImageElement(null, null, null), false, false, false, null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 4500, 420);
+    J.set$src$x(t1.img, "./content/platform.png");
+    t1.width = 1060;
+    t1.height = 140;
+    t2.push(t1);
+    t3.push(t1);
+    t1 = new U.Alien(W.ImageElement_ImageElement(null, null, null), null, 0, 0, 97, 50, 8, -7, null, null, false, null, null, null, null, 0, 0, false);
+    t1.initialize$2(4150, 330);
+    t2.push(t1);
+    t5.push(t1);
+    t1 = new U.SpriteSheet(0, 0, 50, 50, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
+    t1._img = U.ImageLoader_getImage("./content/gameitems.png");
+    t1.scaledh = 50;
+    t1.scaledw = 50;
+    t1 = new U.Oxygen(t1, null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 4300, 290);
+    t1.width = 50;
+    t1.height = 45;
+    t2.push(t1);
+    t4.push(t1);
+    t1 = new U.SpriteSheet(0, 0, 50, 50, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
+    t1._img = U.ImageLoader_getImage("./content/gameitems.png");
+    t1.scaledh = 50;
+    t1.scaledw = 50;
+    t1 = new U.Oxygen(t1, null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 4350, 290);
+    t1.width = 50;
+    t1.height = 45;
+    t2.push(t1);
+    t4.push(t1);
+    t1 = new U.SpriteSheet(0, 0, 50, 50, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
+    t1._img = U.ImageLoader_getImage("./content/gameitems.png");
+    t1.scaledh = 50;
+    t1.scaledw = 50;
+    t1 = new U.Oxygen(t1, null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 4400, 290);
+    t1.width = 50;
+    t1.height = 45;
+    t2.push(t1);
+    t4.push(t1);
+    t1 = new U.Alien(W.ImageElement_ImageElement(null, null, null), null, 0, 0, 97, 50, 8, -7, null, null, false, null, null, null, null, 0, 0, false);
+    t1.initialize$2(4500, 330);
+    t2.push(t1);
+    t5.push(t1);
+    t1 = new U.SpriteSheet(50, 0, 120, 100, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
+    t1._img = U.ImageLoader_getImage("./content/gameitems.png");
+    t1.scaledh = 100;
+    t1.scaledw = 120;
+    t1 = new U.Block(t1, W.ImageElement_ImageElement(null, null, null), false, false, false, null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 4700, 300);
+    J.set$src$x(t1.img, "./content/platform.png");
+    t1.width = 120;
+    t1.height = 100;
+    t2.push(t1);
+    t3.push(t1);
+    t1 = new U.ShipItem(null, null, null, 0, 100, 90, 90, 6, new P.Stopwatch(null, null), true, false, 1, null, null, null, null, null, null, null, 0, 0, false);
+    t1.initialize$2(5000, 290);
+    t1.level = 1;
+    t2.push(t1);
+    t4.push(t1);
+  }, "call$0", "setupLevelOne$closure", 0, 0, null],
   setupLevelTwo: [function() {
     var om, t1, t2, t3, t4, t5, t6, bossFloor, trigger, boss, floorObstacle;
     $.SoundManager_instance.loadMusic$2(2, new U.setupLevelTwo_startMusic());
@@ -10128,39 +10535,7 @@ var $$ = {};
     t2.push(t4);
     t3.push(t4);
     t4 = new U.ShipItem(null, null, null, 0, 100, 90, 90, 6, new P.Stopwatch(null, null), true, false, 1, null, null, null, null, null, null, null, 0, 0, false);
-    U.GameObject.prototype.initialize$2.call(t4, 13900, 290);
-    t4.height = 80;
-    t4.width = 80;
-    t3 = new U.SpriteSheet(0, 100, 90, 90, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
-    t3._img = U.ImageLoader_getImage("./content/gameitems.png");
-    t3.scaledh = 90;
-    t3.scaledw = 90;
-    t4.sprite = t3;
-    t3 = new U.SpriteSheet(0, 0, 491, 311, null, null, "./content/panel_level.png", null, 0, null, null, 0, 0);
-    t3._img = U.ImageLoader_getImage("./content/panel_level.png");
-    t3.scaledh = 311;
-    t3.scaledw = 491;
-    t4.levelSprite = t3;
-    t3.numberOfFrames = 1;
-    t4.initialX = 0;
-    t4.initialY = 0;
-    t4.xx = 13900;
-    t4.yy = 290;
-    t3 = new U.SpriteSheet(0, 0, 491, 311, null, null, "./content/panel.png", null, 0, null, null, 0, 0);
-    t3._img = U.ImageLoader_getImage("./content/panel.png");
-    t3.scaledh = 311;
-    t3.scaledw = 491;
-    t4.panel = t3;
-    t3.numberOfFrames = 1;
-    t1 = $.Game_instance.currentLevel;
-    if (t1 === $.LevelManager_enumLevelOne)
-      t4.levelSprite.spritex = 0;
-    else if (t1 === $.LevelManager_enumLevelTwo)
-      t4.levelSprite.spritex = 491;
-    else if (t1 === $.LevelManager_enumLevelThree)
-      t4.levelSprite.spritex = 982;
-    else if (t1 === $.LevelManager_enumLevelFour)
-      t4.levelSprite.spritex = 1473;
+    t4.initialize$2(13900, 290);
     t4.level = 2;
     t2.push(t4);
     t5.push(t4);
@@ -10455,7 +10830,7 @@ var $$ = {};
     static: {"": "CollisionSystem_instance"}
   },
   Game: {
-    "": "Object;player,menu,gameMenu,controls,options,transition,oxygenTimer,lastOxygenTick,input,currentLevel,startLevel,lastENTER,lastESC,stateEnumPlay,stateEnumWin,stateEnumGameOver,stateEnumPause,stateEnumMain,stateEnumControls,stateEnumTransition,stateEnumIntro,stateEnumOptions,stateEnumCollected,resetMainMenu,state,updatesPerSecond,rendersPerSecond,debuggingDisplayTime,numberOfUpdates,numberOfRenders,levelManager",
+    "": "Object;player,menu,gameMenu,controls,options,transition,oxygenTimer,lastOxygenTick,input,currentLevel,startLevel,lastENTER,lastESC,stateEnumPlay,stateEnumWin,stateEnumGameOver,stateEnumPause,stateEnumMain,stateEnumControls,stateEnumTransition,stateEnumIntro,stateEnumOptions,stateEnumCollected,resetMainMenu,state,updatesPerSecond,rendersPerSecond,debuggingDisplayTime,numberOfUpdates,numberOfRenders,levelManager,_lastFrame",
     Initialize$0: [function() {
       var t1, t2, t3, t4;
       t1 = new D.AdjustedContext(null, null, null);
@@ -10785,7 +11160,14 @@ var $$ = {};
     reloadLevel$0: [function() {
       var t1, t2;
       this.levelManager.loadLevel$1(this.currentLevel);
-      this.player.resetPlayer$0();
+      t1 = this.player;
+      t2 = $.get$camera();
+      t2.x = 0;
+      t2.y = 0;
+      $.Game_oxygen = 100;
+      t1.x = t1.playerStartX;
+      t1.y = t1.playerStartY;
+      t1.state = t1.stateEnumAlive;
       t1 = this.currentLevel;
       t2 = $.LevelManager_enumLevelOne;
       if (typeof t1 !== "number")
@@ -10812,7 +11194,15 @@ var $$ = {};
   Game_Initialize_closure: {
     "": "Closure:130;this_0",
     call$1: [function(gameLoop) {
-      this.this_0.update$1(gameLoop.updateTimeStep * 100);
+      var t1, t2, t3;
+      t1 = this.this_0;
+      t2 = t1._lastFrame;
+      t3 = gameLoop._frameCounter;
+      if (t2 === t3)
+        return;
+      else
+        t1._lastFrame = t3;
+      t1.update$1(gameLoop.updateTimeStep * 100);
     }, "call$1", null, 2, 0, null, 247, "call"],
     $isFunction: true
   },
@@ -10826,23 +11216,10 @@ var $$ = {};
   Game_gameOver_closure: {
     "": "Closure:130;this_0",
     call$1: [function(restart) {
-      var t1, t2, t3;
-      t1 = this.this_0;
-      $.Game_lives = 3;
-      t1.levelManager.loadLevel$1(t1.startLevel);
-      t1.player.resetPlayer$0();
-      t1.state = t1.stateEnumPlay;
-      t2 = t1.startLevel;
-      t1.currentLevel = t2;
-      t3 = $.LevelManager_enumLevelOne;
-      if (typeof t2 !== "number")
-        return t2.$ge();
-      if (t2 >= t3) {
-        t2 = t1.oxygenTimer;
-        t2.reset$0(t2);
-        t1.lastOxygenTick = 0;
-        t2.start$0(t2);
-      }
+      var t1 = this.this_0;
+      t1.state = t1.stateEnumMain;
+      t1.levelManager.loadLevel$1($.LevelManager_enumMainMenu);
+      t1.resetMainMenu = true;
       return;
     }, "call$1", null, 2, 0, null, 248, "call"],
     $isFunction: true
@@ -10978,8 +11355,7 @@ var $$ = {};
   LevelManager: {
     "": "Object;",
     loadLevel$1: [function(level) {
-      var t1, om, t2, t3, t4;
-      t1 = $.SoundManager_instance.musicSource;
+      var t1 = $.SoundManager_instance.musicSource;
       if (t1 != null && t1.buffer != null) {
         t1.toString;
         if (!!t1.stop)
@@ -10997,675 +11373,7 @@ var $$ = {};
           U.setupMainMenu();
           break;
         case 1:
-          om = $.ObjectManager_instance;
-          t1 = $.Game_instance.player;
-          t2 = om.goList;
-          t2.push(t1);
-          t1 = new U.SpriteSheet(50, 0, 120, 100, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
-          t1._img = U.ImageLoader_getImage("./content/gameitems.png");
-          t1.scaledh = 100;
-          t1.scaledw = 120;
-          t1 = new U.Block(t1, W.ImageElement_ImageElement(null, null, null), false, false, false, null, null, 0, 0, false);
-          U.GameObject.prototype.initialize$2.call(t1, 800, 420);
-          J.set$src$x(t1.img, "./content/platform.png");
-          t1.width = 2000;
-          t1.height = 140;
-          t2.push(t1);
-          t3 = om.blockList;
-          t3.push(t1);
-          t1 = new U.SpriteSheet(50, 0, 120, 100, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
-          t1._img = U.ImageLoader_getImage("./content/gameitems.png");
-          t1.scaledh = 100;
-          t1.scaledw = 120;
-          t1 = new U.Block(t1, W.ImageElement_ImageElement(null, null, null), false, false, false, null, null, 0, 0, false);
-          U.GameObject.prototype.initialize$2.call(t1, 400, 380);
-          J.set$src$x(t1.img, "./content/platform.png");
-          t1.width = 200;
-          t1.height = 140;
-          t2.push(t1);
-          t3.push(t1);
-          t1 = new U.SpriteSheet(50, 0, 120, 100, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
-          t1._img = U.ImageLoader_getImage("./content/gameitems.png");
-          t1.scaledh = 100;
-          t1.scaledw = 120;
-          t1 = new U.Block(t1, W.ImageElement_ImageElement(null, null, null), false, false, false, null, null, 0, 0, false);
-          U.GameObject.prototype.initialize$2.call(t1, 600, 320);
-          J.set$src$x(t1.img, "./content/platform.png");
-          t1.width = 200;
-          t1.height = 140;
-          t2.push(t1);
-          t3.push(t1);
-          t1 = new U.SpriteSheet(50, 0, 120, 100, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
-          t1._img = U.ImageLoader_getImage("./content/gameitems.png");
-          t1.scaledh = 100;
-          t1.scaledw = 120;
-          t1 = new U.Block(t1, W.ImageElement_ImageElement(null, null, null), false, false, false, null, null, 0, 0, false);
-          U.GameObject.prototype.initialize$2.call(t1, 800, 260);
-          J.set$src$x(t1.img, "./content/platform.png");
-          t1.width = 200;
-          t1.height = 180;
-          t2.push(t1);
-          t3.push(t1);
-          t1 = new U.Spike(10, null, null, null, null, 0, 0, false);
-          t1.x = 800;
-          t1.y = 160;
-          t1.width = 100;
-          t1.height = 20;
-          t2.push(t1);
-          t4 = om.enemyList;
-          t4.push(t1);
-          t1 = new U.SpriteSheet(50, 0, 120, 100, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
-          t1._img = U.ImageLoader_getImage("./content/gameitems.png");
-          t1.scaledh = 100;
-          t1.scaledw = 120;
-          t1 = new U.Block(t1, W.ImageElement_ImageElement(null, null, null), false, false, false, null, null, 0, 0, false);
-          U.GameObject.prototype.initialize$2.call(t1, 1000, 320);
-          J.set$src$x(t1.img, "./content/platform.png");
-          t1.width = 200;
-          t1.height = 140;
-          t2.push(t1);
-          t3.push(t1);
-          t1 = new U.SpriteSheet(50, 0, 120, 100, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
-          t1._img = U.ImageLoader_getImage("./content/gameitems.png");
-          t1.scaledh = 100;
-          t1.scaledw = 120;
-          t1 = new U.Block(t1, W.ImageElement_ImageElement(null, null, null), false, false, false, null, null, 0, 0, false);
-          U.GameObject.prototype.initialize$2.call(t1, 1200, 380);
-          J.set$src$x(t1.img, "./content/platform.png");
-          t1.width = 200;
-          t1.height = 140;
-          t2.push(t1);
-          t3.push(t1);
-          t1 = new U.SpriteSheet(50, 0, 120, 100, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
-          t1._img = U.ImageLoader_getImage("./content/gameitems.png");
-          t1.scaledh = 100;
-          t1.scaledw = 120;
-          t1 = new U.Block(t1, W.ImageElement_ImageElement(null, null, null), false, false, false, null, null, 0, 0, false);
-          U.GameObject.prototype.initialize$2.call(t1, 1600, 300);
-          J.set$src$x(t1.img, "./content/platform.png");
-          t1.width = 120;
-          t1.height = 100;
-          t2.push(t1);
-          t3.push(t1);
-          t1 = new U.SpriteSheet(50, 0, 120, 100, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
-          t1._img = U.ImageLoader_getImage("./content/gameitems.png");
-          t1.scaledh = 100;
-          t1.scaledw = 120;
-          t1 = new U.Block(t1, W.ImageElement_ImageElement(null, null, null), false, false, false, null, null, 0, 0, false);
-          U.GameObject.prototype.initialize$2.call(t1, 2000, 500);
-          J.set$src$x(t1.img, "./content/platform.png");
-          t1.width = 600;
-          t1.height = 140;
-          t2.push(t1);
-          t3.push(t1);
-          t1 = new U.SpriteSheet(50, 0, 120, 100, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
-          t1._img = U.ImageLoader_getImage("./content/gameitems.png");
-          t1.scaledh = 100;
-          t1.scaledw = 120;
-          t1 = new U.Block(t1, W.ImageElement_ImageElement(null, null, null), false, false, false, null, null, 0, 0, false);
-          U.GameObject.prototype.initialize$2.call(t1, 2600, 420);
-          J.set$src$x(t1.img, "./content/platform.png");
-          t1.width = 600;
-          t1.height = 140;
-          t2.push(t1);
-          t3.push(t1);
-          t1 = new U.Alien(W.ImageElement_ImageElement(null, null, null), null, 0, 0, 97, 50, 8, -7, null, null, false, null, null, null, null, 0, 0, false);
-          t1.initialize$2(2600, 330);
-          t2.push(t1);
-          t4.push(t1);
-          t1 = new U.Spike(10, null, null, null, null, 0, 0, false);
-          t1.x = 2800;
-          t1.y = 340;
-          t1.width = 100;
-          t1.height = 20;
-          t2.push(t1);
-          t4.push(t1);
-          t1 = new U.SpriteSheet(50, 0, 120, 100, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
-          t1._img = U.ImageLoader_getImage("./content/gameitems.png");
-          t1.scaledh = 100;
-          t1.scaledw = 120;
-          t1 = new U.Block(t1, W.ImageElement_ImageElement(null, null, null), false, false, false, null, null, 0, 0, false);
-          U.GameObject.prototype.initialize$2.call(t1, 3100, 300);
-          J.set$src$x(t1.img, "./content/platform.png");
-          t1.width = 100;
-          t1.height = 340;
-          t2.push(t1);
-          t3.push(t1);
-          t1 = new U.SpriteSheet(50, 0, 120, 100, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
-          t1._img = U.ImageLoader_getImage("./content/gameitems.png");
-          t1.scaledh = 100;
-          t1.scaledw = 120;
-          t1 = new U.Block(t1, W.ImageElement_ImageElement(null, null, null), false, false, false, null, null, 0, 0, false);
-          U.GameObject.prototype.initialize$2.call(t1, 3300, 300);
-          J.set$src$x(t1.img, "./content/platform.png");
-          t1.width = 100;
-          t1.height = 340;
-          t2.push(t1);
-          t3.push(t1);
-          t1 = new U.SpriteSheet(50, 0, 120, 100, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
-          t1._img = U.ImageLoader_getImage("./content/gameitems.png");
-          t1.scaledh = 100;
-          t1.scaledw = 120;
-          t1 = new U.Block(t1, W.ImageElement_ImageElement(null, null, null), false, false, false, null, null, 0, 0, false);
-          U.GameObject.prototype.initialize$2.call(t1, 3500, 200);
-          J.set$src$x(t1.img, "./content/platform.png");
-          t1.width = 100;
-          t1.height = 550;
-          t2.push(t1);
-          t3.push(t1);
-          t1 = new U.SpriteSheet(50, 0, 120, 100, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
-          t1._img = U.ImageLoader_getImage("./content/gameitems.png");
-          t1.scaledh = 100;
-          t1.scaledw = 120;
-          t1 = new U.Block(t1, W.ImageElement_ImageElement(null, null, null), false, false, false, null, null, 0, 0, false);
-          U.GameObject.prototype.initialize$2.call(t1, 3700, 100);
-          J.set$src$x(t1.img, "./content/platform.png");
-          t1.width = 100;
-          t1.height = 800;
-          t2.push(t1);
-          t3.push(t1);
-          t1 = new U.SpriteSheet(50, 0, 120, 100, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
-          t1._img = U.ImageLoader_getImage("./content/gameitems.png");
-          t1.scaledh = 100;
-          t1.scaledw = 120;
-          t1 = new U.Block(t1, W.ImageElement_ImageElement(null, null, null), false, false, false, null, null, 0, 0, false);
-          U.GameObject.prototype.initialize$2.call(t1, 3800, 600);
-          J.set$src$x(t1.img, "./content/platform.png");
-          t1.width = 50;
-          t1.height = 340;
-          t2.push(t1);
-          t3.push(t1);
-          t1 = new U.SpriteSheet(50, 0, 120, 100, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
-          t1._img = U.ImageLoader_getImage("./content/gameitems.png");
-          t1.scaledh = 100;
-          t1.scaledw = 120;
-          t1 = new U.Block(t1, W.ImageElement_ImageElement(null, null, null), false, false, false, null, null, 0, 0, false);
-          U.GameObject.prototype.initialize$2.call(t1, 4200, 420);
-          J.set$src$x(t1.img, "./content/platform.png");
-          t1.width = 400;
-          t1.height = 140;
-          t2.push(t1);
-          t3.push(t1);
-          t1 = new U.SpriteSheet(50, 0, 120, 100, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
-          t1._img = U.ImageLoader_getImage("./content/gameitems.png");
-          t1.scaledh = 100;
-          t1.scaledw = 120;
-          t1 = new U.Block(t1, W.ImageElement_ImageElement(null, null, null), false, false, false, null, null, 0, 0, false);
-          U.GameObject.prototype.initialize$2.call(t1, 4300, 300);
-          J.set$src$x(t1.img, "./content/platform.png");
-          t1.width = 120;
-          t1.height = 100;
-          t2.push(t1);
-          t3.push(t1);
-          t1 = new U.Alien(W.ImageElement_ImageElement(null, null, null), null, 0, 0, 97, 50, 8, -7, null, null, false, null, null, null, null, 0, 0, false);
-          t1.initialize$2(4200, 330);
-          t2.push(t1);
-          t4.push(t1);
-          t1 = new U.SpriteSheet(50, 0, 120, 100, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
-          t1._img = U.ImageLoader_getImage("./content/gameitems.png");
-          t1.scaledh = 100;
-          t1.scaledw = 120;
-          t1 = new U.Block(t1, W.ImageElement_ImageElement(null, null, null), false, false, false, null, null, 0, 0, false);
-          U.GameObject.prototype.initialize$2.call(t1, 4600, 300);
-          J.set$src$x(t1.img, "./content/platform.png");
-          t1.width = 200;
-          t1.height = 440;
-          t2.push(t1);
-          t3.push(t1);
-          t1 = new U.SpriteSheet(50, 0, 120, 100, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
-          t1._img = U.ImageLoader_getImage("./content/gameitems.png");
-          t1.scaledh = 100;
-          t1.scaledw = 120;
-          t1 = new U.Block(t1, W.ImageElement_ImageElement(null, null, null), false, false, false, null, null, 0, 0, false);
-          U.GameObject.prototype.initialize$2.call(t1, 4730, 420);
-          J.set$src$x(t1.img, "./content/platform.png");
-          t1.width = 70;
-          t1.height = 140;
-          t2.push(t1);
-          t3.push(t1);
-          t1 = new U.SpriteSheet(50, 0, 120, 100, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
-          t1._img = U.ImageLoader_getImage("./content/gameitems.png");
-          t1.scaledh = 100;
-          t1.scaledw = 120;
-          t1 = new U.Block(t1, W.ImageElement_ImageElement(null, null, null), false, false, false, null, null, 0, 0, false);
-          U.GameObject.prototype.initialize$2.call(t1, 4800, 350);
-          J.set$src$x(t1.img, "./content/platform.png");
-          t1.width = 70;
-          t1.height = 240;
-          t2.push(t1);
-          t3.push(t1);
-          t1 = new U.SpriteSheet(50, 0, 120, 100, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
-          t1._img = U.ImageLoader_getImage("./content/gameitems.png");
-          t1.scaledh = 100;
-          t1.scaledw = 120;
-          t1 = new U.Block(t1, W.ImageElement_ImageElement(null, null, null), false, false, false, null, null, 0, 0, false);
-          U.GameObject.prototype.initialize$2.call(t1, 4930, 300);
-          J.set$src$x(t1.img, "./content/platform.png");
-          t1.width = 200;
-          t1.height = 440;
-          t2.push(t1);
-          t3.push(t1);
-          t1 = new U.SpriteSheet(50, 0, 120, 100, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
-          t1._img = U.ImageLoader_getImage("./content/gameitems.png");
-          t1.scaledh = 100;
-          t1.scaledw = 120;
-          t1 = new U.Block(t1, W.ImageElement_ImageElement(null, null, null), false, false, false, null, null, 0, 0, false);
-          U.GameObject.prototype.initialize$2.call(t1, 5330, 420);
-          J.set$src$x(t1.img, "./content/platform.png");
-          t1.width = 600;
-          t1.height = 140;
-          t2.push(t1);
-          t3.push(t1);
-          t1 = new U.Spike(10, null, null, null, null, 0, 0, false);
-          t1.x = 5100;
-          t1.y = 340;
-          t1.width = 100;
-          t1.height = 20;
-          t2.push(t1);
-          t4.push(t1);
-          t1 = new U.SpriteSheet(50, 0, 120, 100, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
-          t1._img = U.ImageLoader_getImage("./content/gameitems.png");
-          t1.scaledh = 100;
-          t1.scaledw = 120;
-          t1 = new U.Block(t1, W.ImageElement_ImageElement(null, null, null), false, false, false, null, null, 0, 0, false);
-          U.GameObject.prototype.initialize$2.call(t1, 5800, 460);
-          J.set$src$x(t1.img, "./content/platform.png");
-          t1.width = 50;
-          t1.height = 140;
-          t2.push(t1);
-          t3.push(t1);
-          t1 = new U.SpriteSheet(50, 0, 120, 100, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
-          t1._img = U.ImageLoader_getImage("./content/gameitems.png");
-          t1.scaledh = 100;
-          t1.scaledw = 120;
-          t1 = new U.Block(t1, W.ImageElement_ImageElement(null, null, null), false, false, false, null, null, 0, 0, false);
-          U.GameObject.prototype.initialize$2.call(t1, 6190, 420);
-          J.set$src$x(t1.img, "./content/platform.png");
-          t1.width = 600;
-          t1.height = 140;
-          t2.push(t1);
-          t3.push(t1);
-          t1 = new U.SpriteSheet(50, 0, 120, 100, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
-          t1._img = U.ImageLoader_getImage("./content/gameitems.png");
-          t1.scaledh = 100;
-          t1.scaledw = 120;
-          t1 = new U.Block(t1, W.ImageElement_ImageElement(null, null, null), false, false, false, null, null, 0, 0, false);
-          U.GameObject.prototype.initialize$2.call(t1, 7400, 420);
-          J.set$src$x(t1.img, "./content/platform.png");
-          t1.width = 1000;
-          t1.height = 140;
-          t2.push(t1);
-          t3.push(t1);
-          t1 = new U.SpriteSheet(50, 0, 120, 100, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
-          t1._img = U.ImageLoader_getImage("./content/gameitems.png");
-          t1.scaledh = 100;
-          t1.scaledw = 120;
-          t1 = new U.Block(t1, W.ImageElement_ImageElement(null, null, null), false, false, false, null, null, 0, 0, false);
-          U.GameObject.prototype.initialize$2.call(t1, 7400, 300);
-          J.set$src$x(t1.img, "./content/platform.png");
-          t1.width = 120;
-          t1.height = 100;
-          t2.push(t1);
-          t3.push(t1);
-          t1 = new U.SpriteSheet(50, 0, 120, 100, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
-          t1._img = U.ImageLoader_getImage("./content/gameitems.png");
-          t1.scaledh = 100;
-          t1.scaledw = 120;
-          t1 = new U.Block(t1, W.ImageElement_ImageElement(null, null, null), false, false, false, null, null, 0, 0, false);
-          U.GameObject.prototype.initialize$2.call(t1, 8000, 340);
-          J.set$src$x(t1.img, "./content/platform.png");
-          t1.width = 200;
-          t1.height = 260;
-          t2.push(t1);
-          t3.push(t1);
-          t1 = new U.SpriteSheet(50, 0, 120, 100, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
-          t1._img = U.ImageLoader_getImage("./content/gameitems.png");
-          t1.scaledh = 100;
-          t1.scaledw = 120;
-          t1 = new U.Block(t1, W.ImageElement_ImageElement(null, null, null), false, false, false, null, null, 0, 0, false);
-          U.GameObject.prototype.initialize$2.call(t1, 8200, 420);
-          J.set$src$x(t1.img, "./content/platform.png");
-          t1.width = 200;
-          t1.height = 140;
-          t2.push(t1);
-          t3.push(t1);
-          t1 = new U.SpriteSheet(50, 0, 120, 100, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
-          t1._img = U.ImageLoader_getImage("./content/gameitems.png");
-          t1.scaledh = 100;
-          t1.scaledw = 120;
-          t1 = new U.Block(t1, W.ImageElement_ImageElement(null, null, null), false, false, false, null, null, 0, 0, false);
-          U.GameObject.prototype.initialize$2.call(t1, 8400, 500);
-          J.set$src$x(t1.img, "./content/platform.png");
-          t1.width = 600;
-          t1.height = 140;
-          t2.push(t1);
-          t3.push(t1);
-          t1 = new U.SpriteSheet(50, 0, 120, 100, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
-          t1._img = U.ImageLoader_getImage("./content/gameitems.png");
-          t1.scaledh = 100;
-          t1.scaledw = 120;
-          t1 = new U.Block(t1, W.ImageElement_ImageElement(null, null, null), false, false, false, null, null, 0, 0, false);
-          U.GameObject.prototype.initialize$2.call(t1, 9100, 420);
-          J.set$src$x(t1.img, "./content/platform.png");
-          t1.width = 800;
-          t1.height = 140;
-          t2.push(t1);
-          t3.push(t1);
-          t1 = new U.Alien(W.ImageElement_ImageElement(null, null, null), null, 0, 0, 97, 50, 8, -7, null, null, false, null, null, null, null, 0, 0, false);
-          t1.initialize$2(9200, 330);
-          t2.push(t1);
-          t4.push(t1);
-          t1 = new U.SpriteSheet(50, 0, 120, 100, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
-          t1._img = U.ImageLoader_getImage("./content/gameitems.png");
-          t1.scaledh = 100;
-          t1.scaledw = 120;
-          t1 = new U.Block(t1, W.ImageElement_ImageElement(null, null, null), false, false, false, null, null, 0, 0, false);
-          U.GameObject.prototype.initialize$2.call(t1, 8400, 150);
-          J.set$src$x(t1.img, "./content/platform.png");
-          t1.width = 100;
-          t1.height = 101;
-          t2.push(t1);
-          t3.push(t1);
-          t1 = new U.SpriteSheet(50, 0, 120, 100, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
-          t1._img = U.ImageLoader_getImage("./content/gameitems.png");
-          t1.scaledh = 100;
-          t1.scaledw = 120;
-          t1 = new U.Block(t1, W.ImageElement_ImageElement(null, null, null), false, false, false, null, null, 0, 0, false);
-          U.GameObject.prototype.initialize$2.call(t1, 8600, 50);
-          J.set$src$x(t1.img, "./content/platform.png");
-          t1.width = 100;
-          t1.height = 101;
-          t2.push(t1);
-          t3.push(t1);
-          t1 = new U.SpriteSheet(50, 0, 120, 100, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
-          t1._img = U.ImageLoader_getImage("./content/gameitems.png");
-          t1.scaledh = 100;
-          t1.scaledw = 120;
-          t1 = new U.Block(t1, W.ImageElement_ImageElement(null, null, null), false, false, false, null, null, 0, 0, false);
-          U.GameObject.prototype.initialize$2.call(t1, 9100, -80);
-          J.set$src$x(t1.img, "./content/platform.png");
-          t1.width = 600;
-          t1.height = 101;
-          t2.push(t1);
-          t3.push(t1);
-          t1 = new U.SpriteSheet(50, 0, 120, 100, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
-          t1._img = U.ImageLoader_getImage("./content/gameitems.png");
-          t1.scaledh = 100;
-          t1.scaledw = 120;
-          t1 = new U.MovingBlock(0, 0, 0, false, t1, W.ImageElement_ImageElement(null, null, null), false, false, false, null, null, 0, 0, false);
-          t1.initializeMove$4(9600, 400, 10000, 400);
-          t1.width = 200;
-          t1.height = 101;
-          t2.push(t1);
-          t3.push(t1);
-          t1 = new U.SpriteSheet(50, 0, 120, 100, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
-          t1._img = U.ImageLoader_getImage("./content/gameitems.png");
-          t1.scaledh = 100;
-          t1.scaledw = 120;
-          t1 = new U.Block(t1, W.ImageElement_ImageElement(null, null, null), false, false, false, null, null, 0, 0, false);
-          U.GameObject.prototype.initialize$2.call(t1, 10300, 420);
-          J.set$src$x(t1.img, "./content/platform.png");
-          t1.width = 400;
-          t1.height = 140;
-          t2.push(t1);
-          t3.push(t1);
-          t1 = new U.SpriteSheet(50, 0, 120, 100, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
-          t1._img = U.ImageLoader_getImage("./content/gameitems.png");
-          t1.scaledh = 100;
-          t1.scaledw = 120;
-          t1 = new U.Block(t1, W.ImageElement_ImageElement(null, null, null), false, false, false, null, null, 0, 0, false);
-          U.GameObject.prototype.initialize$2.call(t1, 10750, 420);
-          J.set$src$x(t1.img, "./content/platform.png");
-          t1.width = 500;
-          t1.height = 140;
-          t2.push(t1);
-          t3.push(t1);
-          t1 = new U.SpriteSheet(50, 0, 120, 100, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
-          t1._img = U.ImageLoader_getImage("./content/gameitems.png");
-          t1.scaledh = 100;
-          t1.scaledw = 120;
-          t1 = new U.Block(t1, W.ImageElement_ImageElement(null, null, null), false, false, false, null, null, 0, 0, false);
-          U.GameObject.prototype.initialize$2.call(t1, 10750, 300);
-          J.set$src$x(t1.img, "./content/platform.png");
-          t1.width = 120;
-          t1.height = 100;
-          t2.push(t1);
-          t3.push(t1);
-          t1 = new U.SpriteSheet(50, 0, 120, 100, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
-          t1._img = U.ImageLoader_getImage("./content/gameitems.png");
-          t1.scaledh = 100;
-          t1.scaledw = 120;
-          t1 = new U.MovingBlock(0, 0, 0, false, t1, W.ImageElement_ImageElement(null, null, null), false, false, false, null, null, 0, 0, false);
-          t1.initializeMove$4(10950, 100, 11300, 100);
-          t1.width = 200;
-          t1.height = 101;
-          t2.push(t1);
-          t3.push(t1);
-          t1 = new U.SpriteSheet(50, 0, 120, 100, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
-          t1._img = U.ImageLoader_getImage("./content/gameitems.png");
-          t1.scaledh = 100;
-          t1.scaledw = 120;
-          t1 = new U.Block(t1, W.ImageElement_ImageElement(null, null, null), false, false, false, null, null, 0, 0, false);
-          U.GameObject.prototype.initialize$2.call(t1, 11350, -120);
-          J.set$src$x(t1.img, "./content/platform.png");
-          t1.width = 500;
-          t1.height = 140;
-          t2.push(t1);
-          t3.push(t1);
-          t1 = new U.SpriteSheet(50, 0, 120, 100, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
-          t1._img = U.ImageLoader_getImage("./content/gameitems.png");
-          t1.scaledh = 100;
-          t1.scaledw = 120;
-          t1 = new U.Block(t1, W.ImageElement_ImageElement(null, null, null), false, false, false, null, null, 0, 0, false);
-          U.GameObject.prototype.initialize$2.call(t1, 11250, 500);
-          J.set$src$x(t1.img, "./content/platform.png");
-          t1.width = 500;
-          t1.height = 140;
-          t2.push(t1);
-          t3.push(t1);
-          t1 = new U.Spike(10, null, null, null, null, 0, 0, false);
-          t1.x = 11400;
-          t1.y = 420;
-          t1.width = 100;
-          t1.height = 20;
-          t2.push(t1);
-          t4.push(t1);
-          t1 = new U.SpriteSheet(50, 0, 120, 100, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
-          t1._img = U.ImageLoader_getImage("./content/gameitems.png");
-          t1.scaledh = 100;
-          t1.scaledw = 120;
-          t1 = new U.Block(t1, W.ImageElement_ImageElement(null, null, null), false, false, false, null, null, 0, 0, false);
-          U.GameObject.prototype.initialize$2.call(t1, 11750, 420);
-          J.set$src$x(t1.img, "./content/platform.png");
-          t1.width = 500;
-          t1.height = 140;
-          t2.push(t1);
-          t3.push(t1);
-          t1 = new U.SpriteSheet(50, 0, 120, 100, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
-          t1._img = U.ImageLoader_getImage("./content/gameitems.png");
-          t1.scaledh = 100;
-          t1.scaledw = 120;
-          t1 = new U.Block(t1, W.ImageElement_ImageElement(null, null, null), false, false, false, null, null, 0, 0, false);
-          U.GameObject.prototype.initialize$2.call(t1, 12550, 300);
-          J.set$src$x(t1.img, "./content/platform.png");
-          t1.width = 500;
-          t1.height = 350;
-          t2.push(t1);
-          t3.push(t1);
-          t1 = new U.SpriteSheet(50, 0, 120, 100, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
-          t1._img = U.ImageLoader_getImage("./content/gameitems.png");
-          t1.scaledh = 100;
-          t1.scaledw = 120;
-          t1 = new U.Block(t1, W.ImageElement_ImageElement(null, null, null), false, false, false, null, null, 0, 0, false);
-          U.GameObject.prototype.initialize$2.call(t1, 13050, 420);
-          J.set$src$x(t1.img, "./content/platform.png");
-          t1.width = 300;
-          t1.height = 350;
-          t2.push(t1);
-          t3.push(t1);
-          t1 = new U.SpriteSheet(50, 0, 120, 100, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
-          t1._img = U.ImageLoader_getImage("./content/gameitems.png");
-          t1.scaledh = 100;
-          t1.scaledw = 120;
-          t1 = new U.Block(t1, W.ImageElement_ImageElement(null, null, null), false, false, false, null, null, 0, 0, false);
-          U.GameObject.prototype.initialize$2.call(t1, 13350, 460);
-          J.set$src$x(t1.img, "./content/platform.png");
-          t1.width = 300;
-          t1.height = 350;
-          t2.push(t1);
-          t3.push(t1);
-          t1 = new U.SpriteSheet(50, 0, 120, 100, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
-          t1._img = U.ImageLoader_getImage("./content/gameitems.png");
-          t1.scaledh = 100;
-          t1.scaledw = 120;
-          t1 = new U.Block(t1, W.ImageElement_ImageElement(null, null, null), false, false, false, null, null, 0, 0, false);
-          U.GameObject.prototype.initialize$2.call(t1, 13450, 235);
-          J.set$src$x(t1.img, "./content/platform.png");
-          t1.width = 120;
-          t1.height = 100;
-          t2.push(t1);
-          t3.push(t1);
-          t1 = new U.SpriteSheet(50, 0, 120, 100, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
-          t1._img = U.ImageLoader_getImage("./content/gameitems.png");
-          t1.scaledh = 100;
-          t1.scaledw = 120;
-          t1 = new U.Block(t1, W.ImageElement_ImageElement(null, null, null), false, false, false, null, null, 0, 0, false);
-          U.GameObject.prototype.initialize$2.call(t1, 13700, 50);
-          J.set$src$x(t1.img, "./content/platform.png");
-          t1.width = 100;
-          t1.height = 160;
-          t2.push(t1);
-          t3.push(t1);
-          t1 = new U.SpriteSheet(50, 0, 120, 100, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
-          t1._img = U.ImageLoader_getImage("./content/gameitems.png");
-          t1.scaledh = 100;
-          t1.scaledw = 120;
-          t1 = new U.Block(t1, W.ImageElement_ImageElement(null, null, null), false, false, false, null, null, 0, 0, false);
-          U.GameObject.prototype.initialize$2.call(t1, 13950, 80);
-          J.set$src$x(t1.img, "./content/platform.png");
-          t1.width = 400;
-          t1.height = 101;
-          t2.push(t1);
-          t3.push(t1);
-          t1 = new U.SpriteSheet(50, 0, 120, 100, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
-          t1._img = U.ImageLoader_getImage("./content/gameitems.png");
-          t1.scaledh = 100;
-          t1.scaledw = 120;
-          t1 = new U.Block(t1, W.ImageElement_ImageElement(null, null, null), false, false, false, null, null, 0, 0, false);
-          U.GameObject.prototype.initialize$2.call(t1, 14200, 50);
-          J.set$src$x(t1.img, "./content/platform.png");
-          t1.width = 100;
-          t1.height = 160;
-          t2.push(t1);
-          t3.push(t1);
-          t1 = new U.SpriteSheet(50, 0, 120, 100, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
-          t1._img = U.ImageLoader_getImage("./content/gameitems.png");
-          t1.scaledh = 100;
-          t1.scaledw = 120;
-          t1 = new U.Block(t1, W.ImageElement_ImageElement(null, null, null), false, false, false, null, null, 0, 0, false);
-          U.GameObject.prototype.initialize$2.call(t1, 14500, 420);
-          J.set$src$x(t1.img, "./content/platform.png");
-          t1.width = 400;
-          t1.height = 140;
-          t2.push(t1);
-          t3.push(t1);
-          t1 = new U.Alien(W.ImageElement_ImageElement(null, null, null), null, 0, 0, 97, 50, 8, -7, null, null, false, null, null, null, null, 0, 0, false);
-          t1.initialize$2(14500, 330);
-          t2.push(t1);
-          t4.push(t1);
-          t1 = new U.SpriteSheet(50, 0, 120, 100, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
-          t1._img = U.ImageLoader_getImage("./content/gameitems.png");
-          t1.scaledh = 100;
-          t1.scaledw = 120;
-          t1 = new U.Block(t1, W.ImageElement_ImageElement(null, null, null), false, false, false, null, null, 0, 0, false);
-          U.GameObject.prototype.initialize$2.call(t1, 15000, 500);
-          J.set$src$x(t1.img, "./content/platform.png");
-          t1.width = 800;
-          t1.height = 140;
-          t2.push(t1);
-          t3.push(t1);
-          t1 = new U.SpriteSheet(50, 0, 120, 100, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
-          t1._img = U.ImageLoader_getImage("./content/gameitems.png");
-          t1.scaledh = 100;
-          t1.scaledw = 120;
-          t1 = new U.Block(t1, W.ImageElement_ImageElement(null, null, null), false, false, false, null, null, 0, 0, false);
-          U.GameObject.prototype.initialize$2.call(t1, 15050, 380);
-          J.set$src$x(t1.img, "./content/platform.png");
-          t1.width = 120;
-          t1.height = 100;
-          t2.push(t1);
-          t3.push(t1);
-          t1 = new U.SpriteSheet(50, 0, 120, 100, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
-          t1._img = U.ImageLoader_getImage("./content/gameitems.png");
-          t1.scaledh = 100;
-          t1.scaledw = 120;
-          t1 = new U.Block(t1, W.ImageElement_ImageElement(null, null, null), false, false, false, null, null, 0, 0, false);
-          U.GameObject.prototype.initialize$2.call(t1, 15300, 150);
-          J.set$src$x(t1.img, "./content/platform.png");
-          t1.width = 100;
-          t1.height = 101;
-          t2.push(t1);
-          t3.push(t1);
-          t1 = new U.SpriteSheet(50, 0, 120, 100, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
-          t1._img = U.ImageLoader_getImage("./content/gameitems.png");
-          t1.scaledh = 100;
-          t1.scaledw = 120;
-          t1 = new U.Block(t1, W.ImageElement_ImageElement(null, null, null), false, false, false, null, null, 0, 0, false);
-          U.GameObject.prototype.initialize$2.call(t1, 15600, 420);
-          J.set$src$x(t1.img, "./content/platform.png");
-          t1.width = 400;
-          t1.height = 140;
-          t2.push(t1);
-          t3.push(t1);
-          t1 = new U.Spike(10, null, null, null, null, 0, 0, false);
-          t1.x = 15450;
-          t1.y = 340;
-          t1.width = 100;
-          t1.height = 20;
-          t2.push(t1);
-          t4.push(t1);
-          t1 = new U.SpriteSheet(50, 0, 120, 100, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
-          t1._img = U.ImageLoader_getImage("./content/gameitems.png");
-          t1.scaledh = 100;
-          t1.scaledw = 120;
-          t1 = new U.Block(t1, W.ImageElement_ImageElement(null, null, null), false, false, false, null, null, 0, 0, false);
-          U.GameObject.prototype.initialize$2.call(t1, 16100, 420);
-          J.set$src$x(t1.img, "./content/platform.png");
-          t1.width = 600;
-          t1.height = 140;
-          t2.push(t1);
-          t3.push(t1);
-          t1 = new U.SpriteSheet(50, 0, 120, 100, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
-          t1._img = U.ImageLoader_getImage("./content/gameitems.png");
-          t1.scaledh = 100;
-          t1.scaledw = 120;
-          t1 = new U.Block(t1, W.ImageElement_ImageElement(null, null, null), false, false, false, null, null, 0, 0, false);
-          U.GameObject.prototype.initialize$2.call(t1, 16300, 300);
-          J.set$src$x(t1.img, "./content/platform.png");
-          t1.width = 120;
-          t1.height = 100;
-          t2.push(t1);
-          t3.push(t1);
-          t1 = new U.SpriteSheet(50, 0, 120, 100, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
-          t1._img = U.ImageLoader_getImage("./content/gameitems.png");
-          t1.scaledh = 100;
-          t1.scaledw = 120;
-          t1 = new U.MovingBlock(0, 0, 0, false, t1, W.ImageElement_ImageElement(null, null, null), false, false, false, null, null, 0, 0, false);
-          t1.initializeMove$4(16500, 200, 16700, 200);
-          t1.width = 200;
-          t1.height = 101;
-          t2.push(t1);
-          t3.push(t1);
-          t1 = new U.SpriteSheet(50, 0, 120, 100, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
-          t1._img = U.ImageLoader_getImage("./content/gameitems.png");
-          t1.scaledh = 100;
-          t1.scaledw = 120;
-          t1 = new U.MovingBlock(0, 0, 0, false, t1, W.ImageElement_ImageElement(null, null, null), false, false, false, null, null, 0, 0, false);
-          t1.initializeMove$4(16600, 400, 17100, 400);
-          t1.width = 200;
-          t1.height = 101;
-          t2.push(t1);
-          t3.push(t1);
+          U.setupLevelOne();
           break;
         case 2:
           U.setupLevelTwo();
@@ -11679,6 +11387,14 @@ var $$ = {};
     "": "Closure:172;",
     call$0: [function() {
       $.SoundManager_instance.setMusic$1(1);
+      $.SoundManager_instance.startMusic$0();
+    }, "call$0", null, 0, 0, null, "call"],
+    $isFunction: true
+  },
+  setupLevelOne_startMusic: {
+    "": "Closure:172;",
+    call$0: [function() {
+      $.SoundManager_instance.setMusic$1(2);
       $.SoundManager_instance.startMusic$0();
     }, "call$0", null, 0, 0, null, "call"],
     $isFunction: true
@@ -11697,7 +11413,7 @@ var $$ = {};
         t1 = this.introText;
         t2 = t1.spritey;
         if (t2 <= 0)
-          t1.spritey = t2 + 0.1;
+          t1.spritey = t2 + 0.12;
         else {
           t1 = this.repeat2;
           if (t1 === 0 || t1 === 1 || t1 === 2 || t1 === 3 || t1 === 4 || t1 === 5 || t1 === 6 || t1 === 7 || t1 === 8 || t1 === 9 || t1 === 10 || t1 === 11 || t1 === 12)
@@ -12420,10 +12136,6 @@ var $$ = {};
   },
   Block: {
     "": "GameObject;boulder,img,isObstacle,triggerFall,moving<,x,y,height,width,dead",
-    initialize$2: [function(x, y) {
-      U.GameObject.prototype.initialize$2.call(this, x, y);
-      J.set$src$x(this.img, "./content/platform.png");
-    }, "call$2", "get$initialize", 4, 0, null, 12, 138],
     draw$0: [function() {
       var t1, t2, t3, t4, t5, t6, pattern;
       t1 = this.height;
@@ -12947,59 +12659,6 @@ var $$ = {};
       return;
     }, "call$0", "get$collect", 0, 0, null]
   },
-  MovingBlock: {
-    "": "Block;initialX,endX,endY,goingBack,boulder,img,isObstacle,triggerFall,moving,x,y,height,width,dead",
-    initializeMove$4: [function(startX, startY, endX, endY) {
-      U.Block.prototype.initialize$2.call(this, startX, startY);
-      this.initialX = startX;
-      this.endX = endX;
-      this.endY = endY;
-      this.moving = true;
-    }, "call$4", "get$initializeMove", 8, 0, null, 253, 254, 255, 256],
-    draw$0: [function() {
-      var pattern, t1, t2, t3, t4, t5;
-      J.save$0$x($.normContext);
-      J.beginPath$0$x($.ctx.context);
-      pattern = J.createPatternFromImage$2$x($.normContext, this.img, "repeat");
-      t1 = $.ctx;
-      t2 = this.x;
-      t3 = this.width;
-      if (typeof t2 !== "number")
-        return t2.$sub();
-      t4 = this.y;
-      t5 = this.height;
-      if (typeof t4 !== "number")
-        return t4.$sub();
-      t1.rect$4(t1, t2 - t3 / 2, t4 - t5 / 2, t3, t5);
-      J.set$fillStyle$x($.normContext, pattern);
-      J.closePath$0$x($.normContext);
-      J.fill$0$x($.ctx.context);
-      J.restore$0$x($.normContext);
-    }, "call$0", "get$draw", 0, 0, null],
-    update$1: [function(dt) {
-      var speed, t1, t2;
-      speed = 1 * dt;
-      if (!this.goingBack) {
-        t1 = this.x;
-        t2 = this.endX;
-        if (typeof t1 !== "number")
-          return t1.$lt();
-        if (t1 < t2)
-          this.x = t1 + speed;
-        else
-          this.goingBack = true;
-      } else {
-        t1 = this.x;
-        t2 = this.initialX;
-        if (typeof t1 !== "number")
-          return t1.$gt();
-        if (t1 > t2)
-          this.x = t1 - speed;
-        else
-          this.goingBack = false;
-      }
-    }, "call$1", "get$update", 2, 0, null, 228]
-  },
   Oxygen: {
     "": "Item;sprite,x,y,height,width,dead",
     update$1: [function(dt) {
@@ -13025,7 +12684,7 @@ var $$ = {};
     }, "call$0", "get$collect", 0, 0, null]
   },
   Player: {
-    "": "GameObject;img,input,JUMPING,WALKING,LOOK_RIGHT,LOOK_LEFT,ATTACKED,MOVINGBLOCK,movingBlockk,playerBlockX,velocity_y,accel,sprite,stateEnumAlive,stateEnumInjured,stateEnumDead,state,invincibilityTimer,blink,playerStartX,playerStartY,originalX,imgXOffset,imgYOffset,x,y,height,width,dead",
+    "": "GameObject;img,input,JUMPING,WALKING,LOOK_RIGHT,LOOK_LEFT,ATTACKED,MOVINGBLOCK,movingBlockk,playerBlockX,velocity_y,accel,jumpVelocity,sprite,stateEnumAlive,stateEnumInjured,stateEnumDead,state,invincibilityTimer,blink,playerStartX,playerStartY,originalX,imgXOffset,imgYOffset,x,y,height,width,dead",
     draw$0: [function() {
       var t1, t2, t3, t4, t5, t6, t7, t8;
       if (this.state !== this.stateEnumDead)
@@ -13190,7 +12849,7 @@ var $$ = {};
           if (!this.JUMPING) {
             $.SoundManager_instance.playSound$1(1);
             this.JUMPING = true;
-            this.velocity_y = 25;
+            this.velocity_y = this.jumpVelocity;
           }
         this.input.toString;
         if ($.get$gameLoop()._keyboard.isDown$1(39) || this.input.controllerAxesRight) {
@@ -13252,7 +12911,7 @@ var $$ = {};
           if (t2 <= 0)
             $.Game_instance.gameOver$0();
           else
-            $.get$gameLoop().addTimer$2(new U.Player_update_closure(), 2);
+            $.get$gameLoop().addTimer$2(new U.Player_update_closure(), 3);
         }
         $.CollisionSystem_instance.PlayerCollideWithItem$1(this);
         $.CollisionSystem_instance.PlayerCollideWithTrigger$1(this);
@@ -13298,16 +12957,7 @@ var $$ = {};
           }
         }
       }
-    }, "call$2", "get$movePlayer", 4, 0, null, 257, 258],
-    resetPlayer$0: [function() {
-      var t1 = $.get$camera();
-      t1.x = 0;
-      t1.y = 0;
-      $.Game_oxygen = 100;
-      this.x = this.playerStartX;
-      this.y = this.playerStartY;
-      this.state = this.stateEnumAlive;
-    }, "call$0", "get$resetPlayer", 0, 0, null],
+    }, "call$2", "get$movePlayer", 4, 0, null, 253, 254],
     injureBuzz$2: [function(injuryAmount, boss) {
       var t1 = $.Game_oxygen;
       if (typeof injuryAmount !== "number")
@@ -13323,7 +12973,7 @@ var $$ = {};
         this.sprite.spritex = -500;
         this.originalX = this.x;
       }
-    }, "call$2", "get$injureBuzz", 4, 0, null, 259, 260],
+    }, "call$2", "get$injureBuzz", 4, 0, null, 255, 256],
     invincibilityCountDown$0: [function() {
       var t1 = this.invincibilityTimer;
       if (t1 > 0) {
@@ -13361,25 +13011,63 @@ var $$ = {};
     "": "Closure:130;",
     call$1: [function(reload) {
       return $.Game_instance.reloadLevel$0();
-    }, "call$1", null, 2, 0, null, 261, "call"],
+    }, "call$1", null, 2, 0, null, 257, "call"],
     $isFunction: true
   },
   Player_injureBuzz_closure: {
     "": "Closure:130;this_0",
     call$1: [function(invincibilityTimer) {
       return this.this_0.invincibilityCountDown$0();
-    }, "call$1", null, 2, 0, null, 262, "call"],
+    }, "call$1", null, 2, 0, null, 258, "call"],
     $isFunction: true
   },
   Player_invincibilityCountDown_closure: {
     "": "Closure:130;this_0",
     call$1: [function(invincibilityTimer) {
       return this.this_0.invincibilityCountDown$0();
-    }, "call$1", null, 2, 0, null, 262, "call"],
+    }, "call$1", null, 2, 0, null, 258, "call"],
     $isFunction: true
   },
   ShipItem: {
     "": "Item;sprite,panel,levelSprite,spriteXInitial,spriteYInitial,spriteWidth,spriteHeight,spriteFrames,timer,glow,collected,repeat,level,initialX,initialY,xx,yy,x,y,height,width,dead",
+    initialize$2: [function(x, y) {
+      var t1, t2, t3;
+      U.GameObject.prototype.initialize$2.call(this, x, y);
+      this.height = 80;
+      this.width = 80;
+      t1 = this.spriteWidth;
+      t2 = this.spriteHeight;
+      t3 = new U.SpriteSheet(this.spriteXInitial, this.spriteYInitial, t1, t2, null, null, "./content/gameitems.png", null, 0, null, null, 0, 0);
+      t3._img = U.ImageLoader_getImage("./content/gameitems.png");
+      t3.scaledh = t2;
+      t3.scaledw = t1;
+      this.sprite = t3;
+      t3 = new U.SpriteSheet(0, 0, 491, 311, null, null, "./content/panel_level.png", null, 0, null, null, 0, 0);
+      t3._img = U.ImageLoader_getImage("./content/panel_level.png");
+      t3.scaledh = 311;
+      t3.scaledw = 491;
+      this.levelSprite = t3;
+      t3.numberOfFrames = 1;
+      this.initialX = 0;
+      this.initialY = 0;
+      this.xx = x;
+      this.yy = y;
+      t3 = new U.SpriteSheet(0, 0, 491, 311, null, null, "./content/panel.png", null, 0, null, null, 0, 0);
+      t3._img = U.ImageLoader_getImage("./content/panel.png");
+      t3.scaledh = 311;
+      t3.scaledw = 491;
+      this.panel = t3;
+      t3.numberOfFrames = 1;
+      t1 = $.Game_instance.currentLevel;
+      if (t1 === $.LevelManager_enumLevelOne)
+        this.levelSprite.spritex = 0;
+      else if (t1 === $.LevelManager_enumLevelTwo)
+        this.levelSprite.spritex = 491;
+      else if (t1 === $.LevelManager_enumLevelThree)
+        this.levelSprite.spritex = 982;
+      else if (t1 === $.LevelManager_enumLevelFour)
+        this.levelSprite.spritex = 1473;
+    }, "call$2", "get$initialize", 4, 0, null, 12, 138],
     update$1: [function(dt) {
     }, "call$1", "get$update", 2, 0, null, 228],
     draw$0: [function() {
@@ -13570,6 +13258,8 @@ var $$ = {};
       $.SoundManager_instance.playSound$1(3);
       this.collected = true;
       var t1 = $.Game_instance;
+      t1.toString;
+      $.Game_lives = $.Game_lives + 1;
       t1.state = t1.stateEnumCollected;
     }, "call$0", "get$collect", 0, 0, null]
   },
@@ -13681,17 +13371,17 @@ var $$ = {};
       if (i >= t1.length)
         return H.ioore(t1, i);
       return t1[i];
-    }, "call$1", null, 2, 0, null, 263, "call"],
+    }, "call$1", null, 2, 0, null, 259, "call"],
     $isFunction: true
   },
   convertNativeToDart_AcceptStructuredClone_writeSlot: {
-    "": "Closure:264;copies_3",
+    "": "Closure:260;copies_3",
     call$2: [function(i, x) {
       var t1 = this.copies_3;
       if (i >= t1.length)
         return H.ioore(t1, i);
       t1[i] = x;
-    }, "call$2", null, 4, 0, null, 263, 12, "call"],
+    }, "call$2", null, 4, 0, null, 259, 12, "call"],
     $isFunction: true
   },
   convertNativeToDart_AcceptStructuredClone_walk: {
@@ -13750,7 +13440,7 @@ var $$ = {};
   main: [function() {
     var t1, t2, t3, t4, t5;
     if ($.Game_instance == null) {
-      t1 = new U.Player(W.ImageElement_ImageElement(null, null, null), null, false, false, false, false, false, false, null, 0, 0, 1.5, null, 1, 2, 3, null, 0, false, 14500, 300, null, 16, -12, null, null, 0, 0, false);
+      t1 = new U.Player(W.ImageElement_ImageElement(null, null, null), null, false, false, false, false, false, false, null, 0, 0, 1.15, 20, null, 1, 2, 3, null, 0, false, 0, 300, null, 16, -12, null, null, 0, 0, false);
       t1.Player$0();
       t2 = U.MainMenu$();
       t3 = U.InGameMenu$();
@@ -13758,7 +13448,7 @@ var $$ = {};
       t4.Controls$0();
       t5 = new U.Options(null, null, null, null, null, null, null, null, null, 0, 0, false, false, false, false, false, false, false, false, false, false, false, null, null, 0, 0, false);
       t5.Options$0();
-      t5 = new U.Game(t1, t2, t3, t4, t5, U.LevelTransition$(), new P.Stopwatch(null, null), 0, U.Input_Input(), null, null, 0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, false, null, 0, 0, 0, 0, 0, new U.LevelManager());
+      t5 = new U.Game(t1, t2, t3, t4, t5, U.LevelTransition$(), new P.Stopwatch(null, null), 0, U.Input_Input(), null, null, 0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, false, null, 0, 0, 0, 0, 0, new U.LevelManager(), null);
       $.Game_instance = t5;
       t5.Initialize$0();
     }
@@ -14702,10 +14392,6 @@ true,
 "keyCode",
 "controller",
 "level",
-"startX",
-"startY",
-"endX",
-"endY",
 "direction",
 "amount",
 "injuryAmount",
