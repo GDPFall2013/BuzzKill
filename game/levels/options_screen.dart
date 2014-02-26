@@ -7,6 +7,7 @@ class Options extends GameObject{
   SpriteSheet bg;
   SpriteSheet levelSprite;
   SpriteSheet backSprite;
+  SpriteSheet soundSprite;
   double x;
   double y;
   double width;
@@ -16,8 +17,10 @@ class Options extends GameObject{
   int spritey=0;
   
   bool back = false;
-  bool sound = false;
-  bool difficulty = false;
+  
+  bool soundslc = false; bool soundON = true;
+  
+  bool difficultyslc = false;
   bool screen = false;
   bool levelslc = false;
   bool level1slc = false, level2slc=false;
@@ -31,14 +34,14 @@ class Options extends GameObject{
     y = 0.0;
     input = new Input();
     back = true;
-    template = new SpriteSheet("./content/options2.png",spritex,spritey,640,480);
+    //template = new SpriteSheet("./content/options2.png",spritex,spritey,640,480);
     levelSprite = new SpriteSheet("./content/options sprite.png",spritex,spritey,380,70);
-    backSprite = new SpriteSheet("./content/options sprite.png",spritex,spritey,380,70);
+    backSprite = new SpriteSheet("./content/options menu sprite.png",spritex,spritey,380,70);
     bg = new SpriteSheet("./content/options_bg.jpg",spritex,spritey,640,480);
-    
+    soundSprite = new SpriteSheet("./content/options menu sprite.png",spritex,spritey,465,65);
     
 
-      backSprite.spritey = 700;
+      backSprite.spritey = 325;
   }
 
   
@@ -46,16 +49,17 @@ class Options extends GameObject{
     
     if(Game.instance.state == Game.instance.stateEnumOptions){
       bg.drawOnPositionNormal(x, y, 640.0 , 480.0);
-      template.drawOnPositionNormal(x, y, 640.0 , 480.0);
+      //template.drawOnPositionNormal(x, y, 640.0 , 480.0);
       
       
+      //only shows in main menu
      if(Game.instance.currentLevel == LevelManager.enumMainMenu){
       levelSprite.drawOnPositionNormal(94.0, 116.0, 380.0 , 70.0);
      }
      
       backSprite.drawOnPositionNormal(40.0, 40.0, 380.0 , 70.0);
       
-      
+      soundSprite.drawOnPositionNormal(80.0, 185.0, 380.0 , 70.0);
       
       
    }
@@ -79,12 +83,12 @@ class Options extends GameObject{
     /*******************************************************************************************
      *****************************  BEGIN BETA TESTING CODE (TO SKIP LEVELS) *******************
      *******************************************************************************************/
-    if(Game.instance.currentLevel == LevelManager.enumMainMenu){
-    if(back && input.wasPressed(KeyCode.DOWN)){
+    
+    if(back && input.wasPressed(KeyCode.DOWN) && Game.instance.currentLevel == LevelManager.enumMainMenu){
       levelSprite.spritey = 70;
       back = false;
       level1hover = true;
-      backSprite.spritey = 630;
+      backSprite.spritey = 260;
       levelslc = true;
       
       if(level1slc){
@@ -97,10 +101,10 @@ class Options extends GameObject{
         level2hoverslc = true;
         levelSprite.spritey = 420;
       }
-    }
     
-    if(levelslc){
-    if(level1hover && input.wasPressed(KeyCode.ENTER)){
+    }
+    //if(levelslc){
+    else if(level1hover && input.wasPressed(KeyCode.ENTER)){
      // if(input.timePressed(KeyCode.ENTER) - Game.instance.lastENTER > 0.0){
         levelSprite.spritey = 140;
     //    Game.instance.lastENTER = input.timePressed(KeyCode.ENTER);
@@ -112,7 +116,7 @@ class Options extends GameObject{
       
     }
 
-    if(level1hover && input.wasPressed(KeyCode.RIGHT)){
+    else if(level1hover && input.wasPressed(KeyCode.RIGHT)){
           levelSprite.spritey = 350;
           level1hover = false;
           level2hover = true;
@@ -124,13 +128,13 @@ class Options extends GameObject{
                         }
         }
     
-    if(level1hoverslc && input.wasPressed(KeyCode.RIGHT)){
+    else if(level1hoverslc && input.wasPressed(KeyCode.RIGHT)){
       levelSprite.spritey = 280;
       level1hoverslc = false;
       level2hover = true;
     }
    
-    if(level2hover && input.wasPressed(KeyCode.ENTER)){
+    else if(level2hover && input.wasPressed(KeyCode.ENTER)){
           //if(input.timePressed(KeyCode.ENTER) - Game.instance.lastENTER > 0.0){
             levelSprite.spritey = 420;
          //   Game.instance.lastENTER = input.timePressed(KeyCode.ENTER);
@@ -143,7 +147,7 @@ class Options extends GameObject{
             
      }
     
-    if(level2hover && input.wasPressed(KeyCode.LEFT)){
+    else if(level2hover && input.wasPressed(KeyCode.LEFT)){
               levelSprite.spritey = 70;
               level2hover = false;
               level1hover = true;
@@ -155,13 +159,13 @@ class Options extends GameObject{
               }
             }
     
-    if(level2hoverslc && input.wasPressed(KeyCode.LEFT)){
+    else if(level2hoverslc && input.wasPressed(KeyCode.LEFT)){
          levelSprite.spritey = 560;
          level2hoverslc = false;
          level1hover = true;
        }
     
-    if(levelslc && input.wasPressed(KeyCode.UP)){
+    else if(levelslc && input.wasPressed(KeyCode.UP)){
       if(level1slc){
         levelSprite.spritey = 210;
       }
@@ -171,19 +175,105 @@ class Options extends GameObject{
       else{
         levelSprite.spritey = 0;
       }
-      backSprite.spritey = 700;
+      backSprite.spritey = 325;
       levelslc = false;
       back = true;
     }
-    
-    }
-    
-    }
-    
+
     /*******************************************************************************************
      ***********************    END BETA TESTING CODE (SKIP LEVELS)    *************************
      *******************************************************************************************/  
       
+    
+    
+    else if(back && input.wasPressed(KeyCode.DOWN)){
+      unSelectReturn();
+      back = false;
+      soundslc = true;
+      
+      if(soundON){
+        soundOnHover();
+      }
+      else{
+        soundOffHover();
+      }   
+      
+    }
+    
+    // levelslc -> sound **beta/mainmenu**
+    else if((levelslc && input.wasPressed(KeyCode.DOWN)) || 
+            (Game.instance.currentLevel > LevelManager.enumMainMenu && back && input.wasPressed(KeyCode.DOWN))){
+     soundslc = true;
+     if(level1slc){
+       levelSprite.spritey = 210;
+     }
+     else if(level2slc){
+       levelSprite.spritey = 490;
+     }
+     else{
+       levelSprite.spritey = 0;
+     }
+     reset();
+     if(soundON){
+            soundOnHover();
+          }
+     else{
+            soundOffHover();
+          }      
+   }
+
+    
+    // sound -> levelslc **beta/mainmenu**
+    else if(soundslc && input.wasPressed(KeyCode.UP) && Game.instance.currentLevel == LevelManager.enumMainMenu){
+      soundslc = false; back = false;
+      levelslc = true;
+      if(soundON){
+        soundOn();
+      }
+      else{
+        soundOff();
+      }      
+      
+      if(level1slc){
+        level1slclevel1hover();
+      }
+      else if(level2slc){
+        level2slclevel1hover();
+      }
+      else{
+        noslclevel1hover();
+      }
+      //selectReturn();
+      
+    }
+    
+    // sound -> return
+    else if(soundslc && input.wasPressed(KeyCode.UP) && Game.instance.currentLevel > LevelManager.enumMainMenu){
+      soundslc = false;
+      levelslc = false;
+      back = true;
+      if(soundON){
+        soundOn();
+      }
+      else{
+        soundOff();
+      }
+      selectReturn();
+    }
+    
+    //sound OFF
+    else if(soundslc && input.wasPressed(KeyCode.ENTER) && soundON){
+      soundOffHover();
+      SoundManager.instance.toggleMute();
+    }
+    
+    //sound ON
+    else if(soundslc && input.wasPressed(KeyCode.ENTER) && !soundON){
+      soundOnHover();
+      SoundManager.instance.toggleMute();
+    }    
+    
+    
     
     
     
@@ -198,6 +288,8 @@ class Options extends GameObject{
          //Game.instance.resetMainMenu = true;
           Game.instance.lastENTER = input.timePressed(KeyCode.ENTER);
           reset();
+          back = true;
+          soundslc = false;
         }
         
         else if(input.timePressed(KeyCode.ENTER) - Game.instance.lastENTER > 0.0 &&
@@ -206,6 +298,8 @@ class Options extends GameObject{
           Game.instance.resetMainMenu = true;
           Game.instance.lastENTER = input.timePressed(KeyCode.ENTER);
           reset();
+          back = true;
+          soundslc = false;
         }
 
       }
@@ -266,7 +360,61 @@ class Options extends GameObject{
             level2hoverslc=false; level1hoverslc=false;
           }
     
-                 
+        
+         
   }
   
+  resetLevel(){
+    level1slc=false;level2slc=false;
+    level1hover=false; level2hover=false;
+    level2hoverslc=false; level1hoverslc=false;
+  }
+  
+  
+  selectReturn(){
+    backSprite.spritey = 325;
+  }
+  
+  unSelectReturn(){
+    backSprite.spritey = 260;
+  }
+  
+  level2slclevel1hover(){
+    levelSprite.spritey = 560;
+    level1hover = true;
+  }
+  
+  level1slclevel1hover(){
+    levelSprite.spritey = 140;
+    level1hover = true;
+  }
+  
+  noslclevel1hover(){
+    levelSprite.spritey = 70;
+    level1hover = true;
+  }
+  
+  selectlevel2(){
+    levelSprite.spritey = 420;
+  }
+  
+  soundOn(){
+    soundSprite.spritey = 0;
+    soundON = true;
+  }
+  
+  soundOff(){
+    soundSprite.spritey = 65;
+    soundON = false;
+  }
+  
+  soundOnHover(){
+    soundSprite.spritey = 130;
+    soundON = true;
+  }
+  
+  soundOffHover(){
+    soundSprite.spritey = 195;
+    soundON = false;
+  }
 }
