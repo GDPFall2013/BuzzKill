@@ -16,7 +16,8 @@ class Player extends GameObject{
   double playerBlockX=0.0;
   
   double velocity_y = 0.0;
-  double accel = 1.5;
+  double accel = 1.15;          // Old value was 15.0
+  double jumpVelocity = 20.0;  // Old Value was 25.0
   SpriteSheet sprite;
   
   int stateEnumAlive = 1;
@@ -114,11 +115,13 @@ class Player extends GameObject{
      
      if (state != stateEnumDead && !ATTACKED && Game.instance.state != Game.instance.stateEnumCollected) {
        
-       if (input.isDown(KeyCode.UP) || input.controllerButtonPushed){
+       if (input.wasPressed(KeyCode.UP) || 
+           input.controllerButtonPushed || 
+           input.wasPressed(KeyCode.SPACE)){
           if(!JUMPING){
            SoundManager.instance.playSound(SoundManager.enumSoundJump);
            JUMPING = true;
-           velocity_y = 25.0;
+           velocity_y = jumpVelocity;
           }
        }
        
@@ -187,7 +190,7 @@ class Player extends GameObject{
            Game.instance.gameOver();
           } else {
             // TODO: play some death music
-            gameLoop.addTimer((reload) => Game.instance.reloadLevel(), 2.0);
+            gameLoop.addTimer((reload) => Game.instance.reloadLevel(), 3.0);
           }
         }
         
