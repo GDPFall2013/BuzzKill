@@ -32,6 +32,7 @@ part 'objects/ingame_menu.dart';
 part 'objects/trigger.dart';
 part 'objects/bullet.dart';
 part 'objects/moving_block.dart';
+part 'objects/spring.dart';
 
 part 'animations/sprite_sheet.dart';
 

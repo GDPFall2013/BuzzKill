@@ -11,13 +11,15 @@ class Player extends GameObject{
   bool LOOK_LEFT = false;
   bool ATTACKED = false;
   bool MOVINGBLOCK = false;
+  bool SPRING_JUMP = false;
+  bool SPRING_INAIR = false;
   
   Block movingBlockk;
-  double playerBlockX=0.0;
   
   double velocity_y = 0.0;
   double accel = 1.15;          // Old value was 15.0
   double jumpVelocity = 20.0;  // Old Value was 25.0
+  double springJumpVelocity = 30.0;
   SpriteSheet sprite;
   
   int stateEnumAlive = 1;
@@ -29,8 +31,8 @@ class Player extends GameObject{
   double invincibilityTimer = 0.0;
   bool blink = false;
   
-  double playerStartX = 0.0; //14500.0;  //TODO: This should be moved to level object later
-  double playerStartY = 300.0; 
+  double playerStartX = 13400.0; //14500.0;  //TODO: This should be moved to level object later
+  double playerStartY = -120.0; 
   double originalX;
   
   double imgXOffset = 16.0;
@@ -115,6 +117,12 @@ class Player extends GameObject{
      
      if (state != stateEnumDead && !ATTACKED && Game.instance.state != Game.instance.stateEnumCollected) {
        
+       if(SPRING_JUMP){
+         velocity_y = springJumpVelocity;
+         SPRING_JUMP = false;
+         SPRING_INAIR = true;
+       }
+       
        if (input.wasPressed(KeyCode.UP) || 
            input.controllerButtonPushed || 
            input.wasPressed(KeyCode.SPACE)){
@@ -154,7 +162,7 @@ class Player extends GameObject{
          } else {
            movementSpeed = 3.0;
          }
-         movePlayer(-1.0, 3*dt);
+         movePlayer(-1.0, movementSpeed*dt);
          WALKING = true;
          LOOK_LEFT = true;
          LOOK_RIGHT = false;
@@ -172,11 +180,23 @@ class Player extends GameObject{
             y = y - velocity_y * dt;
             
             if(LOOK_RIGHT && input.isDown(KeyCode.RIGHT)){
-            movePlayer (1.0, 1 * dt);
+              if(SPRING_INAIR){
+                movePlayer (1.0, 5 * dt);
+              }
+              else{
+                movePlayer (1.0, 1 * dt);
+              }
             }
             else if(LOOK_LEFT && input.isDown(KeyCode.LEFT)){
             movePlayer(1.0, -1 * dt);
+              if(SPRING_INAIR){
+                movePlayer (1.0, -5 * dt);
+              }
+              else{
+                movePlayer (1.0, 1 * dt);
+              }
             }
+           
          }
          
        
@@ -225,65 +245,51 @@ class Player extends GameObject{
     */
    movePlayer(double direction, double amount) {
      //move, then check if player is colliding with stuff.  If he is, move him back.
-       
-       
+     
        if(MOVINGBLOCK){
          movePlayerWithBlock(direction,amount,movingBlockk);
-         playerBlockX = this.x;
        }
+       
        else{
          this.x += direction * amount;
        for (Block block in ObjectManager.instance.blockList) {
          if (CollisionSystem.instance.checkForCollision(this, block)){
-           
-           
-         /*  if(block.moving){
-             print('update moving');
-             //if(this.velocity_y <=0){
-                      this.x =  block.x;
-                      
-             //}
-           }
-           
-           else{*/
            this.x -= direction * amount;   //Undo the movement
            return;
-           //}
          }
-       /*  
-         if(block.moving == true){
-        */ 
-          /* 
-           if(CollisionSystem.instance.PlayerCollideWithBlock(this)){
-             
-           print('update moving');
-           this.y = block.y - block.height/2 - this.height/2;
-           this.x += (direction * amount + block.x);
-           
-           print('update moving');
-           CollisionSystem.instance.PlayerCollideWithMovingBlock(this, block);
-           
-         }*/
          
        }
        }
+   }
+     
+   movePlayerWithBlock(double direction, double amount, MovingBlock block){
+
+     if(WALKING){     
+       if(LOOK_RIGHT){
+         if(block.goingBack){
+           this.x += direction * amount;
+         }
+         else{
+           this.x += direction * amount;
+         }
        }
-     
-   movePlayerWithBlock(double direction, double amount, Block block){
-     this.x += direction * amount;
-    /* if(WALKING){
-       //this.x = block.x;
-       this.x += direction * amount;
-       playerBlockX = x;
-       print(block.x);
-       print(x);
-       //print(amount);
-       print('walking on block');
+       else if(LOOK_LEFT){
+         if(block.goingBack){
+           this.x += direction * amount- (block.speed/2);
+         }
+         else{
+          this.x += direction * amount - (block.speed);
+         }
+       }
      }
-     
-     else{*/
-     //this.x =  (block.x + this.x) / 2;
-     //}
+    
+     else{
+       if(block.goingBack){
+        this.x -= block.speed;}
+       else{
+         this.x += block.speed;
+       }
+     }
      
    }
    

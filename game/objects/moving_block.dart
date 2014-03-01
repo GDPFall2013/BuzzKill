@@ -17,6 +17,7 @@ class MovingBlock extends Block {
   double endX = 0.0;
   double endY = 0.0;
   bool goingBack = false;
+  double speed = 1.0;
   
   initializeMove(double startX, double startY, double endX, double endY) {
     super.initialize(startX, startY);
@@ -45,7 +46,7 @@ class MovingBlock extends Block {
   
   update(double dt){
     //print('update');
-    double speed = 1 * dt;
+    //double speed = 1.5 * dt;
     
     if (goingBack == false) {
       if(x < endX){

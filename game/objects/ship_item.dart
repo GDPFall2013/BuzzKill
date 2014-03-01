@@ -121,9 +121,15 @@ class ShipItem extends Item{
         levelSprite.drawOnPosition(xx+300, yy-200, 491.0 , 311.0); 
         timer.start();
 
-             if(initialX <= 400){
-             this.x -= 1;
+             if(this.x >= xx+400 || this.y > -60 || this.y < -65){
+               if(this.x>= xx+400){
+             this.x -= 1;}
+             if(this.y > -60){
              this.y -= 4.5;
+             }
+             if(this.y < -65){
+                this.y += 4.5;
+             }
              sprite.scaledw += 0.5; 
              sprite.scaledh += 0.5;
              initialX += 5;}
@@ -192,9 +198,16 @@ class ShipItem extends Item{
                 timer.start();
                 
                      //move space item
-                     if(initialX <= 400){ 
-                     this.x -= 1;
-                     this.y -= 4.5;
+                     if(this.x >= xx+400 || this.y > -60 || this.y<-65){ 
+                       if(this.x>= xx+400){
+                     this.x -= 1;}
+                     if(this.y > -60){
+                        this.y -= 4.5;
+                     }
+                     if(this.y < -65){
+                        this.y += 4.5;
+                     }
+                    // this.y -= 4.5;
                      sprite.scaledw += 0.5; 
                      sprite.scaledh += 0.5;
                      initialX += 5;
