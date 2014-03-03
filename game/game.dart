@@ -32,6 +32,8 @@ part 'objects/ingame_menu.dart';
 part 'objects/trigger.dart';
 part 'objects/bullet.dart';
 part 'objects/moving_block.dart';
+part 'objects/cyrax.dart';
+part 'objects/clone.dart';
 
 part 'animations/sprite_sheet.dart';
 
@@ -112,9 +114,6 @@ double numberOfRenders = 0.0;
 
 LevelManager levelManager = new LevelManager();
 
-// lastFrame is a fix on one keyboard button being referenced twice for a single push
-int _lastFrame;
-
 Initialize() {
   buildCanvas();
   SoundManager sm = new SoundManager();
@@ -122,15 +121,7 @@ Initialize() {
   ObjectManager objectManager = new ObjectManager();
   //Input input = new Input();
   
-  gameLoop.onUpdate = ((gameLoop) {
-    // This if Statement is a temporary fix for an issue with Game Loop
-    // It was sometimes causing 1 keypress to be registered multiple times
-    if (_lastFrame == gameLoop.frame) {
-      return;
-    } else {
-      _lastFrame = gameLoop.frame;
-    }
-    update(gameLoop.dt * 100);});
+  gameLoop.onUpdate = ((gameLoop) {update(gameLoop.dt * 100);});
   gameLoop.onRender = ((gameLoop) {draw();});
   gameLoop.start();
   
@@ -465,11 +456,8 @@ win() {
   
 }
 
-/**
- * This is for when a ship item has been collected
- */
+
 collected(){
-  lives++;
   state = stateEnumCollected;
 }
 gameOver() {
@@ -493,19 +481,16 @@ reloadLevel() {
 }
 
 restartGame() {
-//  lives = 3;
-//  levelManager.loadLevel(startLevel);
-//  player.resetPlayer();
-//  state = stateEnumPlay;
-//  
-//  currentLevel = startLevel;
-//  //reset oxygen
-//  if(currentLevel >= LevelManager.enumLevelOne){
-//    oxygenTimer.reset(); lastOxygenTick = 0.0;
-//    oxygenTimer.start();}
-  state = stateEnumMain;
-  levelManager.loadLevel(LevelManager.enumMainMenu);
-  resetMainMenu = true;
+  lives = 3;
+  levelManager.loadLevel(startLevel);
+  player.resetPlayer();
+  state = stateEnumPlay;
+  
+  currentLevel = startLevel;
+  //reset oxygen
+  if(currentLevel >= LevelManager.enumLevelOne){
+    oxygenTimer.reset(); lastOxygenTick = 0.0;
+    oxygenTimer.start();}
 }
 
 pauseOxygenDrain(){
