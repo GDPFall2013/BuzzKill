@@ -175,7 +175,11 @@ void setupLevelThree() {
   
   om.addBlock(new Block()..initialize(9100.0, 420.0) // floor
         ..width = 800.0 .. height = 140.0);
-  om.addEnemy(new Alien()..initialize(9200.0, 330.0));  //enemy
+  om.addBlock(new Block()..initialize(8800.0, 300.0)    // Boulder
+                  ..width = 120.0 .. height = 100.0);
+ // om.addBlock(new MovingBlock()..initializeMove(8900.0, 150.0, 9400.0, 150.0) // moving block
+ //         ..width = 200.0 .. height = 101.0..speed = 3.0);
+  
   
   
  // om.addBlock(new Block()..initialize(8330.0, 150.0) // high level floor
@@ -238,6 +242,8 @@ void setupLevelThree() {
   
   om.addBlock(new Block()..initialize(10300.0, 420.0) // floor
         ..width = 400.0 .. height = 140.0);
+  om.addBlock(new Spring()..initialize(10200.0, 270.0));   //spring
+  om.addEnemy(new Gorilla()..initialize(10500.0, 300.0));  //enemy gorilla
   om.addBlock(new Block()..initialize(10750.0, 420.0) // floor
         ..width = 500.0 .. height = 140.0);
   om.addBlock(new Block()..initialize(10750.0, 300.0)    // Boulder
@@ -471,10 +477,12 @@ void setupLevelThree() {
   om.addItem(new Oxygen()..initialize(19750.0, 350.0));
   
   
+  om.addEnemy(new Cyrax()..initialize(20000.0, 310.0));  //enemy
+  
   om.addBlock(new Spring()..initialize(20850.0, 300.0));   //spring
   
-  om.addBlock(new MovingBlock()..initializeMove(19600.0, 200.0, 20000.0, 200.0) // moving block
-            ..width = 200.0 .. height = 101.0..speed = 3.0);
+  //om.addBlock(new MovingBlock()..initializeMove(19600.0, 200.0, 20000.0, 200.0) // moving block
+  //          ..width = 200.0 .. height = 101.0..speed = 3.0);
   
   om.addBlock(new Block()..initialize(21300.0, -200.0) // floor
          ..width = 200.0 .. height = 101.0);

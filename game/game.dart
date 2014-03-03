@@ -33,6 +33,7 @@ part 'objects/trigger.dart';
 part 'objects/bullet.dart';
 part 'objects/moving_block.dart';
 part 'objects/spring.dart';
+part 'objects/cyrax.dart';
 
 part 'animations/sprite_sheet.dart';
 
@@ -200,7 +201,7 @@ void update(double dt) {
     else if (oxygenTimer.elapsedMilliseconds > 250 + lastOxygenTick && currentLevel>=LevelManager.enumLevelOne &&
         oxygen >0){
       lastOxygenTick += 250;
-      oxygen -= 0;
+      oxygen -= 1;
     }
     
     ObjectManager.instance.removeDeadObjects();

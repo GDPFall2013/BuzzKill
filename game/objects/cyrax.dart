@@ -1,14 +1,14 @@
 part of gdp;
 
-class cyrax extends Enemy{
+class Cyrax extends Enemy{
   
   ImageElement img = new ImageElement();
 
   SpriteSheet sprite;
-  int spriteXInitial = 0;
-  int spriteYInitial = 881;
-  int spriteWidth = 90;
-  int spriteHeight = 170;
+  int spriteXInitial = 110;
+  int spriteYInitial = 850;
+  int spriteWidth = 110;
+  int spriteHeight = 160;
   
   double imgOffsetX = 8.0;
   double imgOffsetY = -7.0;
@@ -19,8 +19,8 @@ class cyrax extends Enemy{
   
   initialize(double x, double y) {
     super.initialize(x, y);
-    width = 90.0;
-    height = 170.0;
+    width = 110.0;
+    height = 160.0;
     sprite = new SpriteSheet("./content/enemies_spritesheet.png",
         spriteXInitial,spriteYInitial,spriteWidth,spriteHeight);
     
@@ -28,7 +28,7 @@ class cyrax extends Enemy{
     endPos = x-600.0;
     
     sprite.frameChangeRate = 20.0;
-    sprite.numberOfFrames = 5;
+    sprite.numberOfFrames = 4;
   }
   
   update (double dt) {
@@ -41,7 +41,7 @@ class cyrax extends Enemy{
       }
       else{
         goingBack = true;
-        sprite.spritey = 1100;
+        sprite.spritey = 1010;
       }
     } else {
       if(x<initialPos){
@@ -49,7 +49,7 @@ class cyrax extends Enemy{
       }
       else{
         goingBack = false;
-        sprite.spritey = 880;
+        sprite.spritey = 850;
       }
     }
     sprite.update(dt);  

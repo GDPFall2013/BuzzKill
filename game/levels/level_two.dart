@@ -254,7 +254,7 @@ void setupLevelTwo() {
   ..width = 120.0 .. height = 20.0;
   
   
-  Enemy boss = (new Gorilla()..initialize(13100.0, 290.0));
+  Enemy boss = (new Gorilla()..initialize(13100.0, 300.0));
   om.addEnemy(boss);
   
   
