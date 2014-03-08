@@ -205,6 +205,7 @@ class Player extends GameObject{
             && state != stateEnumDead) {
           Game.lives -= 1;
           state = stateEnumDead;
+          SoundManager.instance.playSound(SoundManager.enumSoundDeath);
           ATTACKED = false;
           if (Game.lives <= 0) {
            Game.instance.gameOver();

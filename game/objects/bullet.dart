@@ -33,6 +33,7 @@ class Bullet extends Enemy
     
     sprite.frameChangeRate = 9.0;
     sprite.numberOfFrames = 14;
+    SoundManager.instance.playSound(SoundManager.enumSoundShoot);
   }
  
   
