@@ -195,7 +195,12 @@ void update(double dt) {
     }
     
     for (GameObject go in ObjectManager.instance.goList) {
-      go.update(dt);
+      double goRightEdge = go.x + go.width/2;
+      double goLeftEdge = go.x - go.width/2;
+      if (goRightEdge > (camera.x - (viewportWidth / Camera.instance.screenRatio))  && 
+          goLeftEdge < (camera.x + (viewportWidth / Camera.instance.screenRatio))) {
+        go.update(dt);
+      }
     }
     
     //Drain Oxygen

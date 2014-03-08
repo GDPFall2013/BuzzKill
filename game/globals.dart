@@ -7,7 +7,7 @@ class Globals{
   static double oxygenLossRate; // this is milliseconds per tick, increase to slow
   
   static double gameSpeed;
-  static double jumpVelocity;
+  static double jumpVelocity = 1.0;
   
   
   

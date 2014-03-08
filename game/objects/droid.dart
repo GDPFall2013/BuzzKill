@@ -17,7 +17,7 @@ class Droid extends Enemy{
   double endPos;
   bool goingBack = false;
   
-  double lastBullet = 0.0;
+  double lastBullet = 250.0;
   Bullet bullet;
   double bulletDelay = 300.0;
   
