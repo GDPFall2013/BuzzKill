@@ -72,7 +72,7 @@ class Droid extends Enemy{
   }
   
    double injure() {
-    return 10.0;
+    return 10.0 * Globals.enemyDamage;
    }
    
    void fire() {

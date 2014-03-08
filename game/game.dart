@@ -16,6 +16,7 @@ import 'dart:web_audio';
 part 'input_manager.dart';
 part 'object_manager.dart';
 part 'audio/sound_manager.dart';
+part 'globals.dart';
 
 part 'objects/game_object.dart';
 part 'objects/block.dart';
@@ -124,7 +125,8 @@ Initialize() {
   ObjectManager objectManager = new ObjectManager();
   levelManager = new LevelManager();
   transition = new LevelTransition();
-  //Input input = new Input();
+  Globals.setNormalDifficulty();
+
   
   gameLoop.onUpdate = ((gameLoop) {
     // This if Statement is a temporary fix for an issue with Game Loop
@@ -134,7 +136,7 @@ Initialize() {
     } else {
       _lastFrame = gameLoop.frame;
     }
-    update(gameLoop.dt * 100);});
+    update(gameLoop.dt * 100 * Globals.gameSpeed);});
   gameLoop.onRender = ((gameLoop) {draw();});
   gameLoop.start();
   
@@ -200,9 +202,9 @@ void update(double dt) {
     if(player.ATTACKED){
       pauseOxygenDrain();
     }
-    else if (oxygenTimer.elapsedMilliseconds > 250 + lastOxygenTick && currentLevel>=LevelManager.enumLevelOne &&
+    else if (oxygenTimer.elapsedMilliseconds > Globals.oxygenLossRate + lastOxygenTick && currentLevel>=LevelManager.enumLevelOne &&
         oxygen >0){
-      lastOxygenTick += 250;
+      lastOxygenTick += Globals.oxygenLossRate;
       oxygen -= 1;
     }
     

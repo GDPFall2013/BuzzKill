@@ -134,6 +134,6 @@ class Gorilla extends Enemy{
     attack = true;
     gameLoop.addTimer((reload) => SoundManager.instance.playSound(SoundManager.enumSoundGSmash), 0.5);
     ;
-    return 10.0;
+    return 10.0 * Globals.enemyDamage;
    }
 }

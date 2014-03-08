@@ -17,7 +17,7 @@ class Player extends GameObject{
   Block movingBlockk;
   
   double velocity_y = 0.0;
-  double accel = 1.15;          // Old value was 15.0
+  double accel = 0.8;          // Old value was 15.0 (this was before multiplying by dt)
   double jumpVelocity = 20.0;  // Old Value was 25.0
   double springJumpVelocity = 30.0;
   SpriteSheet sprite;
@@ -129,7 +129,7 @@ class Player extends GameObject{
           if(!JUMPING){
            SoundManager.instance.playSound(SoundManager.enumSoundJump);
            JUMPING = true;
-           velocity_y = jumpVelocity;
+           velocity_y = jumpVelocity * Globals.jumpVelocity;
           }
        }
        
@@ -176,7 +176,7 @@ class Player extends GameObject{
 
          //Gravity
          if(velocity_y > - 130.0){
-            velocity_y = velocity_y - accel;
+            velocity_y = velocity_y - accel* (dt);
             y = y - velocity_y * dt;
             
             if(LOOK_RIGHT && input.isDown(KeyCode.RIGHT) || input.controllerAxesRight){

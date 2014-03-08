@@ -344,16 +344,19 @@ class Options extends GameObject{
       else if(hardhover && input.wasPressed(KeyCode.ENTER)){
         easyslc = false; normalslc = false; hardslc = true; hardhover = true;
         hardSelectHardHover();
+        Globals.setHardDifficulty();
       }
       //normalslc normalhover
       else if(normalhover && input.wasPressed(KeyCode.ENTER)){
         easyslc = false; normalslc = true; hardslc = false; normalhover = true;
         normalSelectNormalHover();
+        Globals.setNormalDifficulty();
       }
       //easyslc easyhover
       else if(easyhover && input.wasPressed(KeyCode.ENTER)){
         easyslc = true; normalslc = false; hardslc = false; easyhover = true;
         easySelectEasyHover();
+        Globals.setEasyDifficulty();
       }
       
       
