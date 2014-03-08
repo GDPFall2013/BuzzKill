@@ -77,7 +77,7 @@ MainMenu menu = new MainMenu();
 InGameMenu gameMenu = new InGameMenu();
 Controls controls = new Controls();
 Options options = new Options();
-LevelTransition transition = new LevelTransition();
+LevelTransition transition;
 
 static double oxygen = 100.0; 
 Stopwatch oxygenTimer = new Stopwatch();
@@ -112,7 +112,7 @@ double debuggingDisplayTime = 0.0;
 double numberOfUpdates = 0.0;
 double numberOfRenders = 0.0;
 
-LevelManager levelManager = new LevelManager();
+LevelManager levelManager;
 
 // lastFrame is a fix on one keyboard button being referenced twice for a single push
 int _lastFrame;
@@ -122,6 +122,8 @@ Initialize() {
   SoundManager sm = new SoundManager();
   CollisionSystem cs = new CollisionSystem();
   ObjectManager objectManager = new ObjectManager();
+  levelManager = new LevelManager();
+  transition = new LevelTransition();
   //Input input = new Input();
   
   gameLoop.onUpdate = ((gameLoop) {

@@ -17,6 +17,10 @@ class Droid extends Enemy{
   double endPos;
   bool goingBack = false;
   
+  double lastBullet = 0.0;
+  Bullet bullet;
+  double bulletDelay = 300.0;
+  
   initialize(double x, double y) {
     super.initialize(x, y);
     width = 80.0;
@@ -29,9 +33,17 @@ class Droid extends Enemy{
     
     sprite.frameChangeRate = 10.0;
     sprite.numberOfFrames = 8;
+    bullet = new Bullet()..initialize(this.x, this.y);
+    ObjectManager.instance.addEnemy(bullet);
   }
   
   update (double dt) {
+    lastBullet += dt;
+   if (lastBullet > bulletDelay) {
+     lastBullet -= bulletDelay;
+     fire();
+   }
+    
     double speed = 0.4 * dt;
   
     //move aliens back and forth
@@ -61,5 +73,17 @@ class Droid extends Enemy{
   
    double injure() {
     return 10.0;
+   }
+   
+   void fire() {
+     SoundManager.instance.playSound(SoundManager.enumSoundShoot);
+     int direction = 0;
+     if (this.goingBack){
+       direction = 1;
+     } else {
+       direction = -1;
+     }
+     bullet.initialize(this.x + 40 * direction, this.y + 30);
+     bullet.setDirection(direction);
    }
 }
