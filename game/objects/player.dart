@@ -179,7 +179,7 @@ class Player extends GameObject{
             velocity_y = velocity_y - accel;
             y = y - velocity_y * dt;
             
-            if(LOOK_RIGHT && input.isDown(KeyCode.RIGHT)){
+            if(LOOK_RIGHT && input.isDown(KeyCode.RIGHT) || input.controllerAxesRight){
               if(SPRING_INAIR){
                 movePlayer (1.0, 5 * dt);
               }
@@ -187,7 +187,7 @@ class Player extends GameObject{
                 movePlayer (1.0, 1 * dt);
               }
             }
-            else if(LOOK_LEFT && input.isDown(KeyCode.LEFT)){
+            else if(LOOK_LEFT && input.isDown(KeyCode.LEFT) || input.controllerAxesLeft){
             movePlayer(1.0, -1 * dt);
               if(SPRING_INAIR){
                 movePlayer (1.0, -5 * dt);
