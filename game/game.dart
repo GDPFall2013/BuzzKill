@@ -4,6 +4,7 @@ import 'dart:html';
 import 'dart:collection';
 import "dart:convert";
 import "dart:js";
+import 'dart:math';
 
 //import 'packages/js/js.dart' as js;
 import 'package:game_loop/game_loop_html.dart';
@@ -32,8 +33,12 @@ part 'objects/ingame_menu.dart';
 part 'objects/trigger.dart';
 part 'objects/bullet.dart';
 part 'objects/moving_block.dart';
+<<<<<<< HEAD
 part 'objects/cyrax.dart';
 part 'objects/clone.dart';
+=======
+part 'objects/spring.dart';
+>>>>>>> 06b5d9cdf0d202ce6b8f57481d6a6d75846959f6
 
 part 'animations/sprite_sheet.dart';
 

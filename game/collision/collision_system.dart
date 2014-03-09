@@ -51,23 +51,32 @@ class CollisionSystem
       {
           if (checkForCollision(player, block))
           {
-             
              if (player.velocity_y > 0) { // This means he is hitting the block from below
                player.y = block.y + block.height/2 + player.height/2; 
              } 
              else {  // He is falling
+               //if moving block, return block
                if(block.moving){
-                movingBlock = block;
+                movingBlock = block;   //to return
                 }
+               //if player on spring
+               if(block.spring){
+                 Spring spring = block;
+                 if(!spring.once){
+                 spring.setOnSpring(true);
+                 }
+               }
                onblock = true;
                player.y = block.y - block.height/2 - player.height/2;     
              }
              
-             player.velocity_y = 0.0;
+           player.velocity_y = 0.0;
           }
       }
+      
       if (onblock) {
         player.JUMPING = false;
+        player.SPRING_INAIR = false;
         }
 
        else {

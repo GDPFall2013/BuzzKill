@@ -13,6 +13,7 @@ class Block extends GameObject {
   bool isObstacle = false;
   bool triggerFall = false;
   bool moving = false;
+  bool spring = false;
   
   initialize(double x, double y) {
     super.initialize(x, y);

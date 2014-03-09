@@ -1,3 +1,4 @@
+
 part of gdp;
 
 class clone extends Enemy{
@@ -55,11 +56,13 @@ class clone extends Enemy{
     sprite.update(dt);  
   }
   
-  draw(){
+  draw()
+  {
     sprite.drawOnPosition(x-width/2 - imgOffsetX, y-height/2 + imgOffsetY, width , height);
   }
   
-   double injure() {
+   double injure() 
+   {
     return 10.0;
    }
 }

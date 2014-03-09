@@ -26,6 +26,11 @@ class Trigger extends GameObject {
     boss = b;
     floorObstacle = fo;
   }
+  
+  //set obstacle to collapse once trigger is hit
+  setTriggerObstacle(Block fo){
+    floorObstacle = fo;
+  }
 
   draw() {
       trigger.drawOnPosition(x-this.width/2, y-this.height/2, 120.0 , 20.0);   
@@ -33,8 +38,16 @@ class Trigger extends GameObject {
   
   //collapse objects when Buzz stands on trigger
   collapse(){
+    if(bossFloor!= null){
     bossFloor..triggerFall = true;
+    }
+    
+    if(boss != null){
     boss..triggerFall = true;
+    }
+    
+    if(floorObstacle != null){
     floorObstacle..triggerFall = true;
+    }
   }
 }

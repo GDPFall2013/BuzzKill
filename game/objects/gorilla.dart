@@ -6,10 +6,17 @@ class Gorilla extends Enemy{
 
   SpriteSheet sprite;
   SpriteSheet attackSprite;
+  SpriteSheet attackSprite1;
+  
+  
+  
   int spriteXInitial = 0;
   int spriteYInitial = 360;
   int spriteWidth = 140;
   int spriteHeight = 200;
+  int attacknum;
+  
+ 
   
   double imgOffsetX = 0.0;
   double imgOffsetY = -20.0;
@@ -22,13 +29,23 @@ class Gorilla extends Enemy{
   bool triggerFall = false;
   bool attack = false;
   
+  Random rnd = new Random();
+ 
+  generateRandomNumbers()
+  {
+    
+    attacknum = rnd.nextInt(2);
+    
+  }
+  
   initialize(double x, double y) {
     super.initialize(x, y);
     width = 140.0;
     height = 200.0;
     
     sprite = new SpriteSheet("./content/enemies_spritesheet.png",0,360,140,200);
-    attackSprite = new SpriteSheet("./content/enemies_attack_spritesheet.png",0,500,240,250);
+    attackSprite = new SpriteSheet("./content/enemies_attack_spritesheet.png",0,665,220,260);
+    attackSprite1 = new SpriteSheet("./content/enemies_attack_spritesheet.png",0,1305,130,220);
     initialPos = x;
     endPos = x-150.0;
     
@@ -37,14 +54,21 @@ class Gorilla extends Enemy{
     
     attackSprite.frameChangeRate = 25.0;
     attackSprite.numberOfFrames = 7;
-        
+    
+    attackSprite1.frameChangeRate = 25.0;
+    attackSprite1.numberOfFrames = 8;
+       
      TYPE = "BOSS";
+     
+     
   }
   
-  update (double dt) {
+  update (double dt) 
+  {
     double speed = 0.4 * dt;
     
-    if(triggerFall){
+    if(triggerFall)
+    {
       y += 1;
       sprite.spritey = 130;
       
@@ -97,41 +121,88 @@ class Gorilla extends Enemy{
     
     sprite.update(dt);  
     
-    if(attack){
+    if(attack)
+    {
       /* if(attackSprite.spritex >= 400){
          attackSprite.spritex =0;}
        else{
          attackSprite.spritex += 200;
        }*/
-      if(attackSprite.spriteFrame > 6){
+      
+    
+      if (attacknum == 0)
+      { 
+       if(attackSprite.spriteFrame > 6)
+       {
         attack = false;
         attackSprite.spritex = 0;
         sprite.spritex = 0;
         attackSprite.spriteFrame = 1;
-        }
-      else{
-      if(goingBack){
-        attackSprite.spritey = 250;
+       }
+       else if(goingBack)
+       {
+         attackSprite.spritey = 285;
+         sprite.spritex = -200;
+       }
+       else
+       {
+        attackSprite.spritey = 665;
         sprite.spritex = -200;
-      }
-      else{
-        attackSprite.spritey = 500;
+       } 
+       
+       attackSprite.update(dt);
+     }
+     else if (attacknum == 1) 
+     {
+       if(attackSprite1.spriteFrame > 7)
+       {
+        attack = false;
+        attackSprite1.spritex = 0;
+        sprite.spritex = 0;
+        attackSprite1.spriteFrame = 1;
+       }
+       else if(goingBack)
+       {
+         attackSprite1.spritey = 1305;
+         sprite.spritex = -200;
+       }
+       else
+       {
+        attackSprite1.spritey = 1544;
         sprite.spritex = -200;
-      }
-      attackSprite.update(dt);
+       } 
+       
+       attackSprite1.update(dt);
     }
-    }
-  }
-  
-  draw(){
-    sprite.drawOnPosition(x-width/2 - imgOffsetX, y-height/2 + imgOffsetY, width , height);
-    if(attack){
-    attackSprite.drawOnPosition(x-width/2 - imgOffsetX, y-height/2 + (-100), width , height);
-    }
-  }
-  
-   double injure() {
-    attack = true;
-    return 10.0;
+
    }
+  }
+  
+  draw()
+  {
+    sprite.drawOnPosition(x-width/2 - imgOffsetX, y-height/2 + imgOffsetY, width , height);
+    if(attack)
+    {
+       if (attacknum == 0)
+       {
+         attackSprite.drawOnPosition(x-width/2 - imgOffsetX, y-height/2 + (-80), width , height);
+       }
+       else if (attacknum == 1)
+       {
+        attackSprite1.drawOnPosition(x-width/2 - imgOffsetX, y-height/2 + (-45), width , height);
+       }
+    }
+  }
+  
+   double injure() 
+   {
+    attack = true;
+    generateRandomNumbers();
+    return 10.0;
+   }  
+   
+   
+   
+   
+   
 }
