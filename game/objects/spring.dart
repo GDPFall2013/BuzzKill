@@ -60,9 +60,9 @@ class Spring extends Block {
     
     if(movingBlock != null){
       if(movingBlock.goingBack){
-              this.x -= movingBlock.speed;}
+              this.x -= movingBlock.speedX;}
              else{
-               this.x += movingBlock.speed;
+               this.x += movingBlock.speedX;
              }
     }
     

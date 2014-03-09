@@ -463,13 +463,13 @@ class Options extends GameObject{
       //screenFull -> screenWindow
       if(screenFULL && input.wasPressed(KeyCode.ENTER)){
         screenWindowHover();
-        toggleFullScreen();
+       // toggleFullScreen();
       }
       
       //screenWindow -> screenFull
       else if(!screenFULL && input.wasPressed(KeyCode.ENTER)){
         screenFullHover();
-        toggleFullScreen();
+       // toggleFullScreen();
       }
       
       //screenslc -> difficultyslc

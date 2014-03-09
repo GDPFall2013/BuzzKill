@@ -98,11 +98,14 @@ class CollisionSystem
          if(trigger.y == trigger.originalY){
          trigger.y += 20;
          }
+         trigger.onTrigger = true;
       }
        
        else if(trigger.y != trigger.originalY){
          trigger.y -=20;
+         trigger.onTrigger = false;
        }
+
       }
    }
      

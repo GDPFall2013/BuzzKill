@@ -34,6 +34,8 @@ part 'objects/bullet.dart';
 part 'objects/moving_block.dart';
 part 'objects/spring.dart';
 part 'objects/cyrax.dart';
+part 'objects/vertical_block.dart';
+part 'objects/diagonal_block.dart';
 
 part 'animations/sprite_sheet.dart';
 
@@ -42,6 +44,7 @@ part 'levels/level_one.dart';
 part 'levels/level_test.dart';
 part 'levels/level_two.dart';
 part 'levels/level_three.dart';
+part 'levels/level_four.dart';
 part 'levels/level_menu.dart';
 part 'levels/main_menu.dart';
 part 'levels/controls.dart';
@@ -147,7 +150,6 @@ Initialize() {
     oxygenTimer.start();
   }
     
- 
 }
 
 /**
@@ -201,7 +203,7 @@ void update(double dt) {
     else if (oxygenTimer.elapsedMilliseconds > 250 + lastOxygenTick && currentLevel>=LevelManager.enumLevelOne &&
         oxygen >0){
       lastOxygenTick += 250;
-      oxygen -= 1;
+      oxygen -= 0;
     }
     
     ObjectManager.instance.removeDeadObjects();

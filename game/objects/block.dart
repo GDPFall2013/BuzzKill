@@ -14,6 +14,13 @@ class Block extends GameObject {
   bool triggerFall = false;
   bool moving = false;
   bool spring = false;
+  bool goingBack = false;
+  double speedX = 0.0;
+  double speedY = 0.0;
+  bool vertical = false;
+  bool diagonal = false;
+  bool still = true;
+  bool backUp = false;
   
   initialize(double x, double y) {
     super.initialize(x, y);
@@ -31,9 +38,10 @@ class Block extends GameObject {
     
     //trigger block obstacle collapse
     else{
-      if(triggerFall && isObstacle && y<430){
+      if(triggerFall && isObstacle && y<(850)){
         y = y + 5;
-        height = height - 10.5;
+        print(y);
+        //height = height - 10.5;
         normContext.save();
         ctx.beginPath();
         CanvasPattern pattern = normContext.createPatternFromImage(img, 'repeat');
@@ -42,12 +50,28 @@ class Block extends GameObject {
         normContext.closePath();
         ctx.fill();
         normContext.restore();
+        still = false;
+        backUp = false;
+      }
+      
+      else if(!triggerFall && isObstacle && y>=200){
         
+        y = y - 5;
+                //height = height - 10.5;
+                normContext.save();
+                ctx.beginPath();
+                CanvasPattern pattern = normContext.createPatternFromImage(img, 'repeat');
+                ctx.rect(x-this.width/2,y-this.height/2, width, height);
+                normContext.fillStyle = pattern;
+                normContext.closePath();
+                ctx.fill();
+                normContext.restore();
+                still = false;
+                backUp = true;
       }
       
       //trigger enemy floor collapse
       else if(triggerFall && !isObstacle){
-        
         y += 3;
         normContext.save();
         ctx.beginPath();
@@ -57,7 +81,8 @@ class Block extends GameObject {
         normContext.closePath();
         ctx.fill();
         normContext.restore();
-        
+        still = false;
+        backUp = false;
       }
       
       //regular inanimate floor
@@ -70,6 +95,9 @@ class Block extends GameObject {
       normContext.closePath();
       ctx.fill();
       normContext.restore();
+      still = true;
+      backUp = false;
+      triggerFall = false;
       }
     }
   }

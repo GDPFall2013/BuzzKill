@@ -232,7 +232,7 @@ void setupLevelThree() {
   
   // screen 9
   om.addBlock(new MovingBlock()..initializeMove(9600.0, 400.0, 10000.0, 400.0) // moving block
-          ..width = 200.0 .. height = 101.0..speed = 3.0);
+          ..width = 200.0 .. height = 101.0..speedX = 3.0);
   om.addItem(new Oxygen()..initialize(9800.0, 290.0));
   om.addItem(new Oxygen()..initialize(9850.0, 290.0));
   om.addItem(new Oxygen()..initialize(9900.0, 290.0));
@@ -249,7 +249,7 @@ void setupLevelThree() {
   om.addBlock(new Block()..initialize(10750.0, 300.0)    // Boulder
                   ..width = 120.0 .. height = 100.0);
   om.addBlock(new MovingBlock()..initializeMove(10950.0, 100.0, 11350.0, 100.0) // moving block
-            ..width = 200.0 .. height = 101.0..speed = 3.0);
+            ..width = 200.0 .. height = 101.0..speedX = 3.0);
   om.addItem(new Oxygen()..initialize(10950.0, 0.0));
   om.addItem(new Oxygen()..initialize(11000.0, 0.0));
   om.addItem(new Oxygen()..initialize(11050.0, 0.0));
@@ -404,7 +404,7 @@ void setupLevelThree() {
   om.addBlock(new Block()..initialize(16300.0, 300.0)    // Boulder
         ..width = 120.0 .. height = 100.0);
   om.addBlock(new MovingBlock()..initializeMove(16500.0, 200.0, 16800.0, 200.0) // moving block
-            ..width = 200.0 .. height = 101.0..speed = 3.0);
+            ..width = 200.0 .. height = 101.0..speedX = 3.0);
   om.addItem(new Oxygen()..initialize(16500.0, 100.0));
   om.addItem(new Oxygen()..initialize(16550.0, 100.0));
   om.addItem(new Oxygen()..initialize(16600.0, 100.0));
@@ -414,7 +414,7 @@ void setupLevelThree() {
   om.addItem(new Oxygen()..initialize(16800.0, 100.0));
   
   om.addBlock(new MovingBlock()..initializeMove(16800.0, 400.0, 17200.0, 400.0) // moving block
-            ..width = 200.0 .. height = 101.0..speed = 4.0);
+            ..width = 200.0 .. height = 101.0..speedX = 4.0);
   om.addItem(new Oxygen()..initialize(16900.0, 300.0));
   om.addItem(new Oxygen()..initialize(16950.0, 300.0));
   om.addItem(new Oxygen()..initialize(17000.0, 300.0));
@@ -430,7 +430,7 @@ void setupLevelThree() {
   
   // screen 14
   MovingBlock mBlock = new MovingBlock()..initializeMove(18100.0, 400.0, 18500.0, 400.0) // moving block
-  ..width = 400.0 .. height = 101.0..speed = 3.0;
+  ..width = 400.0 .. height = 101.0..speedX = 3.0;
   
   //om.addBlock(new MovingBlock()..initializeMove(18100.0, 400.0, 18500.0, 400.0) // moving block
     //        ..width = 400.0 .. height = 101.0..speed = 2.0);
