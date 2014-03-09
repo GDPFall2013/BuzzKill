@@ -5,13 +5,12 @@ class MainMenu extends GameObject{
   Input input;
   SpriteSheet sprite;
   SpriteSheet instructions;
+  SpriteSheet selectInstructions;
   double x;
   double y;
   double width;
   double height;
-  
-  double xx;
-  double yy;
+
   
   int i =0;
   
@@ -33,17 +32,16 @@ class MainMenu extends GameObject{
     playGame = true;
     sprite = new SpriteSheet("./content/menu.png",spritex,spritey,150,196);
     instructions = new SpriteSheet("./content/instructions.png",0,0,258,114);
-    
-    xx = 750.0;
-    yy = 400.0;
+    selectInstructions = new SpriteSheet("./content/enter-instructions.png",0,0,258,114);
   }
 
   
   draw(){
     sprite.drawOnPositionNormal(x-this.width/2, y-this.height/2, 150.0 , 196.0);
     
-    
-    instructions.drawOnPosition(xx-258.0/2, yy-114.0/2, 258.0 , 114.0);
+
+    instructions.drawOnPosition(camera.x+700, camera.y+350, 258.0 , 114.0);
+    selectInstructions.drawOnPosition(camera.x+850, camera.y+350, 258.0 , 114.0);
   }
   
   

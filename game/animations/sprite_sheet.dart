@@ -9,8 +9,8 @@ class SpriteSheet {
 
   int spritex;
   num spritey;
-  int _framew;
-  int _frameh;  
+  num _framew;
+  num _frameh;  
   num scaledw;
   num scaledh;
   String _imgurl = "";

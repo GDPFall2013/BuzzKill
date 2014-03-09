@@ -36,7 +36,7 @@ class CollisionSystem
             if(enemy.TYPE == "BOSS"){
               boss = true;
             }
-            player.injureBuzz (enemy.injure(),boss);  
+            player.injureBuzz (enemy.injure().round().toDouble(),boss);  
             
           }
       }
@@ -98,11 +98,14 @@ class CollisionSystem
          if(trigger.y == trigger.originalY){
          trigger.y += 20;
          }
+         trigger.onTrigger = true;
       }
        
        else if(trigger.y != trigger.originalY){
          trigger.y -=20;
+         trigger.onTrigger = false;
        }
+
       }
    }
      

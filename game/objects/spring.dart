@@ -38,6 +38,7 @@ class Spring extends Block {
       //Game.instance.player.x += 1;
       Game.instance.player.SPRING_JUMP = true;
       jump = true;
+      SoundManager.instance.playSound(SoundManager.enumSoundSpring);
       }
       
       if(repeat < 20){
@@ -60,9 +61,9 @@ class Spring extends Block {
     
     if(movingBlock != null){
       if(movingBlock.goingBack){
-              this.x -= movingBlock.speed;}
+              this.x -= movingBlock.speedX;}
              else{
-               this.x += movingBlock.speed;
+               this.x += movingBlock.speedX;
              }
     }
     

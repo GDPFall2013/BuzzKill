@@ -10,6 +10,7 @@ class Trigger extends GameObject {
   Block bossFloor;
   Enemy boss;
   Block floorObstacle;
+  bool onTrigger = false;
   
   var img = new ImageElement();
   
@@ -34,6 +35,13 @@ class Trigger extends GameObject {
 
   draw() {
       trigger.drawOnPosition(x-this.width/2, y-this.height/2, 120.0 , 20.0);   
+      
+      if(!onTrigger){
+        floorObstacle.triggerFall = false;
+      }
+      else{
+        floorObstacle.triggerFall = true;
+      }
   }
   
   //collapse objects when Buzz stands on trigger

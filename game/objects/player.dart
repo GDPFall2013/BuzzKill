@@ -17,7 +17,7 @@ class Player extends GameObject{
   Block movingBlockk;
   
   double velocity_y = 0.0;
-  double accel = 1.15;          // Old value was 15.0
+  double accel = 0.8;          // Old value was 15.0 (this was before multiplying by dt)
   double jumpVelocity = 20.0;  // Old Value was 25.0
   double springJumpVelocity = 30.0;
   SpriteSheet sprite;
@@ -31,7 +31,7 @@ class Player extends GameObject{
   double invincibilityTimer = 0.0;
   bool blink = false;
   
-  double playerStartX = 0.0; //14500.0;  //TODO: This should be moved to level object later
+  double playerStartX = 13200.0; //14500.0;  //TODO: This should be moved to level object later
   double playerStartY = -120.0; 
   double originalX;
   
@@ -129,7 +129,7 @@ class Player extends GameObject{
           if(!JUMPING){
            SoundManager.instance.playSound(SoundManager.enumSoundJump);
            JUMPING = true;
-           velocity_y = jumpVelocity;
+           velocity_y = jumpVelocity * Globals.jumpVelocity;
           }
        }
        
@@ -176,10 +176,10 @@ class Player extends GameObject{
 
          //Gravity
          if(velocity_y > - 130.0){
-            velocity_y = velocity_y - accel;
+            velocity_y = velocity_y - accel* (dt);
             y = y - velocity_y * dt;
             
-            if(LOOK_RIGHT && input.isDown(KeyCode.RIGHT)){
+            if(LOOK_RIGHT && input.isDown(KeyCode.RIGHT) || input.controllerAxesRight){
               if(SPRING_INAIR){
                 movePlayer (1.0, 5 * dt);
               }
@@ -187,7 +187,7 @@ class Player extends GameObject{
                 movePlayer (1.0, 1 * dt);
               }
             }
-            else if(LOOK_LEFT && input.isDown(KeyCode.LEFT)){
+            else if(LOOK_LEFT && input.isDown(KeyCode.LEFT) || input.controllerAxesLeft){
             movePlayer(1.0, -1 * dt);
               if(SPRING_INAIR){
                 movePlayer (1.0, -5 * dt);
@@ -205,6 +205,7 @@ class Player extends GameObject{
             && state != stateEnumDead) {
           Game.lives -= 1;
           state = stateEnumDead;
+          SoundManager.instance.playSound(SoundManager.enumSoundDeath);
           ATTACKED = false;
           if (Game.lives <= 0) {
            Game.instance.gameOver();
@@ -254,41 +255,92 @@ class Player extends GameObject{
          this.x += direction * amount;
        for (Block block in ObjectManager.instance.blockList) {
          if (CollisionSystem.instance.checkForCollision(this, block)){
+           
+           if(block.isObstacle && block.still){
            this.x -= direction * amount;   //Undo the movement
-           return;
+           //return;
+           }
+           
+           //if blockObstacle is falling, Undo the movement
+           if(block.isObstacle && block.triggerFall){
+             this.x -= direction * amount;          
+           }
+           
+           //if blockObstacle is going back up, Undo the movement
+           else if(block.isObstacle && block.backUp && (this.x<(block.x-block.width/2)-19 || this.x>(block.x+(block.width/2)+19.5))){
+             this.x -= direction * amount;  
+           }
+           
+           //running against regular block
+           else if(!block.isObstacle){
+             this.x -= direction * amount;   //Undo the movement
+           }
          }
          
        }
        }
    }
      
-   movePlayerWithBlock(double direction, double amount, MovingBlock block){
+   movePlayerWithBlock(double direction, double amount, Block block){
 
      if(WALKING){     
        if(LOOK_RIGHT){
          if(block.goingBack){
            this.x += direction * amount;
+           this.y += block.speedY;
          }
          else{
            this.x += direction * amount;
+           this.y += block.speedY;
          }
        }
+       
        else if(LOOK_LEFT){
          if(block.goingBack){
-           this.x += direction * amount- (block.speed/2);
+           if(block.vertical){
+            this.x += direction * amount - (2);
+           }
+           else{
+            this.x += direction * amount- (block.speedX/2);
+           }
+           
+           this.y += block.speedY;
          }
+         
          else{
-          this.x += direction * amount - (block.speed);
+           if(block.vertical){
+             this.x += direction * amount - (2);
+           }
+           else{
+            this.x += direction * amount - (block.speedX);
+           }
+          this.y += block.speedY;
          }
        }
      }
     
      else{
-       if(block.goingBack){
-        this.x -= block.speed;}
-       else{
-         this.x += block.speed;
+       
+       if(block.diagonal){
+         if(block.goingBack){
+          this.x += block.speedX;
+          this.y -= block.speedY;}
+         else{
+          this.x -= block.speedX;
+          this.y += block.speedY;
+         }
        }
+       
+       else{
+         if(block.goingBack){
+          this.x -= block.speedX;
+          this.y -= block.speedY;}
+         else{
+          this.x += block.speedX;
+          this.y += block.speedY;
+          }
+       }
+       
      }
      
    }

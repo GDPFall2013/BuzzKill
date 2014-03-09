@@ -57,7 +57,7 @@ void setupLevelTwo() {
   om.addItem(new Oxygen()..initialize(1100.0, 290.0));
   om.addItem(new Oxygen()..initialize(1150.0, 290.0));
   om.addItem(new Oxygen()..initialize(1200.0, 290.0));
-  om.addEnemy(new Bullet()..initialize(2000.0, 330.0));
+  //om.addEnemy(new Bullet()..initialize(2000.0, 330.0));
   om.addEnemy(new Droid()..initialize(2000.0, 305.0));
   //om.addEnemy(new Spike()..initialize(1900.0, 340.0)
   //    ..width = 100.0 .. height = 20.0);
@@ -248,18 +248,18 @@ void setupLevelTwo() {
   
   
   //boss
-  om.addBlock(new Block()..initialize(13445.0, 420.0) // trigger floor
-        ..width = 310.0 .. height = 140.0);
+  om.addBlock(new Block()..initialize(13545.0, 420.0) // trigger floor
+        ..width = 520.0 .. height = 140.0);
   Trigger trigger = new Trigger()..initialize(13530.0, 340.0)
   ..width = 120.0 .. height = 20.0;
   
   
-  Enemy boss = (new Gorilla()..initialize(13100.0, 290.0));
+  Enemy boss = (new Gorilla()..initialize(13100.0, 300.0));
   om.addEnemy(boss);
   
   
   
-  Block floorObstacle = new Block()..initialize(13700.0, 0.0) // obstacle
+  Block floorObstacle = new Block()..initialize(13700.0, 200.0) // obstacle
   ..width = 200.0 .. height = 1000.0 ..isObstacle = true;
   om.addBlock(floorObstacle);
   

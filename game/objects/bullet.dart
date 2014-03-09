@@ -18,7 +18,7 @@ class Bullet extends Enemy
 
   double initialPos;
   double endPos;
-  bool goingBack = false;
+  int direction = 1;
   
   initialize(double x, double y) 
   {
@@ -39,43 +39,55 @@ class Bullet extends Enemy
   update (double dt) 
   {
     speed = 1.2 * dt;
+    x = x + speed * direction; 
     
-   //move bullet back and forth
-    if (goingBack == false) 
-    {
-      if(x >= endPos)
-      {
-        x = x - speed;   
-      }
-      else
-      {
-        goingBack = true;
-        sprite.spritey = 1160;
-      }    
-    } 
-    else
-    {
-      if(x < initialPos)
-      {
-        x = x + speed;
-      }
-      else
-      {
-         goingBack = false;
-         sprite.spritey = 1040;
-       
-      }
-    }
+    
+    
+//   //move bullet back and forth
+//    if (goingBack == false) 
+//    {
+//      if(x >= endPos)
+//      {
+//        x = x - speed;   
+//      }
+//      else
+//      {
+//        goingBack = true;
+//        sprite.spritey = 1160;
+//      }    
+//    } 
+//    else
+//    {
+//      if(x < initialPos)
+//      {
+//        x = x + speed;
+//      }
+//      else
+//      {
+//         goingBack = false;
+//         sprite.spritey = 1040;
+//       
+//      }
+//    }
     sprite.update(dt);  
   } 
   
+  void setDirection(int direction) {
+    this.direction = direction;
+    if (direction == 1) {
+      sprite.spritey = 1160;
+    } else {
+      sprite.spritey = 1040;
+    }
+  }
+  
   draw()
   {
-    sprite.drawOnPosition(x-width/2 - imgOffsetX, y-height/2 + imgOffsetY, width , height);
+     sprite.drawOnPosition(x-width/2 - imgOffsetX, y-height/2 + imgOffsetY, width , height);
   }
   
    double injure() 
    {
-     return 10.0;
+     return 10.0 * Globals.enemyDamage;
    }
 }
