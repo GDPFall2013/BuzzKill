@@ -36,7 +36,7 @@ class CollisionSystem
             if(enemy.TYPE == "BOSS"){
               boss = true;
             }
-            player.injureBuzz (enemy.injure(),boss);  
+            player.injureBuzz (enemy.injure().round().toDouble(),boss);  
             
           }
       }

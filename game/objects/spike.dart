@@ -41,7 +41,7 @@ class Spike extends Enemy {
   }
   
   double injure() {
-    return 20.0;
+    return 20.0 * Globals.spikeDamage;
   }
   
 }

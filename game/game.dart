@@ -16,6 +16,7 @@ import 'dart:web_audio';
 part 'input_manager.dart';
 part 'object_manager.dart';
 part 'audio/sound_manager.dart';
+part 'globals.dart';
 
 part 'objects/game_object.dart';
 part 'objects/block.dart';
@@ -80,7 +81,7 @@ MainMenu menu = new MainMenu();
 InGameMenu gameMenu = new InGameMenu();
 Controls controls = new Controls();
 Options options = new Options();
-LevelTransition transition = new LevelTransition();
+LevelTransition transition;
 
 static double oxygen = 100.0; 
 Stopwatch oxygenTimer = new Stopwatch();
@@ -115,7 +116,7 @@ double debuggingDisplayTime = 0.0;
 double numberOfUpdates = 0.0;
 double numberOfRenders = 0.0;
 
-LevelManager levelManager = new LevelManager();
+LevelManager levelManager;
 
 // lastFrame is a fix on one keyboard button being referenced twice for a single push
 int _lastFrame;
@@ -125,7 +126,10 @@ Initialize() {
   SoundManager sm = new SoundManager();
   CollisionSystem cs = new CollisionSystem();
   ObjectManager objectManager = new ObjectManager();
-  //Input input = new Input();
+  levelManager = new LevelManager();
+  transition = new LevelTransition();
+  Globals.setNormalDifficulty();
+
   
   gameLoop.onUpdate = ((gameLoop) {
     // This if Statement is a temporary fix for an issue with Game Loop
@@ -135,7 +139,7 @@ Initialize() {
     } else {
       _lastFrame = gameLoop.frame;
     }
-    update(gameLoop.dt * 100);});
+    update(gameLoop.dt * 100 * Globals.gameSpeed);});
   gameLoop.onRender = ((gameLoop) {draw();});
   gameLoop.start();
   
@@ -193,17 +197,23 @@ void update(double dt) {
     }
     
     for (GameObject go in ObjectManager.instance.goList) {
-      go.update(dt);
+      double goRightEdge = go.x + go.width/2;
+      double goLeftEdge = go.x - go.width/2;
+      if (goRightEdge > (camera.x - (viewportWidth / Camera.instance.screenRatio))  && 
+          goLeftEdge < (camera.x + (viewportWidth / Camera.instance.screenRatio))) {
+        go.update(dt);
+      }
     }
     
     //Drain Oxygen
     if(player.ATTACKED){
       pauseOxygenDrain();
     }
-    else if (oxygenTimer.elapsedMilliseconds > 250 + lastOxygenTick && currentLevel>=LevelManager.enumLevelOne &&
+    else if (oxygenTimer.elapsedMilliseconds > Globals.oxygenLossRate + lastOxygenTick && currentLevel>=LevelManager.enumLevelOne &&
         oxygen >0){
-      lastOxygenTick += 250;
-      oxygen -= 0;
+      lastOxygenTick += Globals.oxygenLossRate;
+      oxygen -= 1;
+
     }
     
     ObjectManager.instance.removeDeadObjects();

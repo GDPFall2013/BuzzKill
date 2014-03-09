@@ -29,6 +29,10 @@ class SoundManager {
   AudioBuffer _oxygenClip;
   AudioBuffer _shipItemClip;
   AudioBuffer _injureClip;
+  AudioBuffer _deathClip;
+  AudioBuffer _shootClip;
+  AudioBuffer _gsmashClip;
+  AudioBuffer _springClip;
   
   AudioBuffer _mainMenuMusicClip;
   AudioBuffer _levelOneMusicClip;
@@ -39,6 +43,10 @@ class SoundManager {
   static final int enumSoundOxygen = 2;
   static final int enumSoundShipItem = 3;
   static final int enumSoundInjure = 4;
+  static final int enumSoundDeath = 5;
+  static final int enumSoundShoot = 6;
+  static final int enumSoundGSmash = 7;
+  static final int enumSoundSpring = 8;
   
   static final int musicMainMenu = 1;
   static final int musicLevelOne = 2;
@@ -94,6 +102,34 @@ class SoundManager {
         ac.decodeAudioData(request.response)
           .then((AudioBuffer buffer) { 
             _injureClip = buffer;
+          });
+      });
+    HttpRequest.request('content/Sound Files/Death.wav', responseType: 'arraybuffer')
+      .then((HttpRequest request) {
+        ac.decodeAudioData(request.response)
+          .then((AudioBuffer buffer) { 
+            _deathClip = buffer;
+          });
+      });
+    HttpRequest.request('content/Sound Files/Shoot.wav', responseType: 'arraybuffer')
+      .then((HttpRequest request) {
+        ac.decodeAudioData(request.response)
+          .then((AudioBuffer buffer) { 
+            _shootClip = buffer;
+          });
+      });
+    HttpRequest.request('content/Sound Files/GSmash.wav', responseType: 'arraybuffer')
+      .then((HttpRequest request) {
+        ac.decodeAudioData(request.response)
+          .then((AudioBuffer buffer) { 
+            _gsmashClip = buffer;
+          });
+      });
+    HttpRequest.request('content/Sound Files/Spring.wav', responseType: 'arraybuffer')
+      .then((HttpRequest request) {
+        ac.decodeAudioData(request.response)
+          .then((AudioBuffer buffer) { 
+            _springClip = buffer;
           });
       });
   }
@@ -220,6 +256,22 @@ class SoundManager {
           break;
         case 4: 
           source.buffer = _injureClip;
+          source.start(0);
+          break;
+        case 5: 
+          source.buffer = _deathClip;
+          source.start(0);
+          break;
+        case 6: 
+          source.buffer = _shootClip;
+          source.start(0);
+          break;
+        case 7: 
+          source.buffer = _gsmashClip;
+          source.start(0);
+          break;
+        case 8: 
+          source.buffer = _springClip;
           source.start(0);
           break;
       }

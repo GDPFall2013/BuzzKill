@@ -132,6 +132,8 @@ class Gorilla extends Enemy{
   
    double injure() {
     attack = true;
-    return 10.0;
+    gameLoop.addTimer((reload) => SoundManager.instance.playSound(SoundManager.enumSoundGSmash), 0.5);
+    ;
+    return 10.0 * Globals.enemyDamage;
    }
 }
