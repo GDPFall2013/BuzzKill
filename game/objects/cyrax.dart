@@ -1,6 +1,6 @@
 part of gdp;
 
-class cyrax extends Enemy{
+class Cyrax extends Enemy{
   
   ImageElement img = new ImageElement();
 

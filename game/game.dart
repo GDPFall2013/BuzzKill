@@ -37,7 +37,6 @@ part 'objects/moving_block.dart';
 part 'objects/cyrax.dart';
 part 'objects/clone.dart';
 part 'objects/spring.dart';
-part 'objects/cyrax.dart';
 part 'objects/vertical_block.dart';
 part 'objects/diagonal_block.dart';
 
@@ -121,6 +120,9 @@ double numberOfRenders = 0.0;
 
 LevelManager levelManager;
 
+// lastFrame is a fix on one keyboard button being referenced twice for a single push
+ int _lastFrame;
+ 
 Initialize() {
   buildCanvas();
   SoundManager sm = new SoundManager();
@@ -131,9 +133,9 @@ Initialize() {
   Globals.setNormalDifficulty();
 
   
-<<<<<<< HEAD
-  gameLoop.onUpdate = ((gameLoop) {update(gameLoop.dt * 100);});
-=======
+
+  //gameLoop.onUpdate = ((gameLoop) {update(gameLoop.dt * 100);});
+
   gameLoop.onUpdate = ((gameLoop) {
     // This if Statement is a temporary fix for an issue with Game Loop
     // It was sometimes causing 1 keypress to be registered multiple times
@@ -143,7 +145,7 @@ Initialize() {
       _lastFrame = gameLoop.frame;
     }
     update(gameLoop.dt * 100 * Globals.gameSpeed);});
->>>>>>> fdb9613d4614f00e77fb1e637c8457324df5c85b
+
   gameLoop.onRender = ((gameLoop) {draw();});
   gameLoop.start();
   

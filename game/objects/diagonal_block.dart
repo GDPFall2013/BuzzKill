@@ -20,9 +20,9 @@ class DiagonalBlock extends Block {
   double speedY = 1.0;
   double speedX = 2.0;
   SpriteSheet boulder = new SpriteSheet("./content/gameitems.png",50,0,120,100);
-  bool once = false; 
   bool goingBack = false;
   bool diagonal = true;
+  bool upToDown = false;
   
   initializeMove(double startX, double startY, double endX, double endY) {
     super.initialize(startX, startY);
@@ -32,6 +32,7 @@ class DiagonalBlock extends Block {
     this.endX = endX;
     this.endY = endY;
     moving = true;
+
   }
   
 
@@ -48,8 +49,9 @@ class DiagonalBlock extends Block {
       ctx.fill();
       normContext.restore();
      */
-    
-      boulder.drawOnPosition(x-this.width/2, y-this.height/2, width , height);  
+    boulder.scaledh = this.height;
+    boulder.scaledw = this.width;
+    boulder.drawOnPosition(x-this.width/2, y-this.height/2, width , height);  
       
     
   }
@@ -57,7 +59,32 @@ class DiagonalBlock extends Block {
   update(double dt){
     //print('update');
     //double speed = 1.5 * dt;
+    if(upToDown){
+      if (goingBack == false) {
+            if(y < endY){
+              y = y + speedY;
+              x = x + speedX;
+            }
+            else{
+              goingBack = true;
+              //sprite.spritey = 50;
+            }
+          } 
+          else {
+            if(y>initialY){
+              y = y - speedY;
+              x = x - speedX;
+            }
+            else{
+              goingBack = false;
+              //sprite.spritey = 0;
+            }
+          }
+    }
     
+    
+    
+    else{
     if (goingBack == false) {
       if(y < endY){
         y = y + speedY;
@@ -78,6 +105,7 @@ class DiagonalBlock extends Block {
         //sprite.spritey = 0;
       }
     }
-
+    }
+    
   }
 }

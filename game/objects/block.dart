@@ -19,6 +19,7 @@ class Block extends GameObject {
   double speedY = 0.0;
   bool vertical = false;
   bool diagonal = false;
+  bool upToDown = false;
   bool still = true;
   bool backUp = false;
   
@@ -54,7 +55,7 @@ class Block extends GameObject {
         backUp = false;
       }
       
-      else if(!triggerFall && isObstacle && y>=200){
+      else if(!triggerFall && isObstacle && y>=100){
         
         y = y - 5;
                 //height = height - 10.5;

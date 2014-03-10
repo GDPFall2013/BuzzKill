@@ -31,7 +31,7 @@ class Player extends GameObject{
   double invincibilityTimer = 0.0;
   bool blink = false;
   
-  double playerStartX = 13200.0; //14500.0;  //TODO: This should be moved to level object later
+  double playerStartX = 9100.0; //14500.0;  //TODO: This should be moved to level object later
   double playerStartY = -120.0; 
   double originalX;
   
@@ -322,12 +322,25 @@ class Player extends GameObject{
      else{
        
        if(block.diagonal){
-         if(block.goingBack){
-          this.x += block.speedX;
-          this.y -= block.speedY;}
+         
+         if(block.upToDown){
+           if(block.goingBack){
+             this.x -= block.speedX;
+             this.y -= block.speedY;}
+           else{
+             this.x += block.speedX;
+             this.y += block.speedY;           
+         }
+         }
+         
          else{
-          this.x -= block.speedX;
-          this.y += block.speedY;
+          if(block.goingBack){
+            this.x += block.speedX;
+            this.y -= block.speedY;}
+          else{
+            this.x -= block.speedX;
+            this.y += block.speedY;
+          }
          }
        }
        
