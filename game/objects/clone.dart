@@ -18,6 +18,10 @@ class clone extends Enemy{
   double endPos;
   bool goingBack = false;
   
+  double lastBullet = 250.0;
+  Bullet bullet;
+  double bulletDelay = 300.0;
+  
   initialize(double x, double y) {
     super.initialize(x, y);
     width = 180.0;
@@ -33,6 +37,12 @@ class clone extends Enemy{
   }
   
   update (double dt) {
+    lastBullet += dt;
+    if (lastBullet > bulletDelay) {
+      lastBullet -= bulletDelay;
+      fire();
+    }
+    
     double speed = 0.4 * dt;
   
     //move aliens back and forth
@@ -64,5 +74,17 @@ class clone extends Enemy{
    double injure() 
    {
     return 10.0;
+   }
+   
+   void fire() {
+     SoundManager.instance.playSound(SoundManager.enumSoundShoot);
+     int direction = 0;
+     if (this.goingBack){
+       direction = 1;
+     } else {
+       direction = -1;
+     }
+     bullet.initialize(this.x + 40 * direction, this.y + 30);
+     bullet.setDirection(direction);
    }
 }
