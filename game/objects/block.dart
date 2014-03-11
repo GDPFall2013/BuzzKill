@@ -41,7 +41,7 @@ class Block extends GameObject {
     else{
       if(triggerFall && isObstacle && y<(850)){
         y = y + 5;
-        print(y);
+        //print(y);
         //height = height - 10.5;
         normContext.save();
         ctx.beginPath();
