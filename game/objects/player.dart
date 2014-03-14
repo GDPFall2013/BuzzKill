@@ -253,6 +253,7 @@ class Player extends GameObject{
        
        else{
          this.x += direction * amount;
+        //undo the movement
        for (Block block in ObjectManager.instance.blockList) {
          if (CollisionSystem.instance.checkForCollision(this, block)){
            
@@ -261,12 +262,12 @@ class Player extends GameObject{
            //return;
            }
            
-           //if blockObstacle is falling, Undo the movement
+           //if blockObstacle is falling and buzz running against it, Undo the movement
            if(block.isObstacle && block.triggerFall){
              this.x -= direction * amount;          
            }
            
-           //if blockObstacle is going back up, Undo the movement
+           //if blockObstacle is going back up and buzz running against it, Undo the movement
            else if(block.isObstacle && block.backUp && (this.x<(block.x-block.width/2)-19 || this.x>(block.x+(block.width/2)+19.5))){
              this.x -= direction * amount;  
            }

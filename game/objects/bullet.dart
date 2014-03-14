@@ -11,7 +11,7 @@ class Bullet extends Enemy
   int spriteXInitial = 0;
   int spriteYInitial = 1040;
   int spriteWidth = 60;
-  int spriteHeight = 110;
+  int spriteHeight = 50;
   
   double imgOffsetX = 8.0;
   double imgOffsetY = -7.0;

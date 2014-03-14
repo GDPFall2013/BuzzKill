@@ -30,10 +30,12 @@ class clone extends Enemy{
         spriteXInitial,spriteYInitial,spriteWidth,spriteHeight);
     
     initialPos = x;
-    endPos = x-600.0;
+    endPos = x-400.0;
     
     sprite.frameChangeRate = 10.0;
     sprite.numberOfFrames = 8;
+    bullet = new Bullet()..initialize(this.x, this.y);
+    ObjectManager.instance.addEnemy(bullet);
   }
   
   update (double dt) {
@@ -45,6 +47,12 @@ class clone extends Enemy{
     
     double speed = 0.4 * dt;
   
+    if(STATIONARY){
+      sprite.numberOfFrames = 2;
+      sprite.frameChangeRate = 150.0;
+    }
+
+    else{
     //move aliens back and forth
     if (goingBack == false) {
       if(x >= endPos){
@@ -62,6 +70,7 @@ class clone extends Enemy{
         goingBack = false;
         sprite.spritey = 1338;
       }
+    }
     }
     sprite.update(dt);  
   }
@@ -84,7 +93,7 @@ class clone extends Enemy{
      } else {
        direction = -1;
      }
-     bullet.initialize(this.x + 40 * direction, this.y + 30);
+     bullet.initialize(this.x + 40 * direction, this.y + 10);
      bullet.setDirection(direction);
    }
 }

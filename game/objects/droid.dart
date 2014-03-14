@@ -29,7 +29,7 @@ class Droid extends Enemy{
         spriteXInitial,spriteYInitial,spriteWidth,spriteHeight);
     
     initialPos = x;
-    endPos = x-600.0;
+    endPos = x-400.0;
     
     sprite.frameChangeRate = 10.0;
     sprite.numberOfFrames = 8;

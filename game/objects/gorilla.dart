@@ -98,7 +98,7 @@ class Gorilla extends Enemy{
     
     
     //move gorilla back and forth
-    else{
+    else if(!STATIONARY){
     if (goingBack == false) {
       if(x >= endPos){
         x = x - speed;
