@@ -1,6 +1,8 @@
 part of gdp;
 
 void setupLevelTwo() {
+  Game.instance.currentLevel = LevelManager.enumLevelTwo;
+  Globals.setBackground();
   startMusic() {
       SoundManager.instance.setMusic(SoundManager.musicLevelOne);
       SoundManager.instance.startMusic();
@@ -244,7 +246,8 @@ void setupLevelTwo() {
   om.addItem(new Oxygen()..initialize(12600.0, 290.0));
   om.addBlock(new Block()..initialize(12800.0, 300.0) // Boulder
       ..width = 120.0 .. height = 100.0);
-  
+  om.addBlock(new MovingBlock()..initializeMove(12900.0, 100.0, 13100.0, 1000.0) // moving block
+      ..width = 100.0 .. height = 101.0..speedX = 5.0);
   
   
   //boss

@@ -110,6 +110,7 @@ int stateEnumCollected = 10;
 
 bool resetMainMenu = false; //used to reset main menu if prev screen was pause menu
 int state;
+int oxygenCollected;
 
 // variables for Performance testing
 double updatesPerSecond = 0.0;
@@ -155,7 +156,9 @@ Initialize() {
   startLevel = LevelManager.enumMainMenu;
   levelManager.loadLevel(LevelManager.enumMainMenu);
   state = stateEnumMain;
-
+  oxygenCollected = 0;
+  Globals.setBackground();
+  
   if(currentLevel >= LevelManager.enumLevelOne){
     oxygenTimer.start();
   }
@@ -405,7 +408,7 @@ void draw() {
 
     
     //For beta-testing only. Need to change so "You Win" message shows after level 4
-    if(currentLevel < LevelManager.enumLevelTwo){
+    if(currentLevel < LevelManager.enumLevelFour){
       //currentLevel += 1;
       //reloadLevel();
       state = stateEnumTransition;
@@ -444,7 +447,7 @@ void draw() {
     normContext.fillStyle = 'white';
     normContext.font = "normal 30pt calibri";
     normContext.fillText("Buzz didn't make it...", viewportWidth/2 - 120, viewportHeight/2 - 40, 1000);
-    
+    Globals.setBackground();
   }
   
   
@@ -495,6 +498,7 @@ gameOver() {
   gameLoop.addTimer((restart) => restartGame(), 3.0);
   state = stateEnumGameOver;
   oxygenTimer.stop();
+  oxygenCollected = 0;
 }
 
 reloadLevel() {
@@ -507,6 +511,7 @@ reloadLevel() {
     oxygenTimer.start();}
   
   state = stateEnumPlay;
+  oxygenCollected = 0;
 }
 
 restartGame() {
@@ -520,6 +525,8 @@ restartGame() {
   if(currentLevel >= LevelManager.enumLevelOne){
     oxygenTimer.reset(); lastOxygenTick = 0.0;
     oxygenTimer.start();}
+  
+  oxygenCollected = 0;
 }
 
 pauseOxygenDrain(){

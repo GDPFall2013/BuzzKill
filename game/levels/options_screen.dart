@@ -63,9 +63,10 @@ class Options extends GameObject{
       
       
       //level select only shows in main menu
+      /*
      if(Game.instance.currentLevel == LevelManager.enumMainMenu){
       levelSprite.drawOnPositionNormal(94.0, 116.0, 380.0 , 70.0);
-     }
+     }*/
      
       backSprite.drawOnPositionNormal(40.0, 40.0, 380.0 , 70.0);
       
@@ -94,6 +95,7 @@ class Options extends GameObject{
      *****************************  BEGIN BETA TESTING CODE (TO SKIP LEVELS) *******************
      *******************************************************************************************/
     
+    /*
     if(back && input.wasPressed(KeyCode.DOWN) && Game.instance.currentLevel == LevelManager.enumMainMenu){
       levelSprite.spritey = 70;
       back = false;
@@ -189,7 +191,7 @@ class Options extends GameObject{
       levelslc = false;
       back = true;
     }
-
+*/
     /*******************************************************************************************
      ***********************    END BETA TESTING CODE (SKIP LEVELS)    *************************
      *******************************************************************************************/  
@@ -198,7 +200,7 @@ class Options extends GameObject{
     
     /*=======================================================================================================================*/
     /************************************** BEGIN SOUND SELECT **********************************************************/    
-    else if(back && input.wasPressed(KeyCode.DOWN)){
+   /* else */if(back && input.wasPressed(KeyCode.DOWN)){
       unSelectReturn();
       back = false;
       soundslc = true;
@@ -213,6 +215,7 @@ class Options extends GameObject{
     }
     
     // levelslc -> sound **beta/mainmenu**
+   /*
     else if((levelslc && input.wasPressed(KeyCode.DOWN)) || 
             (Game.instance.currentLevel > LevelManager.enumMainMenu && back && input.wasPressed(KeyCode.DOWN))){
      soundslc = true;
@@ -233,10 +236,10 @@ class Options extends GameObject{
             soundOffHover();
           }      
    }
-
+*/
     
     // sound -> levelslc **beta/mainmenu**
-    else if(soundslc && input.wasPressed(KeyCode.UP) && Game.instance.currentLevel == LevelManager.enumMainMenu){
+  /*  else if(soundslc && input.wasPressed(KeyCode.UP) && Game.instance.currentLevel == LevelManager.enumMainMenu){
       soundslc = false; back = false;
       levelslc = true;
       if(soundON){
@@ -258,9 +261,11 @@ class Options extends GameObject{
       //selectReturn();
       
     }
-    
+    */
+   
     // sound -> return
-    else if(soundslc && input.wasPressed(KeyCode.UP) && Game.instance.currentLevel > LevelManager.enumMainMenu){
+    else if(soundslc && input.wasPressed(KeyCode.UP)){
+        //&& Game.instance.currentLevel > LevelManager.enumMainMenu){
       soundslc = false;
       levelslc = false;
       back = true;

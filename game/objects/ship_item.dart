@@ -9,7 +9,7 @@ class ShipItem extends Item{
   SpriteSheet sprite;
   //ImageElement img = new Element.tag("img");
   SpriteSheet panel;
-  
+  SpriteSheet oxygenSprite; 
   SpriteSheet levelSprite;
   
   int spriteXInitial = 0;
@@ -19,6 +19,7 @@ class ShipItem extends Item{
   num spriteFrames = 6;
   Stopwatch timer = new Stopwatch();
   
+  int oxygenCounter;
   
   bool glow=true;
   bool collected = false;
@@ -39,6 +40,10 @@ class ShipItem extends Item{
     
     levelSprite = new SpriteSheet("./content/panel_level.png",
             0,0,491,311);
+    
+    oxygenSprite = new SpriteSheet("./content/gameitems.png",0,0,50,50);
+    
+    
     levelSprite.numberOfFrames = 1;
     //img.src = "./content/gameitems.png";
     
@@ -50,7 +55,7 @@ class ShipItem extends Item{
     
     panel = new SpriteSheet("./content/panel.png",0,0,491,311);
     panel.numberOfFrames = 1;
-    
+    oxygenCounter = 0;
     
     
     if(Game.instance.currentLevel == LevelManager.enumLevelOne){
@@ -67,6 +72,7 @@ class ShipItem extends Item{
   
   update(double dt) {
     //Inanimate object, does nothing
+    
   }
   
   
@@ -121,9 +127,9 @@ class ShipItem extends Item{
         levelSprite.drawOnPosition(xx+300, yy-200, 491.0 , 311.0); 
         timer.start();
 
-             if(this.x >= xx+400 || this.y > -60 || this.y < -65){
-               if(this.x>= xx+400){
-             this.x -= 1;}
+             if(this.x >= camera.x+475 || this.y > -60 || this.y<-65){
+               if(this.x>= camera.x+475){
+             this.x -= 3.5;}
              if(this.y > -60){
              this.y -= 4.5;
              }
@@ -135,16 +141,16 @@ class ShipItem extends Item{
              initialX += 5;}
              else{
                if(Game.instance.currentLevel == LevelManager.enumLevelOne){
-               levelSprite.spritex = 491;}
+               levelSprite.spritex = 491; drawOxygenCollected();}
                else if(Game.instance.currentLevel == LevelManager.enumLevelTwo){
-               levelSprite.spritex = 982;}
+               levelSprite.spritex = 982; drawOxygenCollected();}
                else if(Game.instance.currentLevel == LevelManager.enumLevelThree){
-               levelSprite.spritex = 1473;}
+               levelSprite.spritex = 1473; drawOxygenCollected();}
                else if(Game.instance.currentLevel == LevelManager.enumLevelFour){
-               levelSprite.spritex = 1964;}
+               levelSprite.spritex = 1964; drawOxygenCollected();}
              }
              
-             if(timer.elapsedMilliseconds >= 4000){
+             if(timer.elapsedMilliseconds >= 5000){
                Game.instance.win();
              }
       }
@@ -198,9 +204,9 @@ class ShipItem extends Item{
                 timer.start();
                 
                      //move space item
-                     if(this.x >= xx+400 || this.y > -60 || this.y<-65){ 
-                       if(this.x>= xx+400){
-                     this.x -= 1;}
+                     if(this.x >= camera.x+475 || this.y > -60 || this.y<-65){ 
+                       if(this.x>= camera.x+475){
+                     this.x -= 3.5;}
                      if(this.y > -60){
                         this.y -= 4.5;
                      }
@@ -215,17 +221,17 @@ class ShipItem extends Item{
                      //increment space items collected once moving space item is stationary
                      else{
                        if(Game.instance.currentLevel == LevelManager.enumLevelOne){
-                       levelSprite.spritex = 491;}
+                       levelSprite.spritex = 491; drawOxygenCollected();}
                        else if(Game.instance.currentLevel == LevelManager.enumLevelTwo){
-                       levelSprite.spritex = 982;}
+                       levelSprite.spritex = 982; drawOxygenCollected();}
                        else if(Game.instance.currentLevel == LevelManager.enumLevelThree){
-                       levelSprite.spritex = 1473;}
+                       levelSprite.spritex = 1473; drawOxygenCollected();}
                        else if(Game.instance.currentLevel == LevelManager.enumLevelFour){
-                       levelSprite.spritex = 1964;}                       
+                       levelSprite.spritex = 1964; drawOxygenCollected();}                       
                      }
                      
                      //timer, after 3 seconds move to next level transition
-                    if(timer.elapsedMilliseconds >= 4000){
+                    if(timer.elapsedMilliseconds >= 5000){
                        Game.instance.win();                     
                        }
               }
@@ -249,5 +255,19 @@ class ShipItem extends Item{
     SoundManager.instance.playSound(SoundManager.enumSoundShipItem);
     collected = true;
     Game.instance.collected();
+  }
+  
+  
+  drawOxygenCollected(){
+    
+    if(oxygenCounter<Game.instance.oxygenCollected){
+      oxygenCounter++;
+    }
+    
+    int o = Game.instance.oxygenCollected;
+    oxygenSprite.drawOnPosition(camera.x+500, camera.y+25, width , height);
+    normContext.fillStyle = 'white';
+    normContext.font = "normal 15pt calibri";
+    normContext.fillText("x $oxygenCounter", viewportWidth/2 + 80, viewportHeight/2 + 30 , 1000);
   }
 }

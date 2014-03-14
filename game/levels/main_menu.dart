@@ -33,10 +33,12 @@ class MainMenu extends GameObject{
     sprite = new SpriteSheet("./content/menu.png",spritex,spritey,150,196);
     instructions = new SpriteSheet("./content/instructions.png",0,0,258,114);
     selectInstructions = new SpriteSheet("./content/enter-instructions.png",0,0,258,114);
+    //query("#canvas").style.backgroundImage = "url(content/background.jpg)";
   }
 
   
   draw(){
+    //print(Game.instance.currentLevel);
     sprite.drawOnPositionNormal(x-this.width/2, y-this.height/2, 150.0 , 196.0);
     
 

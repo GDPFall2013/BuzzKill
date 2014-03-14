@@ -44,4 +44,23 @@ class Globals{
     gameSpeed = 1.5;
     jumpVelocity = 1.02;
   }
+  
+  
+  static void setBackground(){
+    if(Game.instance.currentLevel == LevelManager.enumMainMenu || Game.instance.state == Game.instance.stateEnumMain){
+      query("#canvas").style.backgroundImage = "url(content/background.jpg)";
+    }
+    else if(Game.instance.currentLevel == LevelManager.enumLevelOne){
+      query("#canvas").style.backgroundImage = "url(content/background.jpg)";
+    }
+    else if(Game.instance.currentLevel == LevelManager.enumLevelTwo){
+      query("#canvas").style.backgroundImage = "url(content/backgrounds/level2.jpg)";
+    }
+    else if(Game.instance.currentLevel == LevelManager.enumLevelThree){
+      query("#canvas").style.backgroundImage = "url(content/backgrounds/level3.png)";
+    }
+    else if(Game.instance.currentLevel == LevelManager.enumLevelFour){
+      query("#canvas").style.backgroundImage = "url(content/backgrounds/level4.jpg)";
+    }
+  }
 }

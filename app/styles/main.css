@@ -20,6 +20,6 @@ body {
 #canvas {
   height: 100%;
   margin: auto;
-  background: #0d2648 url("../content/background.jpg") repeat-x bottom left; 
+  background: #0d2648 repeat-x bottom left; 
   background-size:100%;
 }

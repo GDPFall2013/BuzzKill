@@ -32,7 +32,7 @@ class Player extends GameObject{
   bool blink = false;
   
   double playerStartX = 0.0; //14500.0;  //TODO: This should be moved to level object later
-  double playerStartY = -120.0; 
+  double playerStartY = 0.0; 
   double originalX;
   
   double imgXOffset = 16.0;

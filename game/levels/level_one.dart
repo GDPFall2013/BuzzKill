@@ -1,7 +1,8 @@
 part of gdp;
 
 void setupLevelOne() {
-  
+  Game.instance.currentLevel = LevelManager.enumLevelOne;
+  Globals.setBackground();
   startMusic() {
       SoundManager.instance.setMusic(SoundManager.musicLevelOne);
       SoundManager.instance.startMusic();

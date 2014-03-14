@@ -19,13 +19,16 @@ class LevelManager {
         setupMainMenu();
         break;
       case 1:  
-        setupLevelTwo();
+        setupLevelThree();
         break;  
       case 2:
         setupLevelTwo();
         break;
       case 3:
         setupLevelThree();
+        break;
+      case 4:
+        setupLevelFour();
         //mainMenu menu = new mainMenu();
         //Player player = new Player();
         break;
