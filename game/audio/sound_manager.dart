@@ -33,6 +33,10 @@ class SoundManager {
   AudioBuffer _shootClip;
   AudioBuffer _gsmashClip;
   AudioBuffer _springClip;
+  AudioBuffer _cyraxNetClip;
+  AudioBuffer _cyraxShurikenClip;
+  AudioBuffer _cyraxMiniShurikenClip;
+  
   
   AudioBuffer _mainMenuMusicClip;
   AudioBuffer _levelOneMusicClip;
@@ -47,6 +51,9 @@ class SoundManager {
   static final int enumSoundShoot = 6;
   static final int enumSoundGSmash = 7;
   static final int enumSoundSpring = 8;
+  static final int enumSoundCyraxNet = 9;
+  static final int enumSoundCyraxShuriken = 10;
+  static final int enumSoundCyraxMiniShuriken = 11;
   
   static final int musicMainMenu = 1;
   static final int musicLevelOne = 2;
@@ -130,6 +137,27 @@ class SoundManager {
         ac.decodeAudioData(request.response)
           .then((AudioBuffer buffer) { 
             _springClip = buffer;
+          });
+      });
+    HttpRequest.request('content/Sound Files/CyraxNet.wav', responseType: 'arraybuffer')
+      .then((HttpRequest request) {
+        ac.decodeAudioData(request.response)
+          .then((AudioBuffer buffer) { 
+            _cyraxNetClip = buffer;
+          });
+      });
+    HttpRequest.request('content/Sound Files/CyraxShuriken.wav', responseType: 'arraybuffer')
+      .then((HttpRequest request) {
+        ac.decodeAudioData(request.response)
+          .then((AudioBuffer buffer) { 
+            _cyraxShurikenClip = buffer;
+          });
+      });
+    HttpRequest.request('content/Sound Files/CyraxMiniShuriken.wav', responseType: 'arraybuffer')
+      .then((HttpRequest request) {
+        ac.decodeAudioData(request.response)
+          .then((AudioBuffer buffer) { 
+            _cyraxMiniShurikenClip = buffer;
           });
       });
   }
@@ -272,6 +300,18 @@ class SoundManager {
           break;
         case 8: 
           source.buffer = _springClip;
+          source.start(0);
+          break;
+        case 9: 
+          source.buffer = _cyraxNetClip;
+          source.start(0);
+          break;
+        case 10: 
+          source.buffer = _cyraxShurikenClip;
+          source.start(0);
+          break;
+        case 11: 
+          source.buffer = _cyraxMiniShurikenClip;
           source.start(0);
           break;
       }

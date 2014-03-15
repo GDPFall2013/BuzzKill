@@ -223,13 +223,46 @@ class Cyrax extends Enemy{
     }
   }
   
-  
-  
    double injure() 
-   
    {
      attack = true;
      
      return 10.0;
+   }
+   
+   void fireNet() {
+     SoundManager.instance.playSound(SoundManager.enumSoundCyraxNet);
+     int direction = 0;
+     if (this.goingBack){
+       direction = 1;
+     } else {
+       direction = -1;
+     }
+   //  bullet.initialize(this.x + 40 * direction, this.y + 10);
+   //  bullet.setDirection(direction);
+   }
+   
+   void throwShuriken() {
+     SoundManager.instance.playSound(SoundManager.enumSoundCyraxShuriken);
+     int direction = 0;
+     if (this.goingBack){
+       direction = 1;
+     } else {
+       direction = -1;
+     }
+    // bullet.initialize(this.x + 40 * direction, this.y + 10);
+    // bullet.setDirection(direction);
+   }
+   
+   void throwMiniShuriken() {
+     SoundManager.instance.playSound(SoundManager.enumSoundCyraxMiniShuriken);
+     int direction = 0;
+     if (this.goingBack){
+       direction = 1;
+     } else {
+       direction = -1;
+     }
+    // bullet.initialize(this.x + 40 * direction, this.y + 10);
+   //  bullet.setDirection(direction);
    }
 }

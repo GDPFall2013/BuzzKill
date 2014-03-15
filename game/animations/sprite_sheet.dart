@@ -23,11 +23,13 @@ class SpriteSheet {
 
   int spriteXInitial = 0;
   
-  SpriteSheet(this._imgurl, this.spritex, this.spritey,this._framew,this._frameh)
+  SpriteSheet(this._imgurl, spritex, this.spritey,this._framew,this._frameh)
   {
     _img = ImageLoader.getImage(_imgurl); 
     this.scaledh = this._frameh;
     this.scaledw = this._framew;
+    this.spritex = spritex;
+    this.spriteXInitial = spritex;
   }
   
   drawOnPosition(double x, double y, double frameX, double frameY)
