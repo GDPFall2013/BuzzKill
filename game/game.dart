@@ -44,6 +44,7 @@ part 'objects/clone.dart';
 part 'objects/spring.dart';
 part 'objects/vertical_block.dart';
 part 'objects/diagonal_block.dart';
+part 'objects/end_scene.dart';
 
 part 'animations/sprite_sheet.dart';
 
@@ -89,6 +90,7 @@ InGameMenu gameMenu = new InGameMenu();
 Controls controls = new Controls();
 Options options = new Options();
 LevelTransition transition;
+EndScene endScene;
 
 static double oxygen = 100.0; 
 Stopwatch oxygenTimer = new Stopwatch();
@@ -115,6 +117,7 @@ int stateEnumTransition = 7;
 int stateEnumIntro = 8;
 int stateEnumOptions = 9;
 int stateEnumCollected = 10;
+int stateEnumOutro = 11;
 
 bool resetMainMenu = false; //used to reset main menu if prev screen was pause menu
 int state;
@@ -139,6 +142,7 @@ Initialize() {
   ObjectManager objectManager = new ObjectManager();
   levelManager = new LevelManager();
   transition = new LevelTransition();
+  endScene = new EndScene();
   Globals.setNormalDifficulty();
 
   
@@ -171,12 +175,15 @@ Initialize() {
     oxygenTimer.start();
   }
     
+  //SoundManager.instance.toggleMute();
+  
 }
 
 /**
  *  Update is called once per game Loop
  */
 void update(double dt) {
+  //print(state);
   Input.instance.controllerButtonPushed = false;
   Input.instance.controllerAxesRight = false;
   Input.instance.controllerAxesLeft = false;
@@ -299,6 +306,9 @@ void update(double dt) {
           go.update(dt);
         }
     
+    
+
+    
 // Adjust the camera position
  if (player.x - camera.x > viewportWidth - 205) {
    camera.x = player.x - (viewportWidth - 205);
@@ -309,6 +319,12 @@ void update(double dt) {
  
   }
   
+  
+  if(state == stateEnumOutro){
+    //Globals.setBackground();
+    endScene.update(dt);
+    endScene.draw();
+  }
   
   // Frames per second debugging Information
   numberOfUpdates += 1.0;
@@ -398,6 +414,14 @@ void draw() {
     }
     
     else{
+         
+      state = stateEnumOutro;
+      endScene = new EndScene();
+      normContext.clearRect(0, 0,640, 480);
+      Globals.setBackground();
+     // ObjectManager.instance.addObject(endScene);
+      
+     /* 
           normContext.fillStyle = 'black';
           normContext.fillRect(0, 0, 640, 480);
           
@@ -420,9 +444,18 @@ void draw() {
             Game.instance.menu.playGame = true;
             
           }
+          */
     }
 
-  } else if (state == stateEnumGameOver){
+  }
+  
+  else if(state == stateEnumOutro){
+    normContext.clearRect(0, 0,640, 480);
+    endScene.draw();
+  }
+  
+  
+  else if (state == stateEnumGameOver){
     normContext.fillStyle = 'black';
     normContext.fillRect(0, 0, 640, 480);
     
