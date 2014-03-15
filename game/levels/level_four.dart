@@ -72,7 +72,7 @@ void setupLevelFour() {
       ..width = 2000.0 .. height = 110.0);
   
   
-  om.addItem(new Oxygen()..initialize(2800.0, 320.0));
+  /*om.addItem(new Oxygen()..initialize(2800.0, 320.0));
   om.addItem(new Oxygen()..initialize(2850.0, 320.0));
   om.addItem(new Oxygen()..initialize(2900.0, 320.0));
   om.addItem(new Oxygen()..initialize(2950.0, 320.0));
@@ -85,7 +85,7 @@ void setupLevelFour() {
   om.addItem(new Oxygen()..initialize(3300.0, 280.0));
   om.addItem(new Oxygen()..initialize(3350.0, 320.0));
   om.addItem(new Oxygen()..initialize(3400.0, 320.0));
-
+  */
   /*
   om.addBlock(new Block()..initialize(3200.0, 320.0) // Boulder
         ..width = 120.0 .. height = 100.0);
@@ -587,6 +587,22 @@ void setupLevelFour() {
     om.addBlock(new Block()..initialize(22050.0, 500.0)      // low floor
         ..width = 75.0 .. height = 101.0);
     om.addBlock(new Spring()..initialize(22050.0, 370.0));   //spring
+       om.addItem(new Oxygen()..initialize(22050.0, 150.0));
+       om.addItem(new Oxygen()..initialize(22050.0, 125.0));
+       om.addItem(new Oxygen()..initialize(22050.0, 100.0));
+       om.addItem(new Oxygen()..initialize(22050.0, 75.0));
+       om.addItem(new Oxygen()..initialize(22050.0, 50.0));
+       om.addItem(new Oxygen()..initialize(22050.0, 25.0));
+       om.addItem(new Oxygen()..initialize(22050.0, 0.0));
+       om.addItem(new Oxygen()..initialize(22050.0, -75.0));
+       om.addItem(new Oxygen()..initialize(22050.0, -50.0));
+       om.addItem(new Oxygen()..initialize(22050.0, -25.0));
+       om.addItem(new Oxygen()..initialize(22050.0, -100.0));
+       om.addItem(new Oxygen()..initialize(22050.0, -125.0));
+       om.addItem(new Oxygen()..initialize(22050.0, -150.0));
+       om.addItem(new Oxygen()..initialize(22050.0, -175.0));
+       om.addItem(new Oxygen()..initialize(22050.0, -200.0));
+    
     om.addBlock(new Block()..initialize(22400.0, 420.0)      // high floor
         ..width = 600.0 .. height = 101.0);
     om.addEnemy(new clone()..initialize(22600.0, 310.0));  //enemy
@@ -595,7 +611,7 @@ void setupLevelFour() {
         ..width = 400.0 .. height = 101.0);
     om.addEnemy(new Alien()..initialize(22800.0, -70.0));  //enemy
     om.addBlock(new DiagonalBlock()..initializeMove(23000.0, -100.0, 23300.0, 400.0) // diagonal block
-        ..width = 100.0 .. height = 101.0..speedY = 4.0 ..upToDown = true);
+        ..width = 150.0 .. height = 101.0..speedY = 4.0 ..upToDown = true);
     om.addBlock(new DiagonalBlock()..initializeMove(23600.0, -100.0, 23900.0, 400.0) // diagonal block
         ..width = 100.0 .. height = 101.0..speedY = 4.0);
     
@@ -656,7 +672,7 @@ void setupLevelFour() {
        ..width = 75.0 .. height = 140.0);
     om.addBlock(new Spring()..initialize(25700.0, 300.0));   //spring
     
-    om.addItem(new Oxygen()..initialize(25700.0, 150.0));
+    /*om.addItem(new Oxygen()..initialize(25700.0, 150.0));
     om.addItem(new Oxygen()..initialize(25700.0, 125.0));
     om.addItem(new Oxygen()..initialize(25700.0, 100.0));
     om.addItem(new Oxygen()..initialize(25700.0, 75.0));
@@ -671,6 +687,7 @@ void setupLevelFour() {
     om.addItem(new Oxygen()..initialize(25700.0, -150.0));
     om.addItem(new Oxygen()..initialize(25700.0, -175.0));
     om.addItem(new Oxygen()..initialize(25700.0, -200.0));
+    */
     
     om.addBlock(new Block()..initialize(26100.0, 420.0)      // floor
        ..width = 75.0 .. height = 140.0);
@@ -695,19 +712,19 @@ void setupLevelFour() {
        ..width = 75.0 .. height = 140.0);
     om.addBlock(new Spring()..initialize(26500.0, 300.0));   //spring
     om.addItem(new Oxygen()..initialize(26500.0, 150.0));
-    om.addItem(new Oxygen()..initialize(26500.0, 125.0));
+    //om.addItem(new Oxygen()..initialize(26500.0, 125.0));
     om.addItem(new Oxygen()..initialize(26500.0, 100.0));
-    om.addItem(new Oxygen()..initialize(26500.0, 75.0));
+    //om.addItem(new Oxygen()..initialize(26500.0, 75.0));
     om.addItem(new Oxygen()..initialize(26500.0, 50.0));
-    om.addItem(new Oxygen()..initialize(26500.0, 25.0));
+    //om.addItem(new Oxygen()..initialize(26500.0, 25.0));
     om.addItem(new Oxygen()..initialize(26500.0, 0.0));
-    om.addItem(new Oxygen()..initialize(26500.0, -75.0));
+    //om.addItem(new Oxygen()..initialize(26500.0, -75.0));
     om.addItem(new Oxygen()..initialize(26500.0, -50.0));
-    om.addItem(new Oxygen()..initialize(26500.0, -25.0));
+    //om.addItem(new Oxygen()..initialize(26500.0, -25.0));
     om.addItem(new Oxygen()..initialize(26500.0, -100.0));
-    om.addItem(new Oxygen()..initialize(26500.0, -125.0));
+    //om.addItem(new Oxygen()..initialize(26500.0, -125.0));
     om.addItem(new Oxygen()..initialize(26500.0, -150.0));
-    om.addItem(new Oxygen()..initialize(26500.0, -175.0));
+    //om.addItem(new Oxygen()..initialize(26500.0, -175.0));
     om.addItem(new Oxygen()..initialize(26500.0, -200.0));
     
     
@@ -756,6 +773,6 @@ void setupLevelFour() {
      om.addBlock(new Block()..initialize(30600.0, 460.0)      // floor
         ..width = 75.0 .. height = 140.0);
      om.addBlock(new Spring()..initialize(30600.0, 340.0));   //spring
-     om.addItem(new ShipItem()..initialize(30600.0, -320.0)
+     om.addItem(new ShipItem()..initialize(30600.0, -320.0)   //ship item
            ..level = 4);
 }
