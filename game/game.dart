@@ -89,6 +89,9 @@ static double oxygen = 100.0;
 Stopwatch oxygenTimer = new Stopwatch();
 double lastOxygenTick = 0.0;
 
+Stopwatch restartTimer = new Stopwatch();
+int counter=-1;
+
 static int lives = 3;
 Input input = new Input();
 
@@ -437,6 +440,7 @@ void draw() {
             Game.instance.lastENTER = input.timePressed(KeyCode.ENTER);
             Game.instance.resetMainMenu = true;
             Game.instance.menu.playGame = true;
+            
           }
     }
 
@@ -447,7 +451,30 @@ void draw() {
     normContext.fillStyle = 'white';
     normContext.font = "normal 30pt calibri";
     normContext.fillText("Buzz didn't make it...", viewportWidth/2 - 120, viewportHeight/2 - 40, 1000);
-    Globals.setBackground();
+    normContext.save();
+    
+    //calculate time left to choose to continue
+    double secs2=0.00000000001;
+    num secs = restartTimer.elapsedMilliseconds/1000;
+     secs2 = ((secs*5) /(secs)) - (secs-1);
+     if(secs2.isNaN || secs2.isInfinite){
+       secs2 = 0.0000000001;
+     }
+    num secs4 = secs2.floor();
+    
+    //print time left to continue game
+    normContext.font = "normal 15pt calibri";
+    normContext.fillText('Press Enter to continue... $secs4', 300, 420, 1000);
+    normContext.restore();
+    
+    //if user presses ENTER, restart game
+    if (input.isDown(KeyCode.ENTER)) {
+      restartGame();
+    }
+    //load main menu if user does not press ENTER
+    else if(restartTimer.elapsedMilliseconds>5000){
+      reloadMainMenu();
+    }
   }
   
   
@@ -494,8 +521,11 @@ collected(){
 }
 gameOver() {
   // TODO music to be placed here in the future
+  restartTimer = new Stopwatch();
+  restartTimer.start();
   currentLevel = LevelManager.enumLevelOne;
-  gameLoop.addTimer((restart) => restartGame(), 3.0);
+  //gameLoop.addTimer((restart) => reloadMainMenu(), 3.0);
+ 
   state = stateEnumGameOver;
   oxygenTimer.stop();
   oxygenCollected = 0;
@@ -515,12 +545,13 @@ reloadLevel() {
 }
 
 restartGame() {
+  currentLevel = 1;
   lives = 3;
-  levelManager.loadLevel(startLevel);
+  levelManager.loadLevel(currentLevel);
   player.resetPlayer();
   state = stateEnumPlay;
   
-  currentLevel = startLevel;
+  currentLevel = 1;
   //reset oxygen
   if(currentLevel >= LevelManager.enumLevelOne){
     oxygenTimer.reset(); lastOxygenTick = 0.0;
@@ -534,6 +565,15 @@ pauseOxygenDrain(){
         lastOxygenTick += 250;
          oxygen -= 0;
       }
+}
+
+reloadMainMenu(){
+  currentLevel = LevelManager.enumMainMenu;
+  state = stateEnumMain;
+  Game.instance.resetMainMenu = true;
+     Game.instance.menu.playGame = true;
+     lives = 3;
+     Globals.setBackground();
 }
 
 }
