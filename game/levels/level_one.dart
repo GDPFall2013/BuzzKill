@@ -18,7 +18,7 @@ void setupLevelOne() {
  // om.addEnemy(new CyraxShuriken()..initialize(400.0, 100.0));
  // om.addEnemy(new CyraxNet()..initialize(600.0, 100.0));
   //om.addEnemy(new CyraxMiniShuriken()..initialize(200.0, 100.0));
-  //om.addEnemy(new Cyrax()..initialize(800.0, 200.0));
+ // om.addEnemy(new Cyrax()..initialize(800.0, 200.0));
   
   // screen 1
   om.addBlock(new Block()..initialize(875.0, 420.0) // floor

@@ -25,6 +25,8 @@ class CyraxNet extends Projectile
     verticalVelocity = 0.0;
     
     injureValue = 20.0;
+    
+    TYPE = "BOSS";
   }
   
   void setDirection(int direction) {

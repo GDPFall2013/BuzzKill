@@ -25,6 +25,9 @@ class Cyrax extends Enemy{
  
   Random rnd = new Random();
   
+  double lastShot = 150.0;
+  double shotDelay = 200.0;
+  
   initialize(double x, double y) {
     super.initialize(x, y);
     width = 90.0;
@@ -42,11 +45,16 @@ class Cyrax extends Enemy{
     TYPE = "BOSS";
     
 //    attack();  //For testing
-    gameLoop.addTimer((finish) => generateRandomAttack(), 1.0);
   }
   
   update (double dt) 
   {
+    lastShot += dt;
+    if (lastShot > shotDelay) {
+      lastShot -= shotDelay;
+      generateRandomAttack();
+    }
+    
    if (!attacking) {
     double speed = 0.8 * dt;
     
@@ -109,7 +117,6 @@ class Cyrax extends Enemy{
     }
     attacking = true;
     currentAttack.fire(x, y, -direction);
-    gameLoop.addTimer((attack) => generateRandomAttack(), 3.0);
   }
   
 //  //THis is a function for testing
