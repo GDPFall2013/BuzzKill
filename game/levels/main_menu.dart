@@ -22,6 +22,8 @@ class MainMenu extends GameObject{
   bool controls = false;
   bool exit = false;
   
+  bool cheat = false;
+  
   
   MainMenu(){
     width = 150.0;
@@ -34,6 +36,8 @@ class MainMenu extends GameObject{
     instructions = new SpriteSheet("./content/instructions.png",0,0,258,114);
     selectInstructions = new SpriteSheet("./content/enter-instructions.png",0,0,258,114);
     //query("#canvas").style.backgroundImage = "url(content/background.jpg)";
+    //Game.instance.currentLevel = LevelManager.enumLevel;
+    cheat = false;
   }
 
   
@@ -138,7 +142,9 @@ class MainMenu extends GameObject{
               playGame = false;
               Game.instance.lastENTER = input.timePressed(KeyCode.ENTER);
               Game.instance.transition = new LevelTransition();
+              if(!cheat){
               Game.instance.currentLevel = Game.instance.startLevel;
+              }
              }
     }
     
@@ -170,6 +176,42 @@ class MainMenu extends GameObject{
         chrome.app.window.current().close();
       }
     }*/
+    
+    
+    if(input.wasPressed(KeyCode.NUM_ONE)){
+      Game.instance.currentLevel = LevelManager.enumLevelThree;
+      Game.instance.state = Game.instance.stateEnumOutro;
+      Game.instance.endScene = new EndScene();
+      Globals.setBackground();
+      cheat=true;
+    }
+    else if(input.wasPressed(KeyCode.NUM_TWO)){
+      Game.instance.currentLevel = LevelManager.enumLevelOne;
+      cheat=true;
+    }
+    else if(input.wasPressed(KeyCode.NUM_THREE)){
+      Game.instance.currentLevel = LevelManager.enumLevelTwo;
+      cheat=true;
+    }
+    else if(input.wasPressed(KeyCode.NUM_FOUR)){
+      Game.instance.currentLevel = LevelManager.enumLevelThree;
+      cheat=true;
+    }
+    else if(input.wasPressed(KeyCode.NUM_FIVE)){
+      Game.instance.currentLevel = LevelManager.enumLevelOne;
+      Game.instance.player.playerStartX = 12800.0;
+      cheat=true;
+    }
+    else if(input.wasPressed(KeyCode.NUM_SIX)){
+      Game.instance.currentLevel = LevelManager.enumLevelTwo;
+      Game.instance.player.playerStartX = 18600.0;
+      cheat=true;
+    }
+    else if(input.wasPressed(KeyCode.NUM_SEVEN)){
+      Game.instance.currentLevel = LevelManager.enumLevelThree;
+      Game.instance.player.playerStartX = 29000.0;
+      cheat=true;
+    }
     
   }
   }
