@@ -26,7 +26,7 @@ class Bullet extends Projectile
     sprite.frameChangeRate = 9.0;
     sprite.numberOfFrames = 14;
     
-    horizontalVelocity = 1.2;
+    horizontalVelocity = 2.0;
     verticalVelocity = 0.0;
     
     injureValue = 10.0;
