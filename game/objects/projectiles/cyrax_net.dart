@@ -13,7 +13,7 @@ class CyraxNet extends Projectile
     width = 50.0;
     height = 90.0;
     sprite = new SpriteSheet("./content/cyrax_attack_spritesheet.png",
-        spriteXInitial,spriteYInitial,spriteWidth,spriteHeight); //TODO
+        spriteXInitial,spriteYInitial,spriteWidth,spriteHeight);
     
     imgOffsetX = 20.0;
     imgOffsetY = -45.0;

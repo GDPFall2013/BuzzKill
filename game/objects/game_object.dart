@@ -30,12 +30,6 @@ abstract class GameObject {
     
   }
   
-  /**
-   * In order for free listing to work, this kind of setup must 
-   * be done somewhere other than the constructor
-   * The initialize method offers a way to do so.
-   * TODO: Will we be using free listing?
-   */
   initialize(double x, double y) {
     this.x = x;
     this.y = y;
