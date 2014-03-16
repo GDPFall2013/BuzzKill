@@ -144,6 +144,7 @@ class MainMenu extends GameObject{
               Game.instance.transition = new LevelTransition();
               if(!cheat){
               Game.instance.currentLevel = Game.instance.startLevel;
+              Game.instance.player.playerStartX = 0.0;
               }
              }
     }
