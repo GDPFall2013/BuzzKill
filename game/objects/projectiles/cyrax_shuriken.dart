@@ -2,13 +2,10 @@ part of gdp;
 
 class CyraxShuriken extends Projectile
 {
-  
-  ImageElement img = new ImageElement();
-  
-  int spriteXInitial = 250;
-  int spriteYInitial = 90;
-  int spriteWidth = 125;
-  int spriteHeight = 170;
+  int spriteXInitial = 200;
+  int spriteYInitial = 240;
+  int spriteWidth = 100;
+  int spriteHeight = 60;
   
   initialize(double x, double y) 
   {
@@ -18,13 +15,23 @@ class CyraxShuriken extends Projectile
     sprite = new SpriteSheet("./content/cyrax_attack_spritesheet.png",
         spriteXInitial,spriteYInitial,spriteWidth,spriteHeight);
     
-    imgOffsetX = 55.0; //TODO
-    imgOffsetY = -50.0; //TODO
+    imgOffsetX = 30.0;
+    imgOffsetY = -3.0;
     
-    sprite.frameChangeRate = 9.0; //TODO
-    sprite.numberOfFrames = 8; //TODO
+    sprite.frameChangeRate = 8.0;
+    sprite.numberOfFrames = 4;
+    
+    horizontalVelocity = 7.0;
+    verticalVelocity = 0.0;
     
     injureValue = 10.0;
   }
   
+  void setDirection(int direction) {
+    if (direction != 1) {
+      horizontalVelocity = -7.0;
+    } else {
+      horizontalVelocity = 7.0;
+    }
+  }
 }

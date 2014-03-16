@@ -2,49 +2,38 @@ part of gdp;
 
 class CyraxNet extends Projectile
 {
-  
-  ImageElement img = new ImageElement();
-  
-  int spriteXInitial = 0; //TODO
-  int spriteYInitial = 1040; //TODO
-  int spriteWidth = 60;  //TODO
-  int spriteHeight = 50; //TODO
-
-  int direction = 1;
+  int spriteXInitial = 200;
+  int spriteYInitial = 720;
+  int spriteWidth = 100;  
+  int spriteHeight = 180; 
   
   initialize(double x, double y) 
   {
     super.initialize(x, y);
-    width = 60.0; //TODO
-    height = 110.0; //TODO
+    width = 50.0;
+    height = 90.0;
     sprite = new SpriteSheet("./content/cyrax_attack_spritesheet.png",
         spriteXInitial,spriteYInitial,spriteWidth,spriteHeight); //TODO
     
-    imgOffsetX = 0.0; //TODO
-    imgOffsetY = 0.0; //TODO
+    imgOffsetX = 20.0;
+    imgOffsetY = -45.0;
     
-    sprite.frameChangeRate = 9.0; //TODO
-    sprite.numberOfFrames = 14; //TODO
+    sprite.frameChangeRate = 100.0;
+    sprite.numberOfFrames = 1;
     
-    horizontalVelocity = 1.2;
+    horizontalVelocity = 3.0;
     verticalVelocity = 0.0;
     
     injureValue = 20.0;
   }
   
   void setDirection(int direction) {
-    this.direction = direction;
-    if (direction == 1) {
-      sprite.spritey = 1160; //TODO
+    if (direction != 1) {
+      horizontalVelocity = -4.0;
+      sprite.spritey = 900;
     } else {
-      sprite.spritey = 1040; //TODO
-      horizontalVelocity *= -1.0;
+      horizontalVelocity = 4.0;
+      sprite.spritey = 720;
     }
   }
-  
-  
-   double injure() 
-   {
-     return 20.0 * Globals.enemyDamage;
-   }
 }

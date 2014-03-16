@@ -4,8 +4,8 @@ part of gdp;
  * An enemy is any object that can harm the Player
 */
 abstract class Projectile extends Enemy {
-  double horizontalVelocity;
-  double verticalVelocity;
+  double horizontalVelocity = 0.0;
+  double verticalVelocity = 0.0;
   double injureValue;
   
   SpriteSheet sprite;
@@ -15,8 +15,8 @@ abstract class Projectile extends Enemy {
  
   update (double dt) 
   {
- //   x = x + horizontalVelocity * dt; 
- //   y = y + verticalVelocity * dt;
+    x = x + horizontalVelocity * dt; 
+    y = y + verticalVelocity * dt;
     
     sprite.update(dt);  
   } 

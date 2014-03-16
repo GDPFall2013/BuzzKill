@@ -25,6 +25,12 @@ part 'objects/projectiles/cyrax_net.dart';
 part 'objects/projectiles/cyrax_shuriken.dart';
 part 'objects/projectiles/cyrax_mini_shuriken.dart';
 
+part 'objects/cyrax/cyrax.dart';
+part 'objects/cyrax/cyrax_attack.dart';
+part 'objects/cyrax/net_attack.dart';
+part 'objects/cyrax/shuriken_attack.dart';
+part 'objects/cyrax/mini_shuriken_attack.dart';
+
 part 'objects/game_object.dart';
 part 'objects/block.dart';
 part 'objects/player.dart';
@@ -39,7 +45,6 @@ part 'objects/droid.dart';
 part 'objects/ingame_menu.dart';
 part 'objects/trigger.dart';
 part 'objects/moving_block.dart';
-part 'objects/cyrax.dart';
 part 'objects/clone.dart';
 part 'objects/spring.dart';
 part 'objects/vertical_block.dart';

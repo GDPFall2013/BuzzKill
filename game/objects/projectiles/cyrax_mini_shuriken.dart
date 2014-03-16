@@ -3,26 +3,26 @@ part of gdp;
 class CyraxMiniShuriken extends Projectile
 {
   
-  ImageElement img = new ImageElement();
+  int spriteXInitial = 200; 
+  int spriteYInitial = 360; 
+  int spriteWidth = 100; 
+  int spriteHeight = 180; 
   
-  int spriteXInitial = 0; //TODO
-  int spriteYInitial = 1040; //TODO
-  int spriteWidth = 60; //TODO
-  int spriteHeight = 50; //TODO
+  static double speed = 3.0;
   
   initialize(double x, double y) 
   {
     super.initialize(x, y);
-    width = 60.0; //TODO
-    height = 110.0; //TODO
+    width = 30.0; 
+    height = 25.0;
     sprite = new SpriteSheet("./content/cyrax_attack_spritesheet.png",
         spriteXInitial,spriteYInitial,spriteWidth,spriteHeight);
     
-    sprite.frameChangeRate = 9.0; //TODO
-    sprite.numberOfFrames = 14; //TODO
+    sprite.frameChangeRate = 9.0;
+    sprite.numberOfFrames = 3; 
     
-    imgOffsetX = 0.0; //TODO
-    imgOffsetY = 0.0; //TODO
+    imgOffsetX = 40.0;
+    imgOffsetY = -78.0;
     
     injureValue = 5.0;
   }
