@@ -564,6 +564,7 @@ win() {
 
 collected(){
   state = stateEnumCollected;
+  Game.lives++;
 }
 gameOver() {
   // TODO music to be placed here in the future
