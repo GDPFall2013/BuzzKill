@@ -10,16 +10,16 @@ class Bullet extends Projectile
   int spriteWidth = 60;
   int spriteHeight = 50;
   
-  double imgOffsetX = 8.0;
-  double imgOffsetY = -7.0;
+  double imgOffsetX = 20.0;
+  double imgOffsetY = 0.0;
 
   int direction = 1;
   
   initialize(double x, double y) 
   {
     super.initialize(x, y);
-    width = 60.0;
-    height = 110.0;
+    width = 22.0;
+    height = 10.0;
     sprite = new SpriteSheet("./content/enemies_attack_spritesheet.png",
         spriteXInitial,spriteYInitial,spriteWidth,spriteHeight);
     
