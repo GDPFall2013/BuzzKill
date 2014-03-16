@@ -70,9 +70,9 @@ class Options extends GameObject{
      
       backSprite.drawOnPositionNormal(40.0, 40.0, 380.0 , 70.0);
       
-      soundSprite.drawOnPositionNormal(80.0, 185.0, 380.0 , 70.0);
-      difficultySprite.drawOnPositionNormal(80.0,250.0,380.0,70.0);
-      screenSprite.drawOnPositionNormal(80.0,315.0,380.0,70.0);
+      soundSprite.drawOnPositionNormal(80.0, 130.0, 380.0 , 70.0);
+      difficultySprite.drawOnPositionNormal(80.0,220.0,380.0,70.0);
+      screenSprite.drawOnPositionNormal(80.0,305.0,380.0,70.0);
    }
     /*
    else{
