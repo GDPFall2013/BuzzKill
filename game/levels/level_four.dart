@@ -774,6 +774,49 @@ void setupLevelFour() {
      om.addBlock(new Block()..initialize(29650.0, 420.0)      // floor
         ..width = 1500.0 .. height = 140.0);
      
+     //Bottom
+     om.addBlock(new Block()..initialize(29200.0, 300.0)      // Boulder
+         ..width = 120.0 .. height = 100.0);
+     om.addBlock(new Block()..initialize(29500.0, 300.0)      // Boulder
+         ..width = 120.0 .. height = 100.0);
+     
+     //Top Row
+     om.addBlock(new Block()..initialize(29200.0, 100.0)      // Boulder
+         ..width = 120.0 .. height = 100.0);
+     
+     om.addBlock(new Block()..initialize(29400.0, 100.0)      // Boulder
+         ..width = 120.0 .. height = 100.0);
+     
+     om.addBlock(new Block()..initialize(29400.0, 000.0)      // Boulder
+         ..width = 120.0 .. height = 100.0);
+     om.addBlock(new Block()..initialize(29400.0, -100.0)      // Boulder
+         ..width = 120.0 .. height = 100.0);
+     om.addBlock(new Block()..initialize(29400.0, -200.0)      // Boulder
+         ..width = 120.0 .. height = 100.0);
+     
+     om.addBlock(new Block()..initialize(29600.0, 170.0)      // Boulder
+         ..width = 120.0 .. height = 100.0);
+     
+     
+     Trigger bossTrigger = new Trigger()..initialize(29300.0, 340.0)  //trigger
+         ..width = 120.0 .. height = 20.0;
+     Block bossFloorObstacle = new Block()..initialize(29750.0, -100.0) // obstacle
+         ..width = 200.0 .. height = 700.0 ..isObstacle = true;
+     
+     bossTrigger.setTriggerObstacle(bossFloorObstacle);
+     om.addTrigger(bossTrigger);
+     om.addBlock(bossFloorObstacle);
+     
+     om.addItem(new Oxygen()..initialize(29950.0, 300.0));
+     om.addItem(new Oxygen()..initialize(30000.0, 300.0));
+     om.addItem(new Oxygen()..initialize(30050.0, 300.0));
+     om.addItem(new Oxygen()..initialize(30100.0, 300.0));
+     om.addItem(new Oxygen()..initialize(30150.0, 300.0));
+     om.addItem(new Oxygen()..initialize(30200.0, 300.0));
+     om.addItem(new Oxygen()..initialize(30250.0, 300.0));
+     
+     om.addEnemy(new Cyrax()..initialize(30200.0, 275.0));  // boss
+     
      
      om.addBlock(new Block()..initialize(30600.0, 460.0)      // floor
         ..width = 75.0 .. height = 140.0);

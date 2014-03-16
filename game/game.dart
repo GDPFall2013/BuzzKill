@@ -19,6 +19,18 @@ part 'object_manager.dart';
 part 'audio/sound_manager.dart';
 part 'globals.dart';
 
+part 'objects/projectiles/projectile.dart';
+part 'objects/projectiles/bullet.dart';
+part 'objects/projectiles/cyrax_net.dart';
+part 'objects/projectiles/cyrax_shuriken.dart';
+part 'objects/projectiles/cyrax_mini_shuriken.dart';
+
+part 'objects/cyrax/cyrax.dart';
+part 'objects/cyrax/cyrax_attack.dart';
+part 'objects/cyrax/net_attack.dart';
+part 'objects/cyrax/shuriken_attack.dart';
+part 'objects/cyrax/mini_shuriken_attack.dart';
+
 part 'objects/game_object.dart';
 part 'objects/block.dart';
 part 'objects/player.dart';
@@ -32,9 +44,7 @@ part 'objects/gorilla.dart';
 part 'objects/droid.dart';
 part 'objects/ingame_menu.dart';
 part 'objects/trigger.dart';
-part 'objects/bullet.dart';
 part 'objects/moving_block.dart';
-part 'objects/cyrax.dart';
 part 'objects/clone.dart';
 part 'objects/spring.dart';
 part 'objects/vertical_block.dart';
@@ -367,15 +377,7 @@ void draw() {
         
         normContext.clearRect(0, 0,640, 480);
         
-        for (GameObject go in ObjectManager.instance.goList) {
-          double goRightEdge = go.x + go.width/2;
-          double goLeftEdge = go.x - go.width/2;
-                      
-            if (goRightEdge > (camera.x - (viewportWidth / Camera.instance.screenRatio))  && 
-              goLeftEdge < (camera.x + (viewportWidth / Camera.instance.screenRatio))) {
-              go.draw();
-            }
-        }
+        drawObjects();
         
         gameMenu.draw();
       }
@@ -393,33 +395,14 @@ void draw() {
       gameMenu.draw();
     }
     
-  for (GameObject go in ObjectManager.instance.goList) {
-    double goRightEdge = go.x + go.width/2;
-    double goLeftEdge = go.x - go.width/2;
-    
-    if (goRightEdge > (camera.x - (viewportWidth / Camera.instance.screenRatio))  && 
-        goLeftEdge < (camera.x + (viewportWidth / Camera.instance.screenRatio))) {
-      go.draw();
-    //  DrawColliderBox(go);
-    }   
-  }
-  
+  drawObjects();
   drawHUD();
   
   }
   
   else if(state == stateEnumCollected){
     normContext.clearRect(0, 0,640, 480);
-    for (GameObject go in ObjectManager.instance.goList) {
-        double goRightEdge = go.x + go.width/2;
-        double goLeftEdge = go.x - go.width/2;
-        
-        if (goRightEdge > (camera.x - (viewportWidth / Camera.instance.screenRatio))  && 
-            goLeftEdge < (camera.x + (viewportWidth / Camera.instance.screenRatio))) {
-          go.draw();
-        //  DrawColliderBox(go);
-        }   
-      }
+    drawObjects();
       
       drawHUD();
   }
@@ -532,6 +515,19 @@ void draw() {
   // Used for Frames Per Second Debugging Information
   numberOfRenders += 1.0;
 }
+
+drawObjects() {
+  for (GameObject go in ObjectManager.instance.goList) {
+    double goRightEdge = go.x + go.width/2;
+    double goLeftEdge = go.x - go.width/2;
+    
+    if (goRightEdge > (camera.x - (viewportWidth / Camera.instance.screenRatio))  && 
+        goLeftEdge < (camera.x + (viewportWidth / Camera.instance.screenRatio))) {
+      go.draw();
+          DrawColliderBox(go);
+        }   
+      }
+  }
 
 /**
  * Draws textual information around the edges of the screen that does not move with
