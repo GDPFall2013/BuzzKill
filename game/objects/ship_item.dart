@@ -255,6 +255,7 @@ class ShipItem extends Item{
     SoundManager.instance.playSound(SoundManager.enumSoundShipItem);
     collected = true;
     Game.instance.collected();
+    Game.instance.menu.cheat = false;
   }
   
   

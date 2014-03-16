@@ -735,7 +735,12 @@ void setupLevelFour() {
        ..width = 600.0 .. height = 140.0);
     om.addBlock(new Block()..initialize(27400.0, -200.0)      // high floor
        ..width = 400.0 .. height = 101.0);
+    om.addItem(new Oxygen()..initialize(27250.0, -300.0));
     om.addItem(new Oxygen()..initialize(27300.0, -300.0));
+    om.addItem(new Oxygen()..initialize(27350.0, -300.0));
+    om.addItem(new Oxygen()..initialize(27400.0, -300.0));
+    om.addItem(new Oxygen()..initialize(27450.0, -300.0));
+    om.addItem(new Oxygen()..initialize(27500.0, -300.0));
     om.addBlock(new Block()..initialize(27500.0, 300.0)      // Boulder
          ..width = 120.0 .. height = 100.0);
     
