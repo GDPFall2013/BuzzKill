@@ -41,14 +41,14 @@ class Cyrax extends Enemy{
     
     TYPE = "BOSS";
     
-    goingBack = true;
-    attack();
+//    attack();  //For testing
+    gameLoop.addTimer((finish) => generateRandomAttack(), 1.0);
   }
   
   update (double dt) 
   {
    if (!attacking) {
-    double speed = 0.4 * dt;
+    double speed = 0.8 * dt;
     
     //move Cyrax back and forth
     
@@ -85,17 +85,17 @@ class Cyrax extends Enemy{
   
   generateRandomAttack()
   {
-    int attackNum = rnd.nextInt(3); 
+    int attackNum = rnd.nextInt(2); 
     switch (attackNum) {
-      case 1: 
+      case 0: 
         currentAttack = netAttack;
         gameLoop.addTimer((finish) => finishAttack(), currentAttack.totalAttackTime);
       break;
-      case 2: 
+      case 1: 
         currentAttack = shurikenAttack;
         gameLoop.addTimer((finish) => finishAttack(), currentAttack.totalAttackTime);
       break;
-      case 3:
+      case 2:
         currentAttack = miniShurikenAttack;
         gameLoop.addTimer((finish) => finishAttack(), currentAttack.totalAttackTime);
       break;
@@ -109,23 +109,24 @@ class Cyrax extends Enemy{
     }
     attacking = true;
     currentAttack.fire(x, y, -direction);
+    gameLoop.addTimer((attack) => generateRandomAttack(), 3.0);
   }
   
-  //THis is a function for testing
-  attack(){
-    attacking = true;
-    currentAttack = miniShurikenAttack;
-    
-    int direction;
-    if (goingBack) {
-      direction = -1;
-    } else {
-      direction = 1;
-    }
-    currentAttack.fire(x, y, -direction);
-    gameLoop.addTimer((finish) => finishAttack(), currentAttack.totalAttackTime);
-    
-  }
+//  //THis is a function for testing
+//  attack(){
+//    attacking = true;
+//    currentAttack = miniShurikenAttack;
+//    
+//    int direction;
+//    if (goingBack) {
+//      direction = -1;
+//    } else {
+//      direction = 1;
+//    }
+//    currentAttack.fire(x, y, -direction);
+//    gameLoop.addTimer((finish) => finishAttack(), currentAttack.totalAttackTime);
+//    
+//  }
   
   finishAttack(){
     attacking = false;
