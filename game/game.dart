@@ -332,16 +332,16 @@ void update(double dt) {
     endScene.draw();
   }
   
-  // Frames per second debugging Information
-  numberOfUpdates += 1.0;
-  debuggingDisplayTime += dt;
-  if (debuggingDisplayTime > 100.0) {
-    debuggingDisplayTime -= 100.0;
-    updatesPerSecond = numberOfUpdates;
-    rendersPerSecond = numberOfRenders;
-    numberOfUpdates = 0.0;
-    numberOfRenders = 0.0;
-  }
+//  // Frames per second debugging Information
+//  numberOfUpdates += 1.0;
+//  debuggingDisplayTime += dt;
+//  if (debuggingDisplayTime > 100.0) {
+//    debuggingDisplayTime -= 100.0;
+//    updatesPerSecond = numberOfUpdates;
+//    rendersPerSecond = numberOfRenders;
+//    numberOfUpdates = 0.0;
+//    numberOfRenders = 0.0;
+//  }
   
 
 }
@@ -524,7 +524,7 @@ drawObjects() {
     if (goRightEdge > (camera.x - (viewportWidth / Camera.instance.screenRatio))  && 
         goLeftEdge < (camera.x + (viewportWidth / Camera.instance.screenRatio))) {
       go.draw();
-          DrawColliderBox(go);
+         // DrawColliderBox(go);
         }   
       }
   }
@@ -544,11 +544,11 @@ drawHUD() {
   normContext.restore();
   
 // Variables for Performance monitoring
-  normContext.fillStyle = 'white';
-  normContext.font = "normal 8pt calibri";
-  normContext.fillText("ups: $updatesPerSecond", 10, 35, 100);
-  normContext.fillText("rps: $rendersPerSecond", 10, 50, 100);
-  normContext.restore();
+//  normContext.fillStyle = 'white';
+//  normContext.font = "normal 8pt calibri";
+//  normContext.fillText("ups: $updatesPerSecond", 10, 35, 100);
+//  normContext.fillText("rps: $rendersPerSecond", 10, 50, 100);
+//  normContext.restore();
 }
 
 /**
