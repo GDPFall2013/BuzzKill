@@ -153,13 +153,13 @@ void setupLevelFour() {
   om.addItem(new Oxygen()..initialize(5000.0, -325.0));
   om.addItem(new Oxygen()..initialize(5050.0, -325.0));
   
-  /*om.addItem(new Oxygen()..initialize(4800.0, -375.0));
+  om.addItem(new Oxygen()..initialize(4800.0, -375.0));
   om.addItem(new Oxygen()..initialize(4850.0, -375.0));
   om.addItem(new Oxygen()..initialize(4900.0, -375.0));
   om.addItem(new Oxygen()..initialize(4950.0, -375.0));
   om.addItem(new Oxygen()..initialize(5000.0, -375.0));
   om.addItem(new Oxygen()..initialize(5050.0, -375.0));
-  */
+  
   
   om.addBlock(new Block()..initialize(5600.0, 420.0) // floor
       ..width = 600.0 .. height = 140.0);
@@ -420,7 +420,7 @@ void setupLevelFour() {
    om.addBlock(new Spring()..initialize(14425.0, 270.0));   //spring
    om.addBlock(new Block()..initialize(15950.0, 420.0)      // floor
        ..width = 2000.0 .. height = 140.0);
-   /*om.addItem(new Oxygen()..initialize(15900.0, 300.0));
+   om.addItem(new Oxygen()..initialize(15900.0, 300.0));
    om.addItem(new Oxygen()..initialize(15950.0, 300.0));
    om.addItem(new Oxygen()..initialize(16000.0, 300.0));
    om.addItem(new Oxygen()..initialize(16050.0, 300.0));
@@ -430,7 +430,7 @@ void setupLevelFour() {
    om.addItem(new Oxygen()..initialize(16250.0, 300.0));
    om.addItem(new Oxygen()..initialize(16300.0, 300.0));
    om.addItem(new Oxygen()..initialize(16350.0, 300.0));
-   */
+   
    om.addItem(new Oxygen()..initialize(16400.0, 300.0));
    om.addItem(new Oxygen()..initialize(16450.0, 300.0));
    om.addItem(new Oxygen()..initialize(16500.0, 300.0));
@@ -612,7 +612,7 @@ void setupLevelFour() {
     om.addEnemy(new Alien()..initialize(22800.0, -70.0));  //enemy
     om.addBlock(new DiagonalBlock()..initializeMove(23000.0, -100.0, 23300.0, 400.0) // diagonal block
         ..width = 150.0 .. height = 101.0..speedY = 4.0 ..upToDown = true);
-    om.addBlock(new DiagonalBlock()..initializeMove(23600.0, -100.0, 23900.0, 400.0) // diagonal block
+    om.addBlock(new DiagonalBlock()..initializeMove(23600.0, -200.0, 23950.0, 400.0) // diagonal block
         ..width = 100.0 .. height = 101.0..speedY = 4.0);
     
     

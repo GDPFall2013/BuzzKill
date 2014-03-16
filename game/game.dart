@@ -123,6 +123,7 @@ int stateEnumIntro = 8;
 int stateEnumOptions = 9;
 int stateEnumCollected = 10;
 int stateEnumOutro = 11;
+int stateEnumEnd = 12;
 
 bool resetMainMenu = false; //used to reset main menu if prev screen was pause menu
 int state;
@@ -490,6 +491,22 @@ void draw() {
     //load main menu if user does not press ENTER
     else if(restartTimer.elapsedMilliseconds>5000){
       reloadMainMenu();
+    }
+  }
+  
+  else if(state == stateEnumEnd){
+    //normContext.save();
+   // normContext.font = "normal 15pt calibri";
+    //normContext.fillText('Press Enter to continue.', 420, 420, 1000);
+    //normContext.restore();
+    
+    if (input.isDown(KeyCode.ENTER)) {
+      Game.instance.currentLevel = LevelManager.enumMainMenu;
+      Game.instance.state = Game.instance.stateEnumMain;
+      Game.instance.lastENTER = input.timePressed(KeyCode.ENTER);
+      Game.instance.resetMainMenu = true;
+      Game.instance.menu.playGame = true;
+      Globals.setBackground();
     }
   }
   
