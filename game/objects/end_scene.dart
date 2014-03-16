@@ -5,6 +5,7 @@ class EndScene extends GameObject{
   ImageElement img = new ImageElement();
 
   SpriteSheet sprite;
+  SpriteSheet outroTextSprite;
   SpriteSheet shipItemSprite1;
   SpriteSheet shipItemSprite2;
   SpriteSheet shipItemSprite3;
@@ -13,6 +14,8 @@ class EndScene extends GameObject{
   SpriteSheet spaceShipSprite;
   SpriteSheet buzzSprite;
   
+  SpriteSheet missionTextSprite;
+  SpriteSheet continueTextSprite;
   int spriteXInitial = 0;
   int spriteYInitial = 0;
   int spriteWidth = 97;
@@ -29,7 +32,7 @@ class EndScene extends GameObject{
   double accel = 0.8;
   double initialY;
   Stopwatch liftOffTimer = new Stopwatch();
-  
+  Stopwatch outroTimer = new Stopwatch();
   
   double ss1x = 0.0;
   double ss1y = 0.0;
@@ -43,7 +46,10 @@ class EndScene extends GameObject{
   double buzzy = 0.0;
   double shipx = 0.0;
   double shipy = 0.0;
+  double missionTextx = 0.0;  
+  double continueTextx = 0.0; 
   
+  bool outroText = false;
   bool shipItem1 = false;
   bool shipItem2 = false;
   bool shipItem3 = false;
@@ -53,6 +59,7 @@ class EndScene extends GameObject{
   bool reachShip = false;
   bool liftOff = false;
   bool setBG = false;
+  bool drawText = false;
   
   EndScene() {
     //super.initialize(x, y);
@@ -64,6 +71,9 @@ class EndScene extends GameObject{
     sprite = new SpriteSheet("./content/enemies_spritesheet.png",
         0,100,90,90);
     
+    outroTextSprite = new SpriteSheet("./content/outro_text.png",0,0,640,480);
+    outroTextSprite.spritey = -400;
+    
     shipItemSprite1 = new SpriteSheet("./content/gameitems.png",
         0,100,90,90);
     shipItemSprite2 = new SpriteSheet("./content/gameitems.png",
@@ -73,10 +83,22 @@ class EndScene extends GameObject{
     shipItemSprite4 = new SpriteSheet("./content/gameitems.png",
         0,100,90,90);
     
-    spaceShipSprite = new SpriteSheet("./content/spaceship copy.png",
+    spaceShipSprite = new SpriteSheet("./content/spaceship.png",
         0,0,230,310);
     
     buzzSprite = new SpriteSheet("./content/buzzspritesheet.png",0,0,75,100);
+
+
+    missionTextSprite = new SpriteSheet("./content/mission_success.png",0,0,432,98);
+    missionTextSprite.scaledw = 1296;
+    missionTextSprite.scaledh = 294;
+    missionTextx = camera.x;
+    
+    continueTextSprite = new SpriteSheet("./content/mission_success.png",0,0,200,30);
+        continueTextSprite.scaledw = 300;
+        continueTextSprite.scaledh = 45;
+        continueTextx = camera.x+700;
+        continueTextSprite.spritey = 100;
     
     buzzSprite.numberOfFrames = 12;
     buzzSprite.frameChangeRate = 5.0;
@@ -102,6 +124,10 @@ class EndScene extends GameObject{
      
      shipx = camera.x + 300;
      shipy = 200.0;
+     
+     
+     
+     query("#canvas").style.backgroundImage = "url(content/intro_bg.png)";
   }
   
   update (double dt) {
@@ -110,8 +136,30 @@ class EndScene extends GameObject{
     //print('end scene');
    // sprite.update(dt);
     
+    if(!outroText){
+      if(outroTextSprite.spritey <= 0){
+        outroTextSprite.spritey += 0.5;
+        
+      }
+      
+      else{
+        outroTimer.start();
+        
+        if(outroTimer.elapsedMilliseconds > 4000){
+          outroText = true;
+          outroTimer.stop();
+          outroTimer.reset();
+        }
+      }
+      
+      if(Game.instance.input.wasPressed(KeyCode.ENTER)){
+        outroText = true;
+        query("#canvas").style.backgroundImage = "url(content/backgrounds/level2.jpg)";
+      }
+      
+    }
     
-    if(!shipItem1){
+    if(!shipItem1 && outroText){
       if(ss1x > shipx+25 || ss1y < 200.0){
         if(ss1x>shipx+25)
           ss1x -= 5.5;
@@ -215,11 +263,14 @@ class EndScene extends GameObject{
           setBG = true;
           shipy = 400.0;
           shipx = camera.x-100;
+          //normContext.clearRect(x, y, 640, 480);
         }
       }
       
       if(setBG){
-        if(shipx<700){
+       
+        if(shipx<camera.x+700){
+          
         spaceShipSprite.spritex = 1600;
         
         spaceShipSprite.scaledw -= 1.5;
@@ -234,6 +285,24 @@ class EndScene extends GameObject{
         else{
           spaceShipSprite.scaledw = 0.0;
           spaceShipSprite.scaledh = 0.0;
+         outroTimer.start();
+         if(outroTimer.elapsedMilliseconds > 1000){
+          drawText = true;
+          outroTimer.stop();
+          outroTimer.reset();
+         }
+        }
+      }
+      
+      if(drawText){
+        if(missionTextSprite.scaledw >= 490){
+        missionTextSprite.scaledw -= 13.2;
+        missionTextSprite.scaledh -= 3;
+        missionTextx += 4;
+        }
+        else{
+          continueTextSprite.drawOnPosition(continueTextx, 400.0, 200.0, 30.0);
+          Game.instance.state = Game.instance.stateEnumEnd;
         }
       }
      
@@ -248,6 +317,7 @@ class EndScene extends GameObject{
   draw(){
     //sprite.drawOnPosition(camera.x+300.0, 0.0, width , height);
     
+    if(outroText){
     spaceShipSprite.drawOnPosition(shipx, shipy, 230.0, 310.0);
     buzzSprite.drawOnPosition(buzzx, buzzy, 75.0, 100.0);
     
@@ -263,6 +333,20 @@ class EndScene extends GameObject{
     if(!shipItem4){
     shipItemSprite4.drawOnPosition(ss4x, ss4y, 90.0, 90.0);
     }
+    
+    
+      if(drawText){
+      missionTextSprite.drawOnPosition(missionTextx, 0.0, 432.0, 98.0);
+      //continueTextSprite.drawOnPosition(continueTextx, 300.0, 200.0, 30.0);
+      }
+    }
+    
+    else if(!outroText){
+      outroTextSprite.drawOnPositionNormal(0.0, 0.0, 640.0 , 480.0);
+      continueTextSprite.drawOnPosition(camera.x-150, -475.0, 230.0, 30.0);
+    }
+    
+    
   }
   
 
