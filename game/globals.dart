@@ -34,6 +34,7 @@ class Globals{
     
     oxygenLossRate = 250.0;
     gameSpeed = 2.0;
+    jumpVelocity = 1.02;
   }
   
   static void setInsaneDifficulty() {

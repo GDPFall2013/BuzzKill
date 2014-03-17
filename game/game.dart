@@ -50,6 +50,7 @@ part 'objects/spring.dart';
 part 'objects/vertical_block.dart';
 part 'objects/diagonal_block.dart';
 part 'objects/end_scene.dart';
+part 'objects/predator.dart';
 
 part 'animations/sprite_sheet.dart';
 
@@ -524,7 +525,7 @@ drawObjects() {
     if (goRightEdge > (camera.x - (viewportWidth / Camera.instance.screenRatio))  && 
         goLeftEdge < (camera.x + (viewportWidth / Camera.instance.screenRatio))) {
       go.draw();
-         // DrawColliderBox(go);
+        //  DrawColliderBox(go);
         }   
       }
   }
@@ -564,6 +565,7 @@ win() {
 
 collected(){
   state = stateEnumCollected;
+  Game.lives++;
 }
 gameOver() {
   // TODO music to be placed here in the future

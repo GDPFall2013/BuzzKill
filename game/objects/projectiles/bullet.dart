@@ -11,7 +11,7 @@ class Bullet extends Projectile
   int spriteHeight = 10;
   
   double imgOffsetX = 20.0;
-  double imgOffsetY = -60.0;
+  double imgOffsetY = 0.0;
 
   int direction = 1;
   
@@ -26,7 +26,7 @@ class Bullet extends Projectile
     sprite.frameChangeRate = 9.0;
     sprite.numberOfFrames = 14;
     
-    horizontalVelocity = 1.2;
+    horizontalVelocity = 2.0;
     verticalVelocity = 0.0;
     
     injureValue = 10.0;

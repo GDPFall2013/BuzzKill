@@ -34,7 +34,7 @@ class clone extends Enemy{
     
     sprite.frameChangeRate = 10.0;
     sprite.numberOfFrames = 8;
-    bullet = new Bullet()..initialize(this.x, this.y);
+    bullet = new Bullet()..initialize(-10000.0, this.y);
     ObjectManager.instance.addEnemy(bullet);
   }
   
@@ -93,7 +93,7 @@ class clone extends Enemy{
      } else {
        direction = -1;
      }
-     bullet.initialize(this.x + 40 * direction, this.y + 10);
+     bullet.initialize(this.x + 40 * direction, this.y -50);
      bullet.setDirection(direction);
    }
 }
