@@ -8,10 +8,10 @@ class Bullet extends Projectile
   int spriteXInitial = 0;
   int spriteYInitial = 1040;
   int spriteWidth = 60;
-  int spriteHeight = 50;
+  int spriteHeight = 10;
   
   double imgOffsetX = 20.0;
-  double imgOffsetY = 0.0;
+  double imgOffsetY = -60.0;
 
   int direction = 1;
   

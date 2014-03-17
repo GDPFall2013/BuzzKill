@@ -594,10 +594,11 @@ reloadLevel() {
 restartGame() {
   currentLevel = 1;
   lives = 3;
+  menu = new MainMenu();
   levelManager.loadLevel(currentLevel);
   player.resetPlayer();
   state = stateEnumPlay;
-  
+ 
   currentLevel = 1;
   //reset oxygen
   if(currentLevel >= LevelManager.enumLevelOne){

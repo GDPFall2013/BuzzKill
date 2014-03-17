@@ -7,6 +7,10 @@ void setupLevelOne() {
       SoundManager.instance.setMusic(SoundManager.musicLevelOne);
       SoundManager.instance.startMusic();
     }
+  
+  if(!Game.instance.menu.cheat){
+   Game.instance.player.playerStartX = 0.0;
+  }
     
   SoundManager.instance.loadMusic(SoundManager.musicLevelOne,  startMusic);
   
