@@ -540,11 +540,6 @@ var $$ = {};
     $div: [function(receiver, other) {
       return receiver / other;
     }, "call$1", "get$/", 2, 0, null, 161],
-    $mul: [function(receiver, other) {
-      if (typeof other !== "number")
-        throw H.wrapException(new P.ArgumentError(other));
-      return receiver * other;
-    }, "call$1", "get$*", 2, 0, null, 161],
     _tdivFast$1: [function(receiver, other) {
       return (receiver | 0) === receiver ? receiver / other | 0 : this.toInt$0(receiver / other);
     }, "call$1", "get$_tdivFast", 2, 0, null, 161],
@@ -2842,7 +2837,7 @@ var $$ = {};
       t2 = $.Camera_instance;
       t3 = t2.x;
       t4 = t2.screenRatio;
-      J.rect$4$x(t1, (x - t3) * t4 + this.xAdjust, (y - t2.y) * t4 + this.yAdjust, J.$mul$n(width, t4), J.$mul$n(height, $.Camera_instance.screenRatio));
+      J.rect$4$x(t1, (x - t3) * t4 + this.xAdjust, (y - t2.y) * t4 + this.yAdjust, width * t4, height * t4);
     }, "call$4", "get$rect", 8, 0, null, 12, 138, 139, 140],
     lineTo$2: [function(_, x, y) {
       var t1, t2, t3, t4;
@@ -2888,6 +2883,13 @@ var $$ = {};
   },
   ChromeAppWindow: {
     "": "ChromeApi;_onBoundsChanged,_onClosed,_onFullscreened,_onMaximized,_onMinimized,_onRestored",
+    current$0: [function() {
+      var t1 = $.get$ChromeAppWindow__app_window();
+      if (t1 == null)
+        this._throwNotAvailable$0();
+      t1 = t1.callMethod$1("current");
+      return t1 == null ? null : new B.AppWindow(t1);
+    }, "call$0", "get$current", 0, 0, null],
     _throwNotAvailable$0: [function() {
       throw H.wrapException(P.UnsupportedError$("'chrome.app.window' is not available"));
     }, "call$0", "get$_throwNotAvailable", 0, 0, null],
@@ -4582,7 +4584,7 @@ var $$ = {};
       return;
     },
     set$next: function(_) {
-      throw H.wrapException(P.StateError$("No events after a done."));
+      throw H.wrapException(new P.StateError("No events after a done."));
     }
   },
   _PendingEvents: {
@@ -6265,12 +6267,12 @@ var $$ = {};
       else
         return H.S(y) + "-" + H.S(m) + "-" + H.S(d) + " " + H.S(h) + ":" + H.S(min) + ":" + H.S(sec) + "." + H.S(ms);
     }, "call$0", "get$toString", 0, 0, null],
+    DateTime$_now$0: function() {
+      H.Primitives_lazyAsJsDate(this);
+    },
     DateTime$fromMillisecondsSinceEpoch$2$isUtc: function(millisecondsSinceEpoch, isUtc) {
       if (Math.abs(millisecondsSinceEpoch) > 8640000000000000)
         throw H.wrapException(new P.ArgumentError(millisecondsSinceEpoch));
-    },
-    DateTime$_now$0: function() {
-      H.Primitives_lazyAsJsDate(this);
     },
     $isDateTime: true,
     static: {"": "DateTime_MONDAY,DateTime_TUESDAY,DateTime_WEDNESDAY,DateTime_THURSDAY,DateTime_FRIDAY,DateTime_SATURDAY,DateTime_SUNDAY,DateTime_DAYS_PER_WEEK,DateTime_JANUARY,DateTime_FEBRUARY,DateTime_MARCH,DateTime_APRIL,DateTime_MAY,DateTime_JUNE,DateTime_JULY,DateTime_AUGUST,DateTime_SEPTEMBER,DateTime_OCTOBER,DateTime_NOVEMBER,DateTime_DECEMBER,DateTime_MONTHS_PER_YEAR,DateTime__MAX_MILLISECONDS_SINCE_EPOCH", DateTime$fromMillisecondsSinceEpoch: function(millisecondsSinceEpoch, isUtc) {
@@ -6780,7 +6782,7 @@ var $$ = {};
     "%": "WebGLRenderingContext;CanvasRenderingContext"
   },
   CanvasRenderingContext2D: {
-    "": "CanvasRenderingContext;fillStyle},font},strokeStyle}",
+    "": "CanvasRenderingContext;fillStyle},font}",
     beginPath$0: [function(receiver) {
       return receiver.beginPath();
     }, "call$0", "get$beginPath", 0, 0, null],
@@ -9255,7 +9257,7 @@ var $$ = {};
     t2.push(t1);
     t3.push(t1);
     t1 = W.ImageElement_ImageElement(null, null, null);
-    t1 = new U.Gorilla(t1, null, null, null, 0, 360, 140, 200, null, 0, -20, null, null, false, false, false, C.C__JSRandom, null, null, false, false, null, null, 0, 0, false);
+    t1 = new U.Gorilla(t1, null, null, null, 0, 360, 140, 200, null, 0, -30, null, null, false, false, false, C.C__JSRandom, null, null, false, false, null, null, 0, 0, false);
     t1.initialize$2(5000, 400);
     t2.push(t1);
     t5.push(t1);
@@ -11161,7 +11163,37 @@ var $$ = {};
     t2.push(t6);
     t3.push(t6);
     t6 = new U.Oxygen(U.SpriteSheet$("./content/gameitems.png", 0, 0, 50, 50), null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t6, 27250, -300);
+    t6.width = 50;
+    t6.height = 45;
+    t2.push(t6);
+    t4.push(t6);
+    t6 = new U.Oxygen(U.SpriteSheet$("./content/gameitems.png", 0, 0, 50, 50), null, null, 0, 0, false);
     U.GameObject.prototype.initialize$2.call(t6, 27300, -300);
+    t6.width = 50;
+    t6.height = 45;
+    t2.push(t6);
+    t4.push(t6);
+    t6 = new U.Oxygen(U.SpriteSheet$("./content/gameitems.png", 0, 0, 50, 50), null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t6, 27350, -300);
+    t6.width = 50;
+    t6.height = 45;
+    t2.push(t6);
+    t4.push(t6);
+    t6 = new U.Oxygen(U.SpriteSheet$("./content/gameitems.png", 0, 0, 50, 50), null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t6, 27400, -300);
+    t6.width = 50;
+    t6.height = 45;
+    t2.push(t6);
+    t4.push(t6);
+    t6 = new U.Oxygen(U.SpriteSheet$("./content/gameitems.png", 0, 0, 50, 50), null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t6, 27450, -300);
+    t6.width = 50;
+    t6.height = 45;
+    t2.push(t6);
+    t4.push(t6);
+    t6 = new U.Oxygen(U.SpriteSheet$("./content/gameitems.png", 0, 0, 50, 50), null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t6, 27500, -300);
     t6.width = 50;
     t6.height = 45;
     t2.push(t6);
@@ -11351,8 +11383,17 @@ var $$ = {};
     t7.ShurikenAttack$0();
     t8 = new U.MiniShurikenAttack(0, 0, 100, 180, 10, -10, new U.CyraxMiniShuriken(200, 360, 100, 180, 0, 0, null, null, null, null, null, null, false, false, null, null, 0, 0, false), new U.CyraxMiniShuriken(200, 360, 100, 180, 0, 0, null, null, null, null, null, null, false, false, null, null, 0, 0, false), new U.CyraxMiniShuriken(200, 360, 100, 180, 0, 0, null, null, null, null, null, null, false, false, null, null, 0, 0, false), new U.CyraxMiniShuriken(200, 360, 100, 180, 0, 0, null, null, null, null, null, null, false, false, null, null, 0, 0, false), null, null);
     t8.MiniShurikenAttack$0();
-    t1 = new U.Cyrax(t1, null, null, t6, t7, t8, 0, 880, 90, 170, 0, -10, null, null, false, false, C.C__JSRandom, null, null, false, false, null, null, 0, 0, false);
-    t1.initialize$2(30200, 275);
+    t1 = new U.Cyrax(t1, null, null, t6, t7, t8, 0, 880, 90, 170, 0, -10, null, null, false, false, C.C__JSRandom, 150, 200, null, null, false, false, null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 30200, 275);
+    t1.width = 90;
+    t1.height = 150;
+    t6 = U.SpriteSheet$("./content/enemies_spritesheet.png", t1.spriteXInitial, 880, 90, 170);
+    t1.walkingSprite = t6;
+    t1.initialPos = 30200;
+    t1.endPos = 29600;
+    t6.frameChangeRate = 20;
+    t6.numberOfFrames = 5;
+    t1.TYPE = "BOSS";
     t2.push(t1);
     t5.push(t1);
     t1 = new U.Block(U.SpriteSheet$("./content/gameitems.png", 50, 0, 120, 100), W.ImageElement_ImageElement(null, null, null), false, false, false, false, false, 0, 0, false, false, false, true, false, null, null, 0, 0, false);
@@ -11375,8 +11416,280 @@ var $$ = {};
   setupMainMenu: [function() {
     $.SoundManager_instance.loadMusic$2(1, new U.setupMainMenu_startMusic());
   }, "call$0", "setupMainMenu$closure", 0, 0, null],
+  setupLevelOne: [function() {
+    var t1, om, t2, t3, t4, t5;
+    $.Game_instance.currentLevel = $.LevelManager_enumLevelOne;
+    U.Globals_setBackground();
+    t1 = $.Game_instance;
+    if (!t1.menu.cheat)
+      t1.player.playerStartX = 0;
+    $.SoundManager_instance.loadMusic$2(2, new U.setupLevelOne_startMusic());
+    om = $.ObjectManager_instance;
+    t1 = $.Game_instance.player;
+    t2 = om.goList;
+    t2.push(t1);
+    t1 = new U.Block(U.SpriteSheet$("./content/gameitems.png", 50, 0, 120, 100), W.ImageElement_ImageElement(null, null, null), false, false, false, false, false, 0, 0, false, false, false, true, false, null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 875, 420);
+    J.set$src$x(t1.img, "./content/platform.png");
+    t1.width = 1750;
+    t1.height = 140;
+    t2.push(t1);
+    t3 = om.blockList;
+    t3.push(t1);
+    t1 = new U.Oxygen(U.SpriteSheet$("./content/gameitems.png", 0, 0, 50, 50), null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 100, 290);
+    t1.width = 50;
+    t1.height = 45;
+    t2.push(t1);
+    t4 = om.itemList;
+    t4.push(t1);
+    t1 = new U.Oxygen(U.SpriteSheet$("./content/gameitems.png", 0, 0, 50, 50), null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 150, 290);
+    t1.width = 50;
+    t1.height = 45;
+    t2.push(t1);
+    t4.push(t1);
+    t1 = new U.Oxygen(U.SpriteSheet$("./content/gameitems.png", 0, 0, 50, 50), null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 200, 290);
+    t1.width = 50;
+    t1.height = 45;
+    t2.push(t1);
+    t4.push(t1);
+    t1 = new U.Block(U.SpriteSheet$("./content/gameitems.png", 50, 0, 120, 100), W.ImageElement_ImageElement(null, null, null), false, false, false, false, false, 0, 0, false, false, false, true, false, null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 330, 300);
+    J.set$src$x(t1.img, "./content/platform.png");
+    t1.width = 120;
+    t1.height = 100;
+    t2.push(t1);
+    t3.push(t1);
+    t1 = new U.Oxygen(U.SpriteSheet$("./content/gameitems.png", 0, 0, 50, 50), null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 440, 290);
+    t1.width = 50;
+    t1.height = 45;
+    t2.push(t1);
+    t4.push(t1);
+    t1 = new U.Oxygen(U.SpriteSheet$("./content/gameitems.png", 0, 0, 50, 50), null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 490, 290);
+    t1.width = 50;
+    t1.height = 45;
+    t2.push(t1);
+    t4.push(t1);
+    t1 = new U.Oxygen(U.SpriteSheet$("./content/gameitems.png", 0, 0, 50, 50), null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 540, 290);
+    t1.width = 50;
+    t1.height = 45;
+    t2.push(t1);
+    t4.push(t1);
+    t1 = new U.Block(U.SpriteSheet$("./content/gameitems.png", 50, 0, 120, 100), W.ImageElement_ImageElement(null, null, null), false, false, false, false, false, 0, 0, false, false, false, true, false, null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 640, 300);
+    J.set$src$x(t1.img, "./content/platform.png");
+    t1.width = 120;
+    t1.height = 100;
+    t2.push(t1);
+    t3.push(t1);
+    t1 = new U.Oxygen(U.SpriteSheet$("./content/gameitems.png", 0, 0, 50, 50), null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 730, 290);
+    t1.width = 50;
+    t1.height = 45;
+    t2.push(t1);
+    t4.push(t1);
+    t1 = new U.Spike(10, null, null, false, false, null, null, 0, 0, false);
+    t1.x = 850;
+    t1.y = 340;
+    t1.width = 100;
+    t1.height = 20;
+    t2.push(t1);
+    t5 = om.enemyList;
+    t5.push(t1);
+    t1 = new U.Oxygen(U.SpriteSheet$("./content/gameitems.png", 0, 0, 50, 50), null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 1050, 290);
+    t1.width = 50;
+    t1.height = 45;
+    t2.push(t1);
+    t4.push(t1);
+    t1 = new U.Oxygen(U.SpriteSheet$("./content/gameitems.png", 0, 0, 50, 50), null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 1100, 290);
+    t1.width = 50;
+    t1.height = 45;
+    t2.push(t1);
+    t4.push(t1);
+    t1 = new U.Oxygen(U.SpriteSheet$("./content/gameitems.png", 0, 0, 50, 50), null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 1150, 290);
+    t1.width = 50;
+    t1.height = 45;
+    t2.push(t1);
+    t4.push(t1);
+    t1 = new U.Oxygen(U.SpriteSheet$("./content/gameitems.png", 0, 0, 50, 50), null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 1200, 290);
+    t1.width = 50;
+    t1.height = 45;
+    t2.push(t1);
+    t4.push(t1);
+    t1 = new U.Block(U.SpriteSheet$("./content/gameitems.png", 50, 0, 120, 100), W.ImageElement_ImageElement(null, null, null), false, false, false, false, false, 0, 0, false, false, false, true, false, null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 1300, 300);
+    J.set$src$x(t1.img, "./content/platform.png");
+    t1.width = 120;
+    t1.height = 100;
+    t2.push(t1);
+    t3.push(t1);
+    t1 = new U.Oxygen(U.SpriteSheet$("./content/gameitems.png", 0, 0, 50, 50), null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 1450, 290);
+    t1.width = 50;
+    t1.height = 45;
+    t2.push(t1);
+    t4.push(t1);
+    t1 = new U.Oxygen(U.SpriteSheet$("./content/gameitems.png", 0, 0, 50, 50), null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 1500, 290);
+    t1.width = 50;
+    t1.height = 45;
+    t2.push(t1);
+    t4.push(t1);
+    t1 = new U.Spike(10, null, null, false, false, null, null, 0, 0, false);
+    t1.x = 1600;
+    t1.y = 340;
+    t1.width = 100;
+    t1.height = 20;
+    t2.push(t1);
+    t5.push(t1);
+    t1 = new U.Oxygen(U.SpriteSheet$("./content/gameitems.png", 0, 0, 50, 50), null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 1800, 200);
+    t1.width = 50;
+    t1.height = 45;
+    t2.push(t1);
+    t4.push(t1);
+    t1 = new U.Block(U.SpriteSheet$("./content/gameitems.png", 50, 0, 120, 100), W.ImageElement_ImageElement(null, null, null), false, false, false, false, false, 0, 0, false, false, false, true, false, null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 2875, 420);
+    J.set$src$x(t1.img, "./content/platform.png");
+    t1.width = 1875;
+    t1.height = 140;
+    t2.push(t1);
+    t3.push(t1);
+    t1 = new U.Oxygen(U.SpriteSheet$("./content/gameitems.png", 0, 0, 50, 50), null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 2000, 290);
+    t1.width = 50;
+    t1.height = 45;
+    t2.push(t1);
+    t4.push(t1);
+    t1 = new U.Oxygen(U.SpriteSheet$("./content/gameitems.png", 0, 0, 50, 50), null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 2050, 290);
+    t1.width = 50;
+    t1.height = 45;
+    t2.push(t1);
+    t4.push(t1);
+    t1 = new U.Oxygen(U.SpriteSheet$("./content/gameitems.png", 0, 0, 50, 50), null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 2100, 290);
+    t1.width = 50;
+    t1.height = 45;
+    t2.push(t1);
+    t4.push(t1);
+    t1 = new U.Oxygen(U.SpriteSheet$("./content/gameitems.png", 0, 0, 50, 50), null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 2150, 290);
+    t1.width = 50;
+    t1.height = 45;
+    t2.push(t1);
+    t4.push(t1);
+    t1 = new U.Block(U.SpriteSheet$("./content/gameitems.png", 50, 0, 120, 100), W.ImageElement_ImageElement(null, null, null), false, false, false, false, false, 0, 0, false, false, false, true, false, null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 2300, 300);
+    J.set$src$x(t1.img, "./content/platform.png");
+    t1.width = 120;
+    t1.height = 100;
+    t2.push(t1);
+    t3.push(t1);
+    t1 = new U.Oxygen(U.SpriteSheet$("./content/gameitems.png", 0, 0, 50, 50), null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 2800, 290);
+    t1.width = 50;
+    t1.height = 45;
+    t2.push(t1);
+    t4.push(t1);
+    t1 = new U.Oxygen(U.SpriteSheet$("./content/gameitems.png", 0, 0, 50, 50), null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 2850, 290);
+    t1.width = 50;
+    t1.height = 45;
+    t2.push(t1);
+    t4.push(t1);
+    t1 = new U.Oxygen(U.SpriteSheet$("./content/gameitems.png", 0, 0, 50, 50), null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 2900, 290);
+    t1.width = 50;
+    t1.height = 45;
+    t2.push(t1);
+    t4.push(t1);
+    t1 = new U.Alien(W.ImageElement_ImageElement(null, null, null), null, 0, 0, 97, 50, 8, -7, null, null, false, 20, 20, 0.8, null, new P.Stopwatch(null, null), null, null, false, false, null, null, 0, 0, false);
+    t1.initialize$2(3250, 330);
+    t2.push(t1);
+    t5.push(t1);
+    t1 = new U.Spike(10, null, null, false, false, null, null, 0, 0, false);
+    t1.x = 3500;
+    t1.y = 340;
+    t1.width = 100;
+    t1.height = 20;
+    t2.push(t1);
+    t5.push(t1);
+    t1 = new U.Oxygen(U.SpriteSheet$("./content/gameitems.png", 0, 0, 50, 50), null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 3600, 290);
+    t1.width = 50;
+    t1.height = 45;
+    t2.push(t1);
+    t4.push(t1);
+    t1 = new U.Oxygen(U.SpriteSheet$("./content/gameitems.png", 0, 0, 50, 50), null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 3650, 290);
+    t1.width = 50;
+    t1.height = 45;
+    t2.push(t1);
+    t4.push(t1);
+    t1 = new U.Oxygen(U.SpriteSheet$("./content/gameitems.png", 0, 0, 50, 50), null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 3800, 290);
+    t1.width = 50;
+    t1.height = 45;
+    t2.push(t1);
+    t4.push(t1);
+    t1 = new U.Block(U.SpriteSheet$("./content/gameitems.png", 50, 0, 120, 100), W.ImageElement_ImageElement(null, null, null), false, false, false, false, false, 0, 0, false, false, false, true, false, null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 4500, 420);
+    J.set$src$x(t1.img, "./content/platform.png");
+    t1.width = 1060;
+    t1.height = 140;
+    t2.push(t1);
+    t3.push(t1);
+    t1 = new U.Alien(W.ImageElement_ImageElement(null, null, null), null, 0, 0, 97, 50, 8, -7, null, null, false, 20, 20, 0.8, null, new P.Stopwatch(null, null), null, null, false, false, null, null, 0, 0, false);
+    t1.initialize$2(4150, 330);
+    t2.push(t1);
+    t5.push(t1);
+    t1 = new U.Oxygen(U.SpriteSheet$("./content/gameitems.png", 0, 0, 50, 50), null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 4300, 290);
+    t1.width = 50;
+    t1.height = 45;
+    t2.push(t1);
+    t4.push(t1);
+    t1 = new U.Oxygen(U.SpriteSheet$("./content/gameitems.png", 0, 0, 50, 50), null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 4350, 290);
+    t1.width = 50;
+    t1.height = 45;
+    t2.push(t1);
+    t4.push(t1);
+    t1 = new U.Oxygen(U.SpriteSheet$("./content/gameitems.png", 0, 0, 50, 50), null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 4400, 290);
+    t1.width = 50;
+    t1.height = 45;
+    t2.push(t1);
+    t4.push(t1);
+    t1 = new U.Alien(W.ImageElement_ImageElement(null, null, null), null, 0, 0, 97, 50, 8, -7, null, null, false, 20, 20, 0.8, null, new P.Stopwatch(null, null), null, null, false, false, null, null, 0, 0, false);
+    t1.initialize$2(4500, 330);
+    t2.push(t1);
+    t5.push(t1);
+    t1 = new U.Block(U.SpriteSheet$("./content/gameitems.png", 50, 0, 120, 100), W.ImageElement_ImageElement(null, null, null), false, false, false, false, false, 0, 0, false, false, false, true, false, null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 4700, 300);
+    J.set$src$x(t1.img, "./content/platform.png");
+    t1.width = 120;
+    t1.height = 100;
+    t2.push(t1);
+    t3.push(t1);
+    t1 = new U.ShipItem(null, null, null, null, 0, 100, 90, 90, 6, new P.Stopwatch(null, null), null, true, false, 1, null, null, null, null, null, null, null, 0, 0, false);
+    t1.initialize$2(5000, 290);
+    t1.level = 1;
+    t2.push(t1);
+    t4.push(t1);
+  }, "call$0", "setupLevelOne$closure", 0, 0, null],
   setupLevelThree: [function() {
-    var om, t1, t2, t3, t4, t5, mBlock, trigger, floorObstacle;
+    var om, t1, t2, t3, t4, t5, mBlock, trigger, floorObstacle, t6, t7;
     $.Game_instance.currentLevel = $.LevelManager_enumLevelThree;
     U.Globals_setBackground();
     $.SoundManager_instance.loadMusic$2(2, new U.setupLevelThree_startMusic());
@@ -12127,7 +12440,7 @@ var $$ = {};
     t2.push(t1);
     t3.push(t1);
     t1 = W.ImageElement_ImageElement(null, null, null);
-    t1 = new U.Gorilla(t1, null, null, null, 0, 360, 140, 200, null, 0, -20, null, null, false, false, false, C.C__JSRandom, null, null, false, false, null, null, 0, 0, false);
+    t1 = new U.Gorilla(t1, null, null, null, 0, 360, 140, 200, null, 0, -30, null, null, false, false, false, C.C__JSRandom, null, null, false, false, null, null, 0, 0, false);
     t1.initialize$2(10500, 300);
     t2.push(t1);
     t5.push(t1);
@@ -12914,6 +13227,32 @@ var $$ = {};
     t1.height = 45;
     t2.push(t1);
     t4.push(t1);
+    t1 = new U.Spring(U.SpriteSheet$("./content/gameitems copy.png", 0, 0, 74, 165), false, false, false, 0, null, null, null, U.SpriteSheet$("./content/gameitems.png", 50, 0, 120, 100), W.ImageElement_ImageElement(null, null, null), false, false, false, false, false, 0, 0, false, false, false, true, false, null, null, 0, 0, false);
+    t1.initialize$2(19760, 300);
+    t2.push(t1);
+    t3.push(t1);
+    t1 = W.ImageElement_ImageElement(null, null, null);
+    t1 = new U.Predator(t1, null, null, null, 0, 1825, 180, 220, null, 10, -10, null, null, false, false, false, C.C__JSRandom, null, null, false, false, null, null, 0, 0, false);
+    U.GameObject.prototype.initialize$2.call(t1, 20000, 300);
+    t1.width = 140;
+    t1.height = 190;
+    t1.sprite = U.SpriteSheet$("./content/enemies_spritesheet.png", 0, 1825, 180, 220);
+    t1.attackSprite = U.SpriteSheet$("./content/Predator_attack_spritesheet.png", 0, 305, 200, 240);
+    t6 = U.SpriteSheet$("./content/Predator_attack_spritesheet.png", 0, 830, 160, 600);
+    t1.attackSprite1 = t6;
+    t1.initialPos = 20000;
+    t1.endPos = 19700;
+    t7 = t1.sprite;
+    t7.frameChangeRate = 10;
+    t7.numberOfFrames = 6;
+    t7 = t1.attackSprite;
+    t7.frameChangeRate = 60;
+    t7.numberOfFrames = 4;
+    t6.frameChangeRate = 60;
+    t6.numberOfFrames = 12;
+    t1.TYPE = "BOSS";
+    t2.push(t1);
+    t5.push(t1);
     t1 = new U.Spring(U.SpriteSheet$("./content/gameitems copy.png", 0, 0, 74, 165), false, false, false, 0, null, null, null, U.SpriteSheet$("./content/gameitems.png", 50, 0, 120, 100), W.ImageElement_ImageElement(null, null, null), false, false, false, false, false, 0, 0, false, false, false, true, false, null, null, 0, 0, false);
     t1.initialize$2(20850, 300);
     t2.push(t1);
@@ -13712,7 +14051,7 @@ var $$ = {};
     trigger.width = 120;
     trigger.height = 20;
     t1 = W.ImageElement_ImageElement(null, null, null);
-    boss = new U.Gorilla(t1, null, null, null, 0, 360, 140, 200, null, 0, -20, null, null, false, false, false, C.C__JSRandom, null, null, false, false, null, null, 0, 0, false);
+    boss = new U.Gorilla(t1, null, null, null, 0, 360, 140, 200, null, 0, -30, null, null, false, false, false, C.C__JSRandom, null, null, false, false, null, null, 0, 0, false);
     boss.initialize$2(13100, 300);
     t2.push(boss);
     t4.push(boss);
@@ -14419,17 +14758,6 @@ var $$ = {};
         this.endScene.update$1(dt);
         this.endScene.draw$0();
       }
-      t1 = this.numberOfUpdates + 1;
-      this.numberOfUpdates = t1;
-      t2 = this.debuggingDisplayTime + dt;
-      this.debuggingDisplayTime = t2;
-      if (t2 > 100) {
-        this.debuggingDisplayTime = t2 - 100;
-        this.updatesPerSecond = t1;
-        this.rendersPerSecond = this.numberOfRenders;
-        this.numberOfUpdates = 0;
-        this.numberOfRenders = 0;
-      }
     }, "call$1", "get$update", 2, 0, null, 230],
     draw$0: [function() {
       var t1, t2, t3, t4, secs, secs2, secs4;
@@ -14504,7 +14832,8 @@ var $$ = {};
           if ($.get$gameLoop()._keyboard.isDown$1(13)) {
             this.currentLevel = 1;
             $.Game_lives = 3;
-            this.levelManager.loadLevel$1(1);
+            this.menu = U.MainMenu$();
+            this.levelManager.loadLevel$1(this.currentLevel);
             this.player.resetPlayer$0();
             this.state = t4;
             this.currentLevel = 1;
@@ -14542,24 +14871,16 @@ var $$ = {};
       this.numberOfRenders = this.numberOfRenders + 1;
     }, "call$0", "get$draw", 0, 0, null],
     drawObjects$0: [function() {
-      var t1, go, t2, goRightEdge, goLeftEdge, t3, t4;
+      var t1, go, t2, goRightEdge, goLeftEdge, t3;
       for (t1 = $.ObjectManager_instance.goList, t1 = new H.ListIterator(t1, t1.length, 0, null); t1.moveNext$0();) {
         go = t1._current;
         t2 = J.getInterceptor$x(go);
         goRightEdge = J.$add$ns(t2.get$x(go), J.$div$n(t2.get$width(go), 2));
         goLeftEdge = J.$sub$n(t2.get$x(go), J.$div$n(t2.get$width(go), 2));
-        t3 = $.get$camera().x;
-        t4 = $.Camera_instance.screenRatio;
-        if (goRightEdge > t3 - 640 / t4 && goLeftEdge < t3 + 640 / t4) {
+        t2 = $.get$camera().x;
+        t3 = $.Camera_instance.screenRatio;
+        if (goRightEdge > t2 - 640 / t3 && goLeftEdge < t2 + 640 / t3)
           go.draw$0();
-          J.save$0$x($.ctx.context);
-          J.beginPath$0$x($.ctx.context);
-          t3 = $.ctx;
-          t3.rect$4(t3, J.$sub$n(t2.get$x(go), J.$div$n(t2.get$width(go), 2)), J.$sub$n(t2.get$y(go), J.$div$n(t2.get$height(go), 2)), t2.get$width(go), t2.get$height(go));
-          J.set$strokeStyle$x($.normContext, "white");
-          J.stroke$0$x($.ctx.context);
-          J.restore$0$x($.ctx.context);
-        }
       }
     }, "call$0", "get$drawObjects", 0, 0, null],
     drawHUD$0: [function() {
@@ -14569,11 +14890,6 @@ var $$ = {};
       J.fillText$4$x($.normContext, "BUZZKILL", 10, 20, 100);
       J.fillText$4$x($.normContext, "Lives: " + $.Game_lives, 10, 465, 100);
       J.fillText$4$x($.normContext, "Remaining Oxygen: " + H.S($.Game_oxygen), 440, 465, 500);
-      J.restore$0$x($.normContext);
-      J.set$fillStyle$x($.normContext, "white");
-      J.set$font$x($.normContext, "normal 8pt calibri");
-      J.fillText$4$x($.normContext, "ups: " + this.updatesPerSecond, 10, 35, 100);
-      J.fillText$4$x($.normContext, "rps: " + this.rendersPerSecond, 10, 50, 100);
       J.restore$0$x($.normContext);
     }, "call$0", "get$drawHUD", 0, 0, null],
     reloadLevel$0: [function() {
@@ -14782,7 +15098,7 @@ var $$ = {};
           U.setupMainMenu();
           break;
         case 1:
-          U.setupLevelFour();
+          U.setupLevelOne();
           break;
         case 2:
           U.setupLevelTwo();
@@ -14802,6 +15118,14 @@ var $$ = {};
     "": "Closure:173;",
     call$0: [function() {
       $.SoundManager_instance.setMusic$1(1);
+      $.SoundManager_instance.startMusic$0();
+    }, "call$0", null, 0, 0, null, "call"],
+    $isFunction: true
+  },
+  setupLevelOne_startMusic: {
+    "": "Closure:173;",
+    call$0: [function() {
+      $.SoundManager_instance.setMusic$1(2);
       $.SoundManager_instance.startMusic$0();
     }, "call$0", null, 0, 0, null, "call"],
     $isFunction: true
@@ -14890,6 +15214,9 @@ var $$ = {};
           J.fillText$4$x($.normContext, "LEVEL THREE", 250, 200, 1000);
         else if (t1 === $.LevelManager_enumLevelThree)
           J.fillText$4$x($.normContext, "LEVEL FOUR", 250, 200, 1000);
+        t1 = $.Game_instance;
+        if (!t1.menu.cheat)
+          t1.player.playerStartX = 0;
         J.set$font$x($.normContext, "normal 15pt calibri");
         J.fillText$4$x($.normContext, "Press Enter to continue.", 420, 420, 1000);
       }
@@ -14979,7 +15306,7 @@ var $$ = {};
     $isFunction: true
   },
   MainMenu: {
-    "": "GameObject;input,sprite,instructions,selectInstructions,x:gdp$MainMenu$x*,y:gdp$MainMenu$y*,width:gdp$MainMenu$width>,height:gdp$MainMenu$height>,i,spritex,spritey,playGame,options,controls,exit,x,y,height,width,dead",
+    "": "GameObject;input,sprite,instructions,selectInstructions,x:gdp$MainMenu$x*,y:gdp$MainMenu$y*,width:gdp$MainMenu$width>,height:gdp$MainMenu$height>,i,spritex,spritey,playGame,options,controls,exit,cheat,x,y,height,width,dead",
     draw$0: [function() {
       var t1, t2, t3, t4, t5, t6, t7;
       t1 = this.sprite;
@@ -15008,7 +15335,7 @@ var $$ = {};
       t4.drawImageScaledFromSource$9(t4, t7._img, t7.spritex, t7.spritey, t7._framew, t7._frameh, t5 + 850, t6 + 350, t7.scaledw, t7.scaledh);
     }, "call$0", "get$draw", 0, 0, null],
     update$1: [function(dt) {
-      var t1, t2;
+      var t1;
       this.i = this.i + 1;
       t1 = $.Game_instance;
       if (t1.state === t1.stateEnumMain) {
@@ -15107,8 +15434,11 @@ var $$ = {};
             this.input.toString;
             t1.lastENTER = $.get$gameLoop()._keyboard.timePressed$1(13);
             $.Game_instance.transition = U.LevelTransition$();
-            t1 = $.Game_instance;
-            t1.currentLevel = t1.startLevel;
+            if (!this.cheat) {
+              t1 = $.Game_instance;
+              t1.currentLevel = t1.startLevel;
+              t1.player.playerStartX = 0;
+            }
           }
         } else {
           if (this.controls) {
@@ -15142,13 +15472,58 @@ var $$ = {};
                 t1 = $.get$gameLoop()._keyboard.pressed$1(13);
               } else
                 t1 = false;
-              if (t1) {
-                t1 = $.get$app().window;
-                t2 = $.get$ChromeAppWindow__app_window();
-                if (t2 == null)
-                  t1._throwNotAvailable$0();
-                t1 = t2.callMethod$1("current");
-                (t1 == null ? null : new B.AppWindow(t1)).jsProxy.callMethod$1("close");
+              if (t1)
+                $.get$app().window.current$0().jsProxy.callMethod$1("close");
+            }
+          }
+        }
+        this.input.toString;
+        if ($.get$gameLoop()._keyboard.pressed$1(97)) {
+          t1 = $.Game_instance;
+          t1.currentLevel = $.LevelManager_enumLevelThree;
+          t1.state = t1.stateEnumOutro;
+          t1.endScene = U.EndScene$();
+          U.Globals_setBackground();
+          this.cheat = true;
+        } else {
+          this.input.toString;
+          if ($.get$gameLoop()._keyboard.pressed$1(98)) {
+            $.Game_instance.currentLevel = $.LevelManager_enumLevelOne;
+            this.cheat = true;
+          } else {
+            this.input.toString;
+            if ($.get$gameLoop()._keyboard.pressed$1(99)) {
+              $.Game_instance.currentLevel = $.LevelManager_enumLevelTwo;
+              this.cheat = true;
+            } else {
+              this.input.toString;
+              if ($.get$gameLoop()._keyboard.pressed$1(100)) {
+                $.Game_instance.currentLevel = $.LevelManager_enumLevelThree;
+                this.cheat = true;
+              } else {
+                this.input.toString;
+                if ($.get$gameLoop()._keyboard.pressed$1(101)) {
+                  t1 = $.Game_instance;
+                  t1.currentLevel = $.LevelManager_enumLevelOne;
+                  t1.player.playerStartX = 12800;
+                  this.cheat = true;
+                } else {
+                  this.input.toString;
+                  if ($.get$gameLoop()._keyboard.pressed$1(102)) {
+                    t1 = $.Game_instance;
+                    t1.currentLevel = $.LevelManager_enumLevelTwo;
+                    t1.player.playerStartX = 18525;
+                    this.cheat = true;
+                  } else {
+                    this.input.toString;
+                    if ($.get$gameLoop()._keyboard.pressed$1(103)) {
+                      t1 = $.Game_instance;
+                      t1.currentLevel = $.LevelManager_enumLevelThree;
+                      t1.player.playerStartX = 29000;
+                      this.cheat = true;
+                    }
+                  }
+                }
               }
             }
           }
@@ -15165,9 +15540,10 @@ var $$ = {};
       this.sprite = U.SpriteSheet$("./content/menu.png", this.spritex, this.spritey, 150, 196);
       this.instructions = U.SpriteSheet$("./content/instructions.png", 0, 0, 258, 114);
       this.selectInstructions = U.SpriteSheet$("./content/enter-instructions.png", 0, 0, 258, 114);
+      this.cheat = false;
     },
     static: {MainMenu$: function() {
-        var t1 = new U.MainMenu(null, null, null, null, null, null, null, null, 0, 0, 0, false, false, false, false, null, null, 0, 0, false);
+        var t1 = new U.MainMenu(null, null, null, null, null, null, null, null, 0, 0, 0, false, false, false, false, false, null, null, 0, 0, false);
         t1.MainMenu$0();
         return t1;
       }}
@@ -15191,15 +15567,15 @@ var $$ = {};
         t3 = this.soundSprite;
         t4 = t3._framew;
         t5 = t3._frameh;
-        J.drawImageScaledFromSource$9$x($.normContext, t3._img, t3.spritex, t3.spritey, t4, t5, 80, 185, t4, t5);
+        J.drawImageScaledFromSource$9$x($.normContext, t3._img, t3.spritex, t3.spritey, t4, t5, 80, 130, t4, t5);
         t5 = this.difficultySprite;
         t4 = t5._framew;
         t3 = t5._frameh;
-        J.drawImageScaledFromSource$9$x($.normContext, t5._img, t5.spritex, t5.spritey, t4, t3, 80, 250, t4, t3);
+        J.drawImageScaledFromSource$9$x($.normContext, t5._img, t5.spritex, t5.spritey, t4, t3, 80, 220, t4, t3);
         t3 = this.screenSprite;
         t4 = t3._framew;
         t5 = t3._frameh;
-        J.drawImageScaledFromSource$9$x($.normContext, t3._img, t3.spritex, t3.spritey, t4, t5, 80, 315, t4, t5);
+        J.drawImageScaledFromSource$9$x($.normContext, t3._img, t3.spritex, t3.spritey, t4, t5, 80, 305, t4, t5);
       }
     }, "call$0", "get$draw", 0, 0, null],
     update$1: [function(dt) {
@@ -15362,6 +15738,7 @@ var $$ = {};
                           $.Globals_enemyDamage = 1;
                           $.Globals_oxygenLossRate = 250;
                           $.Globals_gameSpeed = 2;
+                          $.Globals_jumpVelocity = 1.02;
                         } else {
                           if (this.normalhover) {
                             this.input.toString;
@@ -15576,6 +15953,7 @@ var $$ = {};
                 if (t1) {
                   this.screenSprite.spritey = 1365;
                   this.screenFULL = false;
+                  this.toggleFullScreen$0();
                 } else {
                   if (!this.screenFULL) {
                     this.input.toString;
@@ -15585,6 +15963,7 @@ var $$ = {};
                   if (t1) {
                     this.screenSprite.spritey = 1300;
                     this.screenFULL = true;
+                    this.toggleFullScreen$0();
                   } else {
                     this.input.toString;
                     if ($.get$gameLoop()._keyboard.pressed$1(38)) {
@@ -15727,6 +16106,13 @@ var $$ = {};
       this.easyhover = true;
       this.easyslc = true;
     }, "call$0", "get$easySelectEasyHover", 0, 0, null],
+    toggleFullScreen$0: [function() {
+      var t1 = $.get$app().window.current$0().jsProxy;
+      if (t1.callMethod$1("isFullscreen") === true)
+        t1.callMethod$1("restore");
+      else
+        t1.callMethod$1("fullscreen");
+    }, "call$0", "get$toggleFullScreen", 0, 0, null],
     Options$0: function() {
       this.gdp$Options$width = 640;
       this.gdp$Options$height = 480;
@@ -16026,8 +16412,8 @@ var $$ = {};
       this.endPos = x - 400;
       t1.frameChangeRate = 10;
       t1.numberOfFrames = 8;
-      t1 = new U.Bullet(W.ImageElement_ImageElement(null, null, null), 0, 1040, 60, 50, 8, -7, 1, 0, 0, null, null, null, null, null, null, false, false, null, null, 0, 0, false);
-      t1.initialize$2(this.x, this.y);
+      t1 = new U.Bullet(W.ImageElement_ImageElement(null, null, null), 0, 1040, 60, 10, 20, 0, 1, 0, 0, null, null, null, null, null, null, false, false, null, null, 0, 0, false);
+      t1.initialize$2(-10000, this.y);
       this.bullet = t1;
       t2 = $.ObjectManager_instance;
       t2.goList.push(t1);
@@ -16048,8 +16434,8 @@ var $$ = {};
           return t2.$add();
         t3 = this.y;
         if (typeof t3 !== "number")
-          return t3.$add();
-        t1.initialize$2(t2 + 40 * direction, t3 + 10);
+          return t3.$sub();
+        t1.initialize$2(t2 + 40 * direction, t3 - 50);
         this.bullet.setDirection$1(direction);
       }
       speed = 0.4 * dt;
@@ -16107,23 +16493,16 @@ var $$ = {};
     }, "call$0", "get$injure", 0, 0, null]
   },
   Cyrax: {
-    "": "Enemy;img,walkingSprite,currentAttack,netAttack,shurikenAttack,miniShurikenAttack,spriteXInitial,spriteYInitial,spriteWidth,spriteHeight,imgOffsetX,imgOffsetY,initialPos,endPos,goingBack<,attacking,rnd,triggerFall,TYPE,STATIONARY,JUMP,x,y,height,width,dead",
-    initialize$2: [function(x, y) {
-      var t1;
-      U.GameObject.prototype.initialize$2.call(this, x, y);
-      this.width = 90;
-      this.height = 150;
-      t1 = U.SpriteSheet$("./content/enemies_spritesheet.png", this.spriteXInitial, this.spriteYInitial, this.spriteWidth, this.spriteHeight);
-      this.walkingSprite = t1;
-      this.initialPos = x;
-      this.endPos = x - 600;
-      t1.frameChangeRate = 20;
-      t1.numberOfFrames = 5;
-      this.TYPE = "BOSS";
-      $.get$gameLoop().addTimer$2(new U.Cyrax_initialize_closure(this), 1);
-    }, "call$2", "get$initialize", 4, 0, null, 12, 138],
+    "": "Enemy;img,walkingSprite,currentAttack,netAttack,shurikenAttack,miniShurikenAttack,spriteXInitial,spriteYInitial,spriteWidth,spriteHeight,imgOffsetX,imgOffsetY,initialPos,endPos,goingBack<,attacking,rnd,lastShot,shotDelay,triggerFall,TYPE,STATIONARY,JUMP,x,y,height,width,dead",
     update$1: [function(dt) {
-      var speed, t1, t2;
+      var t1, t2, speed;
+      t1 = this.lastShot + dt;
+      this.lastShot = t1;
+      t2 = this.shotDelay;
+      if (t1 > t2) {
+        this.lastShot = t1 - t2;
+        this.generateRandomAttack$0();
+      }
       if (!this.attacking) {
         speed = 0.8 * dt;
         if (!this.goingBack) {
@@ -16199,18 +16578,10 @@ var $$ = {};
       direction = this.goingBack ? -1 : 1;
       this.attacking = true;
       this.currentAttack.fire$3(this.x, this.y, -direction);
-      $.get$gameLoop().addTimer$2(new U.Cyrax_generateRandomAttack_closure2(this), 3);
     }, "call$0", "get$generateRandomAttack", 0, 0, null],
     injure$0: [function() {
       return 10;
     }, "call$0", "get$injure", 0, 0, null]
-  },
-  Cyrax_initialize_closure: {
-    "": "Closure:130;this_0",
-    call$1: [function(finish) {
-      return this.this_0.generateRandomAttack$0();
-    }, "call$1", null, 2, 0, null, 254, "call"],
-    $isFunction: true
   },
   Cyrax_generateRandomAttack_closure: {
     "": "Closure:130;this_0",
@@ -16236,13 +16607,6 @@ var $$ = {};
     }, "call$1", null, 2, 0, null, 254, "call"],
     $isFunction: true
   },
-  Cyrax_generateRandomAttack_closure2: {
-    "": "Closure:130;this_3",
-    call$1: [function(attack) {
-      return this.this_3.generateRandomAttack$0();
-    }, "call$1", null, 2, 0, null, 255, "call"],
-    $isFunction: true
-  },
   CyraxAttack: {
     "": "Object;"
   },
@@ -16256,7 +16620,7 @@ var $$ = {};
       else
         t1.spritey = 0;
       $.get$gameLoop().addTimer$2(new U.MiniShurikenAttack_fire_closure(this, x, y, direction), 0.5);
-    }, "call$3", "get$fire", 6, 0, null, 12, 138, 256],
+    }, "call$3", "get$fire", 6, 0, null, 12, 138, 255],
     draw$4: [function(x, y, width, height) {
       var t1, t2, t3, t4;
       t1 = this.sprite;
@@ -16340,7 +16704,7 @@ var $$ = {};
       else
         t1.spritey = 720;
       $.get$gameLoop().addTimer$2(new U.NetAttack_fire_closure(this, x, y, direction), 0.5);
-    }, "call$3", "get$fire", 6, 0, null, 12, 138, 256],
+    }, "call$3", "get$fire", 6, 0, null, 12, 138, 255],
     draw$4: [function(x, y, width, height) {
       var t1, t2, t3, t4;
       t1 = this.sprite;
@@ -16400,7 +16764,7 @@ var $$ = {};
       else
         t1.spritey = 360;
       $.get$gameLoop().addTimer$2(new U.ShurikenAttack_fire_closure(this, x, y, direction), 0.5);
-    }, "call$3", "get$fire", 6, 0, null, 12, 138, 256],
+    }, "call$3", "get$fire", 6, 0, null, 12, 138, 255],
     draw$4: [function(x, y, width, height) {
       var t1, t2, t3, t4;
       t1 = this.sprite;
@@ -16457,7 +16821,7 @@ var $$ = {};
       this.endX = endX;
       this.endY = endY;
       this.moving = true;
-    }, "call$4", "get$initializeMove", 8, 0, null, 257, 258, 259, 260],
+    }, "call$4", "get$initializeMove", 8, 0, null, 256, 257, 258, 259],
     draw$0: [function() {
       var t1, t2, t3, t4, t5, t6;
       t1 = this.gdp$DiagonalBlock$boulder;
@@ -16550,8 +16914,8 @@ var $$ = {};
       this.endPos = x - 400;
       t1.frameChangeRate = 10;
       t1.numberOfFrames = 8;
-      t1 = new U.Bullet(W.ImageElement_ImageElement(null, null, null), 0, 1040, 60, 50, 8, -7, 1, 0, 0, null, null, null, null, null, null, false, false, null, null, 0, 0, false);
-      t1.initialize$2(this.x, this.y);
+      t1 = new U.Bullet(W.ImageElement_ImageElement(null, null, null), 0, 1040, 60, 10, 20, 0, 1, 0, 0, null, null, null, null, null, null, false, false, null, null, 0, 0, false);
+      t1.initialize$2(-10000, this.y);
       this.bullet = t1;
       t2 = $.ObjectManager_instance;
       t2.goList.push(t1);
@@ -16572,8 +16936,8 @@ var $$ = {};
           return t2.$add();
         t3 = this.y;
         if (typeof t3 !== "number")
-          return t3.$add();
-        t1.initialize$2(t2 + 40 * direction, t3 + 30);
+          return t3.$sub();
+        t1.initialize$2(t2 + 40 * direction, t3 - 30);
         this.bullet.setDirection$1(direction);
       }
       speed = 0.4 * dt;
@@ -16940,8 +17304,8 @@ var $$ = {};
     initialize$2: [function(x, y) {
       var t1, t2;
       U.GameObject.prototype.initialize$2.call(this, x, y);
-      this.width = 140;
-      this.height = 200;
+      this.width = 120;
+      this.height = 160;
       this.sprite = U.SpriteSheet$("./content/enemies_spritesheet.png", 0, 360, 140, 200);
       this.attackSprite = U.SpriteSheet$("./content/enemies_attack_spritesheet.png", 0, 665, 220, 260);
       t1 = U.SpriteSheet$("./content/enemies_attack_spritesheet.png", 0, 1305, 130, 220);
@@ -17288,7 +17652,7 @@ var $$ = {};
       this.endY = endY;
       this.moving = true;
       U.SpriteSheet$("./content/gameitems.png", 50, 0, this.width, this.height);
-    }, "call$4", "get$initializeMove", 8, 0, null, 257, 258, 259, 260],
+    }, "call$4", "get$initializeMove", 8, 0, null, 256, 257, 258, 259],
     draw$0: [function() {
       var t1, t2, t3, t4, t5, t6;
       t1 = this.boulder;
@@ -17681,7 +18045,7 @@ var $$ = {};
           }
         }
       }
-    }, "call$2", "get$movePlayer", 4, 0, null, 256, 261],
+    }, "call$2", "get$movePlayer", 4, 0, null, 255, 260],
     movePlayerWithBlock$3: [function(direction, amount, block) {
       var t1, t2, t3;
       if (this.WALKING) {
@@ -17823,7 +18187,7 @@ var $$ = {};
           this.y = t1 + t2;
         }
       }
-    }, "call$3", "get$movePlayerWithBlock", 6, 0, null, 256, 261, 262],
+    }, "call$3", "get$movePlayerWithBlock", 6, 0, null, 255, 260, 261],
     resetPlayer$0: [function() {
       var t1 = $.get$camera();
       t1.x = 0;
@@ -17845,7 +18209,7 @@ var $$ = {};
         this.sprite.spritex = -500;
         this.originalX = this.x;
       }
-    }, "call$2", "get$injureBuzz", 4, 0, null, 263, 264],
+    }, "call$2", "get$injureBuzz", 4, 0, null, 262, 263],
     invincibilityCountDown$0: [function() {
       var t1 = this.invincibilityTimer;
       if (t1 > 0) {
@@ -17879,35 +18243,93 @@ var $$ = {};
     "": "Closure:130;",
     call$1: [function(reload) {
       return $.Game_instance.reloadLevel$0();
-    }, "call$1", null, 2, 0, null, 265, "call"],
+    }, "call$1", null, 2, 0, null, 264, "call"],
     $isFunction: true
   },
   Player_injureBuzz_closure: {
     "": "Closure:130;this_0",
     call$1: [function(invincibilityTimer) {
       return this.this_0.invincibilityCountDown$0();
-    }, "call$1", null, 2, 0, null, 266, "call"],
+    }, "call$1", null, 2, 0, null, 265, "call"],
     $isFunction: true
   },
   Player_invincibilityCountDown_closure: {
     "": "Closure:130;this_0",
     call$1: [function(invincibilityTimer) {
       return this.this_0.invincibilityCountDown$0();
-    }, "call$1", null, 2, 0, null, 266, "call"],
+    }, "call$1", null, 2, 0, null, 265, "call"],
     $isFunction: true
+  },
+  Predator: {
+    "": "Enemy;img,sprite,attackSprite,attackSprite1,spriteXInitial,spriteYInitial,spriteWidth,spriteHeight,attacknum,imgOffsetX,imgOffsetY,initialPos,endPos,goingBack<,triggerFall:gdp$Predator$triggerFall<,attack,rnd,triggerFall,TYPE,STATIONARY,JUMP,x,y,height,width,dead",
+    update$1: [function(dt) {
+      var speed, t1, t2;
+      speed = 2 * dt;
+      if (!this.goingBack) {
+        t1 = this.x;
+        t2 = this.endPos;
+        if (typeof t1 !== "number")
+          return t1.$ge();
+        if (typeof t2 !== "number")
+          return H.iae(t2);
+        if (t1 >= t2)
+          this.x = t1 - speed;
+        else {
+          this.goingBack = true;
+          this.sprite.spritey = 2073;
+        }
+      } else {
+        t1 = this.x;
+        t2 = this.initialPos;
+        if (typeof t1 !== "number")
+          return t1.$lt();
+        if (typeof t2 !== "number")
+          return H.iae(t2);
+        if (t1 < t2)
+          this.x = t1 + speed;
+        else {
+          this.goingBack = false;
+          this.sprite.spritey = 1825;
+        }
+      }
+      this.sprite.update$1(dt);
+    }, "call$1", "get$update", 2, 0, null, 230],
+    draw$0: [function() {
+      var t1, t2, t3, t4, t5, t6, t7, t8;
+      if (this.attack) {
+        t1 = this.sprite;
+        t2 = this.x;
+        t3 = this.width;
+        if (typeof t2 !== "number")
+          return t2.$sub();
+        t4 = this.imgOffsetX;
+        t5 = this.y;
+        t6 = this.height;
+        if (typeof t5 !== "number")
+          return t5.$sub();
+        t7 = this.imgOffsetY;
+        t8 = $.ctx;
+        t8.drawImageScaledFromSource$9(t8, t1._img, t1.spritex, t1.spritey, t1._framew, t1._frameh, t2 - t3 / 2 - t4, t5 - t6 / 2 + t7, t1.scaledw, t1.scaledh);
+      }
+    }, "call$0", "get$draw", 0, 0, null],
+    injure$0: [function() {
+      this.attack = true;
+      this.attacknum = this.rnd.nextInt$1(2);
+      return 10;
+    }, "call$0", "get$injure", 0, 0, null]
   },
   Bullet: {
     "": "Projectile;img,spriteXInitial,spriteYInitial,spriteWidth,spriteHeight,imgOffsetX:gdp$Bullet$imgOffsetX<,imgOffsetY:gdp$Bullet$imgOffsetY<,direction,horizontalVelocity,verticalVelocity,injureValue,sprite,imgOffsetX,imgOffsetY,triggerFall,TYPE,STATIONARY,JUMP,x,y,height,width,dead",
     initialize$2: [function(x, y) {
       var t1;
       U.GameObject.prototype.initialize$2.call(this, x, y);
-      this.width = 60;
-      this.height = 110;
+      this.width = 22;
+      this.height = 10;
       t1 = U.SpriteSheet$("./content/enemies_attack_spritesheet.png", this.spriteXInitial, this.spriteYInitial, this.spriteWidth, this.spriteHeight);
       this.sprite = t1;
       t1.frameChangeRate = 9;
       t1.numberOfFrames = 14;
-      this.horizontalVelocity = 1.2;
+      this.horizontalVelocity = 2;
       this.verticalVelocity = 0;
       this.injureValue = 10;
     }, "call$2", "get$initialize", 4, 0, null, 12, 138],
@@ -17919,7 +18341,7 @@ var $$ = {};
         t1.spritey = 1040;
         this.horizontalVelocity = this.horizontalVelocity * -1;
       }
-    }, "call$1", "get$setDirection", 2, 0, null, 256]
+    }, "call$1", "get$setDirection", 2, 0, null, 255]
   },
   CyraxMiniShuriken: {
     "": "Projectile;spriteXInitial,spriteYInitial,spriteWidth,spriteHeight,horizontalVelocity,verticalVelocity,injureValue,sprite,imgOffsetX,imgOffsetY,triggerFall,TYPE,STATIONARY,JUMP,x,y,height,width,dead",
@@ -17954,6 +18376,7 @@ var $$ = {};
       this.horizontalVelocity = 3;
       this.verticalVelocity = 0;
       this.injureValue = 20;
+      this.TYPE = "BOSS";
     }, "call$2", "get$initialize", 4, 0, null, 12, 138]
   },
   CyraxShuriken: {
@@ -18283,6 +18706,8 @@ var $$ = {};
       this.collected = true;
       var t1 = $.Game_instance;
       t1.state = t1.stateEnumCollected;
+      $.Game_lives = $.Game_lives + 1;
+      t1.menu.cheat = false;
     }, "call$0", "get$collect", 0, 0, null],
     drawOxygenCollected$0: [function() {
       var t1, t2, t3, t4;
@@ -18442,7 +18867,7 @@ var $$ = {};
     }, "call$0", "get$draw", 0, 0, null],
     setOnSpring$1: [function(os) {
       this.onSpring = os;
-    }, "call$1", "get$setOnSpring", 2, 0, null, 267]
+    }, "call$1", "get$setOnSpring", 2, 0, null, 266]
   },
   Trigger: {
     "": "GameObject;trigger,bossFloor,boss,floorObstacle,onTrigger?,img,originalY<,x,y,height,width,dead",
@@ -18489,7 +18914,7 @@ var $$ = {};
       this.endY = endY;
       this.moving = true;
       this.pattern = J.createPatternFromImage$2$x($.normContext, this.gdp$VerticalBlock$img, "repeat");
-    }, "call$4", "get$initializeMove", 8, 0, null, 257, 258, 259, 260],
+    }, "call$4", "get$initializeMove", 8, 0, null, 256, 257, 258, 259],
     draw$0: [function() {
       var t1, t2, t3, t4, t5, t6;
       t1 = this.gdp$VerticalBlock$boulder;
@@ -18558,17 +18983,17 @@ var $$ = {};
       if (i >= t1.length)
         return H.ioore(t1, i);
       return t1[i];
-    }, "call$1", null, 2, 0, null, 268, "call"],
+    }, "call$1", null, 2, 0, null, 267, "call"],
     $isFunction: true
   },
   convertNativeToDart_AcceptStructuredClone_writeSlot: {
-    "": "Closure:269;copies_3",
+    "": "Closure:268;copies_3",
     call$2: [function(i, x) {
       var t1 = this.copies_3;
       if (i >= t1.length)
         return H.ioore(t1, i);
       t1[i] = x;
-    }, "call$2", null, 4, 0, null, 268, 12, "call"],
+    }, "call$2", null, 4, 0, null, 267, 12, "call"],
     $isFunction: true
   },
   convertNativeToDart_AcceptStructuredClone_walk: {
@@ -18627,7 +19052,7 @@ var $$ = {};
   main: [function() {
     var t1, t2, t3, t4, t5;
     if ($.Game_instance == null) {
-      t1 = new U.Player(W.ImageElement_ImageElement(null, null, null), null, false, false, false, false, false, false, false, false, null, 0, 0.8, 20, 30, null, 1, 2, 3, null, 0, false, 0, 0, null, 16, -12, null, null, 0, 0, false);
+      t1 = new U.Player(W.ImageElement_ImageElement(null, null, null), null, false, false, false, false, false, false, false, false, null, 0, 0.8, 20, 30, null, 1, 2, 3, null, 0, false, 15000, -120, null, 16, -12, null, null, 0, 0, false);
       t1.Player$0();
       t2 = U.MainMenu$();
       t3 = U.InGameMenu$();
@@ -18685,11 +19110,6 @@ W.WheelEvent.$isEvent = true;
 W.WheelEvent.$isObject = true;
 W.ImageElement.$isEventTarget = true;
 W.ImageElement.$isObject = true;
-G._GameLoopTouchEvent.$isObject = true;
-B.GameLoopTimer.$isObject = true;
-B.DigitalButton.$isObject = true;
-G.GameLoopTouch.$isObject = true;
-G.GameLoopTouchPosition.$isObject = true;
 W.HttpRequest.$isHttpRequest = true;
 W.HttpRequest.$isEventTarget = true;
 W.HttpRequest.$isObject = true;
@@ -18697,10 +19117,15 @@ W.ProgressEvent.$isEvent = true;
 W.ProgressEvent.$isObject = true;
 P.AudioBuffer.$isAudioBuffer = true;
 P.AudioBuffer.$isObject = true;
-P.Symbol.$isSymbol = true;
-P.Symbol.$isObject = true;
+G._GameLoopTouchEvent.$isObject = true;
+B.GameLoopTimer.$isObject = true;
+B.DigitalButton.$isObject = true;
+G.GameLoopTouch.$isObject = true;
+G.GameLoopTouchPosition.$isObject = true;
 B.LaunchData.$isLaunchData = true;
 B.LaunchData.$isObject = true;
+P.Symbol.$isSymbol = true;
+P.Symbol.$isObject = true;
 H.RawReceivePortImpl.$isObject = true;
 H._IsolateEvent.$isObject = true;
 H._IsolateContext.$isObject = true;
@@ -18855,11 +19280,6 @@ J.$indexSet$ax = function(receiver, a0, a1) {
     return receiver[a0] = a1;
   return J.getInterceptor$ax(receiver).$indexSet(receiver, a0, a1);
 };
-J.$mul$n = function(receiver, a0) {
-  if (typeof receiver == "number" && typeof a0 == "number")
-    return receiver * a0;
-  return J.getInterceptor$n(receiver).$mul(receiver, a0);
-};
 J.$shl$n = function(receiver, a0) {
   return J.getInterceptor$n(receiver).$shl(receiver, a0);
 };
@@ -18984,9 +19404,6 @@ J.set$height$x = function(receiver, value) {
 };
 J.set$src$x = function(receiver, value) {
   return J.getInterceptor$x(receiver).set$src(receiver, value);
-};
-J.set$strokeStyle$x = function(receiver, value) {
-  return J.getInterceptor$x(receiver).set$strokeStyle(receiver, value);
 };
 J.set$width$x = function(receiver, value) {
   return J.getInterceptor$x(receiver).set$width(receiver, value);
@@ -19611,7 +20028,6 @@ true,
 "controller",
 "level",
 "finish",
-"attack",
 "direction",
 "startX",
 "startY",
