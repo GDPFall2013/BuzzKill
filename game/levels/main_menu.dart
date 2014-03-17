@@ -205,7 +205,7 @@ class MainMenu extends GameObject{
     }
     else if(input.wasPressed(KeyCode.NUM_SIX)){
       Game.instance.currentLevel = LevelManager.enumLevelTwo;
-      Game.instance.player.playerStartX = 18600.0;
+      Game.instance.player.playerStartX = 18525.0;
       cheat=true;
     }
     else if(input.wasPressed(KeyCode.NUM_SEVEN)){
