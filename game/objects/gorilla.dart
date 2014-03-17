@@ -19,7 +19,7 @@ class Gorilla extends Enemy{
  
   
   double imgOffsetX = 0.0;
-  double imgOffsetY = -20.0;
+  double imgOffsetY = -30.0;
 
   double initialPos;
   double endPos;
@@ -40,8 +40,8 @@ class Gorilla extends Enemy{
   
   initialize(double x, double y) {
     super.initialize(x, y);
-    width = 140.0;
-    height = 200.0;
+    width = 120.0;
+    height = 160.0;
     
     sprite = new SpriteSheet("./content/enemies_spritesheet.png",0,360,140,200);
     attackSprite = new SpriteSheet("./content/enemies_attack_spritesheet.png",0,665,220,260);

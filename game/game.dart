@@ -19,6 +19,18 @@ part 'object_manager.dart';
 part 'audio/sound_manager.dart';
 part 'globals.dart';
 
+part 'objects/projectiles/projectile.dart';
+part 'objects/projectiles/bullet.dart';
+part 'objects/projectiles/cyrax_net.dart';
+part 'objects/projectiles/cyrax_shuriken.dart';
+part 'objects/projectiles/cyrax_mini_shuriken.dart';
+
+part 'objects/cyrax/cyrax.dart';
+part 'objects/cyrax/cyrax_attack.dart';
+part 'objects/cyrax/net_attack.dart';
+part 'objects/cyrax/shuriken_attack.dart';
+part 'objects/cyrax/mini_shuriken_attack.dart';
+
 part 'objects/game_object.dart';
 part 'objects/block.dart';
 part 'objects/player.dart';
@@ -32,13 +44,12 @@ part 'objects/gorilla.dart';
 part 'objects/droid.dart';
 part 'objects/ingame_menu.dart';
 part 'objects/trigger.dart';
-part 'objects/bullet.dart';
 part 'objects/moving_block.dart';
-part 'objects/cyrax.dart';
 part 'objects/clone.dart';
 part 'objects/spring.dart';
 part 'objects/vertical_block.dart';
 part 'objects/diagonal_block.dart';
+part 'objects/end_scene.dart';
 
 part 'animations/sprite_sheet.dart';
 
@@ -84,6 +95,7 @@ InGameMenu gameMenu = new InGameMenu();
 Controls controls = new Controls();
 Options options = new Options();
 LevelTransition transition;
+EndScene endScene;
 
 static double oxygen = 100.0; 
 Stopwatch oxygenTimer = new Stopwatch();
@@ -110,6 +122,8 @@ int stateEnumTransition = 7;
 int stateEnumIntro = 8;
 int stateEnumOptions = 9;
 int stateEnumCollected = 10;
+int stateEnumOutro = 11;
+int stateEnumEnd = 12;
 
 bool resetMainMenu = false; //used to reset main menu if prev screen was pause menu
 int state;
@@ -134,6 +148,7 @@ Initialize() {
   ObjectManager objectManager = new ObjectManager();
   levelManager = new LevelManager();
   transition = new LevelTransition();
+  endScene = new EndScene();
   Globals.setNormalDifficulty();
 
   
@@ -166,12 +181,15 @@ Initialize() {
     oxygenTimer.start();
   }
     
+  //SoundManager.instance.toggleMute();
+  
 }
 
 /**
  *  Update is called once per game Loop
  */
 void update(double dt) {
+  //print(state);
   Input.instance.controllerButtonPushed = false;
   Input.instance.controllerAxesRight = false;
   Input.instance.controllerAxesLeft = false;
@@ -294,6 +312,9 @@ void update(double dt) {
           go.update(dt);
         }
     
+    
+
+    
 // Adjust the camera position
  if (player.x - camera.x > viewportWidth - 205) {
    camera.x = player.x - (viewportWidth - 205);
@@ -305,16 +326,22 @@ void update(double dt) {
   }
   
   
-  // Frames per second debugging Information
-  numberOfUpdates += 1.0;
-  debuggingDisplayTime += dt;
-  if (debuggingDisplayTime > 100.0) {
-    debuggingDisplayTime -= 100.0;
-    updatesPerSecond = numberOfUpdates;
-    rendersPerSecond = numberOfRenders;
-    numberOfUpdates = 0.0;
-    numberOfRenders = 0.0;
+  if(state == stateEnumOutro){
+    //Globals.setBackground();
+    endScene.update(dt);
+    endScene.draw();
   }
+  
+//  // Frames per second debugging Information
+//  numberOfUpdates += 1.0;
+//  debuggingDisplayTime += dt;
+//  if (debuggingDisplayTime > 100.0) {
+//    debuggingDisplayTime -= 100.0;
+//    updatesPerSecond = numberOfUpdates;
+//    rendersPerSecond = numberOfRenders;
+//    numberOfUpdates = 0.0;
+//    numberOfRenders = 0.0;
+//  }
   
 
 }
@@ -350,15 +377,7 @@ void draw() {
         
         normContext.clearRect(0, 0,640, 480);
         
-        for (GameObject go in ObjectManager.instance.goList) {
-          double goRightEdge = go.x + go.width/2;
-          double goLeftEdge = go.x - go.width/2;
-                      
-            if (goRightEdge > (camera.x - (viewportWidth / Camera.instance.screenRatio))  && 
-              goLeftEdge < (camera.x + (viewportWidth / Camera.instance.screenRatio))) {
-              go.draw();
-            }
-        }
+        drawObjects();
         
         gameMenu.draw();
       }
@@ -376,33 +395,14 @@ void draw() {
       gameMenu.draw();
     }
     
-  for (GameObject go in ObjectManager.instance.goList) {
-    double goRightEdge = go.x + go.width/2;
-    double goLeftEdge = go.x - go.width/2;
-    
-    if (goRightEdge > (camera.x - (viewportWidth / Camera.instance.screenRatio))  && 
-        goLeftEdge < (camera.x + (viewportWidth / Camera.instance.screenRatio))) {
-      go.draw();
-    //  DrawColliderBox(go);
-    }   
-  }
-  
+  drawObjects();
   drawHUD();
   
   }
   
   else if(state == stateEnumCollected){
     normContext.clearRect(0, 0,640, 480);
-    for (GameObject go in ObjectManager.instance.goList) {
-        double goRightEdge = go.x + go.width/2;
-        double goLeftEdge = go.x - go.width/2;
-        
-        if (goRightEdge > (camera.x - (viewportWidth / Camera.instance.screenRatio))  && 
-            goLeftEdge < (camera.x + (viewportWidth / Camera.instance.screenRatio))) {
-          go.draw();
-        //  DrawColliderBox(go);
-        }   
-      }
+    drawObjects();
       
       drawHUD();
   }
@@ -420,6 +420,14 @@ void draw() {
     }
     
     else{
+         
+      state = stateEnumOutro;
+      endScene = new EndScene();
+      normContext.clearRect(0, 0,640, 480);
+      Globals.setBackground();
+     // ObjectManager.instance.addObject(endScene);
+      
+     /* 
           normContext.fillStyle = 'black';
           normContext.fillRect(0, 0, 640, 480);
           
@@ -442,9 +450,18 @@ void draw() {
             Game.instance.menu.playGame = true;
             
           }
+          */
     }
 
-  } else if (state == stateEnumGameOver){
+  }
+  
+  else if(state == stateEnumOutro){
+    normContext.clearRect(0, 0,640, 480);
+    endScene.draw();
+  }
+  
+  
+  else if (state == stateEnumGameOver){
     normContext.fillStyle = 'black';
     normContext.fillRect(0, 0, 640, 480);
     
@@ -477,11 +494,40 @@ void draw() {
     }
   }
   
+  else if(state == stateEnumEnd){
+    //normContext.save();
+   // normContext.font = "normal 15pt calibri";
+    //normContext.fillText('Press Enter to continue.', 420, 420, 1000);
+    //normContext.restore();
+    
+    if (input.isDown(KeyCode.ENTER)) {
+      Game.instance.currentLevel = LevelManager.enumMainMenu;
+      Game.instance.state = Game.instance.stateEnumMain;
+      Game.instance.lastENTER = input.timePressed(KeyCode.ENTER);
+      Game.instance.resetMainMenu = true;
+      Game.instance.menu.playGame = true;
+      Globals.setBackground();
+    }
+  }
+  
   
   
   // Used for Frames Per Second Debugging Information
   numberOfRenders += 1.0;
 }
+
+drawObjects() {
+  for (GameObject go in ObjectManager.instance.goList) {
+    double goRightEdge = go.x + go.width/2;
+    double goLeftEdge = go.x - go.width/2;
+    
+    if (goRightEdge > (camera.x - (viewportWidth / Camera.instance.screenRatio))  && 
+        goLeftEdge < (camera.x + (viewportWidth / Camera.instance.screenRatio))) {
+      go.draw();
+         // DrawColliderBox(go);
+        }   
+      }
+  }
 
 /**
  * Draws textual information around the edges of the screen that does not move with
@@ -498,11 +544,11 @@ drawHUD() {
   normContext.restore();
   
 // Variables for Performance monitoring
-  normContext.fillStyle = 'white';
-  normContext.font = "normal 8pt calibri";
-  normContext.fillText("ups: $updatesPerSecond", 10, 35, 100);
-  normContext.fillText("rps: $rendersPerSecond", 10, 50, 100);
-  normContext.restore();
+//  normContext.fillStyle = 'white';
+//  normContext.font = "normal 8pt calibri";
+//  normContext.fillText("ups: $updatesPerSecond", 10, 35, 100);
+//  normContext.fillText("rps: $rendersPerSecond", 10, 50, 100);
+//  normContext.restore();
 }
 
 /**
@@ -547,10 +593,11 @@ reloadLevel() {
 restartGame() {
   currentLevel = 1;
   lives = 3;
+  menu = new MainMenu();
   levelManager.loadLevel(currentLevel);
   player.resetPlayer();
   state = stateEnumPlay;
-  
+ 
   currentLevel = 1;
   //reset oxygen
   if(currentLevel >= LevelManager.enumLevelOne){

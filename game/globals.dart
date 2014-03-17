@@ -47,20 +47,23 @@ class Globals{
   
   
   static void setBackground(){
-    if(Game.instance.currentLevel == LevelManager.enumMainMenu || Game.instance.state == Game.instance.stateEnumMain){
+    if((Game.instance.currentLevel == LevelManager.enumMainMenu || Game.instance.state == Game.instance.stateEnumMain) && Game.instance.state != Game.instance.stateEnumOutro){
       query("#canvas").style.backgroundImage = "url(content/background.jpg)";
     }
-    else if(Game.instance.currentLevel == LevelManager.enumLevelOne){
+    else if(Game.instance.currentLevel == LevelManager.enumLevelOne && Game.instance.state != Game.instance.stateEnumOutro){
       query("#canvas").style.backgroundImage = "url(content/background.jpg)";
     }
-    else if(Game.instance.currentLevel == LevelManager.enumLevelTwo){
+    else if(Game.instance.currentLevel == LevelManager.enumLevelTwo && Game.instance.state != Game.instance.stateEnumOutro){
       query("#canvas").style.backgroundImage = "url(content/backgrounds/level2.jpg)";
     }
-    else if(Game.instance.currentLevel == LevelManager.enumLevelThree){
+    else if(Game.instance.currentLevel == LevelManager.enumLevelThree && Game.instance.state != Game.instance.stateEnumOutro){
       query("#canvas").style.backgroundImage = "url(content/backgrounds/level3.png)";
     }
-    else if(Game.instance.currentLevel == LevelManager.enumLevelFour){
+    else if(Game.instance.currentLevel == LevelManager.enumLevelFour && Game.instance.state != Game.instance.stateEnumOutro){
       query("#canvas").style.backgroundImage = "url(content/backgrounds/level4.jpg)";
+    }
+    else if(Game.instance.state == Game.instance.stateEnumOutro){
+      query("#canvas").style.backgroundImage = "url(content/backgrounds/level2.jpg)";
     }
   }
 }

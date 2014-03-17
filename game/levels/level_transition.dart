@@ -123,6 +123,9 @@ class LevelTransition extends GameObject{
         normContext.fillText('LEVEL FOUR', viewportWidth/2 - 70, viewportHeight/2 - 40, 1000);
       }
       
+      if(!Game.instance.menu.cheat){
+        Game.instance.player.playerStartX = 0.0;
+      }
       normContext.font = "normal 15pt calibri";
       normContext.fillText('Press Enter to continue.', 420, 420, 1000);
    }

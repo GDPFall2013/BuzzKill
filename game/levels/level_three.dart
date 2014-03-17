@@ -14,7 +14,7 @@ void setupLevelThree() {
     
   om.addObject(Game.instance.player);
   
-  
+ 
   // screen 1
   om.addBlock(new Block()..initialize(800.0, 420.0) // floor
       ..width = 2000.0 .. height = 140.0);

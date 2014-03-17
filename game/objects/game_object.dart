@@ -30,12 +30,6 @@ abstract class GameObject {
     
   }
   
-  /**
-   * In order for free listing to work, this kind of setup must 
-   * be done somewhere other than the constructor
-   * The initialize method offers a way to do so.
-   * TODO: Will we be using free listing?
-   */
   initialize(double x, double y) {
     this.x = x;
     this.y = y;
@@ -52,7 +46,7 @@ DrawColliderBox(GameObject go){
   ctx.save();
   ctx.beginPath(); 
   ctx.rect(go.x - go.width/2, go.y - go.height/2, go.width, go.height);
-  normContext.strokeStyle = "white";  //Should this be capitalized?
+  normContext.strokeStyle = "white";
   ctx.stroke();
   ctx.restore();
 }

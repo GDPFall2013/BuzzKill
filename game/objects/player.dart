@@ -31,8 +31,9 @@ class Player extends GameObject{
   double invincibilityTimer = 0.0;
   bool blink = false;
   
-  double playerStartX = 0.0; //14500.0;  //TODO: This should be moved to level object later
-  double playerStartY = 0.0; 
+
+  double playerStartX = 0.0;//29200.0; //14500.0;  //TODO: This should be moved to level object later
+  double playerStartY = -120.0; 
   double originalX;
   
   double imgXOffset = 16.0;
