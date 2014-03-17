@@ -1,3 +1,4 @@
+
 part of gdp;
 
 class Predator extends Enemy
@@ -44,7 +45,7 @@ class Predator extends Enemy
     
     sprite = new SpriteSheet("./content/enemies_spritesheet.png",0,1825,180,220);
     attackSprite = new SpriteSheet("./content/Predator_attack_spritesheet.png",0,305,200,240);
-    attackSprite1 = new SpriteSheet("./content/Predator_attack_spritesheet.png",0,830,160,600);
+    attackSprite1 = new SpriteSheet("./content/Predator_attack_spritesheet.png",0,830,190,600);
     
     initialPos = x;
     endPos = x-300.0;
@@ -160,6 +161,38 @@ class Predator extends Enemy
       attackSprite1.update(dt);  
       
     }
+    else if (!STATIONARY)
+    {
+      
+      if (goingBack == false) 
+      {
+        if(x >= endPos)
+        {
+          x = x - speed;
+        }
+        else
+        {
+          goingBack = true;
+          sprite.spritey = 2073;
+        }
+       }
+       else 
+       {
+        if(x<initialPos)
+        {
+          x = x + speed;
+        }
+        else
+        {
+          goingBack = false;
+          sprite.spritey = 1825;
+        }
+      }
+      
+      sprite.update(dt);
+     
+    }
+    
     
     if(attack)
     {
@@ -191,7 +224,7 @@ class Predator extends Enemy
   
   draw()
   {
-    
+    sprite.drawOnPosition(x-width/2 - imgOffsetX, y-height/2 + imgOffsetY - 20,  width , height);
     if (attacknum == 0)
     {
      sprite.drawOnPosition(x-width/2 - imgOffsetX, y-height/2 + imgOffsetY - 20,  width , height);
