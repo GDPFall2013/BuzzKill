@@ -525,7 +525,7 @@ drawObjects() {
     if (goRightEdge > (camera.x - (viewportWidth / Camera.instance.screenRatio))  && 
         goLeftEdge < (camera.x + (viewportWidth / Camera.instance.screenRatio))) {
       go.draw();
-          DrawColliderBox(go);
+        //  DrawColliderBox(go);
         }   
       }
   }
