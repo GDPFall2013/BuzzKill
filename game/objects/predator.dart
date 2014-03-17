@@ -7,13 +7,14 @@ class Predator extends Enemy
 
   SpriteSheet sprite;
   SpriteSheet attackSprite;
+  SpriteSheet attackSprite1;
 
   
   int spriteXInitial = 0;
   int spriteYInitial = 1825;
   int spriteWidth = 180;
   int spriteHeight = 220;
-  //int attacknum;
+  int attacknum;
   
  
   
@@ -28,14 +29,13 @@ class Predator extends Enemy
   bool triggerFall = false;
   bool attack = false;
   
-  //Random rnd = new Random();
- 
-  /* generateRandomNumbers()
-  {
-    
-    attacknum = rnd.nextInt(2);
-    
-  }*/
+  Random rnd = new Random();
+  
+  generateRandomNumbers()
+  { 
+    attacknum = rnd.nextInt(2);   
+  }
+  
   
   initialize(double x, double y) {
     super.initialize(x, y);
@@ -44,16 +44,19 @@ class Predator extends Enemy
     
     sprite = new SpriteSheet("./content/enemies_spritesheet.png",0,1825,180,220);
     attackSprite = new SpriteSheet("./content/Predator_attack_spritesheet.png",0,305,200,240);
+    attackSprite1 = new SpriteSheet("./content/Predator_attack_spritesheet.png",0,830,160,600);
     
     initialPos = x;
-    endPos = x-150.0;
+    endPos = x-300.0;
     
     sprite.frameChangeRate = 50.0;
     sprite.numberOfFrames = 6;
     
-    attackSprite.frameChangeRate = 300.0;
+    attackSprite.frameChangeRate = 60.0;
     attackSprite.numberOfFrames = 4;
     
+    attackSprite1.frameChangeRate = 60.0;
+    attackSprite1.numberOfFrames = 12;
     
        
      TYPE = "BOSS";
@@ -96,38 +99,71 @@ class Predator extends Enemy
     
     
     //move Predator back and forth
-    else{
-    if (goingBack == false) {
-      if(x >= endPos){
-        x = x - speed;
+    else if ((attacknum == 0) && !STATIONARY)
+    {
+      
+      if (goingBack == false) 
+      {
+        if(x >= endPos)
+        {
+          x = x - speed;
+        }
+        else
+        {
+          goingBack = true;
+          sprite.spritey = 2073;
+        }
+       }
+       else 
+       {
+        if(x<initialPos)
+        {
+          x = x + speed;
+        }
+        else
+        {
+          goingBack = false;
+          sprite.spritey = 1825;
+        }
       }
-      else{
-        goingBack = true;
-        sprite.spritey = 2073;
-      }
+      
+      sprite.update(dt);
+     
     }
-    else {
-      if(x<initialPos){
-        x = x + speed;
+    else if((attacknum == 1) && !STATIONARY)
+    {
+      
+      if (goingBack == false) 
+      {
+        if(x >= endPos)
+        {
+          x = x - speed;
+        }
+        else
+        {
+          goingBack = true;
+          attackSprite1.spritey = 1872;
+        }
+       }
+       else 
+       {
+        if(x<initialPos)
+        {
+          x = x + speed;
+        }
+        else
+        {
+          goingBack = false;
+          attackSprite1.spritey = 830;
+        }
       }
-      else{
-        goingBack = false;
-        sprite.spritey = 1825;
-      }
+      attackSprite1.update(dt);  
+      
     }
-    }
-    
-    sprite.update(dt);  
     
     if(attack)
     {
-      /* if(attackSprite.spritex >= 400){
-         attackSprite.spritex =0;}
-       else{
-         attackSprite.spritex += 200;
-       }*/
       
-    
        if(attackSprite.spriteFrame > 3)
        {
         attack = false;
@@ -145,12 +181,9 @@ class Predator extends Enemy
         attackSprite.spritey = 305;
         sprite.spritex = -200;
        } 
-       
        attackSprite.update(dt);
      }
      
-       
-       attackSprite.update(dt);
     }
 
    
@@ -158,19 +191,31 @@ class Predator extends Enemy
   
   draw()
   {
-    sprite.drawOnPosition(x-width/2 - imgOffsetX, y-height/2 + imgOffsetY, width , height);
+    
+    if (attacknum == 0)
+    {
+     sprite.drawOnPosition(x-width/2 - imgOffsetX, y-height/2 + imgOffsetY - 20,  width , height);
+    }
+    if (attacknum == 1)
+    {
+     attackSprite1.drawOnPosition(x-width/2 - imgOffsetX, y-height/2 + (-400), width , height);
+    }
+    
     if(attack)
     {
-       attackSprite.drawOnPosition(x-width/2 - imgOffsetX, y-height/2 + (-10), width , height);
+     
+       attackSprite.drawOnPosition(x-width/2 - imgOffsetX, y-height/2 + (-55), width , height);
        
     }
+    
+    
   }
   
    double injure() 
    {
-    attack = true;
-    //generateRandomNumbers();
-    return 10.0;
+     attack = true;
+     generateRandomNumbers();
+     return 10.0;
    }  
    
 }  
