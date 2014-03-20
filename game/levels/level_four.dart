@@ -768,7 +768,21 @@ void setupLevelFour() {
      om.addTrigger(trigger2);
      om.addBlock(floorObstacle2);
     
-     
+     om.addItem(new Oxygen()..initialize(28850.0, 150.0));
+     om.addItem(new Oxygen()..initialize(28850.0, 125.0));
+     om.addItem(new Oxygen()..initialize(28850.0, 100.0));
+     om.addItem(new Oxygen()..initialize(28850.0, 75.0));
+     om.addItem(new Oxygen()..initialize(28850.0, 50.0));
+     om.addItem(new Oxygen()..initialize(28850.0, 25.0));
+     om.addItem(new Oxygen()..initialize(28850.0, 0.0));
+     om.addItem(new Oxygen()..initialize(28850.0, -75.0));
+     om.addItem(new Oxygen()..initialize(28850.0, -50.0));
+     om.addItem(new Oxygen()..initialize(28850.0, -25.0));
+     om.addItem(new Oxygen()..initialize(28850.0, -100.0));
+     om.addItem(new Oxygen()..initialize(28850.0, -125.0));
+     om.addItem(new Oxygen()..initialize(28850.0, -150.0));
+     om.addItem(new Oxygen()..initialize(28850.0, -175.0));
+     om.addItem(new Oxygen()..initialize(28850.0, -200.0));
      
      //screen 19
      om.addBlock(new Block()..initialize(29650.0, 420.0)      // floor
@@ -779,6 +793,8 @@ void setupLevelFour() {
          ..width = 120.0 .. height = 100.0);
      om.addBlock(new Block()..initialize(29500.0, 300.0)      // Boulder
          ..width = 120.0 .. height = 100.0);
+     
+
      
      //Top Row
      om.addBlock(new Block()..initialize(29200.0, 100.0)      // Boulder
@@ -814,6 +830,8 @@ void setupLevelFour() {
      om.addItem(new Oxygen()..initialize(30150.0, 300.0));
      om.addItem(new Oxygen()..initialize(30200.0, 300.0));
      om.addItem(new Oxygen()..initialize(30250.0, 300.0));
+     
+     
      
      om.addEnemy(new Cyrax()..initialize(30200.0, 275.0));  // boss
      

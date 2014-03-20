@@ -249,3 +249,4 @@ class Predator extends Enemy
    }  
    
 }  
+}

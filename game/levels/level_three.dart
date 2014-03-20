@@ -434,14 +434,14 @@ void setupLevelThree() {
   
   om.addBlock(new MovingBlock()..initializeMove(16800.0, 400.0, 17200.0, 400.0) // moving block
             ..width = 200.0 .. height = 101.0..speedX = 4.0);
-  om.addItem(new Oxygen()..initialize(16900.0, 300.0));
+  /*om.addItem(new Oxygen()..initialize(16900.0, 300.0));
   om.addItem(new Oxygen()..initialize(16950.0, 300.0));
   om.addItem(new Oxygen()..initialize(17000.0, 300.0));
   om.addItem(new Oxygen()..initialize(17050.0, 300.0));
   om.addItem(new Oxygen()..initialize(17100.0, 300.0));
   om.addItem(new Oxygen()..initialize(17150.0, 300.0));
   om.addItem(new Oxygen()..initialize(17200.0, 300.0));
-  
+  */
   
   om.addBlock(new Block()..initialize(17600.0, 420.0) // floor
         ..width = 600.0 .. height = 140.0);
@@ -495,11 +495,9 @@ void setupLevelThree() {
   om.addItem(new Oxygen()..initialize(19650.0, 350.0));
   om.addItem(new Oxygen()..initialize(19700.0, 350.0));
   om.addItem(new Oxygen()..initialize(19750.0, 350.0));
-
   
-  om.addBlock(new Spring()..initialize(19760.0, 300.0)); // spring
   
-  om.addEnemy(new Predator()..initialize(20000.0, 300.0));  //enemy
+ // om.addEnemy(new Cyrax()..initialize(20000.0, 310.0));  //enemy
   
   om.addBlock(new Spring()..initialize(20850.0, 300.0));   //spring
   
