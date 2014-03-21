@@ -841,6 +841,9 @@ void setupLevelFour() {
      om.addBlock(new Block()..initialize(30600.0, 460.0)      // floor
         ..width = 75.0 .. height = 140.0);
      om.addBlock(new Spring()..initialize(30600.0, 340.0));   //spring
+     
+     Game.instance.level4Oxygen = om.itemList.length;         //count total oxygen
+     
      om.addItem(new ShipItem()..initialize(30600.0, -320.0)   //ship item
            ..level = 4);
 }

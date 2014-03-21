@@ -271,6 +271,9 @@ void setupLevelTwo() {
   
   om.addBlock(new Block()..initialize(13900.0, 420.0) 
           ..width = 200.0 .. height = 140.0);
+  
+  Game.instance.level2Oxygen = om.itemList.length;    //count total oxygen
+  
   om.addItem(new ShipItem()..initialize(13900.0, 290.0)
       ..level = 2);
   

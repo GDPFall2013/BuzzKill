@@ -129,6 +129,11 @@ int stateEnumCollected = 10;
 int stateEnumOutro = 11;
 int stateEnumEnd = 12;
 
+int level1Oxygen= 0;
+int level2Oxygen= 0;
+int level3Oxygen= 0;
+int level4Oxygen= 0;
+
 bool resetMainMenu = false; //used to reset main menu if prev screen was pause menu
 int state;
 int oxygenCollected;

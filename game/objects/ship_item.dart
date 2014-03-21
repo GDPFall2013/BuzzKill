@@ -266,9 +266,24 @@ class ShipItem extends Item{
     }
     
     int o = Game.instance.oxygenCollected;
+    int total = 0;
+    
+    if(Game.instance.currentLevel == LevelManager.enumLevelOne){
+    total = Game.instance.level1Oxygen;
+    }
+    else if(Game.instance.currentLevel == LevelManager.enumLevelTwo){
+    total = Game.instance.level2Oxygen;
+    }
+    else if(Game.instance.currentLevel == LevelManager.enumLevelThree){
+    total = Game.instance.level3Oxygen;
+    }
+    else if(Game.instance.currentLevel == LevelManager.enumLevelFour){
+    total = Game.instance.level4Oxygen;
+    }
+    
     oxygenSprite.drawOnPosition(camera.x+500, camera.y+25, width , height);
     normContext.fillStyle = 'white';
-    normContext.font = "normal 15pt calibri";
-    normContext.fillText("x $oxygenCounter", viewportWidth/2 + 80, viewportHeight/2 + 30 , 1000);
+    normContext.font = "normal 12pt calibri";
+    normContext.fillText("x $oxygenCounter/$total", viewportWidth/2 + 80, viewportHeight/2 + 30 , 1000);
   }
 }

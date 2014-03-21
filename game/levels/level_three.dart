@@ -506,6 +506,9 @@ void setupLevelThree() {
   
   om.addBlock(new Block()..initialize(21300.0, -200.0) // floor
          ..width = 200.0 .. height = 101.0);
+  
+  Game.instance.level3Oxygen = om.itemList.length;  //count total oxygen
+  
   om.addItem(new ShipItem()..initialize(21300.0, -320.0)
         ..level = 3);
 }

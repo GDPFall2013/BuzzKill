@@ -124,6 +124,9 @@ void setupLevelOne() {
   om.addBlock(new Block()..initialize(4700.0, 300.0) // Boulder
       ..width = 120.0 .. height = 100.0);
   
+  
+  Game.instance.level1Oxygen = om.itemList.length;    //count total oxygen
   om.addItem(new ShipItem()..initialize(5000.0, 290.0)
       ..level = 1);
+  
 }
