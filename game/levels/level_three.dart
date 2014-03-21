@@ -497,7 +497,7 @@ void setupLevelThree() {
   om.addItem(new Oxygen()..initialize(19750.0, 350.0));
   
   
- // om.addEnemy(new Cyrax()..initialize(20000.0, 310.0));  //enemy
+  om.addEnemy(new Predator()..initialize(20000.0, 310.0));  //enemy
   
   om.addBlock(new Spring()..initialize(20850.0, 300.0));   //spring
   

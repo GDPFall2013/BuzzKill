@@ -111,7 +111,7 @@ Input input = new Input();
 int currentLevel;
 int startLevel;
 double lastENTER=0.0;
-double lastESC = 0.0;
+double lastBACK = 0.0;
 
 int stateEnumPlay = 1;
 int stateEnumWin = 2;
@@ -249,16 +249,26 @@ void update(double dt) {
     
     ObjectManager.instance.removeDeadObjects();
     
-    //Bring up in-game menu
-    if(Input.instance.isDown(KeyCode.ESC)){
-      
-      if(input.timePressed(KeyCode.ESC) - Game.instance.lastESC > 0.0){
-        lastESC = input.timePressed(KeyCode.ESC);
+    
+    //Pause game / Bring up in-game menu
+    if(Game.instance.input.wasPressed(KeyCode.ENTER)){
+      if(input.timePressed(KeyCode.ENTER) - 
+        Game.instance.lastENTER > 0.0){
+        Game.instance.lastENTER = input.timePressed(KeyCode.ENTER);
         resetMainMenu = true;
         state = stateEnumPause;
         gameMenu.draw();
         gameMenu.update(dt);
-     }  
+     }   
+    }
+    else if(Game.instance.input.wasPressed(KeyCode.BACKSPACE)){
+      if(input.timePressed(KeyCode.BACKSPACE) - Game.instance.lastBACK > 0.0){
+        Game.instance.lastBACK = input.timePressed(KeyCode.BACKSPACE);
+        resetMainMenu = true;
+        state = stateEnumPause;
+        gameMenu.draw();
+        gameMenu.update(dt);
+     }   
     }
     
   }

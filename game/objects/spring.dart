@@ -19,7 +19,6 @@ class Spring extends Block {
     if(onSpring){
       sprite.spritex = 74;
       onSpring = false;
-      //Game.instance.player.y = this.y - 44;
       once = true;
       sprite.spritey = 269;
       this.y = originalY + 77;
@@ -29,13 +28,8 @@ class Spring extends Block {
 
       sprite.spritey = 193;
       this.y = originalY;
-     // Game.instance.player.y = oldPlayerY;
-      
-      
- //     Game.instance.player.y = -20.0;
+
       if(!jump){
-      //Game.instance.player.y = -220.0;
-      //Game.instance.player.x += 1;
       Game.instance.player.SPRING_JUMP = true;
       jump = true;
       SoundManager.instance.playSound(SoundManager.enumSoundSpring);
@@ -43,7 +37,6 @@ class Spring extends Block {
       
       if(repeat < 20){
         repeat++;
-       // Game.instance.player.y = -50.0;
       }
       else{
         repeat = 0;

@@ -15,7 +15,7 @@ class Globals{
     spikeDamage = 0.5;
     enemyDamage = 0.5;
     
-    oxygenLossRate = 1000.0;
+    oxygenLossRate = 700.0;
     gameSpeed = 1.0;
   }
   
@@ -23,7 +23,7 @@ class Globals{
     spikeDamage = 0.75;
     enemyDamage = 0.75;
     
-    oxygenLossRate = 325.0;
+    oxygenLossRate = 350.0;
     gameSpeed = 1.0;
   }
   

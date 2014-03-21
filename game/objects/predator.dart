@@ -239,7 +239,7 @@ class Predator extends Enemy
      
        attackSprite.drawOnPosition(x-width/2 - imgOffsetX, y-height/2 + (-55), width , height);
        
-    }
+    }  }
   
    double injure() 
    {
@@ -248,5 +248,5 @@ class Predator extends Enemy
      return 10.0;
    }  
    
-}  
+
 }

@@ -127,14 +127,16 @@ class InGameMenu extends GameObject{
   
   //Select 'Resume'
   if(resume && input.wasPressed(KeyCode.ENTER)){
+    if(input.timePressed(KeyCode.ENTER) - Game.instance.lastENTER > 0.0){
     Game.instance.state = Game.instance.stateEnumPlay;
     Game.instance.lastENTER = input.timePressed(KeyCode.ENTER);
     Game.instance.resetMainMenu = true;
+    }
   }
   
-  else if(input.wasPressed(KeyCode.ESC)){
-    if(input.timePressed(KeyCode.ESC) - Game.instance.lastESC > 0.0){
-      Game.instance.lastESC = input.timePressed(KeyCode.ESC);
+  else if(input.wasPressed(KeyCode.BACKSPACE)){
+    if(input.timePressed(KeyCode.BACKSPACE) - Game.instance.lastBACK > 0.0){
+      Game.instance.lastBACK = input.timePressed(KeyCode.BACKSPACE);
       Game.instance.state = Game.instance.stateEnumPlay;
       Game.instance.resetMainMenu = true;
     }

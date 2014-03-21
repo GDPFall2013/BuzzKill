@@ -1,7 +1,8 @@
 part of gdp;
 
 /**
- * A block represents a game object that does not move and the player cannot move through.
+ * A spring represents a game object that does not move and the player cannot move through.
+ * It increases Buzz's jumping ability for a brief moment.
  * Ground is the most common use case.
 */
 class Trigger extends GameObject {

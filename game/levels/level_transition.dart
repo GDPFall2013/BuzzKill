@@ -7,6 +7,7 @@ class LevelTransition extends GameObject{
   SpriteSheet introText;
   SpriteSheet buzz;
   SpriteSheet buzz2;
+  SpriteSheet continueTextSprite;
   Alien alien;
   Droid droid;
   
@@ -30,10 +31,16 @@ class LevelTransition extends GameObject{
     alien = new Alien()..initialize(500.0, 0.0);
     droid = new Droid()..initialize(300.0, 0.0);
     
-    introBG = new SpriteSheet("./content/intro_bg.png",spritex,spritey,640,480);
+    introBG = new SpriteSheet("./content/background.jpg",spritex,spritey,640,480);
     introText = new SpriteSheet("./content/intro_text.png",spritex,spritey,640,480);
     buzz = new SpriteSheet("./content/buzzspritesheet.png",spritex,spritey,75,100);
     buzz2 = new SpriteSheet("./content/buzzspritesheet.png",spritex,spritey,75,100);
+    
+    continueTextSprite = new SpriteSheet("./content/mission_success.png",0,0,200,30);
+        continueTextSprite.scaledw = 300;
+        continueTextSprite.scaledh = 45;
+        //continueTextx = camera.x+700;
+        continueTextSprite.spritey = 100;
     introText.spritey = -400; buzz.spritey = 0; buzz2x=0.0;
   }
 
@@ -89,6 +96,7 @@ class LevelTransition extends GameObject{
       }
 
       introText.drawOnPositionNormal(0.0, 0.0, width , height);
+      continueTextSprite.drawOnPosition(camera.x-150, -475.0, 230.0, 30.0);
     }
     
     
@@ -144,7 +152,7 @@ class LevelTransition extends GameObject{
         //to avoid reading two 'ENTER' presses as the same keystroke
         if(input.timePressed(KeyCode.ENTER) - Game.instance.lastENTER > 0.0){
           ObjectManager.instance.goList.clear();
-          
+          Game.instance.lastENTER = input.timePressed(KeyCode.ENTER);
           Game.instance.currentLevel += 1;
           Game.instance.reloadLevel();
           
@@ -165,13 +173,12 @@ class LevelTransition extends GameObject{
     
     //game intro state
     else if(Game.instance.state == Game.instance.stateEnumIntro){
-      if(Game.instance.input.isDown(KeyCode.ENTER) || Game.instance.input.isDown(KeyCode.ESC)){
+      if(Game.instance.input.isDown(KeyCode.ENTER)){
         
               //to avoid reading two 'ENTER'/'ESC' presses as the same keystroke
-              if(input.timePressed(KeyCode.ENTER) - Game.instance.lastENTER > 0.0 ||
-                  input.timePressed(KeyCode.ESC) - Game.instance.lastESC > 0.0){
+              if(input.timePressed(KeyCode.ENTER) - Game.instance.lastENTER > 0.0){
                 Game.instance.lastENTER = input.timePressed(KeyCode.ENTER);
-                Game.instance.lastESC = input.timePressed(KeyCode.ESC);
+                Game.instance.lastBACK = input.timePressed(KeyCode.BACKSPACE);
                 ObjectManager.instance.goList.clear();
                 Game.instance.state = Game.instance.stateEnumTransition;
               }

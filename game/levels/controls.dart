@@ -32,49 +32,29 @@ class Controls extends GameObject{
     if(Game.instance.state == Game.instance.stateEnumControls){
       sprite.drawOnPositionNormal(x, y, 640.0 , 480.0);
    }
-    /*
-   else{
-      sprite.drawOnPosition(x-this.width/2, y-this.height/2, 0.0 , 0.0);
-    }
-    */
   }
   
   
   update(double dt){
     
-   /* if(Game.instance.state == Game.instance.stateEnumPlay && input.wasPressed(KeyCode.ENTER)){
-      Game.instance.state = Game.instance.stateEnumPause;
-      */
-      
-      
-      
-  //down
-    //if(Game.instance.state == Game.instance.stateEnumControls){
     
-    
-      if (input.wasPressed(KeyCode.ESC) && Game.instance.state == Game.instance.stateEnumPlay){
-       
+      if (input.wasPressed(KeyCode.BACKSPACE) && Game.instance.state == Game.instance.stateEnumPlay){
            Game.instance.state = Game.instance.stateEnumPause; 
-           Game.instance.lastESC = input.timePressed(KeyCode.ESC);
+           Game.instance.lastBACK = input.timePressed(KeyCode.BACKSPACE);
            Game.instance.resetMainMenu = true;
-           //normContext.clearRect(x, y, width, height);
          }
       
       
-      else if((input.wasPressed(KeyCode.ESC) || input.wasPressed(KeyCode.BACKSPACE)) &&
-              Game.instance.currentLevel > LevelManager.enumMainMenu){
+      else if((input.wasPressed(KeyCode.BACKSPACE)) && Game.instance.currentLevel > LevelManager.enumMainMenu){
         Game.instance.state = Game.instance.stateEnumPause;
-        Game.instance.lastESC = input.timePressed(KeyCode.ESC);
+        Game.instance.lastBACK = input.timePressed(KeyCode.BACKSPACE);
         Game.instance.resetMainMenu = true;
       }
-      else if (input.wasPressed(KeyCode.ESC) || input.wasPressed(KeyCode.BACKSPACE)){
-       // normContext.clearRect(x, y, width, height);
-        //normContext.restore();
+      
+      else if (input.wasPressed(KeyCode.BACKSPACE)){
       Game.instance.state = Game.instance.stateEnumMain; 
       Game.instance.resetMainMenu = true;
-      Game.instance.lastESC = input.timePressed(KeyCode.ESC);
-      
-   // }
+      Game.instance.lastBACK = input.timePressed(KeyCode.BACKSPACE);
 
     }
     

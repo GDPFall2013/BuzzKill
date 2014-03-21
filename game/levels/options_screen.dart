@@ -540,19 +540,20 @@ class Options extends GameObject{
 
       }
       
-     
+     /*
       else if((input.wasPressed(KeyCode.ESC)) && Game.instance.currentLevel == LevelManager.enumMainMenu){
         Game.instance.state = Game.instance.stateEnumMain;
         Game.instance.resetMainMenu = true;
         Game.instance.lastESC = input.timePressed(KeyCode.ESC);
         reset();
       }
+      */
      
-      else if (input.wasPressed(KeyCode.ESC)){
+      else if (input.wasPressed(KeyCode.BACKSPACE)){
         Game.instance.state = Game.instance.stateEnumPause; 
         Game.instance.resetMainMenu = true;
         //Game.instance.gameMenu = new InGameMenu();
-        Game.instance.lastESC = input.timePressed(KeyCode.ESC);
+        Game.instance.lastBACK = input.timePressed(KeyCode.BACKSPACE);
         
         reset();
       
