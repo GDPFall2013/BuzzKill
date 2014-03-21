@@ -98,6 +98,9 @@ Options options = new Options();
 LevelTransition transition;
 EndScene endScene;
 
+
+SpriteSheet oxygenSprite;
+
 static double oxygen = 100.0; 
 Stopwatch oxygenTimer = new Stopwatch();
 double lastOxygenTick = 0.0;
@@ -151,7 +154,7 @@ Initialize() {
   transition = new LevelTransition();
   endScene = new EndScene();
   Globals.setNormalDifficulty();
-
+  oxygenSprite = new SpriteSheet("./content/lifebar.png",0,0,200,10);
   
 
   //gameLoop.onUpdate = ((gameLoop) {update(gameLoop.dt * 100);});
@@ -244,10 +247,25 @@ void update(double dt) {
         oxygen >0){
       lastOxygenTick += Globals.oxygenLossRate;
       oxygen -= 1;
-
+      
     }
     
     ObjectManager.instance.removeDeadObjects();
+    
+    //update oxygen bar
+    if(oxygen <=100){
+      oxygenSprite.spritex = ((100 - oxygen.toInt()));
+      
+      if(oxygen <=100 && oxygen > 70){
+        oxygenSprite.spritey = 0;
+      }
+      else if(oxygen <=70 && oxygen > 35){
+        oxygenSprite.spritey = 10;
+      }
+      else if(oxygen <= 35){
+        oxygenSprite.spritey = 20;
+      } 
+    }
     
     
     //Pause game / Bring up in-game menu
@@ -545,13 +563,17 @@ drawObjects() {
  * the camera.
  */
 drawHUD() {
+  
+  oxygenSprite.drawOnPositionNormal(viewportWidth - 150.0, viewportHeight-10.0, 100.0, 10.0);
+  
   normContext.save();
   normContext.fillStyle = 'white';
   normContext.font = "normal 14pt calibri";
   normContext.fillText("BUZZKILL", 10, 20, 100);
   //context.fillText("Score:  ?????", viewportWidth/2 -35, 20, 100);  Do we have score in this game?
   normContext.fillText("Lives: $lives", 10, viewportHeight-15, 100);
-  normContext.fillText("Remaining Oxygen: $oxygen", viewportWidth - 200, viewportHeight-15, 500);
+  normContext.font = "normal 10pt calibri";
+  normContext.fillText("Remaining Oxygen", viewportWidth - 150, viewportHeight-15, 500);
   normContext.restore();
   
 // Variables for Performance monitoring

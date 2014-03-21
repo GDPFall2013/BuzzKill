@@ -24,7 +24,7 @@ void setupLevelTwo() {
   
   om.addBlock(new Block()..initialize(400.0, 300.0) // Boulder
       ..width = 120.0 .. height = 100.0);
-  om.addBlock(new Block()..initialize(510.0, 300.0) // Boulder
+  om.addBlock(new Block()..initialize(520.0, 300.0) // Boulder
       ..width = 120.0 .. height = 100.0);
   
   om.addItem(new Oxygen()..initialize(400.0, 180.0));
