@@ -32,7 +32,7 @@ class Player extends GameObject{
   bool blink = false;
   
 
-  double playerStartX = 19000.0;//29200.0; //14500.0;  //TODO: This should be moved to level object later
+  double playerStartX = 0.0;//29200.0; //14500.0;  //TODO: This should be moved to level object later
   double playerStartY = -120.0; 
   double originalX;
   
@@ -212,6 +212,7 @@ class Player extends GameObject{
            Game.instance.gameOver();
           } else {
             // TODO: play some death music
+            
             gameLoop.addTimer((reload) => Game.instance.reloadLevel(), 3.0);
           }
         }
@@ -257,28 +258,52 @@ class Player extends GameObject{
         //undo the movement
        for (Block block in ObjectManager.instance.blockList) {
          if (CollisionSystem.instance.checkForCollision(this, block)){
-           
+           bool collide = false;
            if(block.isObstacle && block.still){
            this.x -= direction * amount;   //Undo the movement
            //return;
+           collide = true;
            }
            
            //if blockObstacle is falling and buzz running against it, Undo the movement
-           if(block.isObstacle && block.triggerFall){
-             this.x -= direction * amount;          
+           else if(block.isObstacle && block.triggerFall){
+             this.x -= direction * amount;  
+             collide = true;
            }
            
            //if blockObstacle is going back up and buzz running against it, Undo the movement
-           else if(block.isObstacle && block.backUp && (this.x<(block.x-block.width/2)-19 || this.x>(block.x+(block.width/2)+19.5))){
-             this.x -= direction * amount;  
+           else if(block.isObstacle && block.backUp && 
+               ((this.x<=(block.x-block.width/2)-19.5 || this.x>=(block.x+(block.width/2)+22.0)) 
+                   && this.y <= block.y)){
+             //this.x -= direction * amount;  
+             this.x -= 40;
+             this.y += 20;
+             collide = true;
            }
            
+           //if blockObstacle is going back up and buzz running against it, Undo the movement
+           else if(block.isObstacle && block.backUp && 
+               ((this.x<=(block.x-block.width/2)-19.5 || this.x>=(block.x+(block.width/2)+22.0)) 
+                   && this.y > block.y)){
+             this.x -= direction * amount;  
+             this.y += 20;
+             collide = true;
+           }
+
            //running against regular block
            else if(!block.isObstacle){
              this.x -= direction * amount;   //Undo the movement
            }
+
+           //fixes bug of Buzz disappearing into trigger walls
+           if(block.isObstacle){
+           if(this.y > -140.0 && !collide && this.JUMPING && this.y > block.y){
+                         this.x -= 50;
+                         this.y -= 400;
+                       }
+           }
          }
-         
+
        }
        }
    }
