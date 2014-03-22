@@ -60,10 +60,9 @@ class Predator extends Enemy
     attackSprite1.numberOfFrames = 12;
     
        
-     TYPE = "BOSS";
-     
-     
+     TYPE = "BOSS";  
   }
+  
   
   update (double dt) 
   {
@@ -99,9 +98,41 @@ class Predator extends Enemy
     }
     
     
+    else if (!STATIONARY)
+    {
+      if(goingBack == false) 
+      {
+        if(x >= endPos)
+        {
+          x = x - speed;
+        }
+        else
+        {
+          goingBack = true;
+          sprite.spritey = 2073;
+        }
+       }
+       else 
+       {
+        if(x<initialPos)
+        {
+          x = x + speed;
+        }
+        else
+        {
+          goingBack = false;
+          sprite.spritey = 1825;
+        }
+      }
+     
+    }
+    sprite.update(dt);
     //move Predator back and forth
     
-    else if (attacknum == 0)
+    
+    if(attack){
+      /*
+     if (attacknum == 0)
     {
       
       if (goingBack == false) 
@@ -128,10 +159,8 @@ class Predator extends Enemy
           sprite.spritey = 1825;
         }
       }
-      
-      sprite.update(dt);
-     
     }
+     
     if(attacknum == 1)
     {
      
@@ -162,37 +191,40 @@ class Predator extends Enemy
       attackSprite1.update(dt);  
       
     }
-    else if (!STATIONARY)
-    {
-      if(goingBack == false) 
-      {
-        if(x >= endPos)
-        {
-          x = x - speed;
-        }
-        else
-        {
-          goingBack = true;
-          sprite.spritey = 2073;
-        }
-       }
-       else 
-       {
-        if(x<initialPos)
-        {
-          x = x + speed;
-        }
-        else
-        {
-          goingBack = false;
-          sprite.spritey = 1825;
-        }
+    */
+      if(attackSprite.spriteFrame > 3)
+            {
+             attack = false;
+             attackSprite.spritex = 0;
+             sprite.spritex = 0;
+             attackSprite.spriteFrame = 1;
+            }
+            else if(goingBack)
+            {
+              attackSprite.spritey = 22;
+              sprite.spritex = -200;
+              attackSprite.update(dt);
+            }
+            else
+            {
+             attackSprite.spritey = 305;
+             sprite.spritex = -200;
+             attackSprite.update(dt);
+            } 
+            
+            
       }
-     
+      
+      
     }
     
-    sprite.update(dt);
     
+    
+
+    
+    //sprite.update(dt);
+    
+    /*
  
     if(attack)
     {
@@ -216,8 +248,9 @@ class Predator extends Enemy
        } 
        attackSprite.update(dt);
      }
-     
-    }
+     */
+    
+    
 
      
 
@@ -229,11 +262,12 @@ class Predator extends Enemy
     {
      sprite.drawOnPosition(x-width/2 - imgOffsetX, y-height/2 + imgOffsetY - 20,  width , height);
     }
+    /*
     if (attacknum == 1)
     {
      attackSprite1.drawOnPosition(x-width/2 - imgOffsetX, y-height/2 + (-400), width , height);
     }
-    
+    */
     if(attack)
     {
      

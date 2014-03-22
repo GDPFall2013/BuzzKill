@@ -100,6 +100,7 @@ EndScene endScene;
 
 
 SpriteSheet oxygenSprite;
+SpriteSheet oxygenBorder;
 
 static double oxygen = 100.0; 
 Stopwatch oxygenTimer = new Stopwatch();
@@ -159,9 +160,8 @@ Initialize() {
   transition = new LevelTransition();
   endScene = new EndScene();
   Globals.setNormalDifficulty();
-  oxygenSprite = new SpriteSheet("./content/lifebar.png",0,0,200,10);
-  
-
+  oxygenSprite = new SpriteSheet("./content/lifebar.png",0,0,100,10);
+  oxygenBorder = new SpriteSheet("./content/lifebar_border.png",0,0,102,12);
   //gameLoop.onUpdate = ((gameLoop) {update(gameLoop.dt * 100);});
 
   gameLoop.onUpdate = ((gameLoop) {
@@ -569,7 +569,9 @@ drawObjects() {
  */
 drawHUD() {
   
-  oxygenSprite.drawOnPositionNormal(viewportWidth - 150.0, viewportHeight-10.0, 100.0, 10.0);
+  oxygenBorder.drawOnPositionNormal(viewportWidth - 151.0, viewportHeight-13.0, 100.0, 10.0);
+  oxygenSprite.drawOnPositionNormal(viewportWidth - 150.0, viewportHeight-12.0, 100.0, 10.0);
+
   
   normContext.save();
   normContext.fillStyle = 'white';
@@ -578,7 +580,7 @@ drawHUD() {
   //context.fillText("Score:  ?????", viewportWidth/2 -35, 20, 100);  Do we have score in this game?
   normContext.fillText("Lives: $lives", 10, viewportHeight-15, 100);
   normContext.font = "normal 10pt calibri";
-  normContext.fillText("Remaining Oxygen", viewportWidth - 150, viewportHeight-15, 500);
+  normContext.fillText("Oxygen Level:$oxygen", viewportWidth - 150, viewportHeight-15, 500);
   normContext.restore();
   
 // Variables for Performance monitoring
